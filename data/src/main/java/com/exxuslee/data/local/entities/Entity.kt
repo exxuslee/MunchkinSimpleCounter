@@ -15,4 +15,5 @@ data class Entity(
     @ColumnInfo(name = "level") val level: Int,
     @ColumnInfo(name = "bonus") val bonus: Int,
     @ColumnInfo(name = "sex") val sex: Boolean,
+    @ColumnInfo(name = "active") val active: Boolean,
 )

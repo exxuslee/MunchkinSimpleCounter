@@ -10,6 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
 import com.exxuslee.databinding.ActivityMainBinding
 
@@ -49,7 +50,10 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                findNavController(R.id.nav_host_fragment_content_main).navigateUp()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
