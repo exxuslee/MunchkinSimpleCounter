@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.exxuslee.data.local.entities.Entity
-import com.exxuslee.domain.model.Player
 
 @Dao
 interface PlayerDAO{
@@ -17,5 +16,5 @@ interface PlayerDAO{
     fun players(): List<Entity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun savePlayer(player: Player)
+    suspend fun savePlayer(player: Entity)
 }
