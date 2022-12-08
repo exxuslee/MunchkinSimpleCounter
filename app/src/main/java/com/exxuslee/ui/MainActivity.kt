@@ -49,7 +49,14 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> {
+            R.id.new_game -> {
+                true
+            }
+            R.id.settings -> {
+                findNavController(R.id.nav_host_fragment_content_main).navigateUp()
+                true
+            }
+            R.id.about -> {
                 findNavController(R.id.nav_host_fragment_content_main).navigateUp()
                 true
             }
