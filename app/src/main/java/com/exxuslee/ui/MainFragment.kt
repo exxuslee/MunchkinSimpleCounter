@@ -11,9 +11,7 @@ import com.exxuslee.R
 import com.exxuslee.databinding.FragmentFirstBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
 class MainFragment : Fragment(), MenuProvider {
 
     private var _binding: FragmentFirstBinding? = null
@@ -21,8 +19,7 @@ class MainFragment : Fragment(), MenuProvider {
     private val viewModel: MainFragmentViewModel by viewModel()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
@@ -58,6 +55,7 @@ class MainFragment : Fragment(), MenuProvider {
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 true
             }
+            R.id.about -> viewModel.about(requireContext())
             else -> false
         }
     }

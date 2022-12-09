@@ -1,7 +1,9 @@
 package com.exxuslee.ui
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -59,12 +61,21 @@ class MainFragmentViewModel(private val getIDUseCase: UseCase.Base) : ViewModel(
         //Navigation.findNavController(view).navigate(R.id.action_1fragment_to_2frafment, bundle)
     }
 
-    fun removeNumber(key: Int) {
-        _ids.value = _ids.value.minus(key)
-        Log.d(TAG, _ids.value.toString())
+    fun about(context: Context): Boolean {
+        AlertDialog.Builder(context)
+            .setTitle("About..")
+            .setMessage("Set like in PlayMarket!")
+            .setPositiveButton(android.R.string.ok,
+                DialogInterface.OnClickListener { dialog, which ->
+                    // Continue with delete operation
+                })
+            .setNegativeButton(android.R.string.cancel, null)
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .show()
+        return true
     }
 
     companion object {
-        const val TAG = "testNumbers"
+        const val TAG = "Munchkin simple"
     }
 }
