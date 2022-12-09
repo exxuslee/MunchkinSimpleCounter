@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val getIDUseCase: UseCase.Base) : ViewModel() {
+class MainFragmentViewModel(private val getIDUseCase: UseCase.Base) : ViewModel() {
     private var selectedID = 0
 
     private val _ids: MutableStateFlow<Map<Int, String>> = MutableStateFlow(mapOf())
