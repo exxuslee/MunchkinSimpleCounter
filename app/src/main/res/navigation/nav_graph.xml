@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.exxuslee.ui.AboutFragment"
+        android:name="com.exxuslee.ui.SettingFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

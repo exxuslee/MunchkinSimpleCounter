@@ -20,7 +20,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
                 LayoutInflater.from(parent.context), parent, false)
         )
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             sex.text = players[position].sex.toString()
@@ -37,7 +36,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     override fun getItemCount() = players.size
 
     fun updateAdapter(player: List<Player>?) {
-        TODO("Not yet implemented")
+        players.plus(player)
+        notifyDataSetChanged()
     }
 
 }

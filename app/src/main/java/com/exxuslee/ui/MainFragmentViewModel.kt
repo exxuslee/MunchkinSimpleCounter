@@ -17,12 +17,12 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
     private val _players = MutableLiveData<List<Player>?>()
     val players = _players.asLiveData()
 
-    private var handleResult = object : HandleResult<Player> {
+    private var handleResult = object : HandleResult<List<Player>> {
         override fun handleError(message: String) {
         }
 
-        override fun handleSuccess(data: Player) {
-            _players.value = _players.value?.plus(data)
+        override fun handleSuccess(data: List<Player>) {
+            _players.postValue(data)
         }
     }
 
