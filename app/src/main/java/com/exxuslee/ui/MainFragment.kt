@@ -1,5 +1,7 @@
 package com.exxuslee.ui
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.MenuHost
@@ -20,20 +22,24 @@ class MainFragment : Fragment(), MenuProvider {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        viewModel.loadPlayers()
+
+
+        val firstAdapter = MainAdapter()
+        binding.recyclerView.adapter = firstAdapter
+
+        viewModel.players.observe(viewLifecycleOwner) { Player ->
+            firstAdapter.updateAdapter(Player)
+        }
     }
 
     override fun onDestroyView() {
@@ -55,7 +61,19 @@ class MainFragment : Fragment(), MenuProvider {
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 true
             }
-            R.id.about -> viewModel.about(requireContext())
+            R.id.about -> {
+                AlertDialog.Builder(context)
+                    .setTitle("About..")
+                    .setMessage("Set like in PlayMarket!")
+                    .setPositiveButton(android.R.string.ok,
+                        DialogInterface.OnClickListener { dialog, which ->
+                            // Continue with delete operation
+                        })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .show()
+                true
+            }
             else -> false
         }
     }

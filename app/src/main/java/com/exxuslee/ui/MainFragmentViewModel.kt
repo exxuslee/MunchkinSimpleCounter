@@ -1,81 +1,44 @@
 package com.exxuslee.ui
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
-import android.os.Bundle
-import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.usecases.UseCase
 import com.exxuslee.domain.utils.HandleResult
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MainFragmentViewModel(private val getIDUseCase: UseCase.Base) : ViewModel() {
+class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel() {
     private var selectedID = 0
 
-    private val _ids: MutableStateFlow<Map<Int, String>> = MutableStateFlow(mapOf())
-    fun ids() = _ids.asStateFlow()
+    private val _players = MutableLiveData<List<Player>?>()
+    val players = _players.asLiveData()
 
-    private val _dataFetchState = MutableStateFlow(true)
-    fun dataFetchState() = _dataFetchState.asStateFlow()
-
-    private val _isLoading = MutableStateFlow(false)
-    fun isLoading() = _isLoading.asStateFlow()
-
-    private var handleResult = object : HandleResult<Pair<Int, String>> {
+    private var handleResult = object : HandleResult<Player> {
         override fun handleError(message: String) {
-            _isLoading.value = false
-            _dataFetchState.value = false
         }
 
-        override fun handleSuccess(data: Pair<Int, String>) {
-            _isLoading.value = false
-            _dataFetchState.value = true
-            _ids.value = _ids.value.plus(data)
+        override fun handleSuccess(data: Player) {
+            _players.value = _players.value?.plus(data)
         }
     }
 
-    fun getRandomNumber() {
-        _isLoading.value = true
+    fun loadPlayers() {
         viewModelScope.launch {
-            //withContext(Dispatchers.IO) { getIDUseCase.getRandom().handle(handleResult) }
+            withContext(Dispatchers.IO) { playerUseCase.players().handle(handleResult) }
         }
-    }
-
-    fun getNumber(number: Int) {
-        _isLoading.value = true
-        viewModelScope.launch {
-            //withContext(Dispatchers.IO) { getIDUseCase.getNumber(number).handle(handleResult) }
-        }
-    }
-
-    fun getSelectedID(): Int = selectedID
-
-    fun navigate(content: String, view: View, pos: Int) {
-        selectedID = pos
-        val bundle = Bundle()
-        bundle.putString("content", content)
-        //Navigation.findNavController(view).navigate(R.id.action_1fragment_to_2frafment, bundle)
-    }
-
-    fun about(context: Context): Boolean {
-        AlertDialog.Builder(context)
-            .setTitle("About..")
-            .setMessage("Set like in PlayMarket!")
-            .setPositiveButton(android.R.string.ok,
-                DialogInterface.OnClickListener { dialog, which ->
-                    // Continue with delete operation
-                })
-            .setNegativeButton(android.R.string.cancel, null)
-            .setIcon(android.R.drawable.ic_dialog_info)
-            .show()
-        return true
     }
 
     companion object {
         const val TAG = "Munchkin simple"
     }
 }
+
+/**
+ * This functions helps in transforming a [MutableLiveData] of type [T]
+ * to a [LiveData] of type [T]
+ */
+fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
