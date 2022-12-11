@@ -1,5 +1,7 @@
 package com.exxuslee.ui
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.MenuProvider
@@ -12,7 +14,7 @@ import com.exxuslee.databinding.FragmentFirstBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainFragment : Fragment(), MenuProvider {
+class MainFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
@@ -28,8 +30,6 @@ class MainFragment : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
         viewModel.loadPlayers()
 
         val mainAdapter = MainAdapter()
@@ -40,24 +40,26 @@ class MainFragment : Fragment(), MenuProvider {
             mainAdapter.updateAdapter(Player)
         }
 
-        binding.bottomNavigationSetting.setOnItemSelectedListener {
-                item ->
-            when(item.itemId) {
-                R.id.levelPlus -> {
+        binding.bottomNavigationGame.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.levelPlus -> {}
+                R.id.levelMinus -> {}
+                R.id.bonusPlus -> {}
+                R.id.bonusMinus -> {}
+                R.id.more -> binding.bottomNavigationSetting.toggleVisibility()
+            }
+            return@setOnItemSelectedListener true
+        }
+
+        binding.bottomNavigationSetting.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.newGame -> {
                     findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 }
-                R.id.levelMinus -> {
+                R.id.settings -> {
                     findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 }
-                R.id.bonusPlus -> {
-                    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-                }
-                R.id.bonusMinus -> {
-                    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-                }
-                R.id.more -> {
-                    binding.bottomNavigationSetting2.toggleVisibility()
-                }
+                R.id.about -> about()
             }
             return@setOnItemSelectedListener true
         }
@@ -69,20 +71,6 @@ class MainFragment : Fragment(), MenuProvider {
         _binding = null
     }
 
-    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.menu_main, menu)
-    }
-
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return when (menuItem.itemId) {
-            R.id.levelPlus -> {
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-                true
-            }
-            else -> false
-        }
-    }
-
     fun View.toggleVisibility() {
         if (this.isVisible) {
             this.visibility = View.INVISIBLE
@@ -90,27 +78,17 @@ class MainFragment : Fragment(), MenuProvider {
             this.visibility = View.VISIBLE
         }
     }
+
+    fun about() {
+        AlertDialog.Builder(context)
+            .setTitle("About..")
+            .setMessage("Set like in PlayMarket!")
+            .setPositiveButton(android.R.string.ok,
+                DialogInterface.OnClickListener { dialog, which ->
+                    // Continue with delete operation
+                })
+            .setNegativeButton(android.R.string.cancel, null)
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .show()
+    }
 }
-
-
-//R.id.new_game -> {
-//    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//    true
-//}
-//R.id.settings -> {
-//    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//    true
-//}
-//R.id.about -> {
-//    AlertDialog.Builder(context)
-//        .setTitle("About..")
-//        .setMessage("Set like in PlayMarket!")
-//        .setPositiveButton(android.R.string.ok,
-//            DialogInterface.OnClickListener { dialog, which ->
-//                // Continue with delete operation
-//            })
-//        .setNegativeButton(android.R.string.cancel, null)
-//        .setIcon(android.R.drawable.ic_dialog_info)
-//        .show()
-//    true
-//}
