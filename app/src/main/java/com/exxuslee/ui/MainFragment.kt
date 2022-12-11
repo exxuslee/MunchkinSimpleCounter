@@ -34,11 +34,12 @@ class MainFragment : Fragment(), MenuProvider {
         viewModel.loadPlayers()
 
 
-        val firstAdapter = MainAdapter()
-        binding.recyclerView.adapter = firstAdapter
+        val mainAdapter = MainAdapter()
+        binding.recyclerView.adapter = mainAdapter
+        mainAdapter.tableHeader()
 
         viewModel.players.observe(viewLifecycleOwner) { Player ->
-            firstAdapter.updateAdapter(Player)
+            mainAdapter.updateAdapter(Player)
         }
     }
 

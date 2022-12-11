@@ -1,5 +1,6 @@
 package com.exxuslee.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -35,9 +36,18 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun getItemCount() = players.size
 
-    fun updateAdapter(player: List<Player>?) {
-        players.plus(player)
+    fun updateAdapter(listPlayers: List<Player>?) {
+        listPlayers?.map { player -> players=players.plus(player) }
         notifyDataSetChanged()
     }
 
+    fun tableHeader() {
+        players = players.plus(Player(0))
+        Log.d(TAG, this.players.toString())
+        notifyDataSetChanged()
+    }
+
+    companion object {
+        const val TAG = "player"
+    }
 }
