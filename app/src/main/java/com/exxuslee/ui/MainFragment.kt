@@ -62,20 +62,22 @@ class MainFragment : Fragment(), MenuProvider {
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 true
             }
-            R.id.about -> {
-                AlertDialog.Builder(context)
-                    .setTitle("About..")
-                    .setMessage("Set like in PlayMarket!")
-                    .setPositiveButton(android.R.string.ok,
-                        DialogInterface.OnClickListener { dialog, which ->
-                            // Continue with delete operation
-                        })
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .setIcon(android.R.drawable.ic_dialog_info)
-                    .show()
-                true
-            }
+            R.id.about -> aboutDialog()
             else -> false
         }
+    }
+
+    private fun aboutDialog(): Boolean {
+        AlertDialog.Builder(context)
+            .setTitle("About..")
+            .setMessage("Set like in PlayMarket!")
+            .setPositiveButton(android.R.string.ok,
+                DialogInterface.OnClickListener { dialog, which ->
+                    // Continue with delete operation
+                })
+            .setNegativeButton(android.R.string.cancel, null)
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .show()
+        return true
     }
 }

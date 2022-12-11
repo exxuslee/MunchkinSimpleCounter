@@ -32,13 +32,10 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
         }
     }
 
+    private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
+
     companion object {
         const val TAG = "Munchkin simple"
     }
 }
 
-/**
- * This functions helps in transforming a [MutableLiveData] of type [T]
- * to a [LiveData] of type [T]
- */
-fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>

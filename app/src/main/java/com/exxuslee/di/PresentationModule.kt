@@ -1,4 +1,4 @@
-package com.exxuslee.ui.di
+package com.exxuslee.di
 
 import com.exxuslee.ui.MainFragmentViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel

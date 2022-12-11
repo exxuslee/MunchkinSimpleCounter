@@ -18,7 +18,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
             RecyclerFistBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false)
+                LayoutInflater.from(parent.context), parent, false
+            )
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -37,12 +38,33 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     override fun getItemCount() = players.size
 
     fun updateAdapter(listPlayers: List<Player>?) {
-        listPlayers?.map { player -> players=players.plus(player) }
+        listPlayers?.map { player -> players = players.plus(player) }
         notifyDataSetChanged()
     }
 
     fun tableHeader() {
         players = players.plus(Player(0))
+        players = players.plus(Player(1))
+        players = players.plus(Player(2))
+        players = players.plus(Player(3))
+        players = players.plus(Player(4))
+        players = players.plus(Player(5))
+        players = players.plus(Player(6))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(7))
+        players = players.plus(Player(8))
+
         Log.d(TAG, this.players.toString())
         notifyDataSetChanged()
     }

@@ -9,16 +9,9 @@ import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
 import com.exxuslee.databinding.FragmentSecondBinding
 
-
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class SettingFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

@@ -47,4 +47,8 @@
     <string name="about">about</string>
     <string name="more">more</string>
     <string name="settings">settings</string>
+    <string name="levelPlus">level +</string>
+    <string name="levelMinus">level -</string>
+    <string name="bonusPlus">bonus +</string>
+    <string name="bonusMinus">bonus -</string>
 </resources>
