@@ -29,11 +29,9 @@ class MainFragment : Fragment(), MenuProvider {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        requireActivity().addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
         viewModel.loadPlayers()
-
-
         val mainAdapter = MainAdapter()
         binding.recyclerView.adapter = mainAdapter
         mainAdapter.tableHeader()

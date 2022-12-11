@@ -51,4 +51,9 @@
     <string name="levelMinus">level -</string>
     <string name="bonusPlus">bonus +</string>
     <string name="bonusMinus">bonus -</string>
+    <string name="darkButton" />
+    <string name="themeMode">Theme mode</string>
+    <string name="onlinePlayers">Players in game</string>
+    <string name="allPlayers">All Players</string>
+    <string name="add_player">Add player</string>
 </resources>
