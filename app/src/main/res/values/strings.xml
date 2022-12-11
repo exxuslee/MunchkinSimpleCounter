@@ -56,4 +56,8 @@
     <string name="onlinePlayers">Players in game</string>
     <string name="allPlayers">All Players</string>
     <string name="add_player">Add player</string>
+    <string name="sex">⚧️</string>
+    <string name="name">📛</string>
+    <string name="level">🥇</string>
+    <string name="bonus">⚔️</string>
 </resources>

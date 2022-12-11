@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/levelPlus"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_elevator_24"
+        android:title="@string/levelPlus" />
+    <item
+        android:id="@+id/levelMinus"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_elevator_24"
+        android:title="@string/levelMinus" />
+    <item
+        android:id="@+id/bonusPlus"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_star_border_24"
+        android:title="@string/bonusPlus" />
+    <item
+        android:id="@+id/bonusMinus"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_star_border_24"
+        android:title="@string/bonusMinus" />
+    <item
+        android:id="@+id/more"
+        android:enabled="true"
         android:icon="@drawable/ic_baseline_more_vert_24"
-        android:title="@string/more"
-        app:showAsAction="ifRoom">
-        <menu>
-
-            <item
-                android:id="@+id/new_game"
-                android:icon="@drawable/ic_baseline_fiber_new_24"
-                android:orderInCategory="0"
-                android:title="@string/new_game"
-                app:showAsAction="never"/>
-
-            <item
-                android:id="@+id/settings"
-                android:icon="@drawable/ic_baseline_settings_24"
-                android:orderInCategory="100"
-                android:title="@string/settings"
-                app:showAsAction="never"/>
-
-            <item
-                android:id="@+id/about"
-                android:icon="@drawable/ic_baseline_grade_24"
-                android:orderInCategory="200"
-                android:title="@string/about"
-                app:showAsAction="never"/>
-
-        </menu>
-
-    </item>
+        android:title="@string/more" />
 </menu>
