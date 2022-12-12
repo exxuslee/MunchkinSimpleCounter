@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
+import com.exxuslee.databinding.AddPlayerBinding
 import com.exxuslee.databinding.FragmentSecondBinding
 
 class SettingFragment : Fragment() {
@@ -39,6 +40,7 @@ class SettingFragment : Fragment() {
             }
             return@setOnItemSelectedListener true
         }
+
     }
 
     override fun onDestroyView() {
@@ -58,5 +60,10 @@ class SettingFragment : Fragment() {
             .setNegativeButton(android.R.string.cancel, null)
             .setIcon(android.R.drawable.ic_dialog_info)
             .show()
+
+        val message = view.findViewById<View>(R.id.editTextTextPersonName)
+        message.setOnClickListener{
+            Log.d("player", message.toString())
+        }
     }
 }

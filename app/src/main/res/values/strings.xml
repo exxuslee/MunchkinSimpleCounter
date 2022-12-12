@@ -62,4 +62,5 @@
     <string name="bonus">⚔️</string>
     <string name="delPlayer">delete player</string>
     <string name="back">back</string>
+    <string name="man">man</string>
 </resources>
