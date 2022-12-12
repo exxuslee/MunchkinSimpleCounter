@@ -12,6 +12,11 @@
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/settings" />
     <item
+        android:id="@+id/darkMode"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_dark_mode_24"
+        android:title="@string/themeMode" />
+    <item
         android:id="@+id/about"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_star_border_24"

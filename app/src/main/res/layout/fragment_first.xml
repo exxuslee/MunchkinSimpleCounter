@@ -18,7 +18,7 @@
         tools:listitem="@layout/recycler_fist" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_setting"
+        android:id="@+id/bottom_navigation_second"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

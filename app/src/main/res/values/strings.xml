@@ -60,4 +60,6 @@
     <string name="name">📛</string>
     <string name="level">🥇</string>
     <string name="bonus">⚔️</string>
+    <string name="delPlayer">delete player</string>
+    <string name="back">back</string>
 </resources>

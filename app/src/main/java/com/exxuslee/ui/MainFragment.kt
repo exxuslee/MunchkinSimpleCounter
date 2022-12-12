@@ -1,13 +1,13 @@
 package com.exxuslee.ui
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.*
-import androidx.core.view.MenuProvider
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
 import com.exxuslee.databinding.FragmentFirstBinding
@@ -46,16 +46,14 @@ class MainFragment : Fragment() {
                 R.id.levelMinus -> {}
                 R.id.bonusPlus -> {}
                 R.id.bonusMinus -> {}
-                R.id.more -> binding.bottomNavigationSetting.toggleVisibility()
+                R.id.more -> binding.bottomNavigationSecond.toggleVisibility()
             }
             return@setOnItemSelectedListener true
         }
 
-        binding.bottomNavigationSetting.setOnItemSelectedListener { item ->
+        binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.newGame -> {
-                    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-                }
+                R.id.newGame -> {}
                 R.id.settings -> {
                     findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 }
@@ -71,22 +69,18 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-    fun View.toggleVisibility() {
-        if (this.isVisible) {
-            this.visibility = View.INVISIBLE
-        } else {
-            this.visibility = View.VISIBLE
-        }
+    private fun View.toggleVisibility() {
+        if (this.isVisible) this.visibility = View.INVISIBLE
+        else this.visibility = View.VISIBLE
     }
 
-    fun about() {
+    private fun about() {
         AlertDialog.Builder(context)
             .setTitle("About..")
             .setMessage("Set like in PlayMarket!")
-            .setPositiveButton(android.R.string.ok,
-                DialogInterface.OnClickListener { dialog, which ->
-                    // Continue with delete operation
-                })
+            .setPositiveButton(android.R.string.ok) { dialog, which ->
+                Log.d("player", "about $dialog $which")
+            }
             .setNegativeButton(android.R.string.cancel, null)
             .setIcon(android.R.drawable.ic_dialog_info)
             .show()
