@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -48,6 +47,15 @@ class SettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.loadPlayers()
+        val allPlayersAdapter = SettingAdapter()
+        val onlinePlayersAdapter = SettingAdapter()
+        binding.recyclerOfflinePlayer.adapter = allPlayersAdapter
+        binding.recyclerOnlinePlayer.adapter = onlinePlayersAdapter
+        viewModel.players.observe(viewLifecycleOwner) { listPlayers ->
+            allPlayersAdapter.updateAdapter(listPlayers)
+            val online = listPlayers?.filter { player -> player.playing }
+            onlinePlayersAdapter.updateAdapter(online)
+        }
 
         binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
             when (item.itemId) {

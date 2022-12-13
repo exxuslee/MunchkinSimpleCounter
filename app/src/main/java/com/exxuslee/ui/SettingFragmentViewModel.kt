@@ -36,6 +36,7 @@ class SettingFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewMo
         viewModelScope.launch {
             withContext(Dispatchers.IO) { playerUseCase.players().handle(handleResult) }
         }
+
     }
 
     private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>

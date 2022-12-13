@@ -32,7 +32,7 @@ class MainFragment : Fragment() {
 
         viewModel.loadPlayers()
 
-        val mainAdapter = MainAdapter(viewModel.selectedPlayer())
+        val mainAdapter = MainAdapter()
         binding.recyclerView.adapter = mainAdapter
 
         viewModel.players.observe(viewLifecycleOwner) { Player ->
