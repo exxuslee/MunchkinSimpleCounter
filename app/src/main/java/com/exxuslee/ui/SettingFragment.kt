@@ -6,11 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Spinner
+import android.widget.SpinnerAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
-import com.exxuslee.databinding.AddPlayerBinding
 import com.exxuslee.databinding.FragmentSecondBinding
 import com.exxuslee.domain.model.Player
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,8 +21,6 @@ class SettingFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
-    private var _binding2: AddPlayerBinding? = null
-    private val binding2 get() = _binding2!!
     private val viewModel: SettingFragmentViewModel by viewModel()
 
     override fun onCreateView(
@@ -58,7 +57,7 @@ class SettingFragment : Fragment() {
     private fun addPlayer() {
         val view = layoutInflater.inflate(R.layout.add_player, null)
         val editName = view.findViewById<View>(R.id.editTextPersonName) as TextView
-        val imagesMan = intArrayOf(
+        val imagesMan = arrayOf(
             R.drawable.icon_0001,
             R.drawable.icon_0003,
             R.drawable.icon_0005,
@@ -71,6 +70,13 @@ class SettingFragment : Fragment() {
             R.drawable.icon_0004,
             R.drawable.icon_0007,
         )
+
+        val textArray = arrayOf("clouds", "mark", "techcrunch", "clouds", "mark", "techcrunch")
+        val spinner = view.findViewById(R.id.spinnerIcon) as Spinner
+
+        val adapter = SpinnerAdapter(requireContext(), R.layout.spinner_icon, textArray, imagesMan)
+        spinner.adapter = adapter
+
 
         AlertDialog.Builder(context)
             .setTitle("Add player")

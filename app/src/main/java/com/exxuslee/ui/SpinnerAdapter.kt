@@ -1,43 +1,36 @@
 package com.exxuslee.ui
 
-import android.R
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.TextView
+import com.exxuslee.R
 
 
-class SpinnerAdapter (applicationContext: Context, flags: IntArray, fruit: Array<String>) :
-    BaseAdapter() {
-    private var context: Context
-    private var images: IntArray
-    private var fruit: Array<String>
-    private var inflter: LayoutInflater
-
-    init {
-        context = applicationContext
-        images = flags
-        this.fruit = fruit
-        inflter = LayoutInflater.from(applicationContext)
+class SpinnerAdapter(
+    private val ctx: Context, resource: Int, private val contentArray: Array<String>,
+    private val imageArray: Array<Int>
+) : ArrayAdapter<String?>(
+    ctx, R.layout.spinner_icon, R.id.spinnerTextView, contentArray
+) {
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+        return getCustomView(position, convertView, parent)
     }
 
-    override fun getCount(): Int {
-        return images.size
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        return getCustomView(position, convertView, parent)
     }
 
-    override fun getItem(i: Int): Any {
-        return i
-    }
-
-    override fun getItemId(i: Int): Long {
-        return 0
-    }
-
-    override fun getView(i: Int, view: View, viewGroup: ViewGroup?): View {
-        val icon: ImageView = view.findViewById(R.id.icon) as ImageView
-        icon.setImageResource(images[i])
-        return view
+    private fun getCustomView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val inflater = ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val row: View = inflater.inflate(R.layout.spinner_icon, parent, false)
+        val textView = row.findViewById<View>(R.id.spinnerTextView) as TextView
+        textView.text = contentArray[position]
+        val imageView = row.findViewById<View>(R.id.spinnerImageView) as ImageView
+        imageView.setImageResource(imageArray[position])
+        return row
     }
 }
