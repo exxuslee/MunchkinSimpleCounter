@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.SpinnerAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -22,6 +22,17 @@ class SettingFragment : Fragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SettingFragmentViewModel by viewModel()
+    private val imagesMan = arrayOf(
+        R.drawable.icon_0002,
+        R.drawable.icon_0005,
+        R.drawable.icon_0008,
+    )
+    private val imagesWoman = arrayOf(
+        R.drawable.icon_0001,
+        R.drawable.icon_0004,
+        R.drawable.icon_0007,
+    )
+    private val textArray = arrayOf("man", "man", "man", "woman", "woman", "woman")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +47,12 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.loadPlayers()
+
         binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.addPlayer -> addPlayer()
-                R.id.delPlayer -> {}
+                R.id.delPlayer -> deletePlayer()
                 R.id.back -> {
                     findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
                 }
@@ -47,6 +60,29 @@ class SettingFragment : Fragment() {
             return@setOnItemSelectedListener true
         }
 
+    }
+
+    private fun deletePlayer() {
+        val view = layoutInflater.inflate(R.layout.delete_player, null)
+        val spinner = view.findViewById(R.id.spinnerName) as Spinner
+        val listName = arrayOf<String>()
+        val adapter = SpinnerAdapter(
+            requireContext(),
+            R.layout.add_spinner_icon,
+            textArray,
+            imagesMan + imagesWoman
+        )
+        spinner.adapter = adapter
+
+        AlertDialog.Builder(context)
+            .setTitle("Delete player")
+            .setView(view)
+            .setPositiveButton(android.R.string.ok) { dialog, which ->
+                Log.d("player", "about $dialog $which")
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .show()
     }
 
     override fun onDestroyView() {
@@ -57,23 +93,15 @@ class SettingFragment : Fragment() {
     private fun addPlayer() {
         val view = layoutInflater.inflate(R.layout.add_player, null)
         val editName = view.findViewById<View>(R.id.editTextPersonName) as TextView
-        val imagesMan = arrayOf(
-            R.drawable.icon_0002,
-            R.drawable.icon_0005,
-            R.drawable.icon_0008,
-        )
-        val imagesWoman = arrayOf(
-            R.drawable.icon_0001,
-            R.drawable.icon_0004,
-            R.drawable.icon_0007,
-        )
-
-        val textArray = arrayOf("man", "man", "man", "woman", "woman", "woman")
         val spinner = view.findViewById(R.id.spinnerIcon) as Spinner
 
-        val adapter = SpinnerAdapter(requireContext(), R.layout.spinner_icon, textArray, imagesMan+imagesWoman)
+        val adapter = SpinnerAdapter(
+            requireContext(),
+            R.layout.add_spinner_icon,
+            textArray,
+            imagesMan + imagesWoman
+        )
         spinner.adapter = adapter
-
 
         AlertDialog.Builder(context)
             .setTitle("Add player")
