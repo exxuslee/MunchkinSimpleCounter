@@ -32,7 +32,7 @@ class MainFragment : Fragment() {
 
         viewModel.loadPlayers()
 
-        val mainAdapter = MainAdapter()
+        val mainAdapter = MainAdapter(viewModel.selectedPlayer())
         binding.recyclerView.adapter = mainAdapter
 
         viewModel.players.observe(viewLifecycleOwner) { Player ->
@@ -41,10 +41,10 @@ class MainFragment : Fragment() {
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.levelPlus -> {}
-                R.id.levelMinus -> {}
-                R.id.bonusPlus -> {}
-                R.id.bonusMinus -> {}
+                R.id.levelPlus -> {viewModel.level(1)}
+                R.id.levelMinus -> {viewModel.level(-1)}
+                R.id.bonusPlus -> {viewModel.bonus(1)}
+                R.id.bonusMinus -> {viewModel.bonus(-1)}
                 R.id.more -> binding.bottomNavigationSecond.toggleVisibility()
             }
             return@setOnItemSelectedListener true
@@ -60,6 +60,8 @@ class MainFragment : Fragment() {
             }
             return@setOnItemSelectedListener true
         }
+
+        mainAdapter.onPlayerClickListener = { position -> viewModel.selectPlayer(position) }
     }
 
 

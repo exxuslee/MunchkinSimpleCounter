@@ -1,15 +1,14 @@
 package com.exxuslee.ui
 
-import android.util.Log
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.exxuslee.databinding.RecyclerFistBinding
 import com.exxuslee.domain.model.Player
 
-class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter(private var selectedPosition: Int = -1) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     private var players: List<Player> = listOf()
-    private var lastSelectedPosition = -1
     var onPlayerClickListener: ((Int) -> Unit)? = null
 
     inner class ViewHolder(val binding: RecyclerFistBinding) :
@@ -23,14 +22,19 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val strength = players[position].bonus + players[position].level
         holder.binding.apply {
             sex.text = players[position].sex.toString()
             name.text = players[position].name
             level.text = players[position].level.toString()
-            bonus.text = players[position].bonus.toString()
+            bonus.text = strength.toString()
         }
+        holder.itemView.setBackgroundColor(
+            if (selectedPosition == position) Color.LTGRAY else Color.TRANSPARENT)
         holder.itemView.setOnClickListener {
-            lastSelectedPosition = holder.adapterPosition
+            notifyItemChanged(selectedPosition)
+            selectedPosition = holder.adapterPosition
+            notifyItemChanged(position)
             onPlayerClickListener?.invoke(position)
         }
     }

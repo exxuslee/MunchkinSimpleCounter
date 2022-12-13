@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel() {
-    private var selectedID = 0
+    private var selectedID = -1
 
     private val _players = MutableLiveData<List<Player>?>()
     val players = _players.asLiveData()
@@ -33,6 +33,47 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
     }
 
     private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
+
+
+    fun selectedPlayer() = selectedID
+
+    fun selectPlayer(position: Int) {
+        selectedID = position
+    }
+
+    fun level(i: Int) {
+        if (selectedID >= 0) {
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {    playerUseCase.savePlayer(
+                    Player(
+                        name = _players.value?.get(selectedID)!!.name,
+                        level = _players.value?.get(selectedID)!!.level+i,
+                        bonus = _players.value?.get(selectedID)!!.bonus,
+                        sex = _players.value?.get(selectedID)!!.sex,
+                        playing = true,
+                        reverseSex = _players.value?.get(selectedID)!!.reverseSex
+                    )
+                ) }
+            }
+        }
+    }
+
+    fun bonus(i: Int) {
+        if (selectedID >= 0) {
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {    playerUseCase.savePlayer(
+                    Player(
+                        name = _players.value?.get(selectedID)!!.name,
+                        level = _players.value?.get(selectedID)!!.level,
+                        bonus = _players.value?.get(selectedID)!!.bonus+i,
+                        sex = _players.value?.get(selectedID)!!.sex,
+                        playing = true,
+                        reverseSex = _players.value?.get(selectedID)!!.reverseSex
+                    )
+                ) }
+            }
+        }
+    }
 
     companion object {
         const val TAG = "Munchkin simple"
