@@ -1,10 +1,9 @@
-package com.exxuslee.ui
+package com.exxuslee.ui.setting
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.exxuslee.databinding.RecyclerFistBinding
 import com.exxuslee.databinding.RecyclerSecondBinding
 import com.exxuslee.domain.model.Player
 

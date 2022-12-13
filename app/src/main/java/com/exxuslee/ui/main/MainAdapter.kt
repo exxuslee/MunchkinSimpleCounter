@@ -1,4 +1,4 @@
-package com.exxuslee.ui
+package com.exxuslee.ui.main
 
 import android.graphics.Color
 import android.view.LayoutInflater

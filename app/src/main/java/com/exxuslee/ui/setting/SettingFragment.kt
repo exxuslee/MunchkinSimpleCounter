@@ -1,4 +1,4 @@
-package com.exxuslee.ui
+package com.exxuslee.ui.setting
 
 import android.app.AlertDialog
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.exxuslee.ui
+package com.exxuslee.ui.setting
 
 import android.content.Context
 import android.view.LayoutInflater

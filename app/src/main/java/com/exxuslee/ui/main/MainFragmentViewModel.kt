@@ -1,4 +1,4 @@
-package com.exxuslee.ui
+package com.exxuslee.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,7 +1,7 @@
 package com.exxuslee.di
 
-import com.exxuslee.ui.MainFragmentViewModel
-import com.exxuslee.ui.SettingFragmentViewModel
+import com.exxuslee.ui.main.MainFragmentViewModel
+import com.exxuslee.ui.setting.SettingFragmentViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
