@@ -11,11 +11,11 @@ import com.exxuslee.R
 
 
 class SpinnerAdapter(
-    private val ctx: Context, resource: Int, private val contentArray: Array<String>,
+    private val ctx: Context,
+    private val resource: Int,
+    private val contentArray: Array<String>,
     private val imageArray: Array<Int>
-) : ArrayAdapter<String?>(
-    ctx, R.layout.spinner_icon, R.id.spinnerTextView, contentArray
-) {
+) : ArrayAdapter<String?>(ctx, resource, R.id.spinnerTextView, contentArray) {
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         return getCustomView(position, convertView, parent)
     }
@@ -26,7 +26,7 @@ class SpinnerAdapter(
 
     private fun getCustomView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val inflater = ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val row: View = inflater.inflate(R.layout.spinner_icon, parent, false)
+        val row: View = inflater.inflate(resource, parent, false)
         val textView = row.findViewById<View>(R.id.spinnerTextView) as TextView
         textView.text = contentArray[position]
         val imageView = row.findViewById<View>(R.id.spinnerImageView) as ImageView

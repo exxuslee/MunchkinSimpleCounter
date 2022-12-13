@@ -58,23 +58,20 @@ class SettingFragment : Fragment() {
         val view = layoutInflater.inflate(R.layout.add_player, null)
         val editName = view.findViewById<View>(R.id.editTextPersonName) as TextView
         val imagesMan = arrayOf(
-            R.drawable.icon_0001,
-            R.drawable.icon_0003,
-            R.drawable.icon_0005,
-            R.drawable.icon_0006,
-            R.drawable.icon_0008,
-            R.drawable.icon_0009,
-        )
-        val imagesWoman = intArrayOf(
             R.drawable.icon_0002,
+            R.drawable.icon_0005,
+            R.drawable.icon_0008,
+        )
+        val imagesWoman = arrayOf(
+            R.drawable.icon_0001,
             R.drawable.icon_0004,
             R.drawable.icon_0007,
         )
 
-        val textArray = arrayOf("clouds", "mark", "techcrunch", "clouds", "mark", "techcrunch")
+        val textArray = arrayOf("man", "man", "man", "woman", "woman", "woman")
         val spinner = view.findViewById(R.id.spinnerIcon) as Spinner
 
-        val adapter = SpinnerAdapter(requireContext(), R.layout.spinner_icon, textArray, imagesMan)
+        val adapter = SpinnerAdapter(requireContext(), R.layout.spinner_icon, textArray, imagesMan+imagesWoman)
         spinner.adapter = adapter
 
 
