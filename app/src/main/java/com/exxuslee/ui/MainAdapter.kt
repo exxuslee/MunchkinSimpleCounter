@@ -42,21 +42,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun tableHeader() {
-        players = players.plus(Player(0))
-        players = players.plus(Player(1))
-        players = players.plus(Player(2))
-        players = players.plus(Player(3))
-        players = players.plus(Player(4))
-        players = players.plus(Player(5))
-        players = players.plus(Player(6))
-        players = players.plus(Player(7))
-        players = players.plus(Player(8))
-
-        Log.d(TAG, this.players.toString())
-        notifyDataSetChanged()
-    }
-
     companion object {
         const val TAG = "player"
     }

@@ -11,12 +11,12 @@ interface BaseMapper<L, D> {
 
     class Base : BaseMapper<Entity, Player> {
         override fun oneToDomain(type: Entity) = Player(
-            id = type.id,
             name = type.name,
             level = type.level,
             bonus = type.bonus,
             sex = type.sex,
-            active = type.active,
+            playing = type.active,
+            reverseSex = type.reverseSex
         )
 
         override fun allToDomain(types: List<Entity>): List<Player> {
@@ -26,12 +26,12 @@ interface BaseMapper<L, D> {
         }
 
         override fun domainToLocal(type: Player) = Entity(
-            id = type.id,
             name = type.name,
             level = type.level,
             bonus = type.bonus,
             sex = type.sex,
-            active = type.active,
+            active = type.playing,
+            reverseSex = type.reverseSex
         )
 
 

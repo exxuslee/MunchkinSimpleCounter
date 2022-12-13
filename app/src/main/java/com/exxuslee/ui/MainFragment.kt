@@ -34,7 +34,6 @@ class MainFragment : Fragment() {
 
         val mainAdapter = MainAdapter()
         binding.recyclerView.adapter = mainAdapter
-        mainAdapter.tableHeader()
 
         viewModel.players.observe(viewLifecycleOwner) { Player ->
             mainAdapter.updateAdapter(Player)
