@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.exxuslee.data.local.entities.Entity
-import com.exxuslee.domain.model.Player
 
 @Dao
 interface PlayerDAO {
@@ -20,5 +19,14 @@ interface PlayerDAO {
     suspend fun savePlayer(player: Entity)
 
     @Query("UPDATE table_number SET level = :level, bonus = :bonus, reverseSex = :reverseSex, active = :active WHERE name = :name")
-    suspend fun updatePlayer(level: Int, bonus:Int, reverseSex:Boolean, active:Boolean, name:String)
+    suspend fun updatePlayer(
+        level: Int,
+        bonus: Int,
+        reverseSex: Boolean,
+        active: Boolean,
+        name: String
+    )
+
+    @Query("SELECT MAX (id) FROM table_number")
+    suspend fun lastID(): Int?
 }

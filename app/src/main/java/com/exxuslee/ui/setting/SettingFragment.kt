@@ -116,7 +116,6 @@ class SettingFragment : Fragment() {
             .setMessage("Set sex and name of player")
             .setView(view)
             .setPositiveButton(android.R.string.ok) { dialog, which ->
-                Log.d("player", "about $dialog $which")
                 viewModel.savePlayer(Player(name = editName.text.toString()))
             }
             .setNegativeButton(android.R.string.cancel, null)

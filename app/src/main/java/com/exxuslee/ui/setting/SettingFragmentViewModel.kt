@@ -1,5 +1,6 @@
 package com.exxuslee.ui.setting
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,7 +29,10 @@ class SettingFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewMo
 
     fun savePlayer(player: Player) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) { playerUseCase.savePlayer(player) }
+            withContext(Dispatchers.IO) {
+                val lastId = playerUseCase.savePlayer(player)
+                Log.d(TAG, lastId.toString())
+            }
         }
     }
 
@@ -42,7 +46,7 @@ class SettingFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewMo
     private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
 
     companion object {
-        const val TAG = "Munchkin simple"
+        const val TAG = "player"
     }
 }
 

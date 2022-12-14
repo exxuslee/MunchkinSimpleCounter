@@ -18,12 +18,20 @@ class RepositoryImpl(
         else Result.Error("no player in db")
     }
 
-    override suspend fun savePlayer(player: Player) {
+    override suspend fun savePlayer(player: Player): Int {
         playerDAO.savePlayer(mapper.domainToLocal(player))
+        return playerDAO.lastID() ?: -1
     }
 
-    override suspend fun updatePlayer(player: Player) {
-        playerDAO.updatePlayer(player.level, player.bonus, player.reverseSex, player.playing, player.name)
+    override suspend fun updatePlayer(player: Player): Int {
+        playerDAO.updatePlayer(
+            player.level,
+            player.bonus,
+            player.reverseSex,
+            player.playing,
+            player.name
+        )
+        return playerDAO.lastID() ?: -1
     }
 
     override suspend fun players(): Result<List<Player>> {
