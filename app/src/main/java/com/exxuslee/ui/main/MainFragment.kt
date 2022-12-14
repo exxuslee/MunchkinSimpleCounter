@@ -36,7 +36,9 @@ class MainFragment : Fragment() {
         binding.recyclerView.adapter = mainAdapter
 
         viewModel.players.observe(viewLifecycleOwner) { Player ->
-            mainAdapter.updateAdapter(Player)
+            if (Player != null) {
+                mainAdapter.updateAdapter(Player)
+            }
         }
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->

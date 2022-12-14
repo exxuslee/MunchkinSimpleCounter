@@ -15,5 +15,5 @@ data class Entity(
     @ColumnInfo(name = "bonus") val bonus: Int,
     @ColumnInfo(name = "sex") val sex: Boolean,
     @ColumnInfo(name = "active") val active: Boolean,
-    @ColumnInfo(name = "onSex") val reverseSex: Boolean,
+    @ColumnInfo(name = "reverseSex") val reverseSex: Boolean,
 )

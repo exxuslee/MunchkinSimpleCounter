@@ -117,9 +117,7 @@ class SettingFragment : Fragment() {
             .setView(view)
             .setPositiveButton(android.R.string.ok) { dialog, which ->
                 Log.d("player", "about $dialog $which")
-                viewModel.savePlayer(
-                    Player(name = editName.text.toString())
-                )
+                viewModel.savePlayer(Player(name = editName.text.toString()))
             }
             .setNegativeButton(android.R.string.cancel, null)
             .setIcon(android.R.drawable.ic_dialog_info)

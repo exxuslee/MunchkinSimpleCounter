@@ -22,6 +22,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
         }
 
         override fun handleSuccess(data: List<Player>) {
+            _players.postValue(null)
             _players.postValue(data)
         }
     }
@@ -44,16 +45,19 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
     fun level(i: Int) {
         if (selectedID >= 0) {
             viewModelScope.launch {
-                withContext(Dispatchers.IO) {    playerUseCase.savePlayer(
-                    Player(
-                        name = _players.value?.get(selectedID)!!.name,
-                        level = _players.value?.get(selectedID)!!.level+i,
-                        bonus = _players.value?.get(selectedID)!!.bonus,
-                        sex = _players.value?.get(selectedID)!!.sex,
-                        playing = true,
-                        reverseSex = _players.value?.get(selectedID)!!.reverseSex
+                withContext(Dispatchers.IO) {
+                    playerUseCase.updatePlayer(
+                        Player(
+                            name = _players.value?.get(selectedID)!!.name,
+                            level = _players.value?.get(selectedID)!!.level + i,
+                            bonus = _players.value?.get(selectedID)!!.bonus,
+                            sex = _players.value?.get(selectedID)!!.sex,
+                            playing = true,
+                            reverseSex = _players.value?.get(selectedID)!!.reverseSex
+                        )
                     )
-                ) }
+                }
+                loadPlayers()
             }
         }
     }
@@ -61,16 +65,19 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
     fun bonus(i: Int) {
         if (selectedID >= 0) {
             viewModelScope.launch {
-                withContext(Dispatchers.IO) {    playerUseCase.savePlayer(
-                    Player(
-                        name = _players.value?.get(selectedID)!!.name,
-                        level = _players.value?.get(selectedID)!!.level,
-                        bonus = _players.value?.get(selectedID)!!.bonus+i,
-                        sex = _players.value?.get(selectedID)!!.sex,
-                        playing = true,
-                        reverseSex = _players.value?.get(selectedID)!!.reverseSex
+                withContext(Dispatchers.IO) {
+                    playerUseCase.updatePlayer(
+                        Player(
+                            name = _players.value?.get(selectedID)!!.name,
+                            level = _players.value?.get(selectedID)!!.level,
+                            bonus = _players.value?.get(selectedID)!!.bonus + i,
+                            sex = _players.value?.get(selectedID)!!.sex,
+                            playing = true,
+                            reverseSex = _players.value?.get(selectedID)!!.reverseSex
+                        )
                     )
-                ) }
+                }
+                loadPlayers()
             }
         }
     }

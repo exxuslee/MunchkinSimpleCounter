@@ -31,7 +31,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             bonus.text = strength.toString()
         }
         holder.itemView.setBackgroundColor(
-            if (selectedPosition == position) Color.LTGRAY else Color.TRANSPARENT)
+            if (selectedPosition == position) Color.LTGRAY else Color.TRANSPARENT
+        )
         holder.itemView.setOnClickListener {
             notifyItemChanged(selectedPosition)
             selectedPosition = holder.adapterPosition
@@ -42,8 +43,9 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun getItemCount() = players.size
 
-    fun updateAdapter(listPlayers: List<Player>?) {
-        listPlayers?.map { player -> players = players.plus(player) }
+    fun updateAdapter(listPlayers: List<Player>) {
+        //listPlayers?.map { player -> players = players.plus(player) }
+        players = listPlayers
         notifyDataSetChanged()
     }
 

@@ -12,14 +12,18 @@ class RepositoryImpl(
     private val mapper = BaseMapper.Base()
 
 
-    override suspend fun loadPlayer(id: Int): Result<Player> {
-        val localData = playerDAO.player(id)
+    override suspend fun loadPlayer(name: String): Result<Player> {
+        val localData = playerDAO.player(name)
         return if (localData != null) Result.Success(mapper.oneToDomain(localData))
         else Result.Error("no player in db")
     }
 
     override suspend fun savePlayer(player: Player) {
         playerDAO.savePlayer(mapper.domainToLocal(player))
+    }
+
+    override suspend fun updatePlayer(player: Player) {
+        playerDAO.updatePlayer(player.level, player.bonus, player.reverseSex, player.playing, player.name)
     }
 
     override suspend fun players(): Result<List<Player>> {
