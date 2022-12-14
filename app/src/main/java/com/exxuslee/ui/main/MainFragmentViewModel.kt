@@ -37,54 +37,47 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
     private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
 
 
-    fun selectedPlayer() = selectedID
-
     fun selectPlayer(position: Int) {
         selectedID = position
     }
 
-    fun level(i: Int) {
-        if (selectedID >= 0) {
-            viewModelScope.launch {
-                withContext(Dispatchers.IO) {
-                    playerUseCase.updatePlayer(
-                        Player(
-                            name = _players.value?.get(selectedID)!!.name,
-                            level = _players.value?.get(selectedID)!!.level + i,
-                            bonus = _players.value?.get(selectedID)!!.bonus,
-                            sex = _players.value?.get(selectedID)!!.sex,
-                            playing = true,
-                            reverseSex = _players.value?.get(selectedID)!!.reverseSex
-                        )
-                    )
-                }
-                loadPlayers()
+    private fun updatePlayer(player: Player) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                playerUseCase.updatePlayer(player)
             }
+            loadPlayers()
         }
+    }
+
+    fun level(i: Int) {
+        if (selectedID >= 0) updatePlayer(
+            Player(
+                name = _players.value?.get(selectedID)!!.name,
+                level = _players.value?.get(selectedID)!!.level + i,
+                bonus = _players.value?.get(selectedID)!!.bonus,
+                sex = _players.value?.get(selectedID)!!.sex,
+                playing = true,
+                reverseSex = _players.value?.get(selectedID)!!.reverseSex
+            )
+        )
     }
 
     fun bonus(i: Int) {
-        if (selectedID >= 0) {
-            viewModelScope.launch {
-                withContext(Dispatchers.IO) {
-                    playerUseCase.updatePlayer(
-                        Player(
-                            name = _players.value?.get(selectedID)!!.name,
-                            level = _players.value?.get(selectedID)!!.level,
-                            bonus = _players.value?.get(selectedID)!!.bonus + i,
-                            sex = _players.value?.get(selectedID)!!.sex,
-                            playing = true,
-                            reverseSex = _players.value?.get(selectedID)!!.reverseSex
-                        )
-                    )
-                }
-                loadPlayers()
-            }
-        }
+        if (selectedID >= 0) updatePlayer(
+            Player(
+                name = _players.value?.get(selectedID)!!.name,
+                level = _players.value?.get(selectedID)!!.level,
+                bonus = _players.value?.get(selectedID)!!.bonus + i,
+                sex = _players.value?.get(selectedID)!!.sex,
+                playing = true,
+                reverseSex = _players.value?.get(selectedID)!!.reverseSex
+            )
+        )
     }
 
     fun newGame() {
-        _players.postValue(_players.value?.map { player ->
+        val newPlayers = _players.value?.map { player ->
             Player(
                 name = player.name,
                 level = 1,
@@ -93,7 +86,8 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
                 playing = player.playing,
                 reverseSex = false
             )
-        })
+        }
+        _players.postValue(newPlayers)
         Log.d(TAG, _players.value.toString())
     }
 

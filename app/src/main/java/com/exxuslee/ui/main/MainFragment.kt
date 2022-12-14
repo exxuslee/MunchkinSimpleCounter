@@ -62,7 +62,10 @@ class MainFragment : Fragment() {
 
         binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.newGame -> viewModel.newGame()
+                R.id.newGame -> {
+                    viewModel.newGame()
+                    binding.bottomNavigationSecond.toggleVisibility()
+                }
                 R.id.settings -> findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 R.id.about -> about()
             }
