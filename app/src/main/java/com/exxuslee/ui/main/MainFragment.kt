@@ -43,10 +43,18 @@ class MainFragment : Fragment() {
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.levelPlus -> {viewModel.level(1)}
-                R.id.levelMinus -> {viewModel.level(-1)}
-                R.id.bonusPlus -> {viewModel.bonus(1)}
-                R.id.bonusMinus -> {viewModel.bonus(-1)}
+                R.id.levelPlus -> {
+                    viewModel.level(1)
+                }
+                R.id.levelMinus -> {
+                    viewModel.level(-1)
+                }
+                R.id.bonusPlus -> {
+                    viewModel.bonus(1)
+                }
+                R.id.bonusMinus -> {
+                    viewModel.bonus(-1)
+                }
                 R.id.more -> binding.bottomNavigationSecond.toggleVisibility()
             }
             return@setOnItemSelectedListener true
@@ -54,10 +62,8 @@ class MainFragment : Fragment() {
 
         binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.newGame -> {}
-                R.id.settings -> {
-                    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-                }
+                R.id.newGame -> viewModel.newGame()
+                R.id.settings -> findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 R.id.about -> about()
             }
             return@setOnItemSelectedListener true

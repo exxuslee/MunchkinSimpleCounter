@@ -1,5 +1,6 @@
 package com.exxuslee.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -82,8 +83,22 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
         }
     }
 
+    fun newGame() {
+        _players.postValue(_players.value?.map { player ->
+            Player(
+                name = player.name,
+                level = 1,
+                bonus = 0,
+                sex = player.sex,
+                playing = player.playing,
+                reverseSex = false
+            )
+        })
+        Log.d(TAG, _players.value.toString())
+    }
+
     companion object {
-        const val TAG = "Munchkin simple"
+        const val TAG = "player"
     }
 }
 
