@@ -15,11 +15,6 @@
             android:layout_weight="1"
             />
 
-        <include
-            layout="@layout/recycler_second"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
     </TableRow>
 
     <TableRow
@@ -27,20 +22,13 @@
         android:padding="8dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerOnlinePlayer"
-            android:layout_width="0dp"
+            android:id="@+id/recycler_setting_player"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/recycler_second" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerOfflinePlayer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/recycler_second" />
     </TableRow>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

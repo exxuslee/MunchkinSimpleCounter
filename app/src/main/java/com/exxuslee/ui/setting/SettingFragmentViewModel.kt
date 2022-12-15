@@ -13,8 +13,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SettingFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel() {
-    private var selectedID = 0
-
     private val _players = MutableLiveData<List<Player>?>()
     val players = _players.asLiveData()
 
@@ -23,6 +21,7 @@ class SettingFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewMo
         }
 
         override fun handleSuccess(data: List<Player>) {
+            _players.postValue(null)
             _players.postValue(data)
         }
     }

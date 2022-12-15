@@ -38,14 +38,12 @@ class SettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.loadPlayers()
-        val allPlayersAdapter = SettingAdapter()
-        val onlinePlayersAdapter = SettingAdapter()
-        binding.recyclerOfflinePlayer.adapter = allPlayersAdapter
-        binding.recyclerOnlinePlayer.adapter = onlinePlayersAdapter
+
+        val settingAdapter = SettingAdapter(resources.obtainTypedArray(R.array.icons))
+        binding.recyclerSettingPlayer.adapter = settingAdapter
+
         viewModel.players.observe(viewLifecycleOwner) { listPlayers ->
-            allPlayersAdapter.updateAdapter(listPlayers)
-            val online = listPlayers?.filter { player -> player.playing }
-            onlinePlayersAdapter.updateAdapter(online)
+            if (listPlayers != null) settingAdapter.updateAdapter(listPlayers)
         }
 
         binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
@@ -106,9 +104,12 @@ class SettingFragment : Fragment() {
             .setMessage("Set sex and name of player")
             .setView(view)
             .setPositiveButton(android.R.string.ok) { dialog, which ->
-                viewModel.savePlayer(Player(
-                    name = editName.text.toString(),
-                    icon = spinner.selectedItemPosition))
+                viewModel.savePlayer(
+                    Player(
+                        name = editName.text.toString(),
+                        icon = spinner.selectedItemPosition
+                    )
+                )
             }
             .setNegativeButton(android.R.string.cancel, null)
             .setIcon(android.R.drawable.ic_dialog_info)

@@ -1,16 +1,17 @@
 package com.exxuslee.ui.setting
 
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.exxuslee.databinding.RecyclerSecondBinding
 import com.exxuslee.domain.model.Player
+import com.exxuslee.ui.main.DiffCallBack
 
-class SettingAdapter : RecyclerView.Adapter<SettingAdapter.ViewHolder>() {
-    private var selectedPosition: Int = -1
+class SettingAdapter(private val icons: TypedArray) : RecyclerView.Adapter<SettingAdapter.ViewHolder>() {
     private var players: List<Player> = listOf()
-    var onPlayerClickListener: ((Int) -> Unit)? = null
 
     inner class ViewHolder(val binding: RecyclerSecondBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -23,25 +24,21 @@ class SettingAdapter : RecyclerView.Adapter<SettingAdapter.ViewHolder>() {
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val iconID = players[position].icon
         holder.binding.apply {
-            sex.text = players[position].icon.toString()
+            icon.setImageDrawable(icons.getDrawable(iconID))
             name.text = players[position].name
-        }
-        holder.itemView.setBackgroundColor(
-            if (selectedPosition == position) Color.LTGRAY else Color.TRANSPARENT)
-        holder.itemView.setOnClickListener {
-            notifyItemChanged(selectedPosition)
-            selectedPosition = holder.adapterPosition
-            notifyItemChanged(position)
-            onPlayerClickListener?.invoke(position)
         }
     }
 
     override fun getItemCount() = players.size
 
-    fun updateAdapter(listPlayers: List<Player>?) {
-        listPlayers?.map { player -> players = players.plus(player) }
-        notifyDataSetChanged()
+
+    fun updateAdapter(newPlayers: List<Player>) {
+        val toDoDiffUtil = DiffCallBack(players, newPlayers)
+        val toDoDiffResult = DiffUtil.calculateDiff(toDoDiffUtil)
+        players = newPlayers
+        toDoDiffResult.dispatchUpdatesTo(this)
     }
 
     companion object {
