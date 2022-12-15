@@ -57,6 +57,7 @@ class SettingFragment : Fragment() {
             return@setOnItemSelectedListener true
         }
 
+        settingAdapter.onCheckClickListener = { position -> viewModel.onlinePlayer(position) }
     }
 
     private fun deletePlayer() {

@@ -44,6 +44,25 @@ class SettingFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewMo
 
     private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
 
+    fun onlinePlayer(position: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                playerUseCase.updatePlayer(
+                    Player(
+                        id = _players.value?.get(position)!!.id,
+                        name = _players.value?.get(position)!!.name,
+                        level = _players.value?.get(position)!!.level,
+                        bonus = _players.value?.get(position)!!.bonus,
+                        icon = _players.value?.get(position)!!.icon,
+                        playing = !_players.value?.get(position)!!.playing,
+                        reverseSex = _players.value?.get(position)!!.reverseSex
+                    )
+                )
+            }
+            loadPlayers()
+        }
+    }
+
     companion object {
         const val TAG = "player"
     }

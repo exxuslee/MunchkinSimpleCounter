@@ -1,17 +1,20 @@
 package com.exxuslee.ui.setting
 
+import android.content.res.Resources
 import android.content.res.TypedArray
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.exxuslee.R
 import com.exxuslee.databinding.RecyclerSecondBinding
 import com.exxuslee.domain.model.Player
 import com.exxuslee.ui.main.DiffCallBack
 
-class SettingAdapter(private val icons: TypedArray) : RecyclerView.Adapter<SettingAdapter.ViewHolder>() {
+class SettingAdapter(private val icons: TypedArray) :
+    RecyclerView.Adapter<SettingAdapter.ViewHolder>() {
     private var players: List<Player> = listOf()
+    var onCheckClickListener: ((Int) -> Unit)? = null
 
     inner class ViewHolder(val binding: RecyclerSecondBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -28,7 +31,11 @@ class SettingAdapter(private val icons: TypedArray) : RecyclerView.Adapter<Setti
         holder.binding.apply {
             icon.setImageDrawable(icons.getDrawable(iconID))
             name.text = players[position].name
+            checkBox.isChecked = players[position].playing
+            if (players[position].playing) checkBox.text = "\uD83D\uDD79"
+            else checkBox.text = "✘"
         }
+        holder.binding.checkBox.setOnClickListener { onCheckClickListener?.invoke(position) }
     }
 
     override fun getItemCount() = players.size
