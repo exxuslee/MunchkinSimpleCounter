@@ -16,7 +16,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
     private var selectedID = -1
 
     private val _players = MutableLiveData<List<Player>?>()
-    val players = _players.asLiveData()
+    val players = _players as LiveData<List<Player>>
 
     private var handleResult = object : HandleResult<List<Player>> {
         override fun handleError(message: String) {
@@ -34,8 +34,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
         }
     }
 
-    private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
-
+    //private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
 
     fun selectPlayer(position: Int) {
         selectedID = position
@@ -53,6 +52,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
     fun level(i: Int) {
         if (selectedID >= 0) updatePlayer(
             Player(
+                id = _players.value?.get(selectedID)!!.id,
                 name = _players.value?.get(selectedID)!!.name,
                 level = _players.value?.get(selectedID)!!.level + i,
                 bonus = _players.value?.get(selectedID)!!.bonus,
@@ -66,6 +66,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
     fun bonus(i: Int) {
         if (selectedID >= 0) updatePlayer(
             Player(
+                id = _players.value?.get(selectedID)!!.id,
                 name = _players.value?.get(selectedID)!!.name,
                 level = _players.value?.get(selectedID)!!.level,
                 bonus = _players.value?.get(selectedID)!!.bonus + i,
@@ -79,6 +80,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
     fun newGame() {
         val newPlayers = _players.value?.map { player ->
             Player(
+                id = player.id,
                 name = player.name,
                 level = 1,
                 bonus = 0,

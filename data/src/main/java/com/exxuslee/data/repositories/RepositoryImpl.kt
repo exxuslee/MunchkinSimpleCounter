@@ -6,11 +6,8 @@ import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.repositories.Repository
 import com.exxuslee.domain.utils.Result
 
-class RepositoryImpl(
-    private val playerDAO: PlayerDAO,
-) : Repository {
+class RepositoryImpl(private val playerDAO: PlayerDAO) : Repository {
     private val mapper = BaseMapper.Base()
-
 
     override suspend fun loadPlayer(name: String): Result<Player> {
         val localData = playerDAO.player(name)
@@ -23,15 +20,14 @@ class RepositoryImpl(
         return playerDAO.lastID() ?: -1
     }
 
-    override suspend fun updatePlayer(player: Player): Int {
+    override suspend fun updatePlayer(player: Player) {
         playerDAO.updatePlayer(
+            player.id,
             player.level,
             player.bonus,
             player.reverseSex,
-            player.playing,
-            player.name
+            player.playing
         )
-        return playerDAO.lastID() ?: -1
     }
 
     override suspend fun players(): Result<List<Player>> {

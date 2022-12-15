@@ -11,6 +11,7 @@ interface BaseMapper<L, D> {
 
     class Base : BaseMapper<Entity, Player> {
         override fun oneToDomain(type: Entity) = Player(
+            id = type.id,
             name = type.name,
             level = type.level,
             bonus = type.bonus,
@@ -26,6 +27,7 @@ interface BaseMapper<L, D> {
         }
 
         override fun domainToLocal(type: Player) = Entity(
+            id = type.id,
             name = type.name,
             level = type.level,
             bonus = type.bonus,

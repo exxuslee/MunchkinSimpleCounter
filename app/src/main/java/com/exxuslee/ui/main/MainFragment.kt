@@ -35,10 +35,8 @@ class MainFragment : Fragment() {
         val mainAdapter = MainAdapter()
         binding.recyclerView.adapter = mainAdapter
 
-        viewModel.players.observe(viewLifecycleOwner) { Player ->
-            if (Player != null) {
-                mainAdapter.updateAdapter(Player)
-            }
+        viewModel.players.observe(viewLifecycleOwner) { listPlayers ->
+            if (listPlayers != null) mainAdapter.updateAdapter(listPlayers)
         }
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->

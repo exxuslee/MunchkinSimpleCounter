@@ -18,13 +18,13 @@ interface PlayerDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePlayer(player: Entity)
 
-    @Query("UPDATE table_number SET level = :level, bonus = :bonus, reverseSex = :reverseSex, active = :active WHERE name = :name")
+    @Query("UPDATE table_number SET level = :level, bonus = :bonus, reverseSex = :reverseSex, active = :active WHERE id = :id")
     suspend fun updatePlayer(
+        id: Int,
         level: Int,
         bonus: Int,
         reverseSex: Boolean,
         active: Boolean,
-        name: String
     )
 
     @Query("SELECT MAX (id) FROM table_number")
