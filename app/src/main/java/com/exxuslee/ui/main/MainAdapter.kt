@@ -1,5 +1,6 @@
 package com.exxuslee.ui.main
 
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.exxuslee.databinding.RecyclerFistBinding
 import com.exxuslee.domain.model.Player
 
-class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter (private val icons: TypedArray) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     private var selectedPosition: Int = -1
     private var players: List<Player> = listOf()
     var onPlayerClickListener: ((Int) -> Unit)? = null
@@ -25,7 +26,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val strength = players[position].bonus + players[position].level
         holder.binding.apply {
-            sex.text = players[position].sex.toString()
+            icon.setImageDrawable(icons.getDrawable(players[position].icon))
             name.text = players[position].name
             level.text = players[position].level.toString()
             bonus.text = players[position].bonus.toString()

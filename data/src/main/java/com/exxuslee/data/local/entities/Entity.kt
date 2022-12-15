@@ -13,7 +13,7 @@ data class Entity(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "level") val level: Int,
     @ColumnInfo(name = "bonus") val bonus: Int,
-    @ColumnInfo(name = "sex") val sex: Boolean,
+    @ColumnInfo(name = "icon") val icon: Int,
     @ColumnInfo(name = "active") val active: Boolean,
     @ColumnInfo(name = "reverseSex") val reverseSex: Boolean,
 )

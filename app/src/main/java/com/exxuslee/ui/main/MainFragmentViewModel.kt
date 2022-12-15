@@ -56,7 +56,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
                 name = _players.value?.get(selectedID)!!.name,
                 level = _players.value?.get(selectedID)!!.level + i,
                 bonus = _players.value?.get(selectedID)!!.bonus,
-                sex = _players.value?.get(selectedID)!!.sex,
+                icon = _players.value?.get(selectedID)!!.icon,
                 playing = true,
                 reverseSex = _players.value?.get(selectedID)!!.reverseSex
             )
@@ -70,7 +70,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
                 name = _players.value?.get(selectedID)!!.name,
                 level = _players.value?.get(selectedID)!!.level,
                 bonus = _players.value?.get(selectedID)!!.bonus + i,
-                sex = _players.value?.get(selectedID)!!.sex,
+                icon = _players.value?.get(selectedID)!!.icon,
                 playing = true,
                 reverseSex = _players.value?.get(selectedID)!!.reverseSex
             )
@@ -84,7 +84,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
                 name = player.name,
                 level = 1,
                 bonus = 0,
-                sex = player.sex,
+                icon = player.icon,
                 playing = player.playing,
                 reverseSex = false
             )

@@ -5,7 +5,7 @@ data class Player(
     val name: String = "Player",
     val level: Int = 1,
     val bonus: Int = 0,
-    val sex: Boolean = Sex.MAN,
+    val icon: Int = 0,
     val playing: Boolean = false,
     val reverseSex: Boolean = false,
 )

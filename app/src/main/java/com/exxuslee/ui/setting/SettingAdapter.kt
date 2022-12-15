@@ -24,7 +24,7 @@ class SettingAdapter : RecyclerView.Adapter<SettingAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
-            sex.text = players[position].sex.toString()
+            sex.text = players[position].icon.toString()
             name.text = players[position].name
         }
         holder.itemView.setBackgroundColor(

@@ -15,7 +15,7 @@ interface BaseMapper<L, D> {
             name = type.name,
             level = type.level,
             bonus = type.bonus,
-            sex = type.sex,
+            icon = type.icon,
             playing = type.active,
             reverseSex = type.reverseSex
         )
@@ -31,7 +31,7 @@ interface BaseMapper<L, D> {
             name = type.name,
             level = type.level,
             bonus = type.bonus,
-            sex = type.sex,
+            icon = type.icon,
             active = type.playing,
             reverseSex = type.reverseSex
         )

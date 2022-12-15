@@ -32,7 +32,7 @@ class MainFragment : Fragment() {
 
         viewModel.loadPlayers()
 
-        val mainAdapter = MainAdapter()
+        val mainAdapter = MainAdapter(resources.obtainTypedArray(R.array.icons))
         binding.recyclerView.adapter = mainAdapter
 
         viewModel.players.observe(viewLifecycleOwner) { listPlayers ->

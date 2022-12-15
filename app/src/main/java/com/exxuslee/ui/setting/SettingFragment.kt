@@ -21,17 +21,8 @@ class SettingFragment : Fragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SettingFragmentViewModel by viewModel()
-    private val imagesMan = arrayOf(
-        R.drawable.icon_0002,
-        R.drawable.icon_0005,
-        R.drawable.icon_0008,
-    )
-    private val imagesWoman = arrayOf(
-        R.drawable.icon_0001,
-        R.drawable.icon_0004,
-        R.drawable.icon_0007,
-    )
-    private val textArray = arrayOf("man", "man", "man", "woman", "woman", "woman")
+    private val icons by lazy { resources.obtainTypedArray(R.array.icons) }
+    private val textArray by lazy { resources.getStringArray(R.array.icons_string) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,12 +64,11 @@ class SettingFragment : Fragment() {
     private fun deletePlayer() {
         val view = layoutInflater.inflate(R.layout.delete_player, null)
         val spinner = view.findViewById(R.id.spinnerName) as Spinner
-        val listName = arrayOf<String>()
         val adapter = SpinnerAdapter(
             requireContext(),
             R.layout.add_spinner_icon,
             textArray,
-            imagesMan + imagesWoman
+            icons
         )
         spinner.adapter = adapter
 
@@ -107,7 +97,7 @@ class SettingFragment : Fragment() {
             requireContext(),
             R.layout.add_spinner_icon,
             textArray,
-            imagesMan + imagesWoman
+            icons
         )
         spinner.adapter = adapter
 
@@ -116,7 +106,9 @@ class SettingFragment : Fragment() {
             .setMessage("Set sex and name of player")
             .setView(view)
             .setPositiveButton(android.R.string.ok) { dialog, which ->
-                viewModel.savePlayer(Player(name = editName.text.toString()))
+                viewModel.savePlayer(Player(
+                    name = editName.text.toString(),
+                    icon = spinner.selectedItemPosition))
             }
             .setNegativeButton(android.R.string.cancel, null)
             .setIcon(android.R.drawable.ic_dialog_info)
