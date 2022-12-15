@@ -28,7 +28,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             sex.text = players[position].sex.toString()
             name.text = players[position].name
             level.text = players[position].level.toString()
-            bonus.text = strength.toString()
+            bonus.text = players[position].bonus.toString()
+            life.text = strength.toString()
         }
         holder.itemView.setBackgroundColor(
             if (selectedPosition == position) Color.LTGRAY else Color.TRANSPARENT

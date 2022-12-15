@@ -23,6 +23,7 @@
             android:layout_weight="0.1"
             android:text="@string/sex"
             android:textColor="@color/black"
+            android:gravity="center"
             android:textSize="32sp" />
         <TextView
             android:id="@+id/name"
@@ -32,6 +33,7 @@
             android:textSize="32sp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
+            android:gravity="center"
             android:text="@string/name" />
         <TextView
             android:id="@+id/level"
@@ -39,6 +41,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:textSize="32sp"
+            android:gravity="center"
             android:text="@string/level" />
         <TextView
             android:id="@+id/bonus"
@@ -47,7 +50,18 @@
             android:layout_weight="0.1"
             android:textColor="@color/black"
             android:textSize="32sp"
+            android:gravity="center"
             android:text="@string/bonus" />
+        <TextView
+            android:id="@+id/life"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="@string/life" />
 
     </LinearLayout>
 
