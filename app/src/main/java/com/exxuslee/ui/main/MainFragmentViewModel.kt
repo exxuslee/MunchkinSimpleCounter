@@ -89,6 +89,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
                 reverseSex = false
             )
         }
+        if (newPlayers != null) for (player in newPlayers) updatePlayer(player)
         _players.postValue(newPlayers)
         Log.d(TAG, _players.value.toString())
     }
