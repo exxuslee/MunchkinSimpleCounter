@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.exxuslee.databinding.RecyclerFistBinding
 import com.exxuslee.domain.model.Player
 
-class MainAdapter (private val icons: TypedArray) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     private var selectedPosition: Int = -1
     private var players: List<Player> = listOf()
     var onPlayerClickListener: ((Int) -> Unit)? = null
+    var onIconClickListener: ((Int) -> Unit)? = null
 
     inner class ViewHolder(val binding: RecyclerFistBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -25,21 +26,23 @@ class MainAdapter (private val icons: TypedArray) : RecyclerView.Adapter<MainAda
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val strength = players[position].bonus + players[position].level
+        val iconID = players[position].icon
         holder.binding.apply {
-            icon.setImageDrawable(icons.getDrawable(players[position].icon))
+            icon.setImageDrawable(icons.getDrawable(iconID))
             name.text = players[position].name
             level.text = players[position].level.toString()
             bonus.text = players[position].bonus.toString()
             life.text = strength.toString()
+            icon.setOnClickListener { onIconClickListener?.invoke(position) }
         }
-        holder.itemView.setBackgroundColor(
-            if (selectedPosition == position) Color.LTGRAY else Color.TRANSPARENT
-        )
-        holder.itemView.setOnClickListener {
-            notifyItemChanged(selectedPosition)
-            selectedPosition = holder.adapterPosition
-            notifyItemChanged(position)
-            onPlayerClickListener?.invoke(position)
+        holder.itemView.apply {
+            setBackgroundColor(if (selectedPosition == position) Color.LTGRAY else Color.TRANSPARENT)
+            setOnClickListener {
+                notifyItemChanged(selectedPosition)
+                selectedPosition = holder.adapterPosition
+                notifyItemChanged(position)
+                onPlayerClickListener?.invoke(position)
+            }
         }
     }
 
