@@ -38,6 +38,7 @@ class SettingFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewMo
     fun loadPlayers() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) { playerUseCase.players().handle(handleResult) }
+            loadPlayers()
         }
 
     }

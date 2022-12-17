@@ -6,6 +6,6 @@ data class Player(
     val level: Int = 1,
     val bonus: Int = 0,
     val icon: Int = 0,
-    val playing: Boolean = false,
+    val playing: Boolean = true,
     val reverseSex: Boolean = false,
 )
