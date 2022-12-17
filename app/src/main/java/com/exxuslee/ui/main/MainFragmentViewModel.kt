@@ -24,7 +24,7 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
 
         override fun handleSuccess(data: List<Player>) {
             _players.postValue(null)
-            _players.postValue(data)
+            _players.postValue(data.filter { player -> player.playing })
         }
     }
 
@@ -36,8 +36,8 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
 
     //private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
 
-    fun selectPlayer(position: Int) {
-        selectedID = position
+    fun selectPlayer(playerId: Int) {
+        selectedID = playerId
     }
 
     private fun updatePlayer(player: Player) {

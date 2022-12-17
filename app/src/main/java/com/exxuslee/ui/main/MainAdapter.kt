@@ -40,7 +40,7 @@ class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdap
                 notifyItemChanged(selectedPosition)
                 selectedPosition = holder.adapterPosition
                 notifyItemChanged(position)
-                onPlayerClickListener?.invoke(position)
+                onPlayerClickListener?.invoke(selectedPosition)
             }
         }
     }

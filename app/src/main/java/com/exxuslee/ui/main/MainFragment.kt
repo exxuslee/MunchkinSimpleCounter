@@ -36,7 +36,8 @@ class MainFragment : Fragment() {
         binding.recyclerView.adapter = mainAdapter
 
         viewModel.players.observe(viewLifecycleOwner) { listPlayers ->
-            if (listPlayers != null) mainAdapter.updateAdapter(listPlayers)
+            val onlinePlayer = listPlayers.filter { player -> player.playing }
+            mainAdapter.updateAdapter(onlinePlayer)
         }
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->
