@@ -1,12 +1,10 @@
 package com.exxuslee.ui.setting
 
-import android.content.res.Resources
 import android.content.res.TypedArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.exxuslee.R
 import com.exxuslee.databinding.RecyclerSecondBinding
 import com.exxuslee.domain.model.Player
 import com.exxuslee.ui.main.DiffCallBack

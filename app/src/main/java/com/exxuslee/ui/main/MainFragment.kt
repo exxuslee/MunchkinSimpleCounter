@@ -36,8 +36,10 @@ class MainFragment : Fragment() {
         binding.recyclerView.adapter = mainAdapter
 
         viewModel.players.observe(viewLifecycleOwner) { listPlayers ->
-            val onlinePlayer = listPlayers.filter { player -> player.playing }
-            mainAdapter.updateAdapter(onlinePlayer)
+            if (listPlayers != null) {
+                val onlinePlayer = listPlayers.filter { player -> player.playing }
+                mainAdapter.updateAdapter(onlinePlayer)
+            }
         }
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->
@@ -72,6 +74,7 @@ class MainFragment : Fragment() {
         }
 
         mainAdapter.onPlayerClickListener = { position -> viewModel.selectPlayer(position) }
+        mainAdapter.onIconClickListener = { position -> viewModel.changeIcon(position) }
     }
 
 

@@ -94,6 +94,20 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
         Log.d(TAG, _players.value.toString())
     }
 
+    fun changeIcon(position: Int) {
+        updatePlayer(
+            Player(
+                id = _players.value?.get(position)!!.id,
+                name = _players.value?.get(position)!!.name,
+                level = _players.value?.get(position)!!.level,
+                bonus = _players.value?.get(position)!!.bonus,
+                icon = _players.value?.get(position)!!.icon,
+                playing = true,
+                reverseSex = !_players.value?.get(position)!!.reverseSex
+            )
+        )
+    }
+
     companion object {
         const val TAG = "player"
     }

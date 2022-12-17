@@ -25,7 +25,8 @@ class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdap
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val strength = players[position].bonus + players[position].level
-        val iconID = players[position].icon
+        val iconID = if (!players[position].reverseSex) players[position].icon
+        else (players[position].icon+3)%6
         holder.binding.apply {
             icon.setImageDrawable(icons.getDrawable(iconID))
             name.text = players[position].name
