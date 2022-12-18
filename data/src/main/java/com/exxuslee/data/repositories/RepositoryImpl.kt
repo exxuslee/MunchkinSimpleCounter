@@ -35,4 +35,8 @@ class RepositoryImpl(private val playerDAO: PlayerDAO) : Repository {
         return if (localData != null) Result.Success(mapper.allToDomain(localData))
         else Result.Error("no players in db")
     }
+
+    override suspend fun deletePlayer(id: Int) {
+        playerDAO.deletePlayer(id)
+    }
 }

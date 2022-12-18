@@ -9,14 +9,19 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.exxuslee.R
+import com.exxuslee.domain.model.Player
 
 
-class SpinnerAdapter(
+class SpinnerAdapterDel(
     private val ctx: Context,
     private val resource: Int,
-    private val contentArray: Array<String>,
+    private val contentArray: List<Player>,
     private val imageArray: TypedArray
-) : ArrayAdapter<String?>(ctx, resource, R.id.spinnerTextView, contentArray) {
+) : ArrayAdapter<String?>(
+    ctx,
+    resource,
+    R.id.spinnerTextView,
+    contentArray.map { player -> player.name }) {
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         return getCustomView(position, parent)
     }
@@ -29,9 +34,9 @@ class SpinnerAdapter(
         val inflater = ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val row: View = inflater.inflate(resource, parent, false)
         val textView = row.findViewById<View>(R.id.spinnerTextView) as TextView
-        textView.text = contentArray[position]
+        textView.text = contentArray[position].name
         val imageView = row.findViewById<View>(R.id.spinnerImageView) as ImageView
-        imageView.setImageDrawable(imageArray.getDrawable(position))
+        imageView.setImageDrawable(imageArray.getDrawable(contentArray[position].icon))
         return row
     }
 }

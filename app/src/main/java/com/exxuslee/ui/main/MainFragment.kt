@@ -1,8 +1,9 @@
 package com.exxuslee.ui.main
 
 import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,10 +93,15 @@ class MainFragment : Fragment() {
         AlertDialog.Builder(context)
             .setTitle("About..")
             .setMessage("Set like in PlayMarket!")
-            .setPositiveButton(android.R.string.ok) { dialog, which ->
-                Log.d("player", "about $dialog $which")
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                binding.bottomNavigationSecond.toggleVisibility()
+                val openURL = Intent(Intent.ACTION_VIEW)
+                openURL.data = Uri.parse("https://www.google.com/")
+                startActivity(openURL)
             }
-            .setNegativeButton(android.R.string.cancel, null)
+            .setNegativeButton(android.R.string.cancel) { _, _ ->
+                binding.bottomNavigationSecond.toggleVisibility()
+            }
             .setIcon(android.R.drawable.ic_dialog_info)
             .show()
     }

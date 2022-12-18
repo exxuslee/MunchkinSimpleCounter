@@ -2,7 +2,6 @@ package com.exxuslee.ui.setting
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,19 +62,21 @@ class SettingFragment : Fragment() {
     private fun deletePlayer() {
         val view = layoutInflater.inflate(R.layout.delete_player, null)
         val spinner = view.findViewById(R.id.spinnerName) as Spinner
-        val adapter = SpinnerAdapter(
-            requireContext(),
-            R.layout.add_spinner_icon,
-            textArray,
-            icons
-        )
+        val adapter = viewModel.players.value?.let { players ->
+            SpinnerAdapterDel(
+                requireContext(),
+                R.layout.delete_player_spinner,
+                players,
+                icons,
+            )
+        }
         spinner.adapter = adapter
 
         AlertDialog.Builder(context)
             .setTitle("Delete player")
             .setView(view)
             .setPositiveButton(android.R.string.ok) { dialog, which ->
-                Log.d("player", "about $dialog $which")
+                viewModel.deletePlayer(spinner.selectedItemPosition)
             }
             .setNegativeButton(android.R.string.cancel, null)
             .setIcon(android.R.drawable.ic_dialog_info)
@@ -92,7 +93,7 @@ class SettingFragment : Fragment() {
         val editName = view.findViewById<View>(R.id.editTextPersonName) as TextView
         val spinner = view.findViewById(R.id.spinnerIcon) as Spinner
 
-        val adapter = SpinnerAdapter(
+        val adapter = SpinnerAdapterAdd(
             requireContext(),
             R.layout.add_spinner_icon,
             textArray,

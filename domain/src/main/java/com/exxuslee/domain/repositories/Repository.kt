@@ -8,4 +8,5 @@ interface Repository {
     suspend fun savePlayer(player: Player):Int
     suspend fun updatePlayer(player: Player)
     suspend fun players():Result<List<Player>>
+    suspend fun deletePlayer(id: Int)
 }

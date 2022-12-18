@@ -29,4 +29,7 @@ interface PlayerDAO {
 
     @Query("SELECT MAX (id) FROM table_number")
     suspend fun lastID(): Int?
+
+    @Query("DELETE FROM table_number WHERE id = :id")
+    suspend fun deletePlayer(id: Int)
 }

@@ -60,7 +60,15 @@ class SettingFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewMo
                     )
                 )
             }
-            loadPlayers()
+        }
+        loadPlayers()
+    }
+
+    fun deletePlayer(selectedItemPosition: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                _players.value?.get(selectedItemPosition)?.let { playerUseCase.deletePlayer(it.id) }
+            }
         }
     }
 

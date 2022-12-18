@@ -9,6 +9,7 @@ interface UseCase {
     suspend fun savePlayer(player: Player): Int
     suspend fun updatePlayer(player: Player)
     suspend fun players(): Result<List<Player>>
+    suspend fun deletePlayer(id: Int)
 
     class Base(private val repository: Repository) : UseCase {
         override suspend fun loadPlayer(name: String): Result<Player> =
@@ -22,5 +23,9 @@ interface UseCase {
 
         override suspend fun players(): Result<List<Player>> =
             repository.players()
+
+        override suspend fun deletePlayer(id: Int) {
+            repository.deletePlayer(id)
+        }
     }
 }
