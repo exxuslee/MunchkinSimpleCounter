@@ -73,14 +73,14 @@ class MainFragment : Fragment() {
                 }
                 R.id.settings -> findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 R.id.darkMode -> {
+                    checkTheme()
                     val mode = !sharedPreferences["DARK_STATUS", false]
                     if (mode) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     }
-                    Log.d("player", mode.toString())
-                    sharedPreferences.store("DARK_STATUS", mode)
+                    sharedPreferences.store("DARK_STATUS", !sharedPreferences["DARK_STATUS", false])
                 }
                 R.id.about -> about()
             }
@@ -89,6 +89,14 @@ class MainFragment : Fragment() {
 
         mainAdapter.onPlayerClickListener = { position -> viewModel.selectPlayer(position) }
         mainAdapter.onIconClickListener = { position -> viewModel.changeIcon(position) }
+
+        checkTheme()
+    }
+
+    private fun checkTheme() {
+        val mode = sharedPreferences["DARK_STATUS", false]
+        if (mode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 
 

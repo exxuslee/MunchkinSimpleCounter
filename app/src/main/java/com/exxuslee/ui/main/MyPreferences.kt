@@ -18,4 +18,12 @@ class MyPreferences(context: Context) {
     operator fun get(key: String?, valDefault: Boolean): Boolean {
         return preferences.getBoolean(key, valDefault)
     }
+
+    companion object {
+        private const val DARK_STATUS = "DARK_STATUS"
+    }
+
+    var darkMode = preferences.getBoolean(DARK_STATUS, false)
+        set(value) = preferences.edit().putBoolean(DARK_STATUS, value).apply()
+
 }
