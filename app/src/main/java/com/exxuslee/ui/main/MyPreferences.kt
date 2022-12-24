@@ -1,18 +1,21 @@
 package com.exxuslee.ui.main
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 
 
 class MyPreferences(context: Context) {
 
-    companion object {
-        private const val DARK_STATUS = "DARK_STATUS"
-    }
-
     private val preferences = getDefaultSharedPreferences(context)
 
-    var darkMode = preferences?.getInt(DARK_STATUS, 0)
-        set(value) = value?.let { preferences?.edit()?.putInt(DARK_STATUS, it)?.apply() }!!
+    fun store(key: String?, `val`: Boolean) {
+        val editor: SharedPreferences.Editor = preferences.edit()
+        editor.putBoolean(key, `val`)
+        editor.apply()
+    }
 
+    operator fun get(key: String?, valDefault: Boolean): Boolean {
+        return preferences.getBoolean(key, valDefault)
+    }
 }

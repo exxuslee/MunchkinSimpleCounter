@@ -1,41 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.setting.SettingFragment">
 
-    <TableRow android:padding="8dp">
 
-        <include
-            layout="@layout/recycler_second"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            />
+    <include
+        layout="@layout/recycler_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    </TableRow>
 
-    <TableRow
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_setting_player"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="8dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_setting_player"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/recycler_second" />
-
-    </TableRow>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/recycler_second" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_second"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/menu_settings" />
 
-</TableLayout>
+</LinearLayout>

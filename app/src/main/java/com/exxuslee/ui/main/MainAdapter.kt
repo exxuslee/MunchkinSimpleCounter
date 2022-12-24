@@ -1,11 +1,14 @@
 package com.exxuslee.ui.main
 
+import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.exxuslee.R
 import com.exxuslee.databinding.RecyclerFistBinding
 import com.exxuslee.domain.model.Player
 
@@ -36,7 +39,8 @@ class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdap
             icon.setOnClickListener { onIconClickListener?.invoke(position) }
         }
         holder.itemView.apply {
-            setBackgroundColor(if (selectedPosition == position) Color.LTGRAY else Color.TRANSPARENT)
+            setBackgroundColor(if (selectedPosition == position)
+                ContextCompat.getColor(context, R.color.select ) else Color.TRANSPARENT)
             setOnClickListener {
                 notifyItemChanged(selectedPosition)
                 selectedPosition = holder.adapterPosition

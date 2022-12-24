@@ -1,6 +1,7 @@
 package com.exxuslee.ui.main
 
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,7 @@ import com.exxuslee.domain.utils.HandleResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel() {
     private var selectedID = -1
@@ -106,6 +108,14 @@ class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel
                 reverseSex = !_players.value?.get(position)!!.reverseSex
             )
         )
+    }
+
+    fun darkMode(darkMode: Boolean) {
+        if (darkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     companion object {

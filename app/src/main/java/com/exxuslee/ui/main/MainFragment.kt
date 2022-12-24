@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +14,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
 import com.exxuslee.databinding.FragmentFirstBinding
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainFragment : Fragment() {
-
+    private val sharedPreferences: MyPreferences by inject()
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainFragmentViewModel by viewModel()
@@ -71,7 +73,15 @@ class MainFragment : Fragment() {
                 }
                 R.id.settings -> findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 R.id.darkMode -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)}
+                    val mode = !sharedPreferences["DARK_STATUS", false]
+                    if (mode) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    }
+                    Log.d("player", mode.toString())
+                    sharedPreferences.store("DARK_STATUS", mode)
+                }
                 R.id.about -> about()
             }
             return@setOnItemSelectedListener true
