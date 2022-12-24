@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -69,6 +70,8 @@ class MainFragment : Fragment() {
                     binding.bottomNavigationSecond.toggleVisibility()
                 }
                 R.id.settings -> findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                R.id.darkMode -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)}
                 R.id.about -> about()
             }
             return@setOnItemSelectedListener true

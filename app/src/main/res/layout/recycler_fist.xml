@@ -46,7 +46,6 @@
             android:layout_weight="0.1"
             android:gravity="center"
             android:text="@string/bonus"
-            android:textColor="@color/black"
             android:textSize="28sp" />
 
         <TextView
@@ -56,7 +55,6 @@
             android:layout_weight="0.1"
             android:gravity="center"
             android:text="@string/life"
-            android:textColor="@color/black"
             android:textSize="28sp"
             android:textStyle="bold" />
 
