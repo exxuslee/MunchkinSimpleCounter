@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_main_to_setting"
             app:destination="@id/SecondFragment"
             app:popUpTo="@id/FirstFragment" />
     </fragment>

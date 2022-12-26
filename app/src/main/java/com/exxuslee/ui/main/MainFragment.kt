@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,16 +70,15 @@ class MainFragment : Fragment() {
                     viewModel.newGame()
                     binding.bottomNavigationSecond.toggleVisibility()
                 }
-                R.id.settings -> findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                R.id.settings -> findNavController().navigate(R.id.action_main_to_setting)
                 R.id.darkMode -> {
-                    checkTheme()
                     val mode = !sharedPreferences["DARK_STATUS", false]
                     if (mode) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     }
-                    sharedPreferences.store("DARK_STATUS", !sharedPreferences["DARK_STATUS", false])
+                    sharedPreferences.store("DARK_STATUS", mode)
                 }
                 R.id.about -> about()
             }
