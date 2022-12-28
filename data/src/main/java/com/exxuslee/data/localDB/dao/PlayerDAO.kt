@@ -1,10 +1,10 @@
-package com.exxuslee.data.local.dao
+package com.exxuslee.data.localDB.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.exxuslee.data.local.entities.Entity
+import com.exxuslee.data.localDB.entities.Entity
 
 @Dao
 interface PlayerDAO {

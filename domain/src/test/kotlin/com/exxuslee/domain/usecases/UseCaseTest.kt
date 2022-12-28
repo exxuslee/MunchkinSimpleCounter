@@ -1,14 +1,11 @@
 package com.exxuslee.domain.usecases
 
-import com.exxuslee.domain.model.Player
-import com.exxuslee.domain.repositories.Repository
-import com.exxuslee.domain.utils.Result
+import com.exxuslee.domain.repositories.RepositoryDB
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -19,12 +16,12 @@ import org.mockito.junit.MockitoJUnitRunner
 class UseCaseTest {
 
     @Mock
-    private lateinit var repository: Repository
-    private lateinit var useCase: UseCase.Base
+    private lateinit var repository: RepositoryDB
+    private lateinit var useCase: UseCaseDB.Base
 
     @Before
     fun setUp() {
-        useCase = UseCase.Base(repository)
+        useCase = UseCaseDB.Base(repository)
     }
 
     @Test

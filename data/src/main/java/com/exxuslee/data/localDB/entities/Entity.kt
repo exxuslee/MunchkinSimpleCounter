@@ -1,4 +1,4 @@
-package com.exxuslee.data.local.entities
+package com.exxuslee.data.localDB.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

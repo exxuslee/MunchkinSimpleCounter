@@ -1,17 +1,17 @@
 package com.exxuslee.domain.usecases
 
 import com.exxuslee.domain.model.Player
-import com.exxuslee.domain.repositories.Repository
+import com.exxuslee.domain.repositories.RepositoryDB
 import com.exxuslee.domain.utils.Result
 
-interface UseCase {
+interface UseCaseDB {
     suspend fun loadPlayer(name: String): Result<Player>
     suspend fun savePlayer(player: Player): Int
     suspend fun updatePlayer(player: Player)
     suspend fun players(): Result<List<Player>>
     suspend fun deletePlayer(id: Int)
 
-    class Base(private val repository: Repository) : UseCase {
+    class Base(private val repository: RepositoryDB) : UseCaseDB {
         override suspend fun loadPlayer(name: String): Result<Player> =
             repository.loadPlayer(name)
 

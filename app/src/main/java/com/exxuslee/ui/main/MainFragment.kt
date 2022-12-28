@@ -109,19 +109,14 @@ class MainFragment : Fragment() {
     }
 
     private fun about() {
-        AlertDialog.Builder(context)
-            .setTitle("About..")
-            .setMessage("Set like in PlayMarket!")
+        AlertDialog.Builder(context).setTitle("About..").setMessage("Set like in PlayMarket!")
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 binding.bottomNavigationSecond.toggleVisibility()
                 val openURL = Intent(Intent.ACTION_VIEW)
                 openURL.data = Uri.parse("https://www.google.com/")
                 startActivity(openURL)
-            }
-            .setNegativeButton(android.R.string.cancel) { _, _ ->
+            }.setNegativeButton(android.R.string.cancel) { _, _ ->
                 binding.bottomNavigationSecond.toggleVisibility()
-            }
-            .setIcon(android.R.drawable.ic_dialog_info)
-            .show()
+            }.setIcon(android.R.drawable.ic_dialog_info).show()
     }
 }

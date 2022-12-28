@@ -4,9 +4,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
-/**
- * @author Asatryan on 17.12.2022
- */
 interface Communication {
 
     interface Put<T> {
@@ -22,7 +19,7 @@ interface Communication {
     ) : Put<T>, Observe<T> {
 
         override fun put(value: T) {
-            liveData.value = value
+            liveData.value = value!!
         }
 
         override fun observe(owner: LifecycleOwner, observer: Observer<T>) =

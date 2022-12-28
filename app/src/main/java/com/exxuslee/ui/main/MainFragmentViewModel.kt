@@ -6,15 +6,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.exxuslee.BuildConfig
+import com.exxuslee.core.ProvideInstance
 import com.exxuslee.domain.model.Player
-import com.exxuslee.domain.usecases.UseCase
+import com.exxuslee.domain.usecases.UseCaseDB
 import com.exxuslee.domain.utils.HandleResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class MainFragmentViewModel(private val playerUseCase: UseCase.Base) : ViewModel() {
+class MainFragmentViewModel(private val playerUseCase: UseCaseDB.Base) : ViewModel() {
+    val provideInstance = ProvideInstance.Base(BuildConfig.DEBUG)
     private var selectedID = -1
 
     private val _players = MutableLiveData<List<Player>?>()

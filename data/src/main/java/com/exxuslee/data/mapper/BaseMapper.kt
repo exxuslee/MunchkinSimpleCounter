@@ -1,6 +1,6 @@
 package com.exxuslee.data.mapper
 
-import com.exxuslee.data.local.entities.Entity
+import com.exxuslee.data.localDB.entities.Entity
 import com.exxuslee.domain.model.Player
 
 interface BaseMapper<L, D> {

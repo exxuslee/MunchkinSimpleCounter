@@ -8,8 +8,6 @@ interface ProvideInstance {
 
     fun sharedPref(): SharedPref
 
-    fun maxCount(): Int
-
     class Base(isDebug: Boolean) : ProvideInstance {
 
         private val provideInstance = if (isDebug)
@@ -18,16 +16,13 @@ interface ProvideInstance {
             Release()
 
         override fun sharedPref() = provideInstance.sharedPref()
-        override fun maxCount() = provideInstance.maxCount()
     }
 
     private class Debug : ProvideInstance {
         override fun sharedPref() = SharedPref.Test()
-        override fun maxCount(): Int = 2
     }
 
     private class Release : ProvideInstance {
         override fun sharedPref() = SharedPref.Base()
-        override fun maxCount(): Int = 3
     }
 }
