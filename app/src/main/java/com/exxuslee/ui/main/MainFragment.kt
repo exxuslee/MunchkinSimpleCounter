@@ -7,18 +7,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
 import com.exxuslee.databinding.FragmentFirstBinding
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainFragment : Fragment() {
-    private val sharedPreferences: MyPreferences by inject()
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainFragmentViewModel by viewModel()
@@ -72,14 +69,8 @@ class MainFragment : Fragment() {
                 }
                 R.id.settings -> findNavController().navigate(R.id.action_main_to_setting)
                 R.id.darkMode -> {
-                    val mode = !sharedPreferences["DARK_STATUS", false]
-                    viewModel.darkMode(mode)
-                    if (mode) {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    } else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    }
-                    sharedPreferences.store("DARK_STATUS", mode)
+                    viewModel.saveMode()
+                    viewModel.loadMode()
                 }
                 R.id.about -> about()
             }
@@ -88,16 +79,8 @@ class MainFragment : Fragment() {
 
         mainAdapter.onPlayerClickListener = { position -> viewModel.selectPlayer(position) }
         mainAdapter.onIconClickListener = { position -> viewModel.changeIcon(position) }
-
-        checkTheme()
+        viewModel.loadMode()
     }
-
-    private fun checkTheme() {
-        val mode = sharedPreferences["DARK_STATUS", false]
-        if (mode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

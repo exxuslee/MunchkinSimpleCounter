@@ -2,9 +2,6 @@ package com.exxuslee.data.localPreference
 
 import android.content.SharedPreferences
 
-/**
- * @author Asatryan on 24.12.2022
- */
 interface BooleanStorage {
     fun read(key: String, default: Boolean): Boolean
     fun save(key: String, value: Boolean)
