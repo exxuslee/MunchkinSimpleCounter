@@ -1,4 +1,4 @@
-package com.exxuslee.core
+package com.exxuslee.data.localPreference
 
 import android.content.Context
 import android.content.SharedPreferences

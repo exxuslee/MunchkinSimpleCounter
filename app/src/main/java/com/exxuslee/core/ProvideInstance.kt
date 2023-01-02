@@ -1,5 +1,7 @@
 package com.exxuslee.core
 
+import com.exxuslee.data.localPreference.SharedPref
+
 
 interface ProvideInstance {
 
