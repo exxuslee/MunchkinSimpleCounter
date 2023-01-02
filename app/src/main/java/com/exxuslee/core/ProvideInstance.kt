@@ -1,19 +1,13 @@
 package com.exxuslee.core
 
 
-/**
- * @author Asatryan on 21.12.2022
- */
 interface ProvideInstance {
 
     fun sharedPref(): SharedPref
 
     class Base(isDebug: Boolean) : ProvideInstance {
 
-        private val provideInstance = if (isDebug)
-            Debug()
-        else
-            Release()
+        private val provideInstance = if (isDebug) Debug() else Release()
 
         override fun sharedPref() = provideInstance.sharedPref()
     }

@@ -73,6 +73,7 @@ class MainFragment : Fragment() {
                 R.id.settings -> findNavController().navigate(R.id.action_main_to_setting)
                 R.id.darkMode -> {
                     val mode = !sharedPreferences["DARK_STATUS", false]
+                    viewModel.darkMode(mode)
                     if (mode) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     } else {

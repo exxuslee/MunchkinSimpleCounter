@@ -9,7 +9,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presentationModule = module {
-    viewModel { MainFragmentViewModel(get()) }
+    viewModel { MainFragmentViewModel(get(), get()) }
     viewModel { SettingFragmentViewModel(get()) }
     single { MyPreferences(androidContext()) }
 }

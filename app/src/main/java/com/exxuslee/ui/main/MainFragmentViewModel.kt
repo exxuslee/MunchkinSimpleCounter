@@ -1,7 +1,6 @@
 package com.exxuslee.ui.main
 
 import android.util.Log
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.exxuslee.BuildConfig
 import com.exxuslee.core.ProvideInstance
 import com.exxuslee.domain.model.Player
+import com.exxuslee.domain.usecases.UseCaseCache
 import com.exxuslee.domain.usecases.UseCaseDB
 import com.exxuslee.domain.utils.HandleResult
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class MainFragmentViewModel(private val playerUseCase: UseCaseDB.Base) : ViewModel() {
+class MainFragmentViewModel(
+    private val playerUseCase: UseCaseDB.Base,
+    private val cacheUseCase: UseCaseCache.Base
+) : ViewModel() {
     val provideInstance = ProvideInstance.Base(BuildConfig.DEBUG)
     private var selectedID = -1
 
@@ -114,11 +117,15 @@ class MainFragmentViewModel(private val playerUseCase: UseCaseDB.Base) : ViewMod
     }
 
     fun darkMode(darkMode: Boolean) {
-        if (darkMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
+        val mode = cacheUseCase.loadBoolean("DARK_STATE")
+        cacheUseCase.saveBoolean("DARK_STATE", !mode)
+        Log.d(TAG, mode.toString())
+
+//        if (darkMode) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
     }
 
     companion object {
