@@ -96,8 +96,7 @@ class MainFragmentViewModel(
             )
         }
         for (player in newPlayers) updatePlayer(player)
-        //_players.postValue(newPlayers)
-        //Log.d(TAG, _players.value.toString())
+        communication.put(newPlayers)
     }
 
     fun changeIcon(position: Int) {
