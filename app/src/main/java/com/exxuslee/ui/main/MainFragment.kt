@@ -80,6 +80,7 @@ class MainFragment : Fragment() {
         mainAdapter.onPlayerClickListener = { position -> viewModel.selectPlayer(position) }
         mainAdapter.onIconClickListener = { position -> viewModel.changeIcon(position) }
         viewModel.loadMode()
+        viewModel.init(savedInstanceState == null)
     }
 
     override fun onDestroyView() {

@@ -1,6 +1,5 @@
 package com.exxuslee.ui.main
 
-import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -29,7 +28,7 @@ class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val strength = players[position].bonus + players[position].level
         val iconID = if (!players[position].reverseSex) players[position].icon
-        else (players[position].icon+3)%6
+        else (players[position].icon + 3) % 6
         holder.binding.apply {
             icon.setImageDrawable(icons.getDrawable(iconID))
             name.text = players[position].name
@@ -39,8 +38,10 @@ class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdap
             icon.setOnClickListener { onIconClickListener?.invoke(position) }
         }
         holder.itemView.apply {
-            setBackgroundColor(if (selectedPosition == position)
-                ContextCompat.getColor(context, R.color.select ) else Color.TRANSPARENT)
+            setBackgroundColor(
+                if (selectedPosition == position)
+                    ContextCompat.getColor(context, R.color.select) else Color.TRANSPARENT
+            )
             setOnClickListener {
                 notifyItemChanged(selectedPosition)
                 selectedPosition = holder.adapterPosition

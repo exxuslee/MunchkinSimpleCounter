@@ -3,7 +3,7 @@ package com.exxuslee.ui.main
 import androidx.recyclerview.widget.DiffUtil
 import com.exxuslee.domain.model.Player
 
-class DiffCallBack (
+class DiffCallBack(
     private val oldList: List<Player>,
     private val newList: List<Player>,
 ) : DiffUtil.Callback() {

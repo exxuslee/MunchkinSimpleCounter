@@ -2,10 +2,9 @@ package com.exxuslee.ui.main
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.exxuslee.core.Communication
+import com.exxuslee.core.Init
 import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.usecases.UseCaseCache
 import com.exxuslee.domain.usecases.UseCaseDB
@@ -17,8 +16,9 @@ import kotlinx.coroutines.withContext
 
 class MainFragmentViewModel(
     private val playerUseCase: UseCaseDB.Base,
-    private val cacheUseCase: UseCaseCache.Base
-) : ViewModel() {
+    private val cacheUseCase: UseCaseCache.Base,
+    private val communication: MainCommunication.Mutable,
+) : ViewModel(), Init, Communication.Observe<List<Player>> {
     private var selectedID = -1
 
     private val _players = MutableLiveData<List<Player>?>()
@@ -128,5 +128,13 @@ class MainFragmentViewModel(
     companion object {
         const val TAG = "player"
     }
+
+    override fun init(isFirstRun: Boolean) {
+        if (isFirstRun)
+            Log.d(TAG, "isFirstRun ")
+    }
+
+    override fun observe(owner: LifecycleOwner, observer: Observer<List<Player>>) =
+        communication.observe(owner, observer)
 }
 
