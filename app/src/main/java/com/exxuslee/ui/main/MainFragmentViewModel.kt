@@ -2,7 +2,10 @@ package com.exxuslee.ui.main
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.exxuslee.core.Communication
 import com.exxuslee.core.Init
 import com.exxuslee.domain.model.Player
@@ -21,16 +24,15 @@ class MainFragmentViewModel(
 ) : ViewModel(), Init, Communication.Observe<List<Player>> {
     private var selectedID = -1
 
-    private val _players = MutableLiveData<List<Player>?>()
-    val players = _players as LiveData<List<Player>>
+    private var _players = mutableListOf<Player>()
 
     private var handleResult = object : HandleResult<List<Player>> {
         override fun handleError(message: String) {
         }
 
         override fun handleSuccess(data: List<Player>) {
-            _players.postValue(null)
-            _players.postValue(data.filter { player -> player.playing })
+            _players = (data.filter { Player -> Player.playing }) as MutableList<Player>
+            communication.post(data)
         }
     }
 
@@ -39,8 +41,6 @@ class MainFragmentViewModel(
             withContext(Dispatchers.IO) { playerUseCase.players().handle(handleResult) }
         }
     }
-
-    //private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
 
     fun selectPlayer(playerId: Int) {
         selectedID = playerId
@@ -58,13 +58,13 @@ class MainFragmentViewModel(
     fun level(i: Int) {
         if (selectedID >= 0) updatePlayer(
             Player(
-                id = _players.value?.get(selectedID)!!.id,
-                name = _players.value?.get(selectedID)!!.name,
-                level = _players.value?.get(selectedID)!!.level + i,
-                bonus = _players.value?.get(selectedID)!!.bonus,
-                icon = _players.value?.get(selectedID)!!.icon,
+                id = _players[selectedID].id,
+                name = _players[selectedID].name,
+                level = _players[selectedID].level + i,
+                bonus = _players[selectedID].bonus,
+                icon = _players[selectedID].icon,
                 playing = true,
-                reverseSex = _players.value?.get(selectedID)!!.reverseSex
+                reverseSex = _players[selectedID].reverseSex
             )
         )
     }
@@ -72,19 +72,19 @@ class MainFragmentViewModel(
     fun bonus(i: Int) {
         if (selectedID >= 0) updatePlayer(
             Player(
-                id = _players.value?.get(selectedID)!!.id,
-                name = _players.value?.get(selectedID)!!.name,
-                level = _players.value?.get(selectedID)!!.level,
-                bonus = _players.value?.get(selectedID)!!.bonus + i,
-                icon = _players.value?.get(selectedID)!!.icon,
+                id = _players.get(selectedID).id,
+                name = _players.get(selectedID).name,
+                level = _players.get(selectedID).level,
+                bonus = _players.get(selectedID).bonus + i,
+                icon = _players.get(selectedID).icon,
                 playing = true,
-                reverseSex = _players.value?.get(selectedID)!!.reverseSex
+                reverseSex = _players.get(selectedID)!!.reverseSex
             )
         )
     }
 
     fun newGame() {
-        val newPlayers = _players.value?.map { player ->
+        val newPlayers = _players.map { player ->
             Player(
                 id = player.id,
                 name = player.name,
@@ -95,21 +95,21 @@ class MainFragmentViewModel(
                 reverseSex = false
             )
         }
-        if (newPlayers != null) for (player in newPlayers) updatePlayer(player)
-        _players.postValue(newPlayers)
-        Log.d(TAG, _players.value.toString())
+        for (player in newPlayers) updatePlayer(player)
+        //_players.postValue(newPlayers)
+        //Log.d(TAG, _players.value.toString())
     }
 
     fun changeIcon(position: Int) {
         updatePlayer(
             Player(
-                id = _players.value?.get(position)!!.id,
-                name = _players.value?.get(position)!!.name,
-                level = _players.value?.get(position)!!.level,
-                bonus = _players.value?.get(position)!!.bonus,
-                icon = _players.value?.get(position)!!.icon,
+                id = _players[position].id,
+                name = _players[position].name,
+                level = _players[position].level,
+                bonus = _players[position].bonus,
+                icon = _players[position].icon,
                 playing = true,
-                reverseSex = !_players.value?.get(position)!!.reverseSex
+                reverseSex = !_players[position].reverseSex
             )
         )
     }

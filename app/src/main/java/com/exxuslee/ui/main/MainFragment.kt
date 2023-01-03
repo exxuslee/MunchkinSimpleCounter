@@ -35,11 +35,19 @@ class MainFragment : Fragment() {
         val mainAdapter = MainAdapter(resources.obtainTypedArray(R.array.icons))
         binding.recyclerView.adapter = mainAdapter
 
-        viewModel.players.observe(viewLifecycleOwner) { listPlayers ->
+//        viewModel.players.observe(viewLifecycleOwner) { listPlayers ->
+//            if (listPlayers != null) {
+//                val onlinePlayer = listPlayers.filter { player -> player.playing }
+//                mainAdapter.updateAdapter(onlinePlayer)
+//            }
+//        }
+
+        viewModel.observe(viewLifecycleOwner) { listPlayers ->
             if (listPlayers != null) {
                 val onlinePlayer = listPlayers.filter { player -> player.playing }
                 mainAdapter.updateAdapter(onlinePlayer)
             }
+
         }
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->
