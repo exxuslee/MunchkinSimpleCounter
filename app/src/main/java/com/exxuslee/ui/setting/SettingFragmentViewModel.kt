@@ -1,28 +1,33 @@
 package com.exxuslee.ui.setting
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.exxuslee.core.Communication
 import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.usecases.UseCaseDB
 import com.exxuslee.domain.utils.HandleResult
+import com.exxuslee.ui.main.MainCommunication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SettingFragmentViewModel(private val playerUseCase: UseCaseDB.Base) : ViewModel() {
-    private val _players = MutableLiveData<List<Player>?>()
-    val players = _players.asLiveData()
+class SettingFragmentViewModel(
+    private val playerUseCase: UseCaseDB.Base,
+    private val communication: MainCommunication.Mutable
+) : ViewModel(), Communication.Observe<List<Player>> {
+    //    private val _players = MutableLiveData<List<Player>?>()
+    //    val players = _players.asLiveData()
+    var players = mutableListOf<Player>()
 
     private var handleResult = object : HandleResult<List<Player>> {
         override fun handleError(message: String) {
         }
 
         override fun handleSuccess(data: List<Player>) {
-            _players.postValue(null)
-            _players.postValue(data)
+//            _players.postValue(null)
+//            _players.postValue(data)
+            players = (data.filter { Player -> Player.playing }) as MutableList<Player>
+            communication.post(data)
         }
     }
 
@@ -50,13 +55,13 @@ class SettingFragmentViewModel(private val playerUseCase: UseCaseDB.Base) : View
             withContext(Dispatchers.IO) {
                 playerUseCase.updatePlayer(
                     Player(
-                        id = _players.value?.get(position)!!.id,
-                        name = _players.value?.get(position)!!.name,
-                        level = _players.value?.get(position)!!.level,
-                        bonus = _players.value?.get(position)!!.bonus,
-                        icon = _players.value?.get(position)!!.icon,
-                        playing = !_players.value?.get(position)!!.playing,
-                        reverseSex = _players.value?.get(position)!!.reverseSex
+                        id = players[position].id,
+                        name = players[position].name,
+                        level = players[position].level,
+                        bonus = players[position].bonus,
+                        icon = players[position].icon,
+                        playing = !players[position].playing,
+                        reverseSex = players[position].reverseSex
                     )
                 )
             }
@@ -67,7 +72,7 @@ class SettingFragmentViewModel(private val playerUseCase: UseCaseDB.Base) : View
     fun deletePlayer(selectedItemPosition: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                _players.value?.get(selectedItemPosition)?.let { playerUseCase.deletePlayer(it.id) }
+                players[selectedItemPosition].let { playerUseCase.deletePlayer(it.id) }
             }
         }
     }
@@ -75,5 +80,8 @@ class SettingFragmentViewModel(private val playerUseCase: UseCaseDB.Base) : View
     companion object {
         const val TAG = "player"
     }
+
+    override fun observe(owner: LifecycleOwner, observer: Observer<List<Player>>) =
+        communication.observe(owner, observer)
 }
 

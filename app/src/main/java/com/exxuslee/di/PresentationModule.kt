@@ -8,6 +8,6 @@ import org.koin.dsl.module
 
 val presentationModule = module {
     viewModel { MainFragmentViewModel(get(), get(), get()) }
-    viewModel { SettingFragmentViewModel(get()) }
+    viewModel { SettingFragmentViewModel(get(), get()) }
     factory<MainCommunication.Mutable> { MainCommunication.Base() }
 }

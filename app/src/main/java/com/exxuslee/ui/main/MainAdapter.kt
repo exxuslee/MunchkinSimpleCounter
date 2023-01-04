@@ -12,7 +12,7 @@ import com.exxuslee.databinding.RecyclerFistBinding
 import com.exxuslee.domain.model.Player
 
 class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
-    private var selectedPosition: Int = -1
+    private var selectedPosition: Int = NO_SELECTED
     private var players: List<Player> = listOf()
     var onPlayerClickListener: ((Int) -> Unit)? = null
     var onIconClickListener: ((Int) -> Unit)? = null
@@ -62,5 +62,6 @@ class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdap
 
     companion object {
         const val TAG = "player"
+        const val NO_SELECTED = -1
     }
 }

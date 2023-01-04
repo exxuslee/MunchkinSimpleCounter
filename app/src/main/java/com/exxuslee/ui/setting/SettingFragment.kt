@@ -41,7 +41,7 @@ class SettingFragment : Fragment() {
         val settingAdapter = SettingAdapter(resources.obtainTypedArray(R.array.icons))
         binding.recyclerSettingPlayer.adapter = settingAdapter
 
-        viewModel.players.observe(viewLifecycleOwner) { listPlayers ->
+        viewModel.observe(viewLifecycleOwner) { listPlayers ->
             if (listPlayers != null) settingAdapter.updateAdapter(listPlayers)
         }
 
@@ -62,14 +62,12 @@ class SettingFragment : Fragment() {
     private fun deletePlayer() {
         val view = layoutInflater.inflate(R.layout.delete_player, null)
         val spinner = view.findViewById(R.id.spinnerName) as Spinner
-        val adapter = viewModel.players.value?.let { players ->
-            SpinnerAdapterDel(
-                requireContext(),
-                R.layout.delete_player_spinner,
-                players,
-                icons,
-            )
-        }
+        val adapter = SpinnerAdapterDel(
+            requireContext(),
+            R.layout.delete_player_spinner,
+            viewModel.players,
+            icons,
+        )
         spinner.adapter = adapter
 
         AlertDialog.Builder(context)
@@ -105,7 +103,7 @@ class SettingFragment : Fragment() {
             .setTitle("Add player")
             .setMessage("Set sex and name of player")
             .setView(view)
-            .setPositiveButton(android.R.string.ok) { dialog, which ->
+            .setPositiveButton(android.R.string.ok) { _, _ ->
                 viewModel.savePlayer(
                     Player(
                         name = editName.text.toString(),

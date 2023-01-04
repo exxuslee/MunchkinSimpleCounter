@@ -30,14 +30,13 @@ class SettingAdapter(private val icons: TypedArray) :
             icon.setImageDrawable(icons.getDrawable(iconID))
             name.text = players[position].name
             checkBox.isChecked = players[position].playing
-            if (players[position].playing) checkBox.text = "\uD83D\uDD79"
-            else checkBox.text = "✘"
+            if (players[position].playing) checkBox.text = JOYSTICK
+            else checkBox.text = CROSS
         }
         holder.binding.checkBox.setOnClickListener { onCheckClickListener?.invoke(position) }
     }
 
     override fun getItemCount() = players.size
-
 
     fun updateAdapter(newPlayers: List<Player>) {
         val toDoDiffUtil = DiffCallBack(players, newPlayers)
@@ -48,5 +47,7 @@ class SettingAdapter(private val icons: TypedArray) :
 
     companion object {
         const val TAG = "player"
+        const val JOYSTICK = "\uD83D\uDD79"
+        const val CROSS = "✘"
     }
 }
