@@ -23,6 +23,7 @@ class MainFragmentViewModel(
     private val communication: MainCommunication.Mutable,
 ) : ViewModel(), Init, Communication.Observe<List<Player>> {
     private var selectedID = -1
+    private val playerMapper: PlayerMapper.Base = PlayerMapper.Base()
 
     private var _players = mutableListOf<Player>()
 
@@ -57,43 +58,19 @@ class MainFragmentViewModel(
 
     fun level(i: Int) {
         if (selectedID >= 0) updatePlayer(
-            Player(
-                id = _players[selectedID].id,
-                name = _players[selectedID].name,
-                level = _players[selectedID].level + i,
-                bonus = _players[selectedID].bonus,
-                icon = _players[selectedID].icon,
-                playing = true,
-                reverseSex = _players[selectedID].reverseSex
-            )
+            playerMapper.map(_players[selectedID], _players[selectedID].level + i, null, null)
         )
     }
 
     fun bonus(i: Int) {
         if (selectedID >= 0) updatePlayer(
-            Player(
-                id = _players.get(selectedID).id,
-                name = _players.get(selectedID).name,
-                level = _players.get(selectedID).level,
-                bonus = _players.get(selectedID).bonus + i,
-                icon = _players.get(selectedID).icon,
-                playing = true,
-                reverseSex = _players.get(selectedID)!!.reverseSex
-            )
+            playerMapper.map(_players[selectedID], null, _players[selectedID].bonus + i, null)
         )
     }
 
     fun newGame() {
         val newPlayers = _players.map { player ->
-            Player(
-                id = player.id,
-                name = player.name,
-                level = 1,
-                bonus = 0,
-                icon = player.icon,
-                playing = player.playing,
-                reverseSex = false
-            )
+            playerMapper.map(player, 1, 0, false)
         }
         for (player in newPlayers) updatePlayer(player)
         communication.put(newPlayers)
@@ -101,15 +78,7 @@ class MainFragmentViewModel(
 
     fun changeIcon(position: Int) {
         updatePlayer(
-            Player(
-                id = _players[position].id,
-                name = _players[position].name,
-                level = _players[position].level,
-                bonus = _players[position].bonus,
-                icon = _players[position].icon,
-                playing = true,
-                reverseSex = !_players[position].reverseSex
-            )
+            playerMapper.map(_players[position], null, null, !_players[position].reverseSex)
         )
     }
 
@@ -124,10 +93,6 @@ class MainFragmentViewModel(
         cacheUseCase.saveBoolean("DARK_STATE", !mode)
     }
 
-    companion object {
-        const val TAG = "player"
-    }
-
     override fun init(isFirstRun: Boolean) {
         if (isFirstRun)
             Log.d(TAG, "isFirstRun ")
@@ -135,5 +100,9 @@ class MainFragmentViewModel(
 
     override fun observe(owner: LifecycleOwner, observer: Observer<List<Player>>) =
         communication.observe(owner, observer)
+
+    companion object {
+        const val TAG = "player"
+    }
 }
 
