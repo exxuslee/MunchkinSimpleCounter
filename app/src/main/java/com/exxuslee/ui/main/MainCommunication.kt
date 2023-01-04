@@ -9,8 +9,9 @@ interface MainCommunication {
     interface Put : Communication.Put<List<Player>>
     interface Post : Communication.Post<List<Player>>
     interface Observe : Communication.Observe<List<Player>>
+    interface Value : Communication.Value<List<Player>>
 
-    interface Mutable : Put, Observe, Post
+    interface Mutable : Put, Observe, Post, Value
 
     class Base : Communication.Abstract<List<Player>>(SingleLiveEvent()), Mutable
 }

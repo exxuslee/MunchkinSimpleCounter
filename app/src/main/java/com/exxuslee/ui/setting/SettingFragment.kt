@@ -65,7 +65,7 @@ class SettingFragment : Fragment() {
         val adapter = SpinnerAdapterDel(
             requireContext(),
             R.layout.delete_player_spinner,
-            viewModel.players,
+            viewModel.communication.value(),
             icons,
         )
         spinner.adapter = adapter

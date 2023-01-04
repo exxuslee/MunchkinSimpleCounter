@@ -18,9 +18,13 @@ interface Communication {
         fun observe(owner: LifecycleOwner, observer: Observer<T>)
     }
 
+    interface Value<T> {
+        fun value(): T
+    }
+
     abstract class Abstract<T>(
         private val liveData: MutableLiveData<T> = MutableLiveData()
-    ) : Put<T>, Observe<T>, Post<T> {
+    ) : Put<T>, Observe<T>, Post<T>, Value<T> {
 
         override fun put(value: T) {
             liveData.value = value!!
@@ -33,5 +37,6 @@ interface Communication {
             liveData.postValue(value!!)
         }
 
+        override fun value(): T = liveData.value!!
     }
 }

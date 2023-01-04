@@ -25,15 +25,12 @@ class MainFragmentViewModel(
     private var selectedID = -1
     private val playerMapper: PlayerMapper.Base = PlayerMapper.Base()
 
-    private var _players = mutableListOf<Player>()
-
     private var handleResult = object : HandleResult<List<Player>> {
         override fun handleError(message: String) {
         }
 
         override fun handleSuccess(data: List<Player>) {
-            _players = (data.filter { Player -> Player.playing }) as MutableList<Player>
-            communication.post(data)
+            communication.post(data.filter { Player -> Player.playing })
         }
     }
 
@@ -58,18 +55,28 @@ class MainFragmentViewModel(
 
     fun level(i: Int) {
         if (selectedID >= 0) updatePlayer(
-            playerMapper.map(_players[selectedID], _players[selectedID].level + i, null, null)
+            playerMapper.map(
+                communication.value()[selectedID],
+                communication.value()[selectedID].level + i,
+                null,
+                null
+            )
         )
     }
 
     fun bonus(i: Int) {
         if (selectedID >= 0) updatePlayer(
-            playerMapper.map(_players[selectedID], null, _players[selectedID].bonus + i, null)
+            playerMapper.map(
+                communication.value()[selectedID],
+                null,
+                communication.value()[selectedID].bonus + i,
+                null
+            )
         )
     }
 
     fun newGame() {
-        val newPlayers = _players.map { player ->
+        val newPlayers = communication.value().map { player ->
             playerMapper.map(player, 1, 0, false)
         }
         for (player in newPlayers) updatePlayer(player)
@@ -78,7 +85,12 @@ class MainFragmentViewModel(
 
     fun changeIcon(position: Int) {
         updatePlayer(
-            playerMapper.map(_players[position], null, null, !_players[position].reverseSex)
+            playerMapper.map(
+                communication.value()[selectedID],
+                null,
+                null,
+                !communication.value()[position].reverseSex
+            )
         )
     }
 

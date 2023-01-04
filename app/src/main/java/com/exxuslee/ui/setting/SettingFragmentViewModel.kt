@@ -13,20 +13,14 @@ import kotlinx.coroutines.withContext
 
 class SettingFragmentViewModel(
     private val playerUseCase: UseCaseDB.Base,
-    private val communication: MainCommunication.Mutable
+    val communication: MainCommunication.Mutable
 ) : ViewModel(), Communication.Observe<List<Player>> {
-    //    private val _players = MutableLiveData<List<Player>?>()
-    //    val players = _players.asLiveData()
-    var players = mutableListOf<Player>()
 
     private var handleResult = object : HandleResult<List<Player>> {
         override fun handleError(message: String) {
         }
 
         override fun handleSuccess(data: List<Player>) {
-//            _players.postValue(null)
-//            _players.postValue(data)
-            players = (data.filter { Player -> Player.playing }) as MutableList<Player>
             communication.post(data)
         }
     }
@@ -55,13 +49,13 @@ class SettingFragmentViewModel(
             withContext(Dispatchers.IO) {
                 playerUseCase.updatePlayer(
                     Player(
-                        id = players[position].id,
-                        name = players[position].name,
-                        level = players[position].level,
-                        bonus = players[position].bonus,
-                        icon = players[position].icon,
-                        playing = !players[position].playing,
-                        reverseSex = players[position].reverseSex
+                        id = communication.value()[position].id,
+                        name = communication.value()[position].name,
+                        level = communication.value()[position].level,
+                        bonus = communication.value()[position].bonus,
+                        icon = communication.value()[position].icon,
+                        playing = !communication.value()[position].playing,
+                        reverseSex = communication.value()[position].reverseSex
                     )
                 )
             }
@@ -72,7 +66,7 @@ class SettingFragmentViewModel(
     fun deletePlayer(selectedItemPosition: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                players[selectedItemPosition].let { playerUseCase.deletePlayer(it.id) }
+                communication.value()[selectedItemPosition].let { playerUseCase.deletePlayer(it.id) }
             }
         }
     }
