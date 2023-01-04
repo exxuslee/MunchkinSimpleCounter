@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
@@ -48,7 +49,7 @@ class SettingFragment : Fragment() {
         binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.addPlayer -> addPlayer()
-                R.id.delPlayer -> deletePlayer()
+                R.id.delPlayer -> checkDelete()
                 R.id.back -> {
                     findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
                 }
@@ -57,6 +58,11 @@ class SettingFragment : Fragment() {
         }
 
         settingAdapter.onCheckClickListener = { position -> viewModel.onlinePlayer(position) }
+    }
+
+    private fun checkDelete(){
+        if (viewModel.communication.value().isNotEmpty()) deletePlayer()
+        else Toast.makeText(requireContext(), "Players is empty", Toast.LENGTH_SHORT).show()
     }
 
     private fun deletePlayer() {
