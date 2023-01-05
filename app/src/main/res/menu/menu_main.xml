@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/levelPlus"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_sentiment_satisfied_alt_24"
+        android:visible="false"
         android:title="@string/levelPlus" />
     <item
         android:id="@+id/levelMinus"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_sentiment_very_dissatisfied_24"
+        android:visible="false"
         android:title="@string/levelMinus" />
     <item
         android:id="@+id/bonusPlus"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_fastfood_24"
+        android:visible="false"
         android:title="@string/bonusPlus" />
     <item
         android:id="@+id/bonusMinus"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_no_food_24"
+        android:visible="false"
         android:title="@string/bonusMinus" />
     <item
         android:id="@+id/more"

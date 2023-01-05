@@ -18,6 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
+    private val globalMenuItem by lazy { binding.bottomNavigationGame.menu }
     private val viewModel: MainFragmentViewModel by viewModel()
 
     override fun onCreateView(
@@ -34,6 +35,7 @@ class MainFragment : Fragment() {
 
         val mainAdapter = MainAdapter(resources.obtainTypedArray(R.array.icons))
         binding.recyclerView.adapter = mainAdapter
+
 
         viewModel.observe(viewLifecycleOwner) { listPlayers ->
             if (listPlayers != null) {
@@ -77,7 +79,15 @@ class MainFragment : Fragment() {
             return@setOnItemSelectedListener true
         }
 
-        mainAdapter.onPlayerClickListener = { position -> viewModel.selectPlayer(position) }
+        mainAdapter.onPlayerClickListener = { position ->
+            viewModel.selectPlayer(position)
+            
+            globalMenuItem.findItem(R.id.levelPlus).isVisible = true
+            globalMenuItem.findItem(R.id.levelMinus).isVisible = true
+            globalMenuItem.findItem(R.id.bonusPlus).isVisible = true
+            globalMenuItem.findItem(R.id.bonusMinus).isVisible = true
+        }
+
         mainAdapter.onIconClickListener = { position -> viewModel.changeIcon(position) }
         viewModel.loadMode()
         viewModel.init(savedInstanceState == null)
