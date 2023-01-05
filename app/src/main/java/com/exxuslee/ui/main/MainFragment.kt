@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadPlayers()
+        viewModel.init(savedInstanceState == null)
 
         val mainAdapter = MainAdapter(resources.obtainTypedArray(R.array.icons))
         binding.recyclerView.adapter = mainAdapter
@@ -45,16 +45,16 @@ class MainFragment : Fragment() {
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.levelPlus -> {
-                    viewModel.level(1)
+                    viewModel.level(ADD_ONE)
                 }
                 R.id.levelMinus -> {
-                    viewModel.level(-1)
+                    viewModel.level(DEL_ONE)
                 }
                 R.id.bonusPlus -> {
-                    viewModel.bonus(1)
+                    viewModel.bonus(ADD_ONE)
                 }
                 R.id.bonusMinus -> {
-                    viewModel.bonus(-1)
+                    viewModel.bonus(DEL_ONE)
                 }
                 R.id.more -> binding.bottomNavigationSecond.toggleVisibility()
             }
@@ -103,5 +103,11 @@ class MainFragment : Fragment() {
             }.setNegativeButton(android.R.string.cancel) { _, _ ->
                 binding.bottomNavigationSecond.toggleVisibility()
             }.setIcon(android.R.drawable.ic_dialog_info).show()
+    }
+
+    companion object {
+        const val TAG = "player"
+        const val ADD_ONE = 1
+        const val DEL_ONE = -1
     }
 }

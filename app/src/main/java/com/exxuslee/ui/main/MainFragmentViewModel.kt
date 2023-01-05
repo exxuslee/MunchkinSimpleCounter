@@ -12,6 +12,7 @@ import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.usecases.UseCaseCache
 import com.exxuslee.domain.usecases.UseCaseDB
 import com.exxuslee.domain.utils.HandleResult
+import com.exxuslee.ui.PlayerMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,9 +22,9 @@ class MainFragmentViewModel(
     private val playerUseCase: UseCaseDB.Base,
     private val cacheUseCase: UseCaseCache.Base,
     private val communication: MainCommunication.Mutable,
-) : ViewModel(), Init, Communication.Observe<List<Player>> {
+    private val playerMapper: PlayerMapper.Base
+) : ViewModel(), Init, Main, Communication.Observe<List<Player>> {
     private var selectedID = -1
-    private val playerMapper: PlayerMapper.Base = PlayerMapper.Base()
 
     private var handleResult = object : HandleResult<List<Player>> {
         override fun handleError(message: String) {
@@ -34,13 +35,13 @@ class MainFragmentViewModel(
         }
     }
 
-    fun loadPlayers() {
+    private fun loadPlayers() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) { playerUseCase.players().handle(handleResult) }
         }
     }
 
-    fun selectPlayer(playerId: Int) {
+    override fun selectPlayer(playerId: Int) {
         selectedID = playerId
     }
 
@@ -53,59 +54,63 @@ class MainFragmentViewModel(
         }
     }
 
-    fun level(i: Int) {
+    override fun level(i: Int) {
         if (selectedID >= 0) updatePlayer(
             playerMapper.map(
                 communication.value()[selectedID],
                 communication.value()[selectedID].level + i,
                 null,
+                null,
                 null
             )
         )
     }
 
-    fun bonus(i: Int) {
+    override fun bonus(i: Int) {
         if (selectedID >= 0) updatePlayer(
             playerMapper.map(
                 communication.value()[selectedID],
                 null,
                 communication.value()[selectedID].bonus + i,
+                null,
                 null
             )
         )
     }
 
-    fun newGame() {
+    override fun newGame() {
         val newPlayers = communication.value().map { player ->
-            playerMapper.map(player, 1, 0, false)
+            playerMapper.map(player, 1, 0, false, null)
         }
         for (player in newPlayers) updatePlayer(player)
         communication.put(newPlayers)
     }
 
-    fun changeIcon(position: Int) {
+    override fun changeIcon(position: Int) {
         updatePlayer(
             playerMapper.map(
                 communication.value()[selectedID],
                 null,
                 null,
-                !communication.value()[position].reverseSex
+                !communication.value()[position].reverseSex,
+                null
             )
         )
     }
 
-    fun loadMode() {
+    override fun loadMode() {
         val mode = cacheUseCase.loadBoolean("DARK_STATE")
         if (mode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 
-    fun saveMode() {
+    override fun saveMode() {
         val mode = cacheUseCase.loadBoolean("DARK_STATE")
         cacheUseCase.saveBoolean("DARK_STATE", !mode)
     }
 
     override fun init(isFirstRun: Boolean) {
+        loadPlayers()
         if (isFirstRun)
             Log.d(TAG, "isFirstRun ")
     }
