@@ -19,6 +19,7 @@ class MainFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainFragmentViewModel by viewModel()
+    private val bottomMenu by lazy { BottomMenu.Base(binding.bottomNavigationGame.menu) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -80,13 +81,7 @@ class MainFragment : Fragment() {
 
         mainAdapter.onPlayerClickListener = { position ->
             viewModel.selectPlayer(position)
-
-            binding.bottomNavigationGame.menu.apply {
-                findItem(R.id.levelPlus).isVisible = true
-                findItem(R.id.levelMinus).isVisible = true
-                findItem(R.id.bonusPlus).isVisible = true
-                findItem(R.id.bonusMinus).isVisible = true
-            }
+            bottomMenu.activated()
         }
 
         mainAdapter.onIconClickListener = { position ->
