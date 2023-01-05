@@ -55,7 +55,7 @@ class MainFragmentViewModel(
     }
 
     override fun level(i: Int) {
-        if (selectedID >= 0) updatePlayer(
+        if (selectedID >= ZERO) updatePlayer(
             playerMapper.map(
                 communication.value()[selectedID],
                 communication.value()[selectedID].level + i,
@@ -67,7 +67,7 @@ class MainFragmentViewModel(
     }
 
     override fun bonus(i: Int) {
-        if (selectedID >= 0) updatePlayer(
+        if (selectedID >= ZERO) updatePlayer(
             playerMapper.map(
                 communication.value()[selectedID],
                 null,
@@ -80,7 +80,7 @@ class MainFragmentViewModel(
 
     override fun newGame() {
         val newPlayers = communication.value().map { player ->
-            playerMapper.map(player, 1, 0, false, null)
+            playerMapper.map(player, ONE, ZERO, false, null)
         }
         for (player in newPlayers) updatePlayer(player)
         communication.put(newPlayers)
@@ -99,14 +99,14 @@ class MainFragmentViewModel(
     }
 
     override fun loadMode() {
-        val mode = cacheUseCase.loadBoolean("DARK_STATE")
+        val mode = cacheUseCase.loadBoolean(DARK_STATE)
         if (mode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 
     override fun saveMode() {
-        val mode = cacheUseCase.loadBoolean("DARK_STATE")
-        cacheUseCase.saveBoolean("DARK_STATE", !mode)
+        val mode = cacheUseCase.loadBoolean(DARK_STATE)
+        cacheUseCase.saveBoolean(DARK_STATE, !mode)
     }
 
     override fun init(isFirstRun: Boolean) {
@@ -120,6 +120,9 @@ class MainFragmentViewModel(
 
     companion object {
         const val TAG = "player"
+        const val ONE = 1
+        const val ZERO = 0
+        const val DARK_STATE = "DARK_STATE"
     }
 }
 

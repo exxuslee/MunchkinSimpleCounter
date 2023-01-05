@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //val makeUi = MakeUi.Base(this)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
