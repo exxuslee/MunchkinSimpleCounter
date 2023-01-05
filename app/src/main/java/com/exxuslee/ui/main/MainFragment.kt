@@ -18,7 +18,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
-    private val globalMenuItem by lazy { binding.bottomNavigationGame.menu }
     private val viewModel: MainFragmentViewModel by viewModel()
 
     override fun onCreateView(
@@ -81,14 +80,19 @@ class MainFragment : Fragment() {
 
         mainAdapter.onPlayerClickListener = { position ->
             viewModel.selectPlayer(position)
-            
-            globalMenuItem.findItem(R.id.levelPlus).isVisible = true
-            globalMenuItem.findItem(R.id.levelMinus).isVisible = true
-            globalMenuItem.findItem(R.id.bonusPlus).isVisible = true
-            globalMenuItem.findItem(R.id.bonusMinus).isVisible = true
+
+            binding.bottomNavigationGame.menu.apply {
+                findItem(R.id.levelPlus).isVisible = true
+                findItem(R.id.levelMinus).isVisible = true
+                findItem(R.id.bonusPlus).isVisible = true
+                findItem(R.id.bonusMinus).isVisible = true
+            }
         }
 
-        mainAdapter.onIconClickListener = { position -> viewModel.changeIcon(position) }
+        mainAdapter.onIconClickListener = { position ->
+            viewModel.selectPlayer(position)
+            viewModel.changeIcon(position)
+        }
         viewModel.loadMode()
         viewModel.init(savedInstanceState == null)
     }

@@ -35,7 +35,10 @@ class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdap
             level.text = players[position].level.toString()
             bonus.text = players[position].bonus.toString()
             life.text = strength.toString()
-            icon.setOnClickListener { onIconClickListener?.invoke(position) }
+            icon.setOnClickListener {
+                changeSelect(holder.adapterPosition)
+                onIconClickListener?.invoke(position)
+            }
         }
         holder.itemView.apply {
             setBackgroundColor(
@@ -43,15 +46,19 @@ class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdap
                     ContextCompat.getColor(context, R.color.select) else Color.TRANSPARENT
             )
             setOnClickListener {
-                notifyItemChanged(selectedPosition)
-                selectedPosition = holder.adapterPosition
-                notifyItemChanged(position)
+                changeSelect(holder.adapterPosition)
                 onPlayerClickListener?.invoke(selectedPosition)
             }
         }
     }
 
     override fun getItemCount() = players.size
+
+    private fun changeSelect(position: Int) {
+        notifyItemChanged(selectedPosition)
+        selectedPosition = position
+        notifyItemChanged(selectedPosition)
+    }
 
     fun updateAdapter(newPlayers: List<Player>) {
         val toDoDiffUtil = DiffCallBack(players, newPlayers)
