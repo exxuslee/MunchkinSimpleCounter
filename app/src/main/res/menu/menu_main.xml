@@ -13,6 +13,10 @@
         android:icon="@drawable/ic_baseline_sentiment_very_dissatisfied_24"
         android:title="@string/levelMinus" />
     <item
+        android:id="@+id/placeholder"
+        android:enabled="false"
+        android:title="" />
+    <item
         android:id="@+id/bonusPlus"
         android:enabled="false"
         android:icon="@drawable/ic_baseline_fastfood_24"
@@ -22,8 +26,8 @@
         android:enabled="false"
         android:icon="@drawable/ic_baseline_no_food_24"
         android:title="@string/bonusMinus" />
-    <item
-        android:id="@+id/more"
-        android:icon="@drawable/ic_baseline_more_vert_24"
-        android:title="@string/more" />
+<!--    <item-->
+<!--        android:id="@+id/more"-->
+<!--        android:icon="@drawable/ic_baseline_more_vert_24"-->
+<!--        android:title="@string/more" />-->
 </menu>

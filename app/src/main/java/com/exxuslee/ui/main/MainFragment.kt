@@ -58,9 +58,13 @@ class MainFragment : Fragment() {
                 R.id.bonusMinus -> {
                     viewModel.bonus(DEL_ONE)
                 }
-                R.id.more -> binding.bottomNavigationSecond.toggleVisibility()
+               // R.id.more -> binding.bottomNavigationSecond.toggleVisibility()
             }
             return@setOnItemSelectedListener true
+        }
+
+        binding.addFab.setOnClickListener{
+            binding.bottomNavigationSecond.toggleVisibility()
         }
 
         binding.bottomNavigationSecond.setOnItemSelectedListener { item ->

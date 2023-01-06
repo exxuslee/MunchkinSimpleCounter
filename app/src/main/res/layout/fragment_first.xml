@@ -16,19 +16,62 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/recycler_fist" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_second"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:menu="@menu/settings" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_game"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/menu_main" />
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_gravity="bottom">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation_second"
+                style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:menu="@menu/settings"
+                android:focusable="false"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation_game"
+                style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:menu="@menu/menu_main"
+                app:fabCradleMargin="10dp"
+
+                app:fabCradleRoundedCornerRadius="20dp"
+                app:fabCradleVerticalOffset="20dp"
+                android:focusable="false"
+
+
+                android:layout_alignParentBottom="true"
+                app:labelVisibilityMode="labeled"
+
+
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:layout_gravity="bottom|center"
+            android:focusable="true"
+            app:layout_anchor="@id/bottom_navigation_game"
+            app:layout_anchorGravity="center"
+            android:src="@drawable/ic_baseline_more_vert_24"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>
