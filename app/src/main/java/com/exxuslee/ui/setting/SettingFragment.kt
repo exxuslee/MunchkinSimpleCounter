@@ -50,9 +50,9 @@ class SettingFragment : Fragment() {
             when (item.itemId) {
                 R.id.addPlayer -> addPlayer()
                 R.id.delPlayer -> checkDelete()
-                R.id.back -> {
-                    findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-                }
+//                R.id.back -> {
+//                    findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+//                }
             }
             return@setOnItemSelectedListener true
         }

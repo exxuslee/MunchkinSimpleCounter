@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -58,16 +59,9 @@ class MainFragment : Fragment() {
                 R.id.bonusMinus -> {
                     viewModel.bonus(DEL_ONE)
                 }
-               // R.id.more -> binding.bottomNavigationSecond.toggleVisibility()
-            }
-            return@setOnItemSelectedListener true
-        }
-
-        binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
-            when (item.itemId) {
                 R.id.newGame -> {
                     viewModel.newGame()
-                    binding.bottomNavigationSecond.toggleVisibility()
+//                    binding.bottomNavigationSecond.toggleVisibility()
                 }
                 R.id.settings -> findNavController().navigate(R.id.action_main_to_setting)
                 R.id.darkMode -> {
@@ -78,6 +72,27 @@ class MainFragment : Fragment() {
             }
             return@setOnItemSelectedListener true
         }
+
+
+        binding.fab.setOnClickListener{
+            binding.bottomNavigationGame.menu.clear()
+            binding.bottomNavigationGame.inflateMenu(R.menu.settings)
+        }
+//        binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
+//            when (item.itemId) {
+//                R.id.newGame -> {
+//                    viewModel.newGame()
+//                    binding.bottomNavigationSecond.toggleVisibility()
+//                }
+//                R.id.settings -> findNavController().navigate(R.id.action_main_to_setting)
+//                R.id.darkMode -> {
+//                    viewModel.saveMode()
+//                    viewModel.loadMode()
+//                }
+//                R.id.about -> about()
+//            }
+//            return@setOnItemSelectedListener true
+//        }
 
         mainAdapter.onPlayerClickListener = { position ->
             viewModel.selectPlayer(position)
@@ -105,12 +120,12 @@ class MainFragment : Fragment() {
     private fun about() {
         AlertDialog.Builder(context).setTitle("About..").setMessage("Set like in PlayMarket!")
             .setPositiveButton(android.R.string.ok) { _, _ ->
-                binding.bottomNavigationSecond.toggleVisibility()
+                //binding.bottomNavigationSecond.toggleVisibility()
                 val openURL = Intent(Intent.ACTION_VIEW)
                 openURL.data = Uri.parse("https://www.google.com/")
                 startActivity(openURL)
             }.setNegativeButton(android.R.string.cancel) { _, _ ->
-                binding.bottomNavigationSecond.toggleVisibility()
+                //binding.bottomNavigationSecond.toggleVisibility()
             }.setIcon(android.R.drawable.ic_dialog_info).show()
     }
 
