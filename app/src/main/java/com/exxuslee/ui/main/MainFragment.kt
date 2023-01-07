@@ -63,10 +63,6 @@ class MainFragment : Fragment() {
             return@setOnItemSelectedListener true
         }
 
-        binding.addFab.setOnClickListener{
-            binding.bottomNavigationSecond.toggleVisibility()
-        }
-
         binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.newGame -> {
