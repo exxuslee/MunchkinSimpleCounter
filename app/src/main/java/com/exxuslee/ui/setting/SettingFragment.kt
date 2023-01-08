@@ -50,17 +50,17 @@ class SettingFragment : Fragment() {
             when (item.itemId) {
                 R.id.addPlayer -> addPlayer()
                 R.id.delPlayer -> checkDelete()
-//                R.id.back -> {
-//                    findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-//                }
+                else -> throw IllegalArgumentException("Wrong type of menu")
             }
             return@setOnItemSelectedListener true
         }
 
         settingAdapter.onCheckClickListener = { position -> viewModel.onlinePlayer(position) }
+
+        binding.fab.setOnClickListener { findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment) }
     }
 
-    private fun checkDelete(){
+    private fun checkDelete() {
         if (viewModel.communication.value().isNotEmpty()) deletePlayer()
         else Toast.makeText(requireContext(), "Players is empty", Toast.LENGTH_SHORT).show()
     }
@@ -79,7 +79,7 @@ class SettingFragment : Fragment() {
         AlertDialog.Builder(context)
             .setTitle("Delete player")
             .setView(view)
-            .setPositiveButton(android.R.string.ok) { dialog, which ->
+            .setPositiveButton(android.R.string.ok) { _, _ ->
                 viewModel.deletePlayer(spinner.selectedItemPosition)
             }
             .setNegativeButton(android.R.string.cancel, null)
