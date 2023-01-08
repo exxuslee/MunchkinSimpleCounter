@@ -62,7 +62,7 @@ class SettingFragment : Fragment() {
 
     private fun checkDelete() {
         if (viewModel.communication.value().isNotEmpty()) deletePlayer()
-        else Toast.makeText(requireContext(), "Players is empty", Toast.LENGTH_SHORT).show()
+        else Toast.makeText(requireContext(), getString(R.string.empty_players), Toast.LENGTH_SHORT).show()
     }
 
     private fun deletePlayer() {
@@ -77,7 +77,7 @@ class SettingFragment : Fragment() {
         spinner.adapter = adapter
 
         AlertDialog.Builder(context)
-            .setTitle("Delete player")
+            .setTitle(R.string.delete_player)
             .setView(view)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 viewModel.deletePlayer(spinner.selectedItemPosition)
@@ -106,8 +106,8 @@ class SettingFragment : Fragment() {
         spinner.adapter = adapter
 
         AlertDialog.Builder(context)
-            .setTitle("Add player")
-            .setMessage("Set sex and name of player")
+            .setTitle(R.string.add_player)
+            .setMessage(R.string.set_sex_name_player)
             .setView(view)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 viewModel.savePlayer(

@@ -119,10 +119,10 @@ class MainFragmentViewModel(
         communication.observe(owner, observer)
 
     companion object {
-        const val TAG = "player"
-        const val ONE = 1
-        const val ZERO = 0
-        const val DARK_STATE = "DARK_STATE"
+        private const val TAG = "player"
+        private const val ONE = 1
+        private const val ZERO = 0
+        private const val DARK_STATE = "DARK_STATE"
     }
 }
 

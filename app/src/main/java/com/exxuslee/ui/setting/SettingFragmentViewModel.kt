@@ -1,6 +1,5 @@
 package com.exxuslee.ui.setting
 
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -21,10 +20,6 @@ class SettingFragmentViewModel(
     private val playerMapper: PlayerMapper.Base
 ) : ViewModel(), Setting, Communication.Observe<List<Player>> {
 
-    companion object {
-        const val TAG = "player"
-    }
-
     private var handleResult = object : HandleResult<List<Player>> {
         override fun handleError(message: String) {
         }
@@ -36,10 +31,7 @@ class SettingFragmentViewModel(
 
     override fun savePlayer(player: Player) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                val lastId = playerUseCase.savePlayer(player)
-                Log.d(TAG, lastId.toString())
-            }
+            withContext(Dispatchers.IO) { playerUseCase.savePlayer(player) }
         }
     }
 

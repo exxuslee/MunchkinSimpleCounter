@@ -46,8 +46,8 @@ class SettingAdapter(private val icons: TypedArray) :
     }
 
     companion object {
-        const val TAG = "player"
-        const val JOYSTICK = "\uD83D\uDD79"
-        const val CROSS = "✘"
+        private const val TAG = "player"
+        private const val JOYSTICK = "\uD83D\uDD79"
+        private const val CROSS = "✘"
     }
 }

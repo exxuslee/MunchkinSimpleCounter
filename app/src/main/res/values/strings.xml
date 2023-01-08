@@ -31,4 +31,10 @@
     <string name="icon">icon</string>
     <string name="check">🕹</string>
     <string name="todo">TODO</string>
+    <string name="About">About..</string>
+    <string name="like">Set like in PlayMarket!</string>
+    <string name="http_site">https://www.google.com/</string>
+    <string name="empty_players">Players is empty</string>
+    <string name="delete_player">Delete player</string>
+    <string name="set_sex_name_player">Set sex and name of player</string>
 </resources>

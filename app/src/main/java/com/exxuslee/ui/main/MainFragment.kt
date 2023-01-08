@@ -96,18 +96,18 @@ class MainFragment : Fragment() {
     }
 
     private fun about() {
-        AlertDialog.Builder(context).setTitle("About..").setMessage("Set like in PlayMarket!")
+        AlertDialog.Builder(context).setTitle(getString(R.string.About)).setMessage(getString(R.string.like))
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 val openURL = Intent(Intent.ACTION_VIEW)
-                openURL.data = Uri.parse("https://www.google.com/")
+                openURL.data = Uri.parse(getString(R.string.http_site))
                 startActivity(openURL)
             }.setNegativeButton(android.R.string.cancel) { _, _ ->
             }.setIcon(android.R.drawable.ic_dialog_info).show()
     }
 
     companion object {
-        const val TAG = "player"
-        const val ADD_ONE = 1
-        const val DEL_ONE = -1
+        private const val TAG = "player"
+        private const val ADD_ONE = 1
+        private const val DEL_ONE = -1
     }
 }
