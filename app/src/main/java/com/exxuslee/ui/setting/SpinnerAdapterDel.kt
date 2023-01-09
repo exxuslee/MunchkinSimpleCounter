@@ -16,7 +16,7 @@ class SpinnerAdapterDel(
     spinnerTextView: Int,
     private val contentArray: List<Player>,
     private val imageArray: TypedArray
-) : SpinnerAdapter(
+) : SpinnerAdapter.Abstract(
     ctx,
     resource,
     (contentArray.map { player -> player.name }).toTypedArray(),

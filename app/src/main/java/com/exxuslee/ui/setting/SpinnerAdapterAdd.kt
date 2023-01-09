@@ -15,7 +15,7 @@ class SpinnerAdapterAdd(
     spinnerTextView: Int,
     private val contentArray: Array<String>,
     private val imageArray: TypedArray
-) : SpinnerAdapter(ctx, resource, contentArray, spinnerTextView) {
+) : SpinnerAdapter.Abstract(ctx, resource, contentArray, spinnerTextView) {
 
     override fun getCustomView(position: Int, parent: ViewGroup?): View {
         val row = super.getCustomView(position, parent)

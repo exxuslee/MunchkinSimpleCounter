@@ -45,22 +45,11 @@ class MainFragment : Fragment() {
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.levelPlus -> {
-                    viewModel.level(addOne)
-                }
-                R.id.levelMinus -> {
-                    viewModel.level(deleteOne)
-                }
-                R.id.bonusPlus -> {
-                    viewModel.bonus(addOne)
-                }
-                R.id.bonusMinus -> {
-                    viewModel.bonus(deleteOne)
-                }
-                R.id.newGame -> {
-                    viewModel.newGame()
-//                    binding.bottomNavigationSecond.toggleVisibility()
-                }
+                R.id.levelPlus -> viewModel.level(addOne)
+                R.id.levelMinus -> viewModel.level(deleteOne)
+                R.id.bonusPlus -> viewModel.bonus(addOne)
+                R.id.bonusMinus -> viewModel.bonus(deleteOne)
+                R.id.newGame -> viewModel.newGame()
                 R.id.settings -> findNavController().navigate(R.id.action_main_to_setting)
                 R.id.darkMode -> {
                     viewModel.saveMode()
@@ -96,7 +85,8 @@ class MainFragment : Fragment() {
     }
 
     private fun about() {
-        AlertDialog.Builder(context).setTitle(getString(R.string.About)).setMessage(getString(R.string.like))
+        AlertDialog.Builder(context).setTitle(getString(R.string.About))
+            .setMessage(getString(R.string.like))
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 val openURL = Intent(Intent.ACTION_VIEW)
                 openURL.data = Uri.parse(getString(R.string.http_site))

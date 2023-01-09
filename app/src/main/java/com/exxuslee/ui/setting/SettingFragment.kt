@@ -1,6 +1,5 @@
 package com.exxuslee.ui.setting
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
+import com.exxuslee.core.Dialog
 import com.exxuslee.databinding.FragmentSecondBinding
 import com.exxuslee.domain.model.Player
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -62,11 +62,12 @@ class SettingFragment : Fragment() {
 
     private fun checkDelete() {
         if (viewModel.communication.value().isNotEmpty()) deletePlayer()
-        else Toast.makeText(requireContext(), getString(R.string.empty_players), Toast.LENGTH_SHORT).show()
+        else Toast.makeText(requireContext(), getString(R.string.empty_players), Toast.LENGTH_SHORT)
+            .show()
     }
 
     private fun deletePlayer() {
-        val view = layoutInflater.inflate(R.layout.delete_player, null)
+        val view = layoutInflater.inflate(R.layout.delete_player, null,)
         val spinner = view.findViewById(R.id.spinnerName) as Spinner
         val adapter = SpinnerAdapterDel(
             requireContext(),
@@ -77,15 +78,11 @@ class SettingFragment : Fragment() {
         )
         spinner.adapter = adapter
 
-        AlertDialog.Builder(context)
-            .setTitle(R.string.delete_player)
-            .setView(view)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                viewModel.deletePlayer(spinner.selectedItemPosition)
-            }
-            .setNegativeButton(android.R.string.cancel, null)
-            .setIcon(android.R.drawable.ic_dialog_info)
-            .show()
+        Dialog.Base(context).invoke(
+            getString(R.string.delete_player),
+            "",
+            view
+        ) { viewModel.deletePlayer(spinner.selectedItemPosition) }
     }
 
     override fun onDestroyView() {
@@ -99,29 +96,22 @@ class SettingFragment : Fragment() {
         val spinner = view.findViewById(R.id.spinnerIcon) as Spinner
 
         val adapter = SpinnerAdapterAdd(
-            requireContext(),
-            R.layout.add_spinner_icon,
-            R.id.spinnerTextView,
-            textArray,
-            icons
+            requireContext(), R.layout.add_spinner_icon, R.id.spinnerTextView, textArray, icons
         )
         spinner.adapter = adapter
 
-        AlertDialog.Builder(context)
-            .setTitle(R.string.add_player)
-            .setMessage(R.string.set_sex_name_player)
-            .setView(view)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                viewModel.savePlayer(
-                    Player(
-                        name = editName.text.toString(),
-                        icon = spinner.selectedItemPosition
-                    )
+        Dialog.Base(context).invoke(
+            getString(R.string.add_player),
+            getString(R.string.set_sex_name_player),
+            view
+        ) {
+            viewModel.savePlayer(
+                Player(
+                    name = editName.text.toString(),
+                    icon = spinner.selectedItemPosition
                 )
-            }
-            .setNegativeButton(android.R.string.cancel, null)
-            .setIcon(android.R.drawable.ic_dialog_info)
-            .show()
+            )
+        }
 
     }
 }
