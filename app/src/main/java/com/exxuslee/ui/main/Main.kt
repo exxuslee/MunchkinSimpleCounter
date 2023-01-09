@@ -6,6 +6,6 @@ interface Main {
     fun bonus(i: Int)
     fun newGame()
     fun changeIcon(position: Int)
-    fun loadMode()
+    fun theme()
     fun saveMode()
 }

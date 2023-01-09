@@ -6,10 +6,12 @@ import android.view.View
 
 
 interface Dialog {
-    fun apply(title: String, message: String, view: View, ok: ((Unit) -> Unit))
+    fun apply(title: String, message: String, view: View?, ok: ((Unit) -> Unit))
 
     class Base(context: Context?) : Dialog, AlertDialog(context) {
-        override fun apply (title: String, message: String, view: View, ok: ((Unit) -> Unit)) {
+
+
+        override fun apply (title: String, message: String, view: View?, ok: ((Unit) -> Unit)) {
             val dialog = Builder(context)
                 .setTitle(title)
                 .setView(view)

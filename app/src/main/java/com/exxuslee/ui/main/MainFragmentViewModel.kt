@@ -98,7 +98,7 @@ class MainFragmentViewModel(
         )
     }
 
-    override fun loadMode() {
+    override fun theme() {
         val mode = cacheUseCase.loadBoolean(DARK_STATE)
         if (mode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

@@ -1,6 +1,5 @@
 package com.exxuslee.ui.main
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
+import com.exxuslee.core.Dialog
 import com.exxuslee.databinding.FragmentFirstBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -53,9 +53,10 @@ class MainFragment : Fragment() {
                 R.id.settings -> findNavController().navigate(R.id.action_main_to_setting)
                 R.id.darkMode -> {
                     viewModel.saveMode()
-                    viewModel.loadMode()
+                    viewModel.theme()
                 }
                 R.id.about -> about()
+                else -> throw IllegalArgumentException("Wrong type of menu")
             }
             return@setOnItemSelectedListener true
         }
@@ -75,7 +76,7 @@ class MainFragment : Fragment() {
             viewModel.selectPlayer(position)
             viewModel.changeIcon(position)
         }
-        viewModel.loadMode()
+        viewModel.theme()
         viewModel.init(savedInstanceState == null)
     }
 
@@ -85,14 +86,15 @@ class MainFragment : Fragment() {
     }
 
     private fun about() {
-        AlertDialog.Builder(context).setTitle(getString(R.string.About))
-            .setMessage(getString(R.string.like))
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                val openURL = Intent(Intent.ACTION_VIEW)
-                openURL.data = Uri.parse(getString(R.string.http_site))
-                startActivity(openURL)
-            }.setNegativeButton(android.R.string.cancel) { _, _ ->
-            }.setIcon(android.R.drawable.ic_dialog_info).show()
+        Dialog.Base(context).apply(
+            getString(R.string.About),
+            getString(R.string.like),
+            null
+        ){
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data = Uri.parse(getString(R.string.http_site))
+            startActivity(openURL)
+        }
     }
 
     companion object {
