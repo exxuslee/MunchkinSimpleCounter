@@ -78,7 +78,7 @@ class SettingFragment : Fragment() {
         )
         spinner.adapter = adapter
 
-        Dialog.Base(context).invoke(
+        Dialog.Base(context).apply(
             getString(R.string.delete_player),
             "",
             view
@@ -100,7 +100,7 @@ class SettingFragment : Fragment() {
         )
         spinner.adapter = adapter
 
-        Dialog.Base(context).invoke(
+        Dialog.Base(context).apply(
             getString(R.string.add_player),
             getString(R.string.set_sex_name_player),
             view
