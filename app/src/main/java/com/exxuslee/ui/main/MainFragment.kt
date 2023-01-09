@@ -46,16 +46,16 @@ class MainFragment : Fragment() {
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.levelPlus -> {
-                    viewModel.level(ADD_ONE)
+                    viewModel.level(addOne)
                 }
                 R.id.levelMinus -> {
-                    viewModel.level(DEL_ONE)
+                    viewModel.level(deleteOne)
                 }
                 R.id.bonusPlus -> {
-                    viewModel.bonus(ADD_ONE)
+                    viewModel.bonus(addOne)
                 }
                 R.id.bonusMinus -> {
-                    viewModel.bonus(DEL_ONE)
+                    viewModel.bonus(deleteOne)
                 }
                 R.id.newGame -> {
                     viewModel.newGame()
@@ -106,8 +106,8 @@ class MainFragment : Fragment() {
     }
 
     companion object {
-        private const val TAG = "player"
-        private const val ADD_ONE = 1
-        private const val DEL_ONE = -1
+        //private const val TAG = "player"
+        private const val addOne = 1
+        private const val deleteOne = -1
     }
 }

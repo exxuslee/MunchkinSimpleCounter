@@ -7,12 +7,16 @@ interface BottomMenu {
     fun activated()
 
     class Base(private val menu: Menu): BottomMenu {
+        private var init = true
         override fun activated() {
-            menu.apply {
-                findItem(R.id.levelPlus).isEnabled = true
-                findItem(R.id.levelMinus).isEnabled = true
-                findItem(R.id.bonusPlus).isEnabled = true
-                findItem(R.id.bonusMinus).isEnabled = true
+            if (init){
+                menu.apply {
+                    findItem(R.id.levelPlus).isEnabled = true
+                    findItem(R.id.levelMinus).isEnabled = true
+                    findItem(R.id.bonusPlus).isEnabled = true
+                    findItem(R.id.bonusMinus).isEnabled = true
+                }
+                init = false
             }
         }
     }
