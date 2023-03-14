@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
@@ -61,10 +62,16 @@ class MainFragment : Fragment() {
             return@setOnItemSelectedListener true
         }
 
-
+        var menu = true
         binding.fab.setOnClickListener {
             binding.bottomNavigationGame.menu.clear()
-            binding.bottomNavigationGame.inflateMenu(R.menu.settings)
+            menu = if (menu) {
+                binding.bottomNavigationGame.inflateMenu(R.menu.settings)
+                false
+            } else {
+                binding.bottomNavigationGame.inflateMenu(R.menu.menu_main)
+                true
+            }
         }
 
         mainAdapter.onPlayerClickListener = { position ->

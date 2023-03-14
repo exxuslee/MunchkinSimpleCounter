@@ -2,6 +2,7 @@ package com.exxuslee.ui.main
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ import com.exxuslee.ui.PlayerMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.ext.scope
 
 
 class MainFragmentViewModel(
@@ -25,6 +27,7 @@ class MainFragmentViewModel(
     private val playerMapper: PlayerMapper.Base
 ) : ViewModel(), Init, Main, Communication.Observe<List<Player>> {
     private var selectedID = -1
+    private var menu = 0
 
     private var handleResult = object : HandleResult<List<Player>> {
         override fun handleError(message: String) {

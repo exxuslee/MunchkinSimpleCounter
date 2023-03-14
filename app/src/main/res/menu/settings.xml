@@ -10,7 +10,7 @@
         android:id="@+id/settings"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="@string/settings" />
+        android:title="@string/players" />
     <item
         android:id="@+id/placeholder"
         android:enabled="false"
