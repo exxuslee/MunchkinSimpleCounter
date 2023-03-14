@@ -38,10 +38,8 @@ class MainFragment : Fragment() {
 
 
         viewModel.observe(viewLifecycleOwner) { listPlayers ->
-            if (listPlayers != null) {
-                val onlinePlayer = listPlayers.filter { player -> player.playing }
-                mainAdapter.updateAdapter(onlinePlayer)
-            }
+            val onlinePlayer = listPlayers.filter { player -> player.playing }
+            mainAdapter.updateAdapter(onlinePlayer)
         }
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->

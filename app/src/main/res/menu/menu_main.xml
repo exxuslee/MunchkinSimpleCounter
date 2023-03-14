@@ -26,8 +26,4 @@
         android:enabled="false"
         android:icon="@drawable/ic_baseline_no_food_24"
         android:title="@string/bonusMinus" />
-<!--    <item-->
-<!--        android:id="@+id/more"-->
-<!--        android:icon="@drawable/ic_baseline_more_vert_24"-->
-<!--        android:title="@string/more" />-->
 </menu>
