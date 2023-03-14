@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
 import com.exxuslee.core.Dialog
+import com.exxuslee.core.vibratePhone
 import com.exxuslee.databinding.FragmentSecondBinding
 import com.exxuslee.domain.model.Player
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,6 +48,7 @@ class SettingFragment : Fragment() {
         }
 
         binding.bottomNavigationSecond.setOnItemSelectedListener { item ->
+            vibratePhone()
             when (item.itemId) {
                 R.id.addPlayer -> addPlayer()
                 R.id.delPlayer -> checkDelete()
@@ -55,9 +57,15 @@ class SettingFragment : Fragment() {
             return@setOnItemSelectedListener true
         }
 
-        settingAdapter.onCheckClickListener = { position -> viewModel.onlinePlayer(position) }
+        settingAdapter.onCheckClickListener = { position ->
+            vibratePhone()
+            viewModel.onlinePlayer(position)
+        }
 
-        binding.fab.setOnClickListener { findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment) }
+        binding.fab.setOnClickListener {
+            vibratePhone()
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
     }
 
     private fun checkDelete() {
@@ -67,7 +75,7 @@ class SettingFragment : Fragment() {
     }
 
     private fun deletePlayer() {
-        val view = layoutInflater.inflate(R.layout.delete_player, null,)
+        val view = layoutInflater.inflate(R.layout.delete_player, null)
         val spinner = view.findViewById(R.id.spinnerName) as Spinner
         val adapter = SpinnerAdapterDel(
             requireContext(),

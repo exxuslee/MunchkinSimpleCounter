@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exxuslee.R
 import com.exxuslee.core.Dialog
+import com.exxuslee.core.vibratePhone
 import com.exxuslee.databinding.FragmentFirstBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -45,6 +45,7 @@ class MainFragment : Fragment() {
         }
 
         binding.bottomNavigationGame.setOnItemSelectedListener { item ->
+            vibratePhone()
             when (item.itemId) {
                 R.id.levelPlus -> viewModel.level(addOne)
                 R.id.levelMinus -> viewModel.level(deleteOne)
@@ -64,6 +65,7 @@ class MainFragment : Fragment() {
 
         var menu = true
         binding.fab.setOnClickListener {
+            vibratePhone()
             binding.bottomNavigationGame.menu.clear()
             menu = if (menu) {
                 binding.bottomNavigationGame.inflateMenu(R.menu.settings)
@@ -75,11 +77,13 @@ class MainFragment : Fragment() {
         }
 
         mainAdapter.onPlayerClickListener = { position ->
+            vibratePhone()
             viewModel.selectPlayer(position)
             bottomMenu.activated()
         }
 
         mainAdapter.onIconClickListener = { position ->
+            vibratePhone()
             viewModel.selectPlayer(position)
             viewModel.changeIcon(position)
         }
