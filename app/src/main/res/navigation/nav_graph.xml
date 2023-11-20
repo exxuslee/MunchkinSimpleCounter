@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.exxuslee.ui.main.MainFragment"
+        android:name="com.exxuslee.munchkinsimplecounter.ui.main.MainFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.exxuslee.ui.setting.SettingFragment"
+        android:name="com.exxuslee.munchkinsimplecounter.ui.setting.SettingFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

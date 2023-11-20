@@ -1,19 +1,18 @@
-package com.exxuslee.ui.main
+package com.exxuslee.munchkinsimplecounter.ui.main
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exxuslee.core.Communication
-import com.exxuslee.core.Init
+import com.exxuslee.munchkinsimplecounter.core.Communication
+import com.exxuslee.munchkinsimplecounter.core.Init
 import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.usecases.UseCaseCache
 import com.exxuslee.domain.usecases.UseCaseDB
 import com.exxuslee.domain.utils.HandleResult
-import com.exxuslee.ui.PlayerMapper
+import com.exxuslee.munchkinsimplecounter.ui.PlayerMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

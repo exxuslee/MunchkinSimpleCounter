@@ -1,4 +1,4 @@
-package com.exxuslee.ui.main
+package com.exxuslee.munchkinsimplecounter.ui.main
 
 interface Main {
     fun selectPlayer(playerId: Int)

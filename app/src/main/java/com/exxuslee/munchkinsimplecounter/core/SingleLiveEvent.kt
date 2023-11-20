@@ -1,4 +1,4 @@
-package com.exxuslee.core
+package com.exxuslee.munchkinsimplecounter.core
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

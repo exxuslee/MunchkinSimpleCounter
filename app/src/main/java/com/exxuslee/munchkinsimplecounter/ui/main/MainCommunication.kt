@@ -1,7 +1,7 @@
-package com.exxuslee.ui.main
+package com.exxuslee.munchkinsimplecounter.ui.main
 
-import com.exxuslee.core.Communication
-import com.exxuslee.core.SingleLiveEvent
+import com.exxuslee.munchkinsimplecounter.core.Communication
+import com.exxuslee.munchkinsimplecounter.core.SingleLiveEvent
 import com.exxuslee.domain.model.Player
 
 interface MainCommunication {

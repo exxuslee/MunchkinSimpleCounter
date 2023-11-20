@@ -1,13 +1,13 @@
-package com.exxuslee.ui.setting
+package com.exxuslee.munchkinsimplecounter.ui.setting
 
 import android.content.res.TypedArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.exxuslee.databinding.RecyclerSecondBinding
+import com.exxuslee.munchkinsimplecounter.databinding.RecyclerSecondBinding
 import com.exxuslee.domain.model.Player
-import com.exxuslee.ui.main.DiffCallBack
+import com.exxuslee.munchkinsimplecounter.ui.main.DiffCallBack
 
 class SettingAdapter(private val icons: TypedArray) :
     RecyclerView.Adapter<SettingAdapter.ViewHolder>() {

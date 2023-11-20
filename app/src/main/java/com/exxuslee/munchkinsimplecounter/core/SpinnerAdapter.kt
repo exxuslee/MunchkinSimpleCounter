@@ -1,4 +1,4 @@
-package com.exxuslee.core
+package com.exxuslee.munchkinsimplecounter.core
 
 import android.content.Context
 import android.view.LayoutInflater

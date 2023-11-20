@@ -1,4 +1,4 @@
-package com.exxuslee.ui
+package com.exxuslee.munchkinsimplecounter.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,8 +6,8 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import com.exxuslee.R
-import com.exxuslee.databinding.ActivityMainBinding
+import com.exxuslee.munchkinsimplecounter.R
+import com.exxuslee.munchkinsimplecounter.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

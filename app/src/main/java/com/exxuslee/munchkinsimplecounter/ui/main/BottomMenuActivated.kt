@@ -1,7 +1,7 @@
-package com.exxuslee.ui.main
+package com.exxuslee.munchkinsimplecounter.ui.main
 
 import android.view.Menu
-import com.exxuslee.R
+import com.exxuslee.munchkinsimplecounter.R
 
 interface BottomMenu {
     fun activated()

@@ -1,9 +1,9 @@
-package com.exxuslee
+package com.exxuslee.munchkinsimplecounter
 
 import android.app.Application
 import com.exxuslee.data.di.databaseModule
 import com.exxuslee.data.di.repositoryModule
-import com.exxuslee.di.presentationModule
+import com.exxuslee.munchkinsimplecounter.di.presentationModule
 import com.exxuslee.domain.di.interactionModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -15,9 +15,9 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            if (BuildConfig.DEBUG) androidLogger(Level.ERROR)
+            //if (BuildConfig.DEBUG) androidLogger(Level.ERROR)
             //modules(appModules + domainModules + dataModules)
-            koin.loadModules(appModules + domainModules + dataModules)
+            koin.loadModules(com.exxuslee.munchkinsimplecounter.appModules + com.exxuslee.munchkinsimplecounter.domainModules + com.exxuslee.munchkinsimplecounter.dataModules)
             koin.createRootScope()
         }
     }

@@ -1,4 +1,4 @@
-package com.exxuslee.ui.main
+package com.exxuslee.munchkinsimplecounter.ui.main
 
 import androidx.recyclerview.widget.DiffUtil
 import com.exxuslee.domain.model.Player

@@ -1,15 +1,15 @@
-package com.exxuslee.ui.setting
+package com.exxuslee.munchkinsimplecounter.ui.setting
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exxuslee.core.Communication
+import com.exxuslee.munchkinsimplecounter.core.Communication
 import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.usecases.UseCaseDB
 import com.exxuslee.domain.utils.HandleResult
-import com.exxuslee.ui.PlayerMapper
-import com.exxuslee.ui.main.MainCommunication
+import com.exxuslee.munchkinsimplecounter.ui.PlayerMapper
+import com.exxuslee.munchkinsimplecounter.ui.main.MainCommunication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

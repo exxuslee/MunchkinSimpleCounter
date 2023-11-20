@@ -1,4 +1,4 @@
-package com.exxuslee.core
+package com.exxuslee.munchkinsimplecounter.core
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -24,7 +24,10 @@ interface Communication {
 
     abstract class Abstract<T>(
         private val liveData: MutableLiveData<T> = MutableLiveData()
-    ) : Put<T>, Observe<T>, Post<T>, Value<T> {
+    ) : com.exxuslee.munchkinsimplecounter.core.Communication.Put<T>,
+        com.exxuslee.munchkinsimplecounter.core.Communication.Observe<T>,
+        com.exxuslee.munchkinsimplecounter.core.Communication.Post<T>,
+        com.exxuslee.munchkinsimplecounter.core.Communication.Value<T> {
 
         override fun put(value: T) {
             liveData.value = value!!

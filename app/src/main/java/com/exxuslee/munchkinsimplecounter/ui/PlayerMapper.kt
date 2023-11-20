@@ -1,4 +1,4 @@
-package com.exxuslee.ui
+package com.exxuslee.munchkinsimplecounter.ui
 
 import com.exxuslee.domain.model.Player
 

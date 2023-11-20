@@ -1,9 +1,9 @@
-package com.exxuslee.di
+package com.exxuslee.munchkinsimplecounter.di
 
-import com.exxuslee.ui.PlayerMapper
-import com.exxuslee.ui.main.MainCommunication
-import com.exxuslee.ui.main.MainFragmentViewModel
-import com.exxuslee.ui.setting.SettingFragmentViewModel
+import com.exxuslee.munchkinsimplecounter.ui.PlayerMapper
+import com.exxuslee.munchkinsimplecounter.ui.main.MainCommunication
+import com.exxuslee.munchkinsimplecounter.ui.main.MainFragmentViewModel
+import com.exxuslee.munchkinsimplecounter.ui.setting.SettingFragmentViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

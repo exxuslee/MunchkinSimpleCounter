@@ -1,4 +1,4 @@
-package com.exxuslee.ui.setting
+package com.exxuslee.munchkinsimplecounter.ui.setting
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.exxuslee.R
-import com.exxuslee.core.Dialog
-import com.exxuslee.core.vibratePhone
-import com.exxuslee.databinding.FragmentSecondBinding
+import com.exxuslee.munchkinsimplecounter.R
+import com.exxuslee.munchkinsimplecounter.core.Dialog
+import com.exxuslee.munchkinsimplecounter.core.vibratePhone
+import com.exxuslee.munchkinsimplecounter.databinding.FragmentSecondBinding
 import com.exxuslee.domain.model.Player
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -1,4 +1,4 @@
-package com.exxuslee.ui.main
+package com.exxuslee.munchkinsimplecounter.ui.main
 
 import android.content.res.TypedArray
 import android.graphics.Color
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.exxuslee.R
-import com.exxuslee.databinding.RecyclerFistBinding
+import com.exxuslee.munchkinsimplecounter.R
+import com.exxuslee.munchkinsimplecounter.databinding.RecyclerFistBinding
 import com.exxuslee.domain.model.Player
 
 class MainAdapter(private val icons: TypedArray) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
