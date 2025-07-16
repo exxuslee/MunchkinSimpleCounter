@@ -9,13 +9,16 @@ java {
 }
 
 dependencies {
-    implementation "org.koin:koin-android:2.1.6"
-    implementation "org.koin:koin-androidx-scope:2.1.6"
+    implementation "io.insert-koin:koin-core:4.0.2"
 
     testImplementation "org.mockito:mockito-core:4.0.0"
     testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
     //testImplementation "androidx.test.ext:junit-ktx:1.1.4"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2"
+}
+
+kotlin {
+    jvmToolchain(17)
 }

@@ -7,6 +7,6 @@ import com.exxuslee.data.localDB.entities.Entity
 
 
 @Database(entities = [Entity::class], version = 1, exportSchema = false)
-abstract class Database : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract val dao: PlayerDAO
 }

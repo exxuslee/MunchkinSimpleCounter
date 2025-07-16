@@ -20,7 +20,7 @@ class RepositoryImpl(private val playerDAO: PlayerDAO) : RepositoryDB {
         return playerDAO.lastID() ?: -1
     }
 
-    override suspend fun updatePlayer(player: Player) {
+    override suspend fun updatePlayer(player: Player): Int {
         playerDAO.updatePlayer(
             player.id,
             player.level,
@@ -28,6 +28,7 @@ class RepositoryImpl(private val playerDAO: PlayerDAO) : RepositoryDB {
             player.reverseSex,
             player.playing
         )
+        return 0
     }
 
     override suspend fun players(): Result<List<Player>> {

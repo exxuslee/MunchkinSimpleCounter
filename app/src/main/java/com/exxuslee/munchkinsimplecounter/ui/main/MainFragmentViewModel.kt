@@ -16,7 +16,6 @@ import com.exxuslee.munchkinsimplecounter.ui.PlayerMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.ext.scope
 
 
 class MainFragmentViewModel(
