@@ -52,7 +52,7 @@ fun SettingsView(
             listOf(
                 {
                     HsRow(
-                        imageVector = ImageVector.vectorResource(R.drawable.ic_baseline_fiber_new_24),
+                        imageVector = ImageVector.vectorResource(R.drawable.outline_fiber_new_24),
                         titleContent = {
                             Text(
                                 stringResource(R.string.new_game),
@@ -68,7 +68,7 @@ fun SettingsView(
                 },
                 {
                     HsRow(
-                        imageVector = ImageVector.vectorResource(R.drawable.ic_baseline_person_add_24),
+                        imageVector = ImageVector.vectorResource(R.drawable.outline_person_24),
                         titleContent = {
                             Text(
                                 stringResource(R.string.players),
