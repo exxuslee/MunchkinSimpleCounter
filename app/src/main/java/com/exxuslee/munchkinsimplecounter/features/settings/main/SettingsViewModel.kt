@@ -40,6 +40,8 @@ class SettingsViewModel(
                 viewState = viewState.copy(isDark = viewEvent.newValue)
             }
 
+            Event.IsNewGame -> viewAction = Action.NewGame
+            Event.ConfirmNewGame -> clearAction()
         }
 
     }

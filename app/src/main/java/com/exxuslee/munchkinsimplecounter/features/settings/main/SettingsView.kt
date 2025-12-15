@@ -39,9 +39,10 @@ fun SettingsView(
     Column(
         modifier = Modifier.verticalScroll(scrollState),
     ) {
+        VSpacer(24.dp)
         CellUniversalSection {
             Text(
-                text = stringResource(R.string.app),
+                text = stringResource(R.string.game),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.secondary,
             )
@@ -51,29 +52,26 @@ fun SettingsView(
             listOf(
                 {
                     HsRow(
-                        imageVector = ImageVector.vectorResource(R.drawable.outline_routine_24),
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_baseline_fiber_new_24),
                         titleContent = {
                             Text(
-                                stringResource(R.string.label_dark_mode),
+                                stringResource(R.string.new_game),
                                 modifier = Modifier.padding(horizontal = 12.dp),
                                 color = MaterialTheme.colorScheme.secondary,
                             )
                         },
-                        arrowRight = false,
-                    ) {
-                        Switch(
-                            checked = viewState.isDark,
-                            onCheckedChange = { eventHandler.invoke(Event.IsDark(!viewState.isDark)) },
-                            colors = SwitchDefaults.colors()
-                        )
-                    }
+                        onClick = {
+                            eventHandler.invoke(Event.IsNewGame)
+                        },
+                        arrowRight = true,
+                    )
                 },
                 {
                     HsRow(
-                        imageVector = ImageVector.vectorResource(R.drawable.outline_language_24),
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_baseline_person_add_24),
                         titleContent = {
                             Text(
-                                stringResource(R.string.language),
+                                stringResource(R.string.players),
                                 modifier = Modifier.padding(horizontal = 12.dp),
                                 color = MaterialTheme.colorScheme.secondary,
                             )
@@ -84,60 +82,7 @@ fun SettingsView(
                         arrowRight = true,
                     )
                 },
-                {
-                    HsRow(
-                        imageVector = ImageVector.vectorResource(R.drawable.outline_contract_24),
-                        titleContent = {
-                            Text(
-                                stringResource(R.string.terms_of_service),
-                                modifier = Modifier.padding(horizontal = 12.dp),
-                                color = MaterialTheme.colorScheme.secondary,
-                            )
-                        },
-                        onClick = {
-                            navController.navigate(Routes.SettingsRoute.ThermsRoute.route)
-                        },
-                        arrowRight = true,
-                    ) {
-                        if (!viewState.isTermsOfUseRead) Icon(
-                            painter = painterResource(R.drawable.rounded_warning_24),
-                            contentDescription = "",
-                            modifier = Modifier.padding(horizontal = 12.dp),
-                            tint = MaterialTheme.colorScheme.error
-                        )
-                    }
-                },
-                {
-                    HsRow(
-                        imageVector = ImageVector.vectorResource(R.drawable.outline_volunteer_activism_24),
-                        titleContent = {
-                            Text(
-                                stringResource(R.string.donate),
-                                modifier = Modifier.padding(horizontal = 12.dp),
-                                color = MaterialTheme.colorScheme.secondary,
-                            )
-                        },
-                        onClick = {
-                            navController.navigate(Routes.SettingsRoute.DonateRoute.route)
-                        },
-                        arrowRight = true,
-                    )
-                },
-                {
-                    HsRow(
-                        imageVector = ImageVector.vectorResource(R.drawable.outline_mobile_info_24),
-                        titleContent = {
-                            Text(
-                                stringResource(R.string.about, stringResource(R.string.app_name)),
-                                modifier = Modifier.padding(horizontal = 12.dp)
-                            )
-                        },
-                        onClick = {
-                            navController.navigate(Routes.SettingsRoute.AboutRoute.route)
-                        },
-                        arrowRight = true,
-                    )
-                },
+
             )
         )
         VSpacer(32.dp)

@@ -1,4 +1,4 @@
-package com.exxuslee.munchkinsimplecounter.features.game.root
+package com.exxuslee.munchkinsimplecounter.features.root
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
@@ -35,6 +35,8 @@ import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalPaddingController
 import com.exxuslee.munchkinsimplecounter.ui.common.animatedComposable
 import com.exxuslee.munchkinsimplecounter.features.game.GameScreen
+import com.exxuslee.munchkinsimplecounter.features.game.root.BottomNavigationBar
+import com.exxuslee.munchkinsimplecounter.features.game.root.MainViewModel
 import com.exxuslee.munchkinsimplecounter.features.game.root.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.about.AboutScreen
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.DonateScreen
