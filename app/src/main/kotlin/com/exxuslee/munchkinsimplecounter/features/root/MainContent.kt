@@ -93,6 +93,16 @@ fun MainContent(
                             )
                         }
                     }
+                    if (currentRoute == Routes.SettingsRoute.PlayersRoute) {
+                        IconButton(onClick = {
+
+                        }) {
+                            Icon(
+                                painterResource(id = R.drawable.ic_baseline_person_add_24),
+                                contentDescription = stringResource(R.string.players)
+                            )
+                        }
+                    }
                 }
             )
         },

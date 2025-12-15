@@ -14,6 +14,7 @@ fun NavDestination?.asRoute(): Routes? {
         Routes.SettingsRoute.LanguageRoute.route -> Routes.SettingsRoute.LanguageRoute
         Routes.SettingsRoute.DonateRoute.route -> Routes.SettingsRoute.DonateRoute
         Routes.SettingsRoute.AboutRoute.route -> Routes.SettingsRoute.AboutRoute
+        Routes.SettingsRoute.PlayersRoute.route -> Routes.SettingsRoute.PlayersRoute
         else -> null
     }
 }
