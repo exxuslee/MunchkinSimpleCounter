@@ -1,13 +1,12 @@
-package com.exxuslee.data.localDB.entities
+package com.exxuslee.data.local.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.exxuslee.data.utils.Constants
 
 
-@Entity(tableName = Constants.TABLE)
-data class Entity(
+@Entity(tableName = "Players")
+data class PlayerEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "name") val name: String,
@@ -16,4 +15,5 @@ data class Entity(
     @ColumnInfo(name = "icon") val icon: Int,
     @ColumnInfo(name = "active") val active: Boolean,
     @ColumnInfo(name = "reverseSex") val reverseSex: Boolean,
+    @ColumnInfo(name = "startSex") val startSex: Boolean,
 )
