@@ -18,13 +18,13 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.exxuslee.munchkinsimplecounter.R
+import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Event
+import com.exxuslee.munchkinsimplecounter.features.settings.main.models.ViewState
 import com.exxuslee.munchkinsimplecounter.navigation.Routes
 import com.exxuslee.munchkinsimplecounter.ui.common.CellUniversalSection
 import com.exxuslee.munchkinsimplecounter.ui.common.HsRow
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
 import com.exxuslee.munchkinsimplecounter.ui.common.VSpacer
-import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Event
-import com.exxuslee.munchkinsimplecounter.features.settings.main.models.ViewState
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 
 
@@ -84,7 +84,7 @@ fun SettingsView(
                     )
                 },
 
-            )
+                )
         )
 
         VSpacer(24.dp)
@@ -97,26 +97,34 @@ fun SettingsView(
         }
 
         CellUniversalSection(
-            listOf(
+            viewState.players.map {
                 {
                     HsRow(
-                        imageVector = ImageVector.vectorResource(R.drawable.outline_fiber_new_24),
+                        icon = painterResource(it.icon),
                         titleContent = {
                             Text(
-                                stringResource(R.string.new_game),
+                                it.name,
                                 modifier = Modifier.padding(horizontal = 12.dp),
                                 color = MaterialTheme.colorScheme.secondary,
                             )
                         },
                         onClick = {
-                            eventHandler.invoke(Event.DialogNewGame)
+                            eventHandler.invoke(Event.ActivatePlayer(it))
                         },
-                        arrowRight = true,
+                        valueContent = {
+                            if (it.playing) {
+                                Icon(
+                                    painter = painterResource(R.drawable.outline_check_24),
+                                    contentDescription = "",
+                                    modifier = Modifier.padding(horizontal = 12.dp),
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        },
+                        arrowRight = false,
                     )
-                },
-
-
-                )
+                }
+            }
         )
 
         VSpacer(24.dp)

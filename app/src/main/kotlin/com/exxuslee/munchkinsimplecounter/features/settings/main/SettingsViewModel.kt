@@ -60,6 +60,11 @@ class SettingsViewModel(
                 clearAction()
 
             }
+
+            is Event.ActivatePlayer -> viewModelScope.launch {
+                playersUseCase.updatePlayer(viewEvent.player.copy(playing = !viewEvent.player.playing))
+            }
+
         }
 
     }
