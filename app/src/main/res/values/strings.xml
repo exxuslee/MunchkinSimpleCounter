@@ -20,7 +20,8 @@
     <string name="allPlayers">All Players</string>
     <string name="add_player">Add player</string>
     <string name="sex">⚧️</string>
-    <string name="name">📛</string>
+    <string name="name_icon">📛</string>
+    <string name="name">Name</string>
     <string name="level">🥇</string>
     <string name="bonus">⚔️</string>
     <string name="life">♥</string>
@@ -80,6 +81,10 @@
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="empty_list">Empty list</string>
+    <string name="add">Add</string>
+    <string name="add_player_message">Select the player\'s icon and name</string>
+    <string name="input_name">Input name</string>
+    <string name="select_icon">Select icon</string>
 
 
 </resources>

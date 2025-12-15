@@ -40,7 +40,6 @@ import com.exxuslee.munchkinsimplecounter.features.settings.about.AboutScreen
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.DonateScreen
 import com.exxuslee.munchkinsimplecounter.features.settings.language.LanguageScreen
 import com.exxuslee.munchkinsimplecounter.features.settings.main.SettingsScreen
-import com.exxuslee.munchkinsimplecounter.features.settings.players.PlayersScreen
 import com.exxuslee.munchkinsimplecounter.features.settings.terms.TermsScreen
 import org.koin.androidx.compose.koinViewModel
 
@@ -93,16 +92,6 @@ fun MainContent(
                             )
                         }
                     }
-                    if (currentRoute == Routes.SettingsRoute.PlayersRoute) {
-                        IconButton(onClick = {
-
-                        }) {
-                            Icon(
-                                painterResource(id = R.drawable.ic_baseline_person_add_24),
-                                contentDescription = stringResource(R.string.players)
-                            )
-                        }
-                    }
                 }
             )
         },
@@ -147,10 +136,6 @@ fun MainContent(
                     Routes.SettingsRoute.DonateRoute.route,
                     animationType = AnimationType.FADE
                 ) { DonateScreen() }
-                animatedComposable(
-                    Routes.SettingsRoute.PlayersRoute.route,
-                    animationType = AnimationType.FADE
-                ) { PlayersScreen() }
 
             }
 

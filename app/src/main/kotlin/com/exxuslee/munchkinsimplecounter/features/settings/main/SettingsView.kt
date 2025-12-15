@@ -114,22 +114,7 @@ fun SettingsView(
                         arrowRight = true,
                     )
                 },
-                {
-                    HsRow(
-                        imageVector = ImageVector.vectorResource(R.drawable.outline_person_24),
-                        titleContent = {
-                            Text(
-                                stringResource(R.string.players),
-                                modifier = Modifier.padding(horizontal = 12.dp),
-                                color = MaterialTheme.colorScheme.secondary,
-                            )
-                        },
-                        onClick = {
-                            navController.navigate(Routes.SettingsRoute.PlayersRoute.route)
-                        },
-                        arrowRight = true,
-                    )
-                },
+
 
                 )
         )
