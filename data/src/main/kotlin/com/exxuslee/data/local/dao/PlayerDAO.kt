@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.exxuslee.data.local.entities.PlayerEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlayerDAO {
@@ -13,7 +14,10 @@ interface PlayerDAO {
     fun player(name: String): PlayerEntity?
 
     @Query("SELECT * FROM Players")
-    fun players(): List<PlayerEntity>
+    suspend fun players(): List<PlayerEntity>
+
+    @Query("SELECT * FROM players")
+    fun playersFlow(): Flow<List<PlayerEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePlayer(player: PlayerEntity)

@@ -85,105 +85,113 @@ fun SettingsScreen(
             }
         )
 
-        Action.AddPlayer -> AlertDialog(
-            onDismissRequest = { viewModel.clearAction() },
-            title = {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        modifier = Modifier.size(32.dp),
-                        painter = painterResource(R.drawable.outline_person_add_24),
-                        contentDescription = stringResource(id = R.string.add_player),
-                    )
-                    HSpacer(8.dp)
-                    Text(text = stringResource(id = R.string.add_player))
-                }
-            },
-            text = {
-                Column {
-                    Text(
-                        text = stringResource(id = R.string.add_player_message),
-                    )
-                    VSpacer(16.dp)
+        Action.AddPlayer -> {
+            var selectedIcon by remember { mutableIntStateOf(0) }
+            var name by remember { mutableStateOf("") }
+            val icons = remember {
+                listOf(
+                    R.drawable.icon_0001,
+                    R.drawable.icon_0002,
+                    R.drawable.icon_0003,
+                    R.drawable.icon_0004,
+                    R.drawable.icon_0005,
+                    R.drawable.icon_0006,
+                    R.drawable.icon_0007,
+                    R.drawable.icon_0008,
+                    R.drawable.icon_0009,
+                )
+            }
+            AlertDialog(
+                onDismissRequest = { viewModel.clearAction() },
+                title = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(32.dp),
+                            painter = painterResource(R.drawable.outline_person_add_24),
+                            contentDescription = stringResource(id = R.string.add_player),
+                        )
+                        HSpacer(8.dp)
+                        Text(text = stringResource(id = R.string.add_player))
+                    }
+                },
+                text = {
+                    Column {
+                        Text(
+                            text = stringResource(id = R.string.add_player_message),
+                        )
+                        VSpacer(16.dp)
 
-                    var expanded by remember { mutableStateOf(false) }
-                    var selectedIcon by remember { mutableIntStateOf(0) }
-                    var name by remember { mutableStateOf("") }
+                        var expanded by remember { mutableStateOf(false) }
 
-                    val icons = listOf(
-                        R.drawable.icon_0001,
-                        R.drawable.icon_0002,
-                        R.drawable.icon_0003,
-                        R.drawable.icon_0004,
-                        R.drawable.icon_0005,
-                        R.drawable.icon_0006,
-                        R.drawable.icon_0007,
-                        R.drawable.icon_0008,
-                        R.drawable.icon_0009,
-                    )
-                    OutlinedTextField(
-                        value = name,
-                        onValueChange = { name = it },
-                        label = { Text(stringResource(R.string.name)) },
-                        leadingIcon = {
-                            Box {
-                                Image(
-                                    modifier = Modifier
-                                        .size(36.dp)
-                                        .clickable(
-                                            onClick = { expanded = true }
-                                        ),
-                                    painter = painterResource(id = icons[selectedIcon]),
-                                    contentDescription = stringResource(R.string.select_icon)
-                                )
-                                DropdownMenu(
-                                    expanded = expanded,
-                                    onDismissRequest = { expanded = false }
-                                ) {
-                                    icons.forEachIndexed { index, icon ->
-                                        DropdownMenuItem(
-                                            text = {
-                                                Image(
-                                                    painter = painterResource(id = icon),
-                                                    modifier = Modifier.size(36.dp),
-                                                    contentDescription = stringResource(R.string.select_icon)
-                                                )
-                                            },
-                                            onClick = {
-                                                selectedIcon = index
-                                                expanded = false
-                                            }
-                                        )
+                        OutlinedTextField(
+                            value = name,
+                            onValueChange = { name = it },
+                            label = { Text(stringResource(R.string.name)) },
+                            leadingIcon = {
+                                Box {
+                                    Image(
+                                        modifier = Modifier
+                                            .size(36.dp)
+                                            .clickable(
+                                                onClick = { expanded = true }
+                                            ),
+                                        painter = painterResource(id = icons[selectedIcon]),
+                                        contentDescription = stringResource(R.string.select_icon)
+                                    )
+                                    DropdownMenu(
+                                        expanded = expanded,
+                                        onDismissRequest = { expanded = false }
+                                    ) {
+                                        icons.forEachIndexed { index, icon ->
+                                            DropdownMenuItem(
+                                                text = {
+                                                    Image(
+                                                        painter = painterResource(id = icon),
+                                                        modifier = Modifier.size(36.dp),
+                                                        contentDescription = stringResource(R.string.select_icon)
+                                                    )
+                                                },
+                                                onClick = {
+                                                    selectedIcon = index
+                                                    expanded = false
+                                                }
+                                            )
+                                        }
                                     }
                                 }
-                            }
-                        },
-                        placeholder = { Text(stringResource(R.string.input_name)) },
-                        singleLine = true,
-                    )
-                }
+                            },
+                            placeholder = { Text(stringResource(R.string.input_name)) },
+                            singleLine = true,
+                        )
+                    }
 
-            },
-            confirmButton = {
-                TextButton(onClick = {
-                    viewModel.obtainEvent(Event.ConfirmNewGame)
-                }) {
-                    Text(
-                        text = stringResource(id = R.string.add),
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            viewModel.obtainEvent(
+                                Event.AddPlayer(name = name, icon = icons[selectedIcon])
+                            )
+                        }
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.add),
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { viewModel.clearAction() }) {
+                        Text(
+                            text = stringResource(id = R.string.cancel),
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                    }
                 }
-            },
-            dismissButton = {
-                TextButton(onClick = { viewModel.clearAction() }) {
-                    Text(
-                        text = stringResource(id = R.string.cancel),
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
-                }
-            }
-        )
+            )
+        }
 
         null -> {}
     }

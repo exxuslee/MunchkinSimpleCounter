@@ -9,6 +9,7 @@ import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Action
 import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.main.models.ViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
@@ -21,14 +22,16 @@ class SettingsViewModel(
 ) {
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             combine(
                 themeController.isDark,
                 settingsUseCase.isTermsOfUseRead,
-            ) { isDark, isTermsOfUseRead ->
+                playersUseCase.players,
+            ) { isDark, isTermsOfUseRead, players ->
                 ViewState(
                     isTermsOfUseRead = isTermsOfUseRead,
                     isDark = isDark,
+                    players = players
                 )
             }.collect { newState ->
                 viewState = newState
@@ -54,6 +57,7 @@ class SettingsViewModel(
                 viewModelScope.launch {
                     playersUseCase.savePlayer(Player(name = viewEvent.name, icon = viewEvent.icon))
                 }
+                clearAction()
 
             }
         }

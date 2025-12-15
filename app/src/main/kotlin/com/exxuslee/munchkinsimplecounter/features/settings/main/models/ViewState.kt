@@ -1,6 +1,9 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.main.models
 
+import com.exxuslee.domain.model.Player
+
 data class ViewState(
     val isDark: Boolean = false,
     val isTermsOfUseRead: Boolean = false,
+    val players: List<Player> = emptyList()
 )
