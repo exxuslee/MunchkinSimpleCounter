@@ -19,9 +19,6 @@ android {
     }
 
     buildTypes {
-        create("mock") {
-            initWith(getByName("debug"))
-        }
         debug {
             isMinifyEnabled = false
         }

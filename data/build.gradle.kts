@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -6,14 +8,16 @@ plugins {
 
 android {
     namespace = "com.exxuslee.data"
-    compileSdk = 35
+    compileSdk = property("version.compileSdk").toString().toInt()
 
     defaultConfig {
         minSdk = property("version.minSdk").toString().toInt()
-        targetSdk = property("version.targetSdk").toString().toInt()
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    testOptions {
+        targetSdk = property("version.targetSdk").toString().toInt()
     }
 
     buildTypes {
@@ -26,9 +30,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
     }
+
 }
 
 dependencies {
