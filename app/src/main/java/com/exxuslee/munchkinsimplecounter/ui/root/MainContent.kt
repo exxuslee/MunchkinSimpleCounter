@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -31,10 +32,12 @@ import com.exxuslee.munchkinsimplecounter.navigation.asRoute
 import com.exxuslee.munchkinsimplecounter.navigation.isPrimaryRoute
 import com.exxuslee.munchkinsimplecounter.ui.common.AnimationType
 import com.exxuslee.munchkinsimplecounter.ui.common.BottomNavigationBar
+import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalPaddingController
 import com.exxuslee.munchkinsimplecounter.ui.common.animatedComposable
 import com.exxuslee.munchkinsimplecounter.ui.game.GameScreen
+import com.exxuslee.munchkinsimplecounter.ui.root.models.Event
 import com.exxuslee.munchkinsimplecounter.ui.settings.about.AboutScreen
 import com.exxuslee.munchkinsimplecounter.ui.settings.donate.DonateScreen
 import com.exxuslee.munchkinsimplecounter.ui.settings.language.LanguageScreen
@@ -52,11 +55,10 @@ fun MainContent(
 
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
-
+    val currentRoute = backStackEntry?.destination?.asRoute()
     Scaffold(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
-            val currentRoute = backStackEntry?.destination?.asRoute()
             TopAppBar(
                 windowInsets = WindowInsets.statusBars,
                 title = {
@@ -73,15 +75,36 @@ fun MainContent(
                                 contentDescription = stringResource(R.string.back)
                             )
                         }
+                    } else {
+                        HSpacer(48.dp)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp)
                 ),
+                actions = {
+                    if (currentRoute?.isPrimaryRoute() == true) {
+                        IconButton(onClick = {
+                            viewModel.obtainEvent(Event.MainRoute(Routes.SettingsRoute.MainRoute().route))
+                            navController.navigate(Routes.SettingsRoute.MainRoute().route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }) {
+                            Icon(
+                                painterResource(id = R.drawable.ic_baseline_settings_24),
+                                contentDescription = stringResource(R.string.title_settings)
+                            )
+                        }
+                    }
+                }
             )
         },
         bottomBar = {
-            BottomNavigationBar(
+            if (currentRoute?.isPrimaryRoute() == true) BottomNavigationBar(
                 viewState = viewState,
                 backStackEntry = backStackEntry,
                 navController = navController,

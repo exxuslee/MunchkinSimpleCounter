@@ -31,6 +31,7 @@ fun BottomNavigationBar(
             Routes.GameRoute(),
             Routes.GameRoute(),
             Routes.SettingsRoute.MainRoute(),
+            Routes.SettingsRoute.MainRoute(),
         ).forEach { dest ->
             val currentRoute = backStackEntry?.destination?.route
             NavigationBarItem(
