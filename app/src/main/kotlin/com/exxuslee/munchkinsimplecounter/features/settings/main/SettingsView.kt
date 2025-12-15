@@ -77,7 +77,7 @@ fun SettingsView(
                             )
                         },
                         onClick = {
-                            navController.navigate(Routes.SettingsRoute.LanguageRoute.route)
+                            navController.navigate(Routes.SettingsRoute.PlayersRoute.route)
                         },
                         arrowRight = true,
                     )

@@ -79,6 +79,7 @@
     <string name="new_game_message">Are you sure you want to start a new game?</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="empty_list">Empty list</string>
 
 
 </resources>

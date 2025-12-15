@@ -37,6 +37,9 @@ sealed class Routes(
         data object DonateRoute :
             SettingsRoute("donate", label = { stringResource(R.string.donate) })
 
+        data object PlayersRoute :
+            SettingsRoute("players", label = { stringResource(R.string.players) })
+
         data object AboutRoute :
             SettingsRoute("about", label = { stringResource(R.string.about, R.string.app_name) })
 
