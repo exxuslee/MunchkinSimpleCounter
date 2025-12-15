@@ -12,7 +12,7 @@ sealed class Routes(
     val icon: @Composable () -> Painter,
 ) {
 
-    class GameRoute : Routes(
+    data object GameRoute : Routes(
         "game",
         label = { stringResource(R.string.game) },
         icon = { painterResource(R.drawable.ic_baseline_sentiment_satisfied_alt_24) },
@@ -24,7 +24,7 @@ sealed class Routes(
             label = label,
             icon = { painterResource(R.drawable.ic_baseline_settings_24) },
         ) {
-        class MainRoute() :
+        data object MainRoute :
             SettingsRoute("main", label = { stringResource(R.string.title_settings) })
 
         data object ThermsRoute :

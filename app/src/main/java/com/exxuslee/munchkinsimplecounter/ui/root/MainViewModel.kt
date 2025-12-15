@@ -10,7 +10,7 @@ class MainViewModel(
 
 ) : BaseViewModel<ViewState, Action, Event>(
     initialState = ViewState(
-        initialRoute = Routes.GameRoute().route,
+        initialRoute = Routes.GameRoute.route,
     )
 ) {
 

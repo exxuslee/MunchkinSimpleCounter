@@ -31,7 +31,6 @@ import com.exxuslee.munchkinsimplecounter.navigation.Routes
 import com.exxuslee.munchkinsimplecounter.navigation.asRoute
 import com.exxuslee.munchkinsimplecounter.navigation.isPrimaryRoute
 import com.exxuslee.munchkinsimplecounter.ui.common.AnimationType
-import com.exxuslee.munchkinsimplecounter.ui.common.BottomNavigationBar
 import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalPaddingController
@@ -85,14 +84,8 @@ fun MainContent(
                 actions = {
                     if (currentRoute?.isPrimaryRoute() == true) {
                         IconButton(onClick = {
-                            viewModel.obtainEvent(Event.MainRoute(Routes.SettingsRoute.MainRoute().route))
-                            navController.navigate(Routes.SettingsRoute.MainRoute().route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
+                            viewModel.obtainEvent(Event.MainRoute(Routes.SettingsRoute.MainRoute.route))
+                            navController.navigate(Routes.SettingsRoute.MainRoute.route)
                         }) {
                             Icon(
                                 painterResource(id = R.drawable.ic_baseline_settings_24),
@@ -106,8 +99,6 @@ fun MainContent(
         bottomBar = {
             if (currentRoute?.isPrimaryRoute() == true) BottomNavigationBar(
                 viewState = viewState,
-                backStackEntry = backStackEntry,
-                navController = navController,
             ) { event ->
                 viewModel.obtainEvent(event)
             }
@@ -127,9 +118,9 @@ fun MainContent(
                     .background(MaterialTheme.colorScheme.surface)
             ) {
 
-                animatedComposable(Routes.GameRoute().route) { GameScreen() }
+                animatedComposable(Routes.GameRoute.route) { GameScreen() }
 
-                animatedComposable(Routes.SettingsRoute.MainRoute().route) { SettingsScreen() }
+                animatedComposable(Routes.SettingsRoute.MainRoute.route) { SettingsScreen() }
                 animatedComposable(
                     Routes.SettingsRoute.ThermsRoute.route,
                     animationType = AnimationType.FADE
