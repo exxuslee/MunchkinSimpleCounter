@@ -1,0 +1,8 @@
+package com.exxuslee.munchkinsimplecounter.ui.settings.donate.models
+
+sealed class Event {
+    data object AddressCopied: Event()
+    data class OnAmountSelected(val amount: Int): Event()
+    data class OnTickerSelected(val tickerItem: DonateTickerItem): Event()
+    data class OnChainSelected(val chainItem: DonateChainItem): Event()
+}

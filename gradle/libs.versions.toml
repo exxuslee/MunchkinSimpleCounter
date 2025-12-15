@@ -1,5 +1,5 @@
 [versions]
-agp = "8.9.3"
+agp = "8.13.2"
 kotlin = "2.1.21"
 core-ktx = "1.16.0"
 composeCompiler = "1.10.0"
@@ -70,6 +70,7 @@ compose-ui-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview
 compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "composeUi" }
 compose-ui-text-googlefonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "composeCompiler" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "composeUi" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "composeUi" }
 compose-material-iconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
@@ -77,8 +78,8 @@ compose-material3-window-size = { group = "androidx.compose.material3", name = "
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
-koin-navigation = { module = "io.insert-koin:koin-androidx-navigation", version.ref = "koinCompose" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+koin-navigation = { module = "io.insert-koin:koin-androidx-navigation", version.ref = "koin" }
 
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }

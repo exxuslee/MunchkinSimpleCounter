@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     style="@style/Theme.Material3.DayNight"
-    tools:context="com.exxuslee.munchkinsimplecounter.ui.MainActivity">
+    tools:context="com.exxuslee.munchkinsimplecounter.MainActivity">
 
     <include layout="@layout/content_main" />
 

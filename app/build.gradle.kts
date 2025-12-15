@@ -25,31 +25,67 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            ndk {
+                debugSymbolLevel = "SYMBOL_TABLE"
+            }
+        }
+        debug {
+            ndk {
+                debugSymbolLevel = "FULL"
+            }
+            isMinifyEnabled = false
+        }
+        create("mock") {
+            initWith(getByName("debug"))
+            applicationIdSuffix = ".mock"
+            matchingFallbacks += listOf("debug", "release")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
     buildFeatures {
+        compose = true
+        buildConfig = true
         viewBinding = true
         dataBinding = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 }
 
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":core:localize"))
     implementation(fileTree("libs") { include("*.jar") })
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.preview)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material.iconsExtended)
+    implementation(libs.compose.ui.text.googlefonts)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling.preview)
+
     implementation(libs.androidx.material)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
@@ -58,6 +94,8 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
     implementation(libs.koin.navigation)
+
+    implementation(libs.coil.compose)
 
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.core.splashscreen)

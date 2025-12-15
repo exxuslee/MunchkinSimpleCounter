@@ -1,25 +1,27 @@
 package com.exxuslee.munchkinsimplecounter
 
 import android.app.Application
-import com.exxuslee.data.di.roomDatabaseModule
-import com.exxuslee.data.di.repositoryModule
-import com.exxuslee.munchkinsimplecounter.di.presentationModule
-import com.exxuslee.domain.di.interactionModule
+import android.content.Context
+import com.exxuslee.munchkinsimplecounter.di.appModule
+import com.hwasfy.localize.util.LocaleHelper
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 class App : Application() {
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleHelper.wrapContext(base))
+    }
+
     override fun onCreate() {
         super.onCreate()
+
         startKoin {
+            androidLogger(if (BuildConfig.DEBUG) Level.DEBUG else Level.ERROR)
             androidContext(this@App)
-            //if (BuildConfig.DEBUG) androidLogger(Level.ERROR)
-            //modules(appModules + domainModules + dataModules)
-            koin.loadModules(com.exxuslee.munchkinsimplecounter.appModules + com.exxuslee.munchkinsimplecounter.domainModules + com.exxuslee.munchkinsimplecounter.dataModules)
+            modules(appModule)
         }
     }
 }
-
-val appModules = listOf(presentationModule)
-val domainModules = listOf(interactionModule)
-val dataModules = listOf(repositoryModule, roomDatabaseModule)
