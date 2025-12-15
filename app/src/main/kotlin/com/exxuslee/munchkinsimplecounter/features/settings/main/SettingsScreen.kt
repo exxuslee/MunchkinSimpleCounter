@@ -51,6 +51,32 @@ fun SettingsScreen(
             }
         )
 
+        Action.AddPlayer -> AlertDialog(
+            onDismissRequest = { viewModel.clearAction() },
+            title = { Text(text = stringResource(id = R.string.add_player)) },
+            text = {
+                Text(text = stringResource(id = R.string.new_game_message))
+                   },
+            confirmButton = {
+                TextButton(onClick = {
+                    viewModel.obtainEvent(Event.ConfirmNewGame)
+                }) {
+                    Text(
+                        text = stringResource(id = R.string.add_player),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { viewModel.clearAction() }) {
+                    Text(
+                        text = stringResource(id = R.string.cancel),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                }
+            }
+        )
+
         null -> {}
     }
 }

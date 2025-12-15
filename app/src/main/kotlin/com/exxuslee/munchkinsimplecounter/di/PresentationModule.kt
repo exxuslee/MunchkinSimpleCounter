@@ -17,7 +17,7 @@ val presentationModule = module {
 
     viewModel { GameViewModel() }
 
-    viewModel { SettingsViewModel(get(), get()) }
+    viewModel { SettingsViewModel(get(), get(), get()) }
     viewModel { DonateViewModel() }
     viewModel { PlayersViewModel() }
     viewModel { LanguageViewModel() }

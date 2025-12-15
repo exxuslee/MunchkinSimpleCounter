@@ -39,6 +39,7 @@ fun SettingsView(
     Column(
         modifier = Modifier.verticalScroll(scrollState),
     ) {
+
         VSpacer(24.dp)
         CellUniversalSection {
             Text(
@@ -61,7 +62,54 @@ fun SettingsView(
                             )
                         },
                         onClick = {
-                            eventHandler.invoke(Event.IsNewGame)
+                            eventHandler.invoke(Event.DialogNewGame)
+                        },
+                        arrowRight = true,
+                    )
+                },
+                {
+                    HsRow(
+                        imageVector = ImageVector.vectorResource(R.drawable.outline_person_add_24),
+                        titleContent = {
+                            Text(
+                                stringResource(R.string.add_player),
+                                modifier = Modifier.padding(horizontal = 12.dp),
+                                color = MaterialTheme.colorScheme.secondary,
+                            )
+                        },
+                        onClick = {
+                            eventHandler.invoke(Event.DialogAddPlayer)
+                        },
+                        arrowRight = true,
+                    )
+                },
+
+            )
+        )
+
+        VSpacer(24.dp)
+        CellUniversalSection {
+            Text(
+                text = stringResource(R.string.players),
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.secondary,
+            )
+        }
+
+        CellUniversalSection(
+            listOf(
+                {
+                    HsRow(
+                        imageVector = ImageVector.vectorResource(R.drawable.outline_fiber_new_24),
+                        titleContent = {
+                            Text(
+                                stringResource(R.string.new_game),
+                                modifier = Modifier.padding(horizontal = 12.dp),
+                                color = MaterialTheme.colorScheme.secondary,
+                            )
+                        },
+                        onClick = {
+                            eventHandler.invoke(Event.DialogNewGame)
                         },
                         arrowRight = true,
                     )
@@ -83,10 +131,10 @@ fun SettingsView(
                     )
                 },
 
-            )
+                )
         )
-        VSpacer(32.dp)
 
+        VSpacer(24.dp)
         CellUniversalSection {
             Text(
                 text = stringResource(R.string.app),
