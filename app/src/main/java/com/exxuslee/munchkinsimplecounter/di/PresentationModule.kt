@@ -1,11 +1,12 @@
 package com.exxuslee.munchkinsimplecounter.di
 
 
-import com.exxuslee.munchkinsimplecounter.ui.settings.donate.DonateViewModel
-import com.exxuslee.munchkinsimplecounter.ui.settings.language.LanguageViewModel
-import com.exxuslee.munchkinsimplecounter.ui.settings.terms.TermsViewModel
-import com.exxuslee.munchkinsimplecounter.ui.root.MainViewModel
-import com.exxuslee.munchkinsimplecounter.ui.settings.main.SettingsViewModel
+
+import com.exxuslee.munchkinsimplecounter.features.game.root.MainViewModel
+import com.exxuslee.munchkinsimplecounter.features.settings.donate.DonateViewModel
+import com.exxuslee.munchkinsimplecounter.features.settings.language.LanguageViewModel
+import com.exxuslee.munchkinsimplecounter.features.settings.main.SettingsViewModel
+import com.exxuslee.munchkinsimplecounter.features.settings.terms.TermsViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 

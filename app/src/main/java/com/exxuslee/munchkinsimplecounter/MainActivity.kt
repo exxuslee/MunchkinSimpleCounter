@@ -9,7 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.exxuslee.domain.usecases.ThemeController
 import com.exxuslee.munchkinsimplecounter.ui.common.rememberDoubleBackPressHandler
-import com.exxuslee.munchkinsimplecounter.ui.root.MainContent
+import com.exxuslee.munchkinsimplecounter.features.game.root.MainContent
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 import org.koin.compose.koinInject
 
