@@ -8,7 +8,7 @@ import android.view.View
 interface Dialog {
     fun apply(title: String, message: String, view: View?, ok: ((Unit) -> Unit))
 
-    class Base(context: Context?) : com.exxuslee.munchkinsimplecounter.core.Dialog, AlertDialog(context) {
+    class Base(context: Context?) : Dialog, AlertDialog(context) {
 
 
         override fun apply (title: String, message: String, view: View?, ok: ((Unit) -> Unit)) {
