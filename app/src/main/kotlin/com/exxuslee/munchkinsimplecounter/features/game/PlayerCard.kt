@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -37,6 +38,12 @@ fun PlayerCard(
         onSelect = selected,
         onClick = onSelectRow,
         iconContent = {
+            Text(
+                modifier = Modifier.defaultMinSize(minWidth = 48.dp),
+                text = level,
+                fontSize = 28.sp,
+                textAlign = TextAlign.Center,
+            )
             Image(
                 icon,
                 modifier = Modifier
@@ -58,18 +65,13 @@ fun PlayerCard(
             )
         },
         valueContent = {
-            Row {
-                Text(
-                    modifier = Modifier.defaultMinSize(minWidth = 48.dp),
-                    text = level,
-                    fontSize = 28.sp,
-                    textAlign = TextAlign.Center,
-                )
-
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Text(
                     modifier = Modifier.defaultMinSize(minWidth = 48.dp),
                     text = bonus,
-                    fontSize = 28.sp,
+                    fontSize = iconRes?.let { 26.sp } ?: 28.sp,
                     textAlign = TextAlign.Center,
                 )
 
