@@ -52,7 +52,7 @@
     <string name="donate_header_hint">If you like the app, consider supporting development.</string>
     <string name="app">App</string>
     <string name="label_dark_mode">Dark mode</string>
-    <string name="terms_of_service">Terms of service</string>
+    <string name="terms_of_use">Terms of use</string>
     <string name="terms_last_updated">Last updated: %1$s</string>
     <string name="terms_default_date">December 2024</string>
     <string name="terms_section_1_title">1. Acceptance of Terms</string>
@@ -89,7 +89,7 @@
     <string name="select_player_toast_message">Please, select a player</string>
     <string name="max_lenght_name">Maximum lenght of name</string>
     <string name="remove_player">Remove player</string>
-    <string name="game_empty_players_list">Empta active players. Please add the players in settings</string>
+    <string name="game_empty_players_list">Empty active players. Please add the players in settings</string>
 
 
 </resources>

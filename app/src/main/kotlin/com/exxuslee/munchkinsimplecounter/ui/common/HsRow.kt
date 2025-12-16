@@ -38,7 +38,7 @@ fun HsRow(
             imageVector,
             modifier = Modifier.size(30.dp),
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.secondary
+            tint = MaterialTheme.colorScheme.secondary,
         )
         titleContent()
         Spacer(Modifier.weight(1f))
@@ -48,6 +48,7 @@ fun HsRow(
             modifier = Modifier.size(20.dp),
             painter = painterResource(R.drawable.ic_arrow_right),
             contentDescription = null,
+            tint = MaterialTheme.colorScheme.secondary,
         )
     }
 }
@@ -77,6 +78,7 @@ fun HsRow(
             modifier = Modifier.size(20.dp),
             painter = painterResource(R.drawable.ic_arrow_right),
             contentDescription = null,
+            tint = MaterialTheme.colorScheme.secondary,
         )
     }
 }
@@ -110,6 +112,7 @@ fun HsRow(
             modifier = Modifier.size(20.dp),
             painter = painterResource(R.drawable.ic_arrow_right),
             contentDescription = null,
+            tint = MaterialTheme.colorScheme.secondary,
         )
     }
 }

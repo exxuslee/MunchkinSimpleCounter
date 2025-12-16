@@ -1,6 +1,5 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.main
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -121,7 +120,6 @@ fun SettingsView(
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
-                    Log.d("SettingsView", "Rendering player: ${viewState.revealedId} ${player.id}")
                     DraggableCardSimple(
                         isRevealed = viewState.revealedId == index,
                         cardOffset = 64f,
@@ -225,7 +223,7 @@ fun SettingsView(
                         imageVector = ImageVector.vectorResource(R.drawable.outline_contract_24),
                         titleContent = {
                             Text(
-                                stringResource(R.string.terms_of_service),
+                                stringResource(R.string.terms_of_use),
                                 modifier = Modifier.padding(horizontal = 12.dp),
                                 color = MaterialTheme.colorScheme.secondary,
                             )
@@ -265,7 +263,8 @@ fun SettingsView(
                         titleContent = {
                             Text(
                                 stringResource(R.string.about, stringResource(R.string.app_name)),
-                                modifier = Modifier.padding(horizontal = 12.dp)
+                                modifier = Modifier.padding(horizontal = 12.dp),
+                                color = MaterialTheme.colorScheme.secondary,
                             )
                         },
                         onClick = {

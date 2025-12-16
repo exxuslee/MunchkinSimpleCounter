@@ -96,6 +96,7 @@ fun ScreenMessageWithAction(
             text = text,
             textAlign = TextAlign.Center,
             overflow = TextOverflow.Ellipsis,
+            color = MaterialTheme.colorScheme.secondary,
         )
         actionsComposable?.let { composable ->
             Spacer(Modifier.height(32.dp))

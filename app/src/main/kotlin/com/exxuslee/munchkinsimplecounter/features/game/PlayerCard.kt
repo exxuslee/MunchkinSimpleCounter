@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,6 +46,7 @@ fun PlayerCard(
                 text = level,
                 fontSize = 28.sp,
                 textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.secondary,
             )
             Image(
                 icon,
@@ -65,7 +67,8 @@ fun PlayerCard(
                 fontSize = 28.sp,
                 textAlign = TextAlign.Center,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.secondary,
             )
         },
         valueContent = {
@@ -77,6 +80,7 @@ fun PlayerCard(
                     text = bonus,
                     fontSize = iconRes?.let { 26.sp } ?: 28.sp,
                     textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.secondary,
                 )
 
                 Text(
@@ -85,6 +89,7 @@ fun PlayerCard(
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.secondary,
                 )
             }
 
