@@ -70,7 +70,7 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
             modifier = Modifier.verticalScroll(scrollState),
         ) {
             Text(
-                modifier = Modifier.padding(12.dp, 0.dp, 12.dp, 12.dp),
+                modifier = Modifier.padding(12.dp),
                 text = stringResource(R.string.donate_header_hint),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -95,6 +95,7 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                             titleContent = {
                                 Column(
                                     modifier = Modifier.padding(horizontal = 12.dp)
+                                        .weight(6f)
                                 ) {
                                     Text(
                                         text = donat.chain,
@@ -105,7 +106,7 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                                         text = donat.address,
                                         style = MaterialTheme.typography.bodyMedium,
                                         maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis,
+                                        overflow = TextOverflow.MiddleEllipsis,
                                     )
                                 }
                             },
