@@ -89,6 +89,7 @@
     <string name="select_player_toast_message">Please, select a player</string>
     <string name="max_lenght_name">Maximum lenght of name</string>
     <string name="remove_player">Remove player</string>
+    <string name="game_empty_players_list">Empta active players. Please add the players in settings</string>
 
 
 </resources>
