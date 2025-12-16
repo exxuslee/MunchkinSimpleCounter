@@ -262,7 +262,7 @@ fun SettingsView(
                         imageVector = ImageVector.vectorResource(R.drawable.outline_mobile_info_24),
                         titleContent = {
                             Text(
-                                stringResource(R.string.about, stringResource(R.string.app_name)),
+                                stringResource(R.string.about_app),
                                 modifier = Modifier.padding(horizontal = 12.dp),
                                 color = MaterialTheme.colorScheme.secondary,
                             )
