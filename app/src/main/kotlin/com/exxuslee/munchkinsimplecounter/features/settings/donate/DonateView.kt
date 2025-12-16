@@ -101,12 +101,14 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                                         text = donat.chain,
                                         style = MaterialTheme.typography.titleMedium,
                                         fontWeight = FontWeight.SemiBold,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
                                     Text(
                                         text = donat.address,
                                         style = MaterialTheme.typography.bodyMedium,
                                         maxLines = 1,
                                         overflow = TextOverflow.MiddleEllipsis,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
                                 }
                             },
@@ -131,6 +133,7 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.outline_content_copy_24),
                                     contentDescription = stringResource(R.string.donate_copy_cd),
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }
                         }
@@ -171,7 +174,7 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.End
+                textAlign = TextAlign.End,
             )
         }
 
@@ -199,6 +202,7 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
             text = stringResource(R.string.donate_footer_thanks),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         VFillSpacer(12.dp)
     }

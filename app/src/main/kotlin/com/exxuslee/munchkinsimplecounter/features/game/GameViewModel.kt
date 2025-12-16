@@ -1,6 +1,7 @@
 package com.exxuslee.munchkinsimplecounter.features.game
 
 import androidx.lifecycle.viewModelScope
+import com.exxuslee.domain.model.UiState
 import com.exxuslee.domain.usecases.PlayersUseCase
 import com.exxuslee.munchkinsimplecounter.features.game.models.Action
 import com.exxuslee.munchkinsimplecounter.features.game.models.Event
@@ -18,17 +19,19 @@ class GameViewModel(
     init {
         viewModelScope.launch(Dispatchers.IO) {
             playersUseCase.activePlayers.collect {
-                viewState = viewState.copy(players = it)
+                viewState = viewState.copy(players = it, state = UiState.Idle)
             }
         }
     }
 
     override fun obtainEvent(viewEvent: Event) {
         when (viewEvent) {
+
             Event.AddBonus -> viewModelScope.launch(Dispatchers.IO) {
                 val id = viewState.selectedPlayerId
-                if (id == null) viewAction = Action.ShowSelectPlayerMessage
-                else {
+                if (id == null || !viewState.players.map { it.id }.contains(id)) {
+                    viewAction = Action.ShowSelectPlayerMessage
+                } else {
                     val player = playersUseCase.player(id) ?: return@launch
                     playersUseCase.updatePlayer(player.copy(bonus = player.bonus + 1))
                 }
@@ -36,8 +39,9 @@ class GameViewModel(
 
             Event.AddLevel -> viewModelScope.launch(Dispatchers.IO) {
                 val id = viewState.selectedPlayerId
-                if (id == null) viewAction = Action.ShowSelectPlayerMessage
-                else {
+                if (id == null || !viewState.players.map { it.id }.contains(id)) {
+                    viewAction = Action.ShowSelectPlayerMessage
+                } else {
                     val player = playersUseCase.player(id) ?: return@launch
                     playersUseCase.updatePlayer(player.copy(level = player.level + 1))
                 }
@@ -45,8 +49,9 @@ class GameViewModel(
 
             Event.SubBonus -> viewModelScope.launch(Dispatchers.IO) {
                 val id = viewState.selectedPlayerId
-                if (id == null) viewAction = Action.ShowSelectPlayerMessage
-                else {
+                if (id == null || !viewState.players.map { it.id }.contains(id)) {
+                    viewAction = Action.ShowSelectPlayerMessage
+                } else {
                     val player = playersUseCase.player(id) ?: return@launch
                     playersUseCase.updatePlayer(player.copy(bonus = player.bonus - 1))
                 }
@@ -54,7 +59,9 @@ class GameViewModel(
 
             Event.SubLevel -> viewModelScope.launch(Dispatchers.IO) {
                 val id = viewState.selectedPlayerId
-                if (id == null) viewAction = Action.ShowSelectPlayerMessage
+                if (id == null || !viewState.players.map { it.id }.contains(id)) {
+                    viewAction = Action.ShowSelectPlayerMessage
+                }
                 else {
                     val player = playersUseCase.player(id) ?: return@launch
                     playersUseCase.updatePlayer(player.copy(level = player.level - 1))

@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.terms
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,14 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.exxuslee.munchkinsimplecounter.R
-import com.exxuslee.munchkinsimplecounter.ui.common.HeaderStick
 import com.exxuslee.munchkinsimplecounter.features.settings.terms.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.terms.models.ViewState
+import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
+import com.exxuslee.munchkinsimplecounter.ui.common.HeaderStick
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 
 
@@ -38,6 +41,8 @@ fun TermsView(
             R.string.terms_section_7_title to R.string.terms_section_7_content,
             R.string.terms_section_8_title to R.string.terms_section_8_content,
             R.string.terms_section_9_title to R.string.terms_section_9_content,
+            R.string.terms_section_10_title to R.string.terms_section_10_content,
+            R.string.terms_section_11_title to R.string.terms_section_11_content,
         )
     }
 
@@ -65,7 +70,8 @@ fun TermsView(
                 Text(
                     text = stringResource(section.second),
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }
@@ -78,12 +84,17 @@ fun TermsView(
             )
         }
 
+
         item {
+            val view = LocalView.current
             Button(
-                onClick = { eventHandler(Event.ReadTerms) },
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+                    eventHandler(Event.ReadTerms)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(24.dp),
+                    .padding(24.dp,24.dp,24.dp,64.dp),
                 enabled = !viewState.isTermsOfUseRead
             ) {
                 Text(

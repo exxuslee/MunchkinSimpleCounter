@@ -11,16 +11,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.ui.common.HeaderStick
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 
@@ -28,21 +24,16 @@ import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 @Composable
 fun AboutView() {
     Column {
-        val sections = remember {
-            listOf(
-                "Application" to "This app is a simple and lightweight power counter for the board game Munchkin.",
-
-                "How it Work" to """
-            This app is a simple and lightweight power counter for the board game Munchkin.
-            It helps players quickly calculate and track character strength during the game, so you can focus on gameplay instead of math.
-            The app works fully offline, does not collect any personal data, contains no ads, and does not use network access.
-            Created by a fan of Munchkin as a convenient companion for casual and tabletop-friendly play.
-                """.trimIndent(),
-
-                "Version" to "1.2.0",
-                "Privacy" to "We do not collect personal data. Network calls are limited to required APIs."
-            )
-        }
+        val sections = listOf(
+            stringResource(R.string.application_title) to
+                    stringResource(R.string.application_description),
+            stringResource(R.string.how_it_works_title) to
+                    stringResource(R.string.how_it_works_body),
+            stringResource(R.string.version_title) to
+                    stringResource(R.string.version_value),
+            stringResource(R.string.privacy_title) to
+                    stringResource(R.string.privacy_text)
+        )
 
         LazyColumn(
             modifier = Modifier.padding(horizontal = 16.dp),
@@ -56,7 +47,8 @@ fun AboutView() {
                     Text(
                         text = body,
                         style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(bottom = 16.dp)
+                        modifier = Modifier.padding(bottom = 16.dp),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }
