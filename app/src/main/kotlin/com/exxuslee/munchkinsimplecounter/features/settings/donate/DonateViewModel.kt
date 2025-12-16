@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.donate
 
+import com.exxuslee.domain.usecases.PriceUseCase
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.Action
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateChainItem
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateTickerItem
@@ -8,6 +9,7 @@ import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.ViewSt
 import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
 
 class DonateViewModel(
+    val priceUseCase: PriceUseCase,
 ) : BaseViewModel<ViewState, Action, Event>(
     initialState = ViewState(
         donates = DonateChainItem.chains(),
