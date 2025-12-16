@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.main
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -105,12 +106,12 @@ fun SettingsView(
         }
 
         CellUniversalSection(
-            viewState.players.map {
+            viewState.players.mapIndexed { index, player ->
                 {
                     RowUniversal(
                         horizontalArrangement = Arrangement.End,
                         onClick = {
-                            eventHandler.invoke(Event.DeletePlayer(it.id))
+                            eventHandler.invoke(Event.DeletePlayer(player.id))
                         }
                     ) {
                         Icon(
@@ -120,11 +121,12 @@ fun SettingsView(
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
+                    Log.d("SettingsView", "Rendering player: ${viewState.revealedId} ${player.id}")
                     DraggableCardSimple(
-                        isRevealed = viewState.revealedId == it.id,
+                        isRevealed = viewState.revealedId == index,
                         cardOffset = 64f,
                         onReveal = {
-                            eventHandler.invoke(Event.Reveal(it.id))
+                            eventHandler.invoke(Event.Reveal(index))
                         },
                         onCancel = {
                             eventHandler.invoke(Event.Reveal(-1))
@@ -138,23 +140,23 @@ fun SettingsView(
                             HsRow(
                                 iconContent = {
                                     Image(
-                                        painterResource(Icons.icon(it.icon)),
+                                        painterResource(Icons.icon(player.icon)),
                                         modifier = Modifier.size(30.dp),
                                         contentDescription = null,
                                     )
                                 },
                                 titleContent = {
                                     Text(
-                                        it.name,
+                                        player.name,
                                         modifier = Modifier.padding(horizontal = 12.dp),
                                         color = MaterialTheme.colorScheme.secondary,
                                     )
                                 },
                                 onClick = {
-                                    eventHandler.invoke(Event.ActivatePlayer(it))
+                                    eventHandler.invoke(Event.ActivatePlayer(player))
                                 },
                                 valueContent = {
-                                    if (it.playing) {
+                                    if (player.playing) {
                                         Icon(
                                             painter = painterResource(R.drawable.outline_check_24),
                                             contentDescription = "",
