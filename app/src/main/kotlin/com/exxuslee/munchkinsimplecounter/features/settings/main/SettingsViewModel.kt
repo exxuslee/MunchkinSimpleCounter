@@ -68,17 +68,24 @@ class SettingsViewModel(
             Event.DialogAddPlayer -> viewAction = Action.AddPlayer
 
             is Event.AddPlayer -> {
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
                     playersUseCase.savePlayer(Player(name = viewEvent.name, icon = viewEvent.icon))
                 }
                 clearAction()
 
             }
 
-            is Event.ActivatePlayer -> viewModelScope.launch {
+            is Event.ActivatePlayer -> viewModelScope.launch(Dispatchers.IO) {
                 playersUseCase.updatePlayer(viewEvent.player.copy(playing = !viewEvent.player.playing))
             }
 
+            is Event.Reveal -> viewState = viewState.copy(revealedId = viewEvent.id)
+
+            is Event.DeletePlayer -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    playersUseCase.deletePlayer(viewEvent.id)
+                }
+            }
         }
 
     }

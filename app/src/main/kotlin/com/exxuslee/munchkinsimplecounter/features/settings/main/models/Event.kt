@@ -9,6 +9,8 @@ sealed class Event {
     object DialogAddPlayer : Event()
     data class AddPlayer(val name: String, val icon: Int) : Event()
     data class ActivatePlayer(val player: Player) : Event()
+    data class Reveal(val id: Int) : Event()
+    data class DeletePlayer(val id: Int) : Event()
 
 
 }

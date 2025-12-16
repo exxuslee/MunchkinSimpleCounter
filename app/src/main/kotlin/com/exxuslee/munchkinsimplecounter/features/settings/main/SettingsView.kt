@@ -1,7 +1,10 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.main
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -24,9 +27,11 @@ import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.main.models.ViewState
 import com.exxuslee.munchkinsimplecounter.navigation.Routes
 import com.exxuslee.munchkinsimplecounter.ui.common.CellUniversalSection
+import com.exxuslee.munchkinsimplecounter.ui.common.DraggableCardSimple
 import com.exxuslee.munchkinsimplecounter.ui.common.HsRow
 import com.exxuslee.munchkinsimplecounter.ui.common.Icons
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
+import com.exxuslee.munchkinsimplecounter.ui.common.RowUniversal
 import com.exxuslee.munchkinsimplecounter.ui.common.VSpacer
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 
@@ -102,36 +107,68 @@ fun SettingsView(
         CellUniversalSection(
             viewState.players.map {
                 {
-                    HsRow(
-                        iconContent = {
-                            Image(
-                                painterResource(Icons.icon(it.icon)),
-                                modifier = Modifier.size(30.dp),
-                                contentDescription = null,
-                            )
-                        },
-                        titleContent = {
-                            Text(
-                                it.name,
-                                modifier = Modifier.padding(horizontal = 12.dp),
-                                color = MaterialTheme.colorScheme.secondary,
-                            )
-                        },
+                    RowUniversal(
+                        horizontalArrangement = Arrangement.End,
                         onClick = {
-                            eventHandler.invoke(Event.ActivatePlayer(it))
+                            eventHandler.invoke(Event.DeletePlayer(it.id))
+                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_baseline_person_remove_24),
+                            contentDescription = stringResource(R.string.remove_player),
+                            modifier = Modifier.padding(horizontal = 24.dp),
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                    }
+                    DraggableCardSimple(
+                        isRevealed = viewState.revealedId == it.id,
+                        cardOffset = 64f,
+                        onReveal = {
+                            eventHandler.invoke(Event.Reveal(it.id))
                         },
-                        valueContent = {
-                            if (it.playing) {
-                                Icon(
-                                    painter = painterResource(R.drawable.outline_check_24),
-                                    contentDescription = "",
-                                    modifier = Modifier.padding(horizontal = 12.dp),
-                                    tint = MaterialTheme.colorScheme.primary
-                                )
-                            }
+                        onCancel = {
+                            eventHandler.invoke(Event.Reveal(-1))
                         },
-                        arrowRight = false,
-                    )
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .padding(vertical = 1.dp)
+                                .background(MaterialTheme.colorScheme.surface)
+                        ) {
+                            HsRow(
+                                iconContent = {
+                                    Image(
+                                        painterResource(Icons.icon(it.icon)),
+                                        modifier = Modifier.size(30.dp),
+                                        contentDescription = null,
+                                    )
+                                },
+                                titleContent = {
+                                    Text(
+                                        it.name,
+                                        modifier = Modifier.padding(horizontal = 12.dp),
+                                        color = MaterialTheme.colorScheme.secondary,
+                                    )
+                                },
+                                onClick = {
+                                    eventHandler.invoke(Event.ActivatePlayer(it))
+                                },
+                                valueContent = {
+                                    if (it.playing) {
+                                        Icon(
+                                            painter = painterResource(R.drawable.outline_check_24),
+                                            contentDescription = "",
+                                            modifier = Modifier.padding(horizontal = 12.dp),
+                                            tint = MaterialTheme.colorScheme.primary
+                                        )
+                                    }
+                                },
+                                arrowRight = false,
+                            )
+                        }
+
+                    }
+
                 }
             }
         )
