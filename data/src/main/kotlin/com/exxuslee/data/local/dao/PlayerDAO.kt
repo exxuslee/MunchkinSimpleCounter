@@ -19,6 +19,9 @@ interface PlayerDAO {
     @Query("SELECT * FROM players")
     fun playersFlow(): Flow<List<PlayerEntity>>
 
+    @Query("SELECT * FROM players WHERE active = 1")
+    fun activePlayersFlow(): Flow<List<PlayerEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePlayer(player: PlayerEntity)
 

@@ -7,17 +7,23 @@ import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.repositories.PlayersRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
-class PlayersRepositoryImpl(private val playerDAO: PlayerDAO) : PlayersRepository {
+class PlayersRepositoryImpl(
+    private val playerDAO: PlayerDAO,
+) : PlayersRepository {
+
+    override val activePlayers: StateFlow<List<Player>> = playerDAO.activePlayersFlow()
+        .map { list -> list.map { it.toDomain() } }
+        .stateIn(
+            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
 
     override val players: StateFlow<List<Player>> = playerDAO.playersFlow()
         .map { list -> list.map { it.toDomain() } }

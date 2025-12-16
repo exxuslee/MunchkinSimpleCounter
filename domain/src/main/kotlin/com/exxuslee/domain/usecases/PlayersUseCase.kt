@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 interface PlayersUseCase {
 
     val players: StateFlow<List<Player>>
+    val activePlayers: StateFlow<List<Player>>
     suspend fun savePlayer(player: Player): Int
     suspend fun updatePlayer(player: Player)
     suspend fun deletePlayer(id: Int)
@@ -17,6 +18,7 @@ interface PlayersUseCase {
     ) : PlayersUseCase {
 
         override val players: StateFlow<List<Player>> = repository.players
+        override val activePlayers: StateFlow<List<Player>> = repository.activePlayers
 
         override suspend fun savePlayer(player: Player): Int = repository.savePlayer(player)
 

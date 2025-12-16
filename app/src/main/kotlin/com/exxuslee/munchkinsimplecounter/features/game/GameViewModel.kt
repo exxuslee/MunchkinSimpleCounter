@@ -17,7 +17,7 @@ class GameViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            playersUseCase.players.collect {
+            playersUseCase.activePlayers.collect {
                 viewState = viewState.copy(players = it)
             }
         }
