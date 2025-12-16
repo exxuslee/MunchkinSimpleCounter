@@ -30,6 +30,7 @@ import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Action
 import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Event
 import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
+import com.exxuslee.munchkinsimplecounter.ui.common.Icons
 import com.exxuslee.munchkinsimplecounter.ui.common.VSpacer
 import org.koin.androidx.compose.koinViewModel
 
@@ -88,19 +89,7 @@ fun SettingsScreen(
         Action.AddPlayer -> {
             var selectedIcon by remember { mutableIntStateOf(0) }
             var name by remember { mutableStateOf("") }
-            val icons = remember {
-                listOf(
-                    R.drawable.icon_0001,
-                    R.drawable.icon_0002,
-                    R.drawable.icon_0003,
-                    R.drawable.icon_0004,
-                    R.drawable.icon_0005,
-                    R.drawable.icon_0006,
-                    R.drawable.icon_0007,
-                    R.drawable.icon_0008,
-                    R.drawable.icon_0009,
-                )
-            }
+
             AlertDialog(
                 onDismissRequest = { viewModel.clearAction() },
                 title = {
@@ -137,14 +126,14 @@ fun SettingsScreen(
                                             .clickable(
                                                 onClick = { expanded = true }
                                             ),
-                                        painter = painterResource(id = icons[selectedIcon]),
+                                        painter = painterResource(id = Icons.icon(selectedIcon)),
                                         contentDescription = stringResource(R.string.select_icon)
                                     )
                                     DropdownMenu(
                                         expanded = expanded,
                                         onDismissRequest = { expanded = false }
                                     ) {
-                                        icons.forEachIndexed { index, icon ->
+                                        Icons.list.forEachIndexed { index, icon ->
                                             DropdownMenuItem(
                                                 text = {
                                                     Image(
@@ -172,7 +161,7 @@ fun SettingsScreen(
                     TextButton(
                         onClick = {
                             viewModel.obtainEvent(
-                                Event.AddPlayer(name = name, icon = icons[selectedIcon])
+                                Event.AddPlayer(name = name, icon = selectedIcon)
                             )
                         }
                     ) {

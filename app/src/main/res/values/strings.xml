@@ -85,6 +85,7 @@
     <string name="add_player_message">Select the player\'s icon and name</string>
     <string name="input_name">Input name</string>
     <string name="select_icon">Select icon</string>
+    <string name="active_players">Active players</string>
 
 
 </resources>

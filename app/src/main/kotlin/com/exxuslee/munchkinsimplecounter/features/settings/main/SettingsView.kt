@@ -23,6 +23,7 @@ import com.exxuslee.munchkinsimplecounter.features.settings.main.models.ViewStat
 import com.exxuslee.munchkinsimplecounter.navigation.Routes
 import com.exxuslee.munchkinsimplecounter.ui.common.CellUniversalSection
 import com.exxuslee.munchkinsimplecounter.ui.common.HsRow
+import com.exxuslee.munchkinsimplecounter.ui.common.Icons
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
 import com.exxuslee.munchkinsimplecounter.ui.common.VSpacer
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
@@ -90,7 +91,7 @@ fun SettingsView(
         VSpacer(24.dp)
         CellUniversalSection {
             Text(
-                text = stringResource(R.string.players),
+                text = stringResource(R.string.active_players),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.secondary,
             )
@@ -100,7 +101,7 @@ fun SettingsView(
             viewState.players.map {
                 {
                     HsRow(
-                        icon = painterResource(it.icon),
+                        icon = painterResource(Icons.icon(it.icon)),
                         titleContent = {
                             Text(
                                 it.name,

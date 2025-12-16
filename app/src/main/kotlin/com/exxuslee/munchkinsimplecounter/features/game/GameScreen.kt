@@ -1,6 +1,5 @@
 package com.exxuslee.munchkinsimplecounter.features.game
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -14,7 +13,9 @@ fun GameScreen(
     val viewState by viewModel.viewStates().collectAsState()
     val viewAction by viewModel.viewActions().collectAsState(null)
 
-    Text("qwe")
+    GameView(viewState) {
+        viewModel.obtainEvent(it)
+    }
 
     when (viewAction) {
 

@@ -1,0 +1,27 @@
+package com.exxuslee.munchkinsimplecounter.ui.common
+
+import android.util.Log
+import com.exxuslee.munchkinsimplecounter.R
+
+object Icons {
+    val list = listOf(
+        R.drawable.icon_0001,
+        R.drawable.icon_0002,
+        R.drawable.icon_0003,
+        R.drawable.icon_0004,
+        R.drawable.icon_0005,
+        R.drawable.icon_0006,
+        R.drawable.icon_0007,
+        R.drawable.icon_0008,
+        R.drawable.icon_0009,
+    )
+
+    fun icon(index: Int) = try {
+        list[index]
+    } catch (_: Exception) {
+        Log.e("Icons", "icon: Index out of bounds $index, returning default icon.")
+        list[0]
+    }
+
+
+}
