@@ -1,5 +1,6 @@
 package com.exxuslee.data.remote.cmcap.api
 
+import com.exxuslee.data.BuildConfig
 import com.exxuslee.data.remote.cmcap.CMCapService
 import com.exxuslee.data.remote.safeCall
 import com.exxuslee.domain.model.TokenData
@@ -26,6 +27,7 @@ class CMCapServiceImpl(
         private const val CHUNK_SIZE = 30
 
     }
+    val apiList = BuildConfig.CMC_API_KEY.split(",").map { it.trim() }
 
     override suspend fun topTokens(): List<TokenData> {
         val cmcRanks = mutableListOf<TokenData>()
@@ -33,7 +35,7 @@ class CMCapServiceImpl(
         val response = safeCall {
             httpClient.get(BASE_URL) {
                 headers {
-                    append("X-CMC_PRO_API_KEY", "2b781528-4f5b-4eb5-97d8-a8c26050f440")
+                    append("X-CMC_PRO_API_KEY", apiList.random())
                     append("Accept", "application/json")
                 }
                 parameter("limit", CHUNK_SIZE)
@@ -49,7 +51,8 @@ class CMCapServiceImpl(
                 val symbol = token["symbol"]?.jsonPrimitive?.content ?: continue
                 val cmcRank = token["cmc_rank"]?.jsonPrimitive?.intOrNull ?: continue
                 val usd = token["quote"]?.jsonObject?.get("USD")?.jsonObject ?: continue
-                val price = usd["price"]?.jsonPrimitive?.toString()?.toBigDecimalOrNull() ?: continue
+                val price =
+                    usd["price"]?.jsonPrimitive?.toString()?.toBigDecimalOrNull() ?: continue
                 val marketCap = usd["market_cap"]?.jsonPrimitive?.doubleOrNull?.toLong() ?: continue
                 cmcRanks.add(
                     TokenData(

@@ -24,7 +24,7 @@ class PriceRepositoryImpl(
         val lastUpdate = settingsRepository.priceTimestamp()
         val currentTime = System.currentTimeMillis()
 
-        if (currentTime - lastUpdate > 2 * 60 * 60 * 1000) {
+        if (currentTime - lastUpdate < 2 * 60 * 60 * 1000) {
             Log.d ("PriceRepositoryImpl", "Fetching new prices from CMCap")
             val cachedPrices = tokensDAO.tokens()
             if (cachedPrices.isNotEmpty()) return cachedPrices.map { it.toDomain() }
