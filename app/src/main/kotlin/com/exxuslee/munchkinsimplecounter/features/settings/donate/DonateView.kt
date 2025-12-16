@@ -164,11 +164,11 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
             Text(
                 text = buildAnnotatedString {
                     withStyle(SpanStyle(fontFamily = FontFamily.Monospace)) {
-                        append(viewState.selectedAmount.toString().padStart(6))
+                        append(viewState.outAmount.padStart(6))
                     }
                     append(" ")
                     withStyle(SpanStyle(fontFamily = FontFamily.Monospace)) {
-                        append(viewState.selectedTicker.label.padStart(6))
+                        append(viewState.selectedTicker.label.padStart(4))
                     }
                 },
                 style = MaterialTheme.typography.titleMedium,
