@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.exxuslee.munchkinsimplecounter.features.game.models.Event
 import com.exxuslee.munchkinsimplecounter.features.game.models.ViewState
-import com.exxuslee.munchkinsimplecounter.features.root.BottomNavigationBar
 
 @Composable
 fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {

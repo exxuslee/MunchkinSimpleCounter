@@ -32,6 +32,7 @@ fun GameScreen(
             ).show()
             viewModel.clearAction()
         }
+
         null -> {}
     }
 }

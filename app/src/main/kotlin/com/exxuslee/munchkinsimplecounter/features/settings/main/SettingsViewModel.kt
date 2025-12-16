@@ -49,7 +49,19 @@ class SettingsViewModel(
 
             Event.DialogNewGame -> viewAction = Action.NewGame
 
-            Event.ConfirmNewGame -> clearAction()
+            Event.ConfirmNewGame -> {
+                clearAction()
+                viewModelScope.launch(Dispatchers.IO) {
+                    playersUseCase.players.value.forEach { player ->
+                        val resetPlayer = player.copy(
+                            level = 1,
+                            bonus = 0,
+                            reverseSex = false,
+                        )
+                        playersUseCase.updatePlayer(resetPlayer)
+                    }
+                }
+            }
 
             Event.DialogAddPlayer -> viewAction = Action.AddPlayer
 

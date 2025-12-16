@@ -1,4 +1,4 @@
-package com.exxuslee.munchkinsimplecounter.features.root.models
+package com.exxuslee.munchkinsimplecounter.features.game.models
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
