@@ -14,4 +14,7 @@ interface SettingsRepository {
     fun isTermsOfUseRead(): Boolean
     fun isTermsOfUseRead(ok: Boolean)
 
+    fun priceTimestamp(): Long
+    fun priceTimestamp(timestamp: Long)
+
 }

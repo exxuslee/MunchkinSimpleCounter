@@ -4,16 +4,50 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.exxuslee.data.local.AppDatabase
+import com.exxuslee.data.remote.cmcap.CMCapService
+import com.exxuslee.data.remote.cmcap.api.CMCapServiceImpl
 import com.exxuslee.data.repositories.PlayersRepositoryImpl
 import com.exxuslee.data.repositories.PriceRepositoryImpl
 import com.exxuslee.data.repositories.SettingsRepositoryImpl
 import com.exxuslee.domain.repositories.PlayersRepository
 import com.exxuslee.domain.repositories.PriceRepository
 import com.exxuslee.domain.repositories.SettingsRepository
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.compression.ContentEncoding
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.DEFAULT
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val dataModule = module {
+    single {
+        HttpClient(CIO) {
+            install(ContentEncoding) {
+                deflate()
+                gzip()
+            }
+            install(ContentNegotiation) {
+                json(
+                    Json {
+                        ignoreUnknownKeys = true
+                        isLenient = true
+                        explicitNulls = false
+                    }
+                )
+            }
+            install(Logging) {
+                logger = Logger.DEFAULT
+                level = LogLevel.NONE
+            }
+        }
+    }
+
     single<SharedPreferences> {
         androidContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
     }
@@ -23,11 +57,14 @@ val dataModule = module {
             .fallbackToDestructiveMigration(false).build()
     }
 
-    factory { get<AppDatabase>().playerDAO }
-    factory { get<AppDatabase>().priceDAO }
+    single { get<AppDatabase>().playerDAO }
+    single { get<AppDatabase>().tokensDAO }
+
+    single<CMCapService> { CMCapServiceImpl(get()) }
 
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
+    single<PlayersRepository> { PlayersRepositoryImpl(get()) }
+    single<PriceRepository> { PriceRepositoryImpl(get(), get(), get()) }
 
-    factory<PlayersRepository> { PlayersRepositoryImpl(get()) }
-    factory<PriceRepository> { PriceRepositoryImpl(get()) }
+
 }

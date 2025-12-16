@@ -1,0 +1,22 @@
+package com.exxuslee.data.mapper
+
+import com.exxuslee.data.local.entities.TokenEntity
+import com.exxuslee.domain.model.TokenData
+
+fun TokenData.toEntity(): TokenEntity {
+    return TokenEntity(
+        price = this.price,
+        symbol = this.symbol,
+        cmcRank = this.cmcRank,
+        marketCap = this.marketCap
+    )
+}
+
+fun TokenEntity.toDomain(): TokenData {
+    return TokenData(
+        price = this.price,
+        symbol = this.symbol,
+        cmcRank = this.cmcRank,
+        marketCap = this.marketCap
+    )
+}

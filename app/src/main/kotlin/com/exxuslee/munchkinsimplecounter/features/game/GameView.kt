@@ -31,7 +31,7 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                 PlayerCard(null)
                 LazyColumn(
                     modifier = Modifier.weight(1f),
-                    contentPadding = PaddingValues(vertical = 12.dp)
+                    contentPadding = PaddingValues(vertical = 8.dp)
                 ) {
                     items(viewState.players) { player ->
                         val icon = if (player.reverseSex) player.icon + 1 else player.icon

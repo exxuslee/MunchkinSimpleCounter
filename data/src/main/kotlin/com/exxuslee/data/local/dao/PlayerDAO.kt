@@ -16,10 +16,10 @@ interface PlayerDAO {
     @Query("SELECT * FROM Players")
     suspend fun players(): List<PlayerEntity>
 
-    @Query("SELECT * FROM players")
+    @Query("SELECT * FROM Players")
     fun playersFlow(): Flow<List<PlayerEntity>>
 
-    @Query("SELECT * FROM players WHERE active = 1")
+    @Query("SELECT * FROM Players WHERE active = 1")
     fun activePlayersFlow(): Flow<List<PlayerEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

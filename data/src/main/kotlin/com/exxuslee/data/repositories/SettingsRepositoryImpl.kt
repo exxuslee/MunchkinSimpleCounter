@@ -15,6 +15,7 @@ class SettingsRepositoryImpl(
         const val KEY_SELECTED_ROUTE = "selectedRoute"
         const val KEY_TERMS_OF_USE_READ = "isTermsOfUseRead"
         const val DEFAULT_ROUTE = "game"
+        const val PRICE_TIMESTAMP = "priceTimestamp"
     }
 
     override fun isDark(): Boolean = prefs.getBoolean(KEY_IS_DARK, false)
@@ -23,6 +24,7 @@ class SettingsRepositoryImpl(
 
     override fun selectedRoute(): String =
         prefs.getString(KEY_SELECTED_ROUTE, DEFAULT_ROUTE) ?: DEFAULT_ROUTE
+
     override fun selectedRoute(route: String) = prefs.edit { putString(KEY_SELECTED_ROUTE, route) }
 
 
@@ -38,7 +40,13 @@ class SettingsRepositoryImpl(
         }
     }
 
+    override fun priceTimestamp(): Long {
+        return prefs.getLong(PRICE_TIMESTAMP, System.currentTimeMillis())
+    }
 
+    override fun priceTimestamp(timestamp: Long) {
+        prefs.edit { putLong(PRICE_TIMESTAMP, timestamp) }
+    }
 
 
 }

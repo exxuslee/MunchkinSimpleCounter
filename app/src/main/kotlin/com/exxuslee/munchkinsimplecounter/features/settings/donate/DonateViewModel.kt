@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.donate
 
+import androidx.lifecycle.viewModelScope
 import com.exxuslee.domain.usecases.PriceUseCase
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.Action
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateChainItem
@@ -7,6 +8,8 @@ import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.Donate
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.ViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DonateViewModel(
     val priceUseCase: PriceUseCase,
@@ -18,6 +21,12 @@ class DonateViewModel(
         selectedChain = DonateChainItem.Tron,
     )
 ) {
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            priceUseCase.refresh()
+        }
+    }
 
     override fun obtainEvent(viewEvent: Event) {
         when (viewEvent) {
