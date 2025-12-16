@@ -11,7 +11,7 @@ data class ViewState(
         R.drawable.outline_account_balance_wallet_24 to 1000,
         R.drawable.outline_money_bag_24 to 10000,
     ),
-    val selectedAmount: Int = availableAmounts[1].second,
+    val selectedAmount: String = availableAmounts[1].second.toString(),
     val tickers: List<DonateTickerItem>,
     val selectedTicker: DonateTickerItem,
     val selectedChain: DonateChainItem,

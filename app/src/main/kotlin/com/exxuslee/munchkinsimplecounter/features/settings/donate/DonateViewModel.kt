@@ -1,6 +1,7 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.donate
 
 import androidx.lifecycle.viewModelScope
+import com.exxuslee.domain.model.TokenData
 import com.exxuslee.domain.usecases.PriceUseCase
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.Action
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateChainItem
@@ -21,10 +22,11 @@ class DonateViewModel(
         selectedChain = DonateChainItem.Tron,
     )
 ) {
+    private var tokens: List<TokenData> = emptyList()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            priceUseCase.refresh()
+            tokens = priceUseCase.refresh()
         }
     }
 

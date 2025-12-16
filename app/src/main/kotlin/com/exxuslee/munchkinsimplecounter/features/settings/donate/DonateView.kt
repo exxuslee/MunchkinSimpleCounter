@@ -76,7 +76,7 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             DonationAmountSelector(
-                selectedAmount = viewState.selectedAmount,
+                selectedAmount = viewState.selectedAmount.toInt(),
                 items = viewState.availableAmounts,
                 onAmountSelected = { amount -> eventHandler(Event.OnAmountSelected(amount)) }
             )
@@ -168,7 +168,7 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                     }
                     append(" ")
                     withStyle(SpanStyle(fontFamily = FontFamily.Monospace)) {
-                        append(viewState.selectedTicker.label.padStart(4))
+                        append(viewState.selectedTicker.label.padStart(6))
                     }
                 },
                 style = MaterialTheme.typography.titleMedium,
