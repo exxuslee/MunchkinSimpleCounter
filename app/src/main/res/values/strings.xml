@@ -75,7 +75,7 @@
     <string name="terms_section_9_content">If you have any questions about these Terms of Service, please contact us through the application\'s support channels.</string>
     <string name="terms_footer">By using AtomicSwap, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</string>
     <string name="terms_accept_button">Terms accept</string>
-    <string name="game">Game</string>
+    <string name="munchkin_counter">Munchkin counter</string>
     <string name="new_game_title">New game</string>
     <string name="new_game_message">Are you sure you want to start a new game?</string>
     <string name="confirm">Confirm</string>
