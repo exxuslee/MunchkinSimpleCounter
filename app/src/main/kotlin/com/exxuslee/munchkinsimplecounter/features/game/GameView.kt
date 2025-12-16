@@ -19,8 +19,9 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
             contentPadding = PaddingValues(vertical = 12.dp)
         ) {
             items(viewState.players) { player ->
+                val icon = if (player.reverseSex) player.icon + 1 else player.icon
                 PlayerCard(
-                    player.icon,
+                    icon,
                     name = player.name,
                     level = player.level.toString(),
                     bonus = player.bonus.toString(),
