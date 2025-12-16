@@ -20,7 +20,7 @@
     <string name="allPlayers">All Players</string>
     <string name="add_player">Add player</string>
     <string name="sex">⚧️</string>
-    <string name="name_icon">📛</string>
+    <string name="name_icon">\t\t📛</string>
     <string name="name">Name</string>
     <string name="level">🥇</string>
     <string name="bonus">⚔️</string>

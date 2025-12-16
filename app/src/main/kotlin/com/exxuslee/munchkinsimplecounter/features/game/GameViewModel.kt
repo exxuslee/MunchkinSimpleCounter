@@ -27,8 +27,20 @@ class GameViewModel(
 
     override fun obtainEvent(viewEvent: Event) {
         when (viewEvent) {
-
-            else -> {}
+            Event.AddBonus -> TODO()
+            Event.AddLevel -> TODO()
+            Event.SubBonus -> TODO()
+            Event.SubLevel -> TODO()
+            is Event.SelectPlayer ->  {
+                viewState = viewState.copy(selectedPlayerId = viewEvent.id)
+            }
+            is Event.SwitchSex -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    playersUseCase.updatePlayer(viewEvent.player.copy(
+                        reverseSex = !viewEvent.player.reverseSex)
+                    )
+                }
+            }
         }
 
     }

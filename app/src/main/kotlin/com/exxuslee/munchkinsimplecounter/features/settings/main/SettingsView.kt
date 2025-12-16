@@ -1,7 +1,9 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.main
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -101,7 +103,13 @@ fun SettingsView(
             viewState.players.map {
                 {
                     HsRow(
-                        icon = painterResource(Icons.icon(it.icon)),
+                        iconContent = {
+                            Image(
+                                painterResource(Icons.icon(it.icon)),
+                                modifier = Modifier.size(30.dp),
+                                contentDescription = null,
+                            )
+                        },
                         titleContent = {
                             Text(
                                 it.name,

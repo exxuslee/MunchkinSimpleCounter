@@ -54,7 +54,7 @@ fun HsRow(
 
 @Composable
 fun HsRow(
-    icon: Painter,
+    iconContent: @Composable () -> Unit,
     titleContent: @Composable () -> Unit,
     onClick: (() -> Unit)? = null,
     onSelect: Boolean = false,
@@ -68,11 +68,7 @@ fun HsRow(
             )
             .padding(horizontal = 12.dp), onClick = onClick
     ) {
-        Image(
-            icon,
-            modifier = Modifier.size(30.dp),
-            contentDescription = null,
-        )
+        iconContent()
         titleContent()
         Spacer(Modifier.weight(1f))
         if (valueContent != null) valueContent()

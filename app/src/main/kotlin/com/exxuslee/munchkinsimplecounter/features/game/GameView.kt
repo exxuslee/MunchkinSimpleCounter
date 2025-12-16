@@ -14,7 +14,7 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
     Column {
         PlayerCard(null)
         LazyColumn(
-            contentPadding = PaddingValues(vertical = 16.dp)
+            contentPadding = PaddingValues(vertical = 12.dp)
         ) {
             items(viewState.players) { player ->
                 PlayerCard(
@@ -22,7 +22,13 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                     name = player.name,
                     level = player.level.toString(),
                     bonus = player.bonus.toString(),
-                    life = (player.level + player.bonus).toString()
+                    life = (player.level + player.bonus).toString(),
+                    onSelectRow = {
+                        eventHandler.invoke(Event.SelectPlayer(player.id))
+                    },
+                    onSelectIcon = {
+                        eventHandler.invoke(Event.SwitchSex(player))
+                    },
                 )
             }
         }
