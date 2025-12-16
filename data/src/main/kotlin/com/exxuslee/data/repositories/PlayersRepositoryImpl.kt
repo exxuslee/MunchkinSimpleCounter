@@ -46,4 +46,8 @@ class PlayersRepositoryImpl(private val playerDAO: PlayerDAO) : PlayersRepositor
     override suspend fun deletePlayer(id: Int) {
         playerDAO.deletePlayer(id)
     }
+
+    override suspend fun player(id: Int): Player? {
+        return playerDAO.player(id)?.toDomain()
+    }
 }

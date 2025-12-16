@@ -8,13 +8,11 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.exxuslee.munchkinsimplecounter.features.game.models.Event
 import com.exxuslee.munchkinsimplecounter.features.root.models.BottomButtonsItems
-import com.exxuslee.munchkinsimplecounter.features.root.models.Event
-import com.exxuslee.munchkinsimplecounter.features.root.models.ViewState
 
 @Composable
 fun BottomNavigationBar(
-    viewState: ViewState,
     eventHandler: (Event) -> Unit,
 ) {
     NavigationBar(
@@ -30,7 +28,12 @@ fun BottomNavigationBar(
             NavigationBarItem(
                 selected = false,
                 onClick = {
-
+                    eventHandler.invoke(when(dest){
+                        BottomButtonsItems.AddLevel -> Event.AddLevel
+                        BottomButtonsItems.SubLevel -> Event.SubLevel
+                        BottomButtonsItems.AddBonus -> Event.AddBonus
+                        BottomButtonsItems.SubBonus -> Event.SubBonus
+                    })
                 },
                 icon = {
                     Icon(

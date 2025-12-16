@@ -95,13 +95,6 @@ fun MainContent(
                 }
             )
         },
-        bottomBar = {
-            if (currentRoute?.isPrimaryRoute() == true) BottomNavigationBar(
-                viewState = viewState,
-            ) { event ->
-                viewModel.obtainEvent(event)
-            }
-        },
         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp),
     ) { padding ->
         CompositionLocalProvider(

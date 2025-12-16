@@ -10,6 +10,7 @@ interface PlayersUseCase {
     suspend fun savePlayer(player: Player): Int
     suspend fun updatePlayer(player: Player)
     suspend fun deletePlayer(id: Int)
+    suspend fun player(id: Int): Player?
 
     class Base(
         private val repository: PlayersRepository
@@ -24,6 +25,8 @@ interface PlayersUseCase {
         }
 
         override suspend fun deletePlayer(id: Int) = repository.deletePlayer(id)
+
+        override suspend fun player(id: Int) = repository.player(id)
 
     }
 }

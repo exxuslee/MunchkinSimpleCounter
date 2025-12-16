@@ -3,6 +3,7 @@ package com.exxuslee.munchkinsimplecounter.features.game
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.exxuslee.munchkinsimplecounter.features.game.models.Action
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -19,6 +20,7 @@ fun GameScreen(
 
     when (viewAction) {
 
+        Action.ShowSelectPlayerMessage -> {}
         null -> {}
     }
 }

@@ -14,10 +14,6 @@ class MainViewModel(
     )
 ) {
 
-    init {
-
-    }
-
     override fun obtainEvent(viewEvent: Event) {
         when (viewEvent) {
             is Event.MainRoute -> true

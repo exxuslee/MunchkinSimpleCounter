@@ -27,12 +27,14 @@ fun PlayerCard(
     level: String = stringResource(R.string.level),
     bonus: String = stringResource(R.string.bonus),
     life: String = stringResource(R.string.life),
+    selected: Boolean = false,
     onSelectIcon: () -> Unit = {},
     onSelectRow: (() -> Unit)? = null,
 ) {
     val icon = iconRes?.let { painterResource(id = Icons.icon(it)) }
         ?: painterResource(id = R.drawable.sex)
     HsRow(
+        onSelect = selected,
         onClick = onSelectRow,
         iconContent = {
             Image(
@@ -58,23 +60,21 @@ fun PlayerCard(
         valueContent = {
             Row {
                 Text(
-                    modifier = Modifier.defaultMinSize(minWidth = 44.dp),
+                    modifier = Modifier.defaultMinSize(minWidth = 48.dp),
                     text = level,
                     fontSize = 28.sp,
                     textAlign = TextAlign.Center,
                 )
 
-                // Bonus
                 Text(
-                    modifier = Modifier.defaultMinSize(minWidth = 44.dp),
+                    modifier = Modifier.defaultMinSize(minWidth = 48.dp),
                     text = bonus,
                     fontSize = 28.sp,
                     textAlign = TextAlign.Center,
                 )
 
-                // Life
                 Text(
-                    modifier = Modifier.defaultMinSize(minWidth = 44.dp),
+                    modifier = Modifier.defaultMinSize(minWidth = 48.dp),
                     text = life,
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,

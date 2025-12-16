@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PlayerDAO {
 
-    @Query("SELECT * FROM Players WHERE name = :name")
-    fun player(name: String): PlayerEntity?
+    @Query("SELECT * FROM Players WHERE id = :id")
+    fun player(id: Int): PlayerEntity?
 
     @Query("SELECT * FROM Players")
     suspend fun players(): List<PlayerEntity>
