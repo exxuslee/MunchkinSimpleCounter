@@ -87,6 +87,7 @@
     <string name="select_icon">Select icon</string>
     <string name="active_players">Active players</string>
     <string name="select_player_toast_message">Please, select a player</string>
+    <string name="max_lenght_name">Maximum lenght of name</string>
 
 
 </resources>
