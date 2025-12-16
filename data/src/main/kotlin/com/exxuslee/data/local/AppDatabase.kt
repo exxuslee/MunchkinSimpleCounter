@@ -9,7 +9,7 @@ import com.exxuslee.data.local.entities.PlayerEntity
 import com.exxuslee.data.local.entities.TokenEntity
 
 
-@Database(entities = [PlayerEntity::class, TokenEntity::class], version = 1, exportSchema = false)
+@Database(entities = [PlayerEntity::class, TokenEntity::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract val playerDAO: PlayerDAO

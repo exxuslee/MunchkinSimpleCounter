@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name" translatable="false">Simple Munchkin level counter</string>
+    <string name="new_game">Nueva partida</string>
+    <string name="about">Acerca de</string>
+    <string name="about_app">Acerca de la aplicación</string>
+    <string name="add_player">Añadir jugador</string>
+    <string name="name_icon" translatable="false">\t\t📛</string>
+    <string name="name">Nombre</string>
+    <string name="level" translatable="false">🥇</string>
+    <string name="bonus" translatable="false">⚔️</string>
+    <string name="life" translatable="false">♥</string>
+    <string name="back">Atrás</string>
+    <string name="icon">Icono</string>
+    <string name="delete_player">Eliminar jugador</string>
+    <string name="double_back_press_message">Presione de nuevo para salir</string>
+    <string name="add_level">Añadir nivel</string>
+    <string name="sub_level">Restar nivel</string>
+    <string name="add_bonus">Añadir bonus</string>
+    <string name="sub_bonus">Restar bonus</string>
+    <string name="title_settings">Configuración</string>
+    <string name="terms_title">Términos de uso</string>
+    <string name="language">Idioma</string>
+    <string name="donate">Donar</string>
+    <string name="donate_footer_thanks">¡Gracias por tu apoyo!</string>
+    <string name="donate_selected_prefix">Seleccionado: </string>
+    <string name="donate_copy_cd">Copiar</string>
+    <string name="donate_header_hint">Si te gusta la aplicación, considera apoyar el desarrollo.</string>
+    <string name="app">Aplicación</string>
+    <string name="label_dark_mode">Modo oscuro</string>
+    <string name="terms_of_use">Términos de uso</string>
+    <string name="terms_last_updated">Última actualización: %1$s</string>
+    <string name="terms_default_date">Diciembre 2024</string>
+    <string name="terms_section_1_title">1. Aceptación de los términos</string>
+    <string name="terms_section_1_content">Al instalar o usar esta aplicación, acepta estos términos de uso. Si no está de acuerdo con alguna parte de los términos, no use la aplicación.</string>
+    <string name="terms_section_2_title">2. Descripción de la aplicación</string>
+    <string name="terms_section_2_content">La aplicación es un contador de poder de personaje simple diseñado para el juego de mesa Munchkin. Ayuda a los jugadores a calcular y rastrear la fuerza del personaje durante el juego. La aplicación funciona completamente sin conexión y no requiere acceso a la red.</string>
+    <string name="terms_section_3_title">3. Sin recopilación de datos personales</string>
+    <string name="terms_section_3_content">La aplicación no recopila, almacena, procesa ni comparte información personal. No se utilizan cuentas de usuario, análisis, seguimiento ni identificadores.</string>
+    <string name="terms_section_4_title">4. Funcionalidad sin conexión</string>
+    <string name="terms_section_4_content">La aplicación funciona completamente en su dispositivo. No se conecta a Internet, servidores externos ni servicios de terceros.</string>
+    <string name="terms_section_5_title">5. Sin publicidad</string>
+    <string name="terms_section_5_content">La aplicación no contiene anuncios y no muestra contenido promocional de ningún tipo.</string>
+    <string name="terms_section_6_title">6. Uso previsto</string>
+    <string name="terms_section_6_content">La aplicación está destinada únicamente a fines de entretenimiento y está diseñada para usarse como herramienta auxiliar mientras se juega Munchkin. No reemplaza las reglas o materiales oficiales del juego.</string>
+    <string name="terms_section_7_title">7. Propiedad intelectual</string>
+    <string name="terms_section_7_content">Todos los derechos de la aplicación, incluido su diseño, código e interfaz, pertenecen al desarrollador. El nombre Munchkin y el contenido relacionado son propiedad de sus respectivos propietarios y no están afiliados ni respaldados por esta aplicación.</string>
+    <string name="terms_section_8_title">8. Exención de garantía</string>
+    <string name="terms_section_8_content">La aplicación se proporciona "tal cual", sin garantías de ningún tipo. El desarrollador no garantiza que la aplicación esté libre de errores o sea ininterrumpida.</string>
+    <string name="terms_section_9_title">9. Limitación de responsabilidad</string>
+    <string name="terms_section_9_content">El desarrollador no es responsable de ningún daño, pérdida o problema derivado del uso o la imposibilidad de usar la aplicación.</string>
+    <string name="terms_section_10_title">10. Cambios en los términos</string>
+    <string name="terms_section_10_content">Estos términos de uso pueden actualizarse en el futuro. El uso continuado de la aplicación después de los cambios constituye la aceptación de los términos actualizados.</string>
+    <string name="terms_section_11_title">11. Información de contacto</string>
+    <string name="terms_section_11_content">Si tiene preguntas o comentarios sobre estos términos de uso, puede contactar al desarrollador a través de la plataforma donde se distribuye la aplicación.</string>
+    <string name="terms_footer">Al usar Simple Munchkin Counter, reconoce que ha leído, entendido y acepta estar sujeto a estos términos de uso.</string>
+    <string name="terms_accept_button">Aceptar términos</string>
+    <string name="munchkin_counter">Contador Munchkin</string>
+    <string name="new_game_title">Nueva partida</string>
+    <string name="new_game_message">¿Está seguro de que desea comenzar una nueva partida?</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add">Añadir</string>
+    <string name="add_player_message">Seleccione el icono y el nombre del jugador</string>
+    <string name="input_name">Ingresar nombre</string>
+    <string name="select_icon">Seleccionar icono</string>
+    <string name="active_players">Jugadores activos</string>
+    <string name="select_player_toast_message">Por favor, seleccione un jugador</string>
+    <string name="max_lenght_name">Longitud máxima del nombre</string>
+    <string name="remove_player">Eliminar jugador</string>
+    <string name="game_empty_players_list">No hay jugadores activos. Por favor, añada jugadores en la configuración</string>
+    <string name="application_title">Aplicación</string>
+    <string name="application_description">Esta aplicación es un contador de poder simple y ligero para el juego de mesa Munchkin.</string>
+    <string name="how_it_works_title">Cómo funciona</string>
+    <string name="how_it_works_body">Ayuda a los jugadores a calcular y rastrear rápidamente la fuerza del personaje durante el juego, para que pueda concentrarse en el gameplay en lugar de las matemáticas.
+La aplicación funciona completamente sin conexión, no recopila datos personales, no contiene anuncios y no usa acceso a la red.
+Creada por un fan de Munchkin como compañero conveniente para un juego casual y amigable para mesa.</string>
+    <string name="version_title">Versión</string>
+    <string name="version_value">1.2.0</string>
+    <string name="privacy_title">Privacidad</string>
+    <string name="privacy_text">No recopilamos datos personales.</string>
+</resources>
+
+

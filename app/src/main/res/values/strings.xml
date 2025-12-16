@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">Simple Munchkin level counter</string>
+    <string name="app_name" translatable="false">Simple Munchkin level counter</string>
     <string name="new_game">New game</string>
     <string name="about">About</string>
     <string name="about_app">About app</string>
     <string name="add_player">Add player</string>
-    <string name="name_icon">\t\t📛</string>
+    <string name="name_icon" translatable="false">\t\t📛</string>
     <string name="name">Name</string>
-    <string name="level">🥇</string>
-    <string name="bonus">⚔️</string>
-    <string name="life">♥</string>
+    <string name="level" translatable="false">🥇</string>
+    <string name="bonus" translatable="false">⚔️</string>
+    <string name="life" translatable="false">♥</string>
     <string name="back">back</string>
     <string name="icon">icon</string>
     <string name="delete_player">Delete player</string>
@@ -65,20 +65,18 @@
     <string name="select_icon">Select icon</string>
     <string name="active_players">Active players</string>
     <string name="select_player_toast_message">Please, select a player</string>
-    <string name="max_lenght_name">Maximum lenght of name</string>
+    <string name="max_lenght_name">Maximum length of name</string>
     <string name="remove_player">Remove player</string>
     <string name="game_empty_players_list">Empty active players. Please add the players in settings</string>
     <string name="application_title">Application</string>
     <string name="application_description">This app is a simple and lightweight power counter for the board game Munchkin.</string>
     <string name="how_it_works_title">How it Work</string>
-    <string name="how_it_works_body">This app is a simple and lightweight power counter for the board game Munchkin.
-It helps players quickly calculate and track character strength during the game, so you can focus on gameplay instead of math.
+    <string name="how_it_works_body">It helps players quickly calculate and track character strength during the game, so you can focus on gameplay instead of math.
 The app works fully offline, does not collect any personal data, contains no ads, and does not use network access.
 Created by a fan of Munchkin as a convenient companion for casual and tabletop-friendly play.</string>
     <string name="version_title">Version</string>
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Privacy</string>
     <string name="privacy_text">We do not collect personal data.</string>
-
 
 </resources>
