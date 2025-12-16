@@ -26,11 +26,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Action
 import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Event
+import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Event.*
 import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
 import com.exxuslee.munchkinsimplecounter.ui.common.Icons
+import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
 import com.exxuslee.munchkinsimplecounter.ui.common.VSpacer
 import org.koin.androidx.compose.koinViewModel
 
@@ -41,6 +44,7 @@ fun SettingsScreen(
 
     val viewState by viewModel.viewStates().collectAsState()
     val viewAction by viewModel.viewActions().collectAsState(null)
+    val navController = LocalNavController.current
 
     SettingsView(viewState) {
         viewModel.obtainEvent(it)
@@ -161,7 +165,7 @@ fun SettingsScreen(
                     TextButton(
                         onClick = {
                             viewModel.obtainEvent(
-                                Event.AddPlayer(name = name, icon = selectedIcon)
+                                AddPlayer(name = name, icon = selectedIcon)
                             )
                         }
                     ) {
@@ -182,6 +186,10 @@ fun SettingsScreen(
             )
         }
 
+        Action.PopBack -> {
+            viewModel.clearAction()
+            navController.popBackStack()
+        }
         null -> {}
     }
 }

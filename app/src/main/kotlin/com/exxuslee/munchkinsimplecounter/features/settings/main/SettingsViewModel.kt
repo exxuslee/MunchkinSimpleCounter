@@ -10,6 +10,7 @@ import com.exxuslee.munchkinsimplecounter.features.settings.main.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.main.models.ViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
@@ -50,7 +51,6 @@ class SettingsViewModel(
             Event.DialogNewGame -> viewAction = Action.NewGame
 
             Event.ConfirmNewGame -> {
-                clearAction()
                 viewModelScope.launch(Dispatchers.IO) {
                     playersUseCase.players.value.forEach { player ->
                         val resetPlayer = player.copy(
@@ -60,6 +60,8 @@ class SettingsViewModel(
                         )
                         playersUseCase.updatePlayer(resetPlayer)
                     }
+                    delay(500)
+                    viewAction = Action.PopBack
                 }
             }
 
