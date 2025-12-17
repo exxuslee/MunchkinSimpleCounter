@@ -65,6 +65,7 @@
     <string name="select_icon">选择图标</string>
     <string name="active_players">活跃玩家</string>
     <string name="select_player_toast_message">请选择一个玩家</string>
+    <string name="add_player_toast_message">要添加更多玩家，请打开设置</string>
     <string name="max_lenght_name">姓名最大长度</string>
     <string name="remove_player">移除玩家</string>
     <string name="game_empty_active_players_list">没有活跃玩家。请在设置中添加玩家</string>

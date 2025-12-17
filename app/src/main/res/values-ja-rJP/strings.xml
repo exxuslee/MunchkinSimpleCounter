@@ -65,6 +65,7 @@
     <string name="select_icon">アイコンを選択</string>
     <string name="active_players">アクティブなプレイヤー</string>
     <string name="select_player_toast_message">プレイヤーを選択してください</string>
+    <string name="add_player_toast_message">プレイヤーを追加するには、設定を開いてください</string>
     <string name="max_lenght_name">名前の最大長</string>
     <string name="remove_player">プレイヤーを削除</string>
     <string name="game_empty_active_players_list">アクティブなプレイヤーがいません。設定でプレイヤーを追加してください</string>

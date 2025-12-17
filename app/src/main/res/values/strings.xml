@@ -65,6 +65,7 @@
     <string name="select_icon">Select icon</string>
     <string name="active_players">Active players</string>
     <string name="select_player_toast_message">Please, select a player</string>
+    <string name="add_player_toast_message">To add more players, open the settings</string>
     <string name="max_lenght_name">Maximum length of name</string>
     <string name="remove_player">Remove player</string>
     <string name="game_empty_active_players_list">Empty active players. Please add the players in settings</string>

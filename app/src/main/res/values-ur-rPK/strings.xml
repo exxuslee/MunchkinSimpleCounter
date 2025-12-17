@@ -65,6 +65,7 @@
     <string name="select_icon">آئیکن منتخب کریں</string>
     <string name="active_players">فعال کھلاڑی</string>
     <string name="select_player_toast_message">براہ کرم ایک کھلاڑی منتخب کریں</string>
+    <string name="add_player_toast_message">مزید کھلاڑی شامل کرنے کے لیے ترتیبات کھولیں</string>
     <string name="max_lenght_name">نام کی زیادہ سے زیادہ لمبائی</string>
     <string name="remove_player">کھلاڑی ہٹائیں</string>
     <string name="game_empty_active_players_list">کوئی فعال کھلاڑی نہیں۔ براہ کرم ترتیبات میں کھلاڑی شامل کریں</string>

@@ -65,6 +65,7 @@
     <string name="select_icon">انتخاب آیکون</string>
     <string name="active_players">بازیکنان فعال</string>
     <string name="select_player_toast_message">لطفاً یک بازیکن انتخاب کنید</string>
+    <string name="add_player_toast_message">برای افزودن بازیکنان بیشتر، تنظیمات را باز کنید</string>
     <string name="max_lenght_name">حداکثر طول نام</string>
     <string name="remove_player">حذف بازیکن</string>
     <string name="game_empty_active_players_list">هیچ بازیکن فعالی وجود ندارد. لطفاً بازیکنان را در تنظیمات اضافه کنید</string>

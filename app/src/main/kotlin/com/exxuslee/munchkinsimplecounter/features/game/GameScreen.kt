@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.game
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -26,23 +27,25 @@ fun GameScreen(
 
     when (viewAction) {
 
-        Action.ShowSelectPlayerMessage -> {
+        is Action.ShowSelectPlayerMessage -> {
             Toast.makeText(
                 LocalContext.current,
-                stringResource(R.string.select_player_toast_message),
+                stringResource((viewAction as Action.ShowSelectPlayerMessage).messageResId),
                 Toast.LENGTH_SHORT
             ).show()
             viewModel.clearAction()
         }
 
-        Action.AddPlayer -> AddPlayerDialog(
-            onDismissRequest = {
-                viewModel.clearAction()
-            },
-            onAddPlayer = { name, selectedIcon ->
-                viewModel.obtainEvent(Event.AddPlayer(name = name, icon = selectedIcon))
-            }
-        )
+        Action.AddPlayer -> {
+            AddPlayerDialog(
+                onDismissRequest = {
+                    viewModel.clearAction()
+                },
+                onAddPlayer = { name, selectedIcon ->
+                    viewModel.obtainEvent(Event.AddPlayer(name = name, icon = selectedIcon))
+                }
+            )
+        }
 
         null -> {}
     }
