@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">لطفاً یک بازیکن انتخاب کنید</string>
     <string name="max_lenght_name">حداکثر طول نام</string>
     <string name="remove_player">حذف بازیکن</string>
-    <string name="game_empty_players_list">هیچ بازیکن فعالی وجود ندارد. لطفاً بازیکنان را در تنظیمات اضافه کنید</string>
+    <string name="game_empty_active_players_list">هیچ بازیکن فعالی وجود ندارد. لطفاً بازیکنان را در تنظیمات اضافه کنید</string>
     <string name="application_title">برنامه</string>
     <string name="application_description">این برنامه یک شمارنده قدرت ساده و سبک برای بازی رومیزی Munchkin است.</string>
     <string name="how_it_works_title">نحوه کار</string>
@@ -78,5 +78,9 @@
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">حریم خصوصی</string>
     <string name="privacy_text">ما داده‌های شخصی جمع‌آوری نمی‌کنیم.</string>
+    <string name="game_empty_players_list">خالی است.\nلطفاً بازیکنان را اضافه کنید</string>
+    <string name="retry">تلاش مجدد</string>
+    <string name="error_description">اتصال خود را بررسی کنید و دوباره تلاش کنید</string>
 
 </resources>
+

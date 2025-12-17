@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">플레이어를 선택하세요</string>
     <string name="max_lenght_name">이름의 최대 길이</string>
     <string name="remove_player">플레이어 제거</string>
-    <string name="game_empty_players_list">활성 플레이어가 없습니다. 설정에서 플레이어를 추가하세요</string>
+    <string name="game_empty_active_players_list">활성 플레이어가 없습니다. 설정에서 플레이어를 추가하세요</string>
     <string name="application_title">애플리케이션</string>
     <string name="application_description">이 앱은 보드 게임 Munchkin을 위한 간단하고 가벼운 능력 카운터입니다.</string>
     <string name="how_it_works_title">작동 방식</string>
@@ -78,5 +78,9 @@ Munchkin 팬이 캐주얼하고 테이블톱 친화적인 플레이를 위한 �
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">개인정보 보호</string>
     <string name="privacy_text">개인 데이터를 수집하지 않습니다.</string>
+    <string name="game_empty_players_list">비어 있습니다.\n플레이어를 추가하세요</string>
+    <string name="retry">다시 시도</string>
+    <string name="error_description">연결을 확인한 후 다시 시도하세요</string>
 
 </resources>
+

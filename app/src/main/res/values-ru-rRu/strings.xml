@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">Пожалуйста, выберите игрока</string>
     <string name="max_lenght_name">Максимальная длина имени</string>
     <string name="remove_player">Удалить игрока</string>
-    <string name="game_empty_players_list">Список активных игроков пуст. Пожалуйста, добавьте игроков в настройках</string>
+    <string name="game_empty_active_players_list">Список активных игроков пуст. Пожалуйста, добавьте игроков в настройках</string>
     <string name="application_title">Приложение</string>
     <string name="application_description">Это простое и легковесное приложение-счетчик силы для настольной игры Munchkin.</string>
     <string name="how_it_works_title">Как работает</string>
@@ -78,6 +78,9 @@
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Конфиденциальность</string>
     <string name="privacy_text">Мы не собираем персональные данные.</string>
+    <string name="game_empty_players_list">Пусто.\nПожалуйста, добавьте игроков</string>
+    <string name="retry">Повторить</string>
+    <string name="error_description">Проверьте подключение к сети и попробуйте ещё раз</string>
 </resources>
 
 

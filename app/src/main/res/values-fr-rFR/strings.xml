@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">Veuillez sélectionner un joueur</string>
     <string name="max_lenght_name">Longueur maximale du nom</string>
     <string name="remove_player">Retirer le joueur</string>
-    <string name="game_empty_players_list">Aucun joueur actif. Veuillez ajouter des joueurs dans les paramètres</string>
+    <string name="game_empty_active_players_list">Aucun joueur actif. Veuillez ajouter des joueurs dans les paramètres</string>
     <string name="application_title">Application</string>
     <string name="application_description">Cette application est un compteur de puissance simple et léger pour le jeu de société Munchkin.</string>
     <string name="how_it_works_title">Comment ça fonctionne</string>
@@ -78,5 +78,9 @@ Créée par un fan de Munchkin comme compagnon pratique pour un jeu décontract�
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Confidentialité</string>
     <string name="privacy_text">Nous ne collectons pas de données personnelles.</string>
+    <string name="game_empty_players_list">Vide.\nVeuillez ajouter des joueurs</string>
+    <string name="retry">Réessayer</string>
+    <string name="error_description">Vérifiez votre connexion et réessayez</string>
 
 </resources>
+

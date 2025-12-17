@@ -8,6 +8,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.game.models.Action
+import com.exxuslee.munchkinsimplecounter.features.game.models.Event
+import com.exxuslee.munchkinsimplecounter.ui.common.AddPlayerDialog
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -32,6 +34,15 @@ fun GameScreen(
             ).show()
             viewModel.clearAction()
         }
+
+        Action.AddPlayer -> AddPlayerDialog(
+            onDismissRequest = {
+                viewModel.clearAction()
+            },
+            onAddPlayer = { name, selectedIcon ->
+                viewModel.obtainEvent(Event.AddPlayer(name = name, icon = selectedIcon))
+            }
+        )
 
         null -> {}
     }

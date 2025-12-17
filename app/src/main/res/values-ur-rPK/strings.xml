@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">براہ کرم ایک کھلاڑی منتخب کریں</string>
     <string name="max_lenght_name">نام کی زیادہ سے زیادہ لمبائی</string>
     <string name="remove_player">کھلاڑی ہٹائیں</string>
-    <string name="game_empty_players_list">کوئی فعال کھلاڑی نہیں۔ براہ کرم ترتیبات میں کھلاڑی شامل کریں</string>
+    <string name="game_empty_active_players_list">کوئی فعال کھلاڑی نہیں۔ براہ کرم ترتیبات میں کھلاڑی شامل کریں</string>
     <string name="application_title">ایپلی کیشن</string>
     <string name="application_description">یہ ایپ بورڈ گیم Munchkin کے لیے ایک سادہ اور ہلکا وزن طاقت کاؤنٹر ہے۔</string>
     <string name="how_it_works_title">یہ کیسے کام کرتا ہے</string>
@@ -78,5 +78,9 @@ Munchkin کے ایک پرستار کے ذریعہ کیشول اور ٹیبل ٹ�
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">رازداری</string>
     <string name="privacy_text">ہم ذاتی ڈیٹا جمع نہیں کرتے۔</string>
+    <string name="game_empty_players_list">خالی ہے۔\nبراہ کرم کھلاڑی شامل کریں</string>
+    <string name="retry">دوبارہ کوشش کریں</string>
+    <string name="error_description">اپنا کنکشن چیک کریں اور دوبارہ کوشش کریں</string>
 
 </resources>
+

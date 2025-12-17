@@ -5,7 +5,8 @@ import com.exxuslee.domain.model.UiState
 
 data class ViewState(
     val isDark: Boolean = false,
-    val players: List<Player> = emptyList(),
+    val activePlayers: List<Player> = emptyList(),
+    val allPlayers: Int = 0,
     val selectedPlayerId: Int? = null,
     val state: UiState = UiState.Loading,
 )

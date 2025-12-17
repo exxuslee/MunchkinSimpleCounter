@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">Por favor, selecione um jogador</string>
     <string name="max_lenght_name">Comprimento máximo do nome</string>
     <string name="remove_player">Remover jogador</string>
-    <string name="game_empty_players_list">Nenhum jogador ativo. Por favor, adicione jogadores nas configurações</string>
+    <string name="game_empty_active_players_list">Nenhum jogador ativo. Por favor, adicione jogadores nas configurações</string>
     <string name="application_title">Aplicativo</string>
     <string name="application_description">Este aplicativo é um contador de poder simples e leve para o jogo de tabuleiro Munchkin.</string>
     <string name="how_it_works_title">Como Funciona</string>
@@ -78,5 +78,9 @@ Criado por um fã de Munchkin como um companheiro conveniente para jogos casuais
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Privacidade</string>
     <string name="privacy_text">Não coletamos dados pessoais.</string>
+    <string name="game_empty_players_list">Vazio.\nPor favor, adicione jogadores</string>
+    <string name="retry">Tentar novamente</string>
+    <string name="error_description">Verifique sua conexão e tente novamente</string>
 
 </resources>
+

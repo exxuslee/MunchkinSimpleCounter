@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">プレイヤーを選択してください</string>
     <string name="max_lenght_name">名前の最大長</string>
     <string name="remove_player">プレイヤーを削除</string>
-    <string name="game_empty_players_list">アクティブなプレイヤーがいません。設定でプレイヤーを追加してください</string>
+    <string name="game_empty_active_players_list">アクティブなプレイヤーがいません。設定でプレイヤーを追加してください</string>
     <string name="application_title">アプリケーション</string>
     <string name="application_description">このアプリは、ボードゲーム「Munchkin」用のシンプルで軽量な能力カウンターです。</string>
     <string name="how_it_works_title">動作方法</string>
@@ -78,5 +78,9 @@ Munchkinのファンによって、カジュアルでテーブルトップフレ
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">プライバシー</string>
     <string name="privacy_text">個人データは収集しません。</string>
+    <string name="game_empty_players_list">空です。\nプレイヤーを追加してください</string>
+    <string name="retry">再試行</string>
+    <string name="error_description">接続を確認して、もう一度お試しください</string>
 
 </resources>
+

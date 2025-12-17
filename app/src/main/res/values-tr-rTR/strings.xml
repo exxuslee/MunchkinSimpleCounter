@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">Lütfen bir oyuncu seçin</string>
     <string name="max_lenght_name">İsim maksimum uzunluğu</string>
     <string name="remove_player">Oyuncuyu kaldır</string>
-    <string name="game_empty_players_list">Aktif oyuncu yok. Lütfen ayarlardan oyuncu ekleyin</string>
+    <string name="game_empty_active_players_list">Aktif oyuncu yok. Lütfen ayarlardan oyuncu ekleyin</string>
     <string name="application_title">Uygulama</string>
     <string name="application_description">Bu uygulama, masa oyunu Munchkin için basit ve hafif bir güç sayacıdır.</string>
     <string name="how_it_works_title">Nasıl Çalışır</string>
@@ -78,5 +78,9 @@ Munchkin hayranı tarafından, gündelik ve masa dostu oyun için uygun bir arka
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Gizlilik</string>
     <string name="privacy_text">Kişisel veri toplamıyoruz.</string>
+    <string name="game_empty_players_list">Boş.\nLütfen oyuncu ekleyin</string>
+    <string name="retry">Yeniden dene</string>
+    <string name="error_description">Bağlantınızı kontrol edip tekrar deneyin</string>
 
 </resources>
+

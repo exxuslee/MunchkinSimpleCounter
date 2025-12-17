@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">Please, select a player</string>
     <string name="max_lenght_name">Maximum length of name</string>
     <string name="remove_player">Remove player</string>
-    <string name="game_empty_players_list">Empty active players. Please add the players in settings</string>
+    <string name="game_empty_active_players_list">Empty active players. Please add the players in settings</string>
     <string name="application_title">Application</string>
     <string name="application_description">This app is a simple and lightweight power counter for the board game Munchkin.</string>
     <string name="how_it_works_title">How it Work</string>
@@ -78,5 +78,8 @@ Created by a fan of Munchkin as a convenient companion for casual and tabletop-f
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Privacy</string>
     <string name="privacy_text">We do not collect personal data.</string>
+    <string name="game_empty_players_list">Empty.\nPlease add the players</string>
+    <string name="retry">Retry</string>
+    <string name="error_description">Check your connection and try again</string>
 
 </resources>

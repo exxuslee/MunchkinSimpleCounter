@@ -67,7 +67,7 @@
     <string name="select_player_toast_message">Bitte wählen Sie einen Spieler aus</string>
     <string name="max_lenght_name">Maximale Länge des Namens</string>
     <string name="remove_player">Spieler entfernen</string>
-    <string name="game_empty_players_list">Keine aktiven Spieler. Bitte fügen Sie Spieler in den Einstellungen hinzu</string>
+    <string name="game_empty_active_players_list">Keine aktiven Spieler. Bitte fügen Sie Spieler in den Einstellungen hinzu</string>
     <string name="application_title">Anwendung</string>
     <string name="application_description">Diese App ist ein einfacher und leichtgewichtiger Stärke-Zähler für das Brettspiel Munchkin.</string>
     <string name="how_it_works_title">Wie es funktioniert</string>
@@ -78,5 +78,9 @@ Erstellt von einem Munchkin-Fan als praktischer Begleiter für lockeres und tisc
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Datenschutz</string>
     <string name="privacy_text">Wir erfassen keine persönlichen Daten.</string>
+    <string name="game_empty_players_list">Leer.\nBitte fügen Sie Spieler hinzu</string>
+    <string name="retry">Erneut versuchen</string>
+    <string name="error_description">Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut</string>
 
 </resources>
+
