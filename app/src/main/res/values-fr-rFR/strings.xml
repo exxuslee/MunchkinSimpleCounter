@@ -79,6 +79,8 @@ Créée par un fan de Munchkin comme compagnon pratique pour un jeu décontract�
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Confidentialité</string>
     <string name="privacy_text">Nous ne collectons pas de données personnelles.</string>
+    <string name="rate_app_title">Rate app</string>
+    <string name="rate_app_button">Rate this app</string>
     <string name="game_empty_players_list">Vide.\nVeuillez ajouter des joueurs</string>
     <string name="retry">Réessayer</string>
     <string name="error_description">Vérifiez votre connexion et réessayez</string>

@@ -79,6 +79,8 @@ Erstellt von einem Munchkin-Fan als praktischer Begleiter für lockeres und tisc
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Datenschutz</string>
     <string name="privacy_text">Wir erfassen keine persönlichen Daten.</string>
+    <string name="rate_app_title">Rate app</string>
+    <string name="rate_app_button">Rate this app</string>
     <string name="game_empty_players_list">Leer.\nBitte fügen Sie Spieler hinzu</string>
     <string name="retry">Erneut versuchen</string>
     <string name="error_description">Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut</string>

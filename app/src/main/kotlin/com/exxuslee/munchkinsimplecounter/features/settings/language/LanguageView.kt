@@ -21,12 +21,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.exxuslee.munchkinsimplecounter.ui.common.CellUniversalLawrenceSection
-import com.exxuslee.munchkinsimplecounter.ui.common.RowUniversal
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.settings.language.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.language.models.ViewState
+import com.exxuslee.munchkinsimplecounter.ui.common.CellUniversalLawrenceSection
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
+import com.exxuslee.munchkinsimplecounter.ui.common.RowUniversal
+import com.exxuslee.munchkinsimplecounter.ui.common.VSpacer
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 import com.hwasfy.localize.api.LanguageManager
 import com.hwasfy.localize.api.currentAppLocale
@@ -54,7 +55,7 @@ fun LanguageView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                 }
             )
         }
-        Spacer(Modifier.height(24.dp))
+        VSpacer(48.dp)
     }
 }
 

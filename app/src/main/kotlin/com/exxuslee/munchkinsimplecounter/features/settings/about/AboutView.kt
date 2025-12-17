@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.exxuslee.munchkinsimplecounter.BuildConfig
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.ui.common.HeaderStick
+import com.exxuslee.munchkinsimplecounter.ui.common.VSpacer
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -73,13 +74,32 @@ fun AboutView() {
                 }
             }
 
+            stickyHeader {
+                HeaderStick(stringResource(R.string.rate_app_title))
+            }
             item {
-                Text(
-                    text = "© 2025 Simple Munchkin Counter.",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(bottom = 24.dp)
-                )
+                val uriHandler = LocalUriHandler.current
+                val playStoreUrl = "https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}"
+                Column(
+                    modifier = Modifier.padding(bottom = 24.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Button(onClick = { uriHandler.openUri(playStoreUrl) }) {
+                        Text(stringResource(R.string.rate_app_button))
+                    }
+                }
+            }
+
+            item {
+                Column {
+                    Text(
+                        text = "© 2025 Simple Munchkin Counter.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(bottom = 24.dp)
+                    )
+                    VSpacer(48.dp)
+                }
             }
         }
     }

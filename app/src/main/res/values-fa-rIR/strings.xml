@@ -79,6 +79,8 @@
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">حریم خصوصی</string>
     <string name="privacy_text">ما داده‌های شخصی جمع‌آوری نمی‌کنیم.</string>
+    <string name="rate_app_title">Rate app</string>
+    <string name="rate_app_button">Rate this app</string>
     <string name="game_empty_players_list">خالی است.\nلطفاً بازیکنان را اضافه کنید</string>
     <string name="retry">تلاش مجدد</string>
     <string name="error_description">اتصال خود را بررسی کنید و دوباره تلاش کنید</string>

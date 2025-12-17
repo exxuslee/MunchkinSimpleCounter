@@ -79,6 +79,8 @@ Created by a fan of Munchkin as a convenient companion for casual and tabletop-f
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Privacy</string>
     <string name="privacy_text">We do not collect personal data.</string>
+    <string name="rate_app_title">Rate app</string>
+    <string name="rate_app_button">Rate this app</string>
     <string name="game_empty_players_list">Empty.\nPlease add the players</string>
     <string name="retry">Retry</string>
     <string name="error_description">Check your connection and try again</string>

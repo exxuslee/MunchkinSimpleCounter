@@ -79,6 +79,8 @@ Munchkin hayranı tarafından, gündelik ve masa dostu oyun için uygun bir arka
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">Gizlilik</string>
     <string name="privacy_text">Kişisel veri toplamıyoruz.</string>
+    <string name="rate_app_title">Rate app</string>
+    <string name="rate_app_button">Rate this app</string>
     <string name="game_empty_players_list">Boş.\nLütfen oyuncu ekleyin</string>
     <string name="retry">Yeniden dene</string>
     <string name="error_description">Bağlantınızı kontrol edip tekrar deneyin</string>
