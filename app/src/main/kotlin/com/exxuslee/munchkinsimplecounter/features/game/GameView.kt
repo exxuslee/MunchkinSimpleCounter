@@ -3,6 +3,7 @@ package com.exxuslee.munchkinsimplecounter.features.game
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -26,7 +27,9 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
 
         UiState.Idle -> {
             val view = LocalView.current
-            Column {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+            ) {
                 PlayerCard(null)
                 if (viewState.allPlayers == 0) ScreenMessageWithAction(
                     text = stringResource(R.string.game_empty_players_list),

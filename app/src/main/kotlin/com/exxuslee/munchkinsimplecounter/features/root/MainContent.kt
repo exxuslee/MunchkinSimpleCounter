@@ -1,10 +1,15 @@
 package com.exxuslee.munchkinsimplecounter.features.root
 
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.systemBarsIgnoringVisibility
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,6 +31,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.exxuslee.munchkinsimplecounter.R
+import com.exxuslee.munchkinsimplecounter.features.game.GameScreen
+import com.exxuslee.munchkinsimplecounter.features.root.models.Event
+import com.exxuslee.munchkinsimplecounter.features.settings.about.AboutScreen
+import com.exxuslee.munchkinsimplecounter.features.settings.donate.DonateScreen
+import com.exxuslee.munchkinsimplecounter.features.settings.language.LanguageScreen
+import com.exxuslee.munchkinsimplecounter.features.settings.main.SettingsScreen
+import com.exxuslee.munchkinsimplecounter.features.settings.terms.TermsScreen
 import com.exxuslee.munchkinsimplecounter.navigation.Routes
 import com.exxuslee.munchkinsimplecounter.navigation.asRoute
 import com.exxuslee.munchkinsimplecounter.navigation.isPrimaryRoute
@@ -34,16 +46,9 @@ import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalPaddingController
 import com.exxuslee.munchkinsimplecounter.ui.common.animatedComposable
-import com.exxuslee.munchkinsimplecounter.features.game.GameScreen
-import com.exxuslee.munchkinsimplecounter.features.root.models.Event
-import com.exxuslee.munchkinsimplecounter.features.settings.about.AboutScreen
-import com.exxuslee.munchkinsimplecounter.features.settings.donate.DonateScreen
-import com.exxuslee.munchkinsimplecounter.features.settings.language.LanguageScreen
-import com.exxuslee.munchkinsimplecounter.features.settings.main.SettingsScreen
-import com.exxuslee.munchkinsimplecounter.features.settings.terms.TermsScreen
 import org.koin.androidx.compose.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun MainContent(
     viewModel: MainViewModel = koinViewModel(),
@@ -57,7 +62,6 @@ fun MainContent(
     Scaffold(
         topBar = {
             TopAppBar(
-                windowInsets = WindowInsets.statusBars,
                 title = {
                     Text(
                         text = currentRoute?.label() ?: "",

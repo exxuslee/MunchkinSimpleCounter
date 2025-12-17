@@ -127,8 +127,11 @@ fun AppTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            val windowsInsetsController = WindowCompat.getInsetsController(window, view)
-            windowsInsetsController.isAppearanceLightStatusBars = !darkTheme
+
+            val controller = WindowCompat.getInsetsController(window, view)
+            controller.isAppearanceLightStatusBars = !darkTheme
+            controller.isAppearanceLightNavigationBars = !darkTheme
+
         }
     }
 
