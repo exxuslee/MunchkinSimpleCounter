@@ -243,6 +243,7 @@ private fun LandscapeNavigationButtons(
                 contentDescription = dest.label(),
             )
         }
+        VSpacer(4.dp)
 
     }
 
