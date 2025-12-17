@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.exxlexxlee.domain"
+    namespace = "com.exxuslee.domain"
     compileSdk = property("version.compileSdk").toString().toInt()
 
     defaultConfig {
@@ -23,8 +23,8 @@ android {
             isMinifyEnabled = false
         }
         release {
-            isMinifyEnabled = true
-        }
+            isMinifyEnabled = false
+            consumerProguardFiles("consumer-rules.pro")        }
     }
 
     compileOptions {
