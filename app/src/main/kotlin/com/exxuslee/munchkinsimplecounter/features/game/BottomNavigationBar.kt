@@ -1,6 +1,7 @@
 package com.exxuslee.munchkinsimplecounter.features.game
 
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -17,6 +18,7 @@ fun BottomNavigationBar(
     eventHandler: (Event) -> Unit,
 ) {
     NavigationBar(
+        modifier = Modifier.height(56.dp),
         windowInsets = WindowInsets(),
         containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = 4.dp,
@@ -30,12 +32,14 @@ fun BottomNavigationBar(
             NavigationBarItem(
                 selected = false,
                 onClick = {
-                    eventHandler.invoke(when(dest){
-                        BottomButtonsItems.AddLevel -> Event.AddLevel
-                        BottomButtonsItems.SubLevel -> Event.SubLevel
-                        BottomButtonsItems.AddBonus -> Event.AddBonus
-                        BottomButtonsItems.SubBonus -> Event.SubBonus
-                    })
+                    eventHandler.invoke(
+                        when (dest) {
+                            BottomButtonsItems.AddLevel -> Event.AddLevel
+                            BottomButtonsItems.SubLevel -> Event.SubLevel
+                            BottomButtonsItems.AddBonus -> Event.AddBonus
+                            BottomButtonsItems.SubBonus -> Event.SubBonus
+                        }
+                    )
                 },
                 icon = {
                     Icon(
