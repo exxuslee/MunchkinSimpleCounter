@@ -16,8 +16,15 @@ object LocaleHelper {
     }
 
     fun getPersistedLocaleTag(context: Context): String {
-        return context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .getString(KEY, Locale.getDefault().toLanguageTag()) ?: "en-US"
+        val saved = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+            .getString(KEY, null)
+
+        if (saved != null) return saved
+
+        val systemLocale = Locale.getDefault()
+        return SupportedLocales.entries
+            .find { it.locale.language == systemLocale.language }
+            ?.tag ?: SupportedLocales.EN_US.tag
     }
 
     fun wrapContext(base: Context): Context {

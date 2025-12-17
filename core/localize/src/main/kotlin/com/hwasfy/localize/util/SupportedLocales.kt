@@ -21,8 +21,10 @@ enum class SupportedLocales(val tag: String, val locale: Locale, val icon: Int) 
 
     companion object {
         fun fromTag(tag: String): SupportedLocales {
-            return entries.find { it.tag.equals(tag, ignoreCase = true) }
-                ?: throw IllegalArgumentException("Locale not supported: $tag")
+            val locale = Locale.forLanguageTag(tag)
+            return entries.find { it.locale == locale }
+                ?: entries.find { it.locale.language == locale.language }
+                ?: EN_US
         }
     }
 }
