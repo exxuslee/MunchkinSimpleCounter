@@ -17,8 +17,8 @@ android {
         applicationId = "com.appybuilder.ExxusLee.Manchkin"
         minSdk = property("version.minSdk").toString().toInt()
         targetSdk = property("version.targetSdk").toString().toInt()
-        versionCode = 7
-        versionName = "1.6"
+        versionCode = 8
+        versionName = "1.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,11 +36,6 @@ android {
                 debugSymbolLevel = "FULL"
             }
             isMinifyEnabled = false
-        }
-        create("mock") {
-            initWith(getByName("debug"))
-            applicationIdSuffix = ".mock"
-            matchingFallbacks += listOf("debug", "release")
         }
     }
 

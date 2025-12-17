@@ -78,7 +78,5 @@ Munchkinのファンによって、カジュアルでテーブルトップフレ
     <string name="version_value">1.2.0</string>
     <string name="privacy_title">プライバシー</string>
     <string name="privacy_text">個人データは収集しません。</string>
+
 </resources>
-
-
-

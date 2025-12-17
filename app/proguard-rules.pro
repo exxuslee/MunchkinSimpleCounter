@@ -11,7 +11,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
+л
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
 #-keepattributes SourceFile,LineNumberTable
@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Keep LocaleHelper class from localize module
+-keep class com.hwasfy.localize.util.LocaleHelper { *; }
+-keepclassmembers class com.hwasfy.localize.util.LocaleHelper { *; }
+
+# Keep all classes in the localize package
+-keep class com.hwasfy.localize.** { *; }
