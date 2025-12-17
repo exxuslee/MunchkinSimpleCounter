@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.exxuslee.munchkinsimplecounter.BuildConfig
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.ui.common.HeaderStick
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
@@ -25,14 +26,10 @@ import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 fun AboutView() {
     Column {
         val sections = listOf(
-            stringResource(R.string.application_title) to
-                    stringResource(R.string.application_description),
-            stringResource(R.string.how_it_works_title) to
-                    stringResource(R.string.how_it_works_body),
-            stringResource(R.string.version_title) to
-                    stringResource(R.string.version_value),
-            stringResource(R.string.privacy_title) to
-                    stringResource(R.string.privacy_text)
+            stringResource(R.string.application_title) to stringResource(R.string.application_description),
+            stringResource(R.string.how_it_works_title) to stringResource(R.string.how_it_works_body),
+            stringResource(R.string.version_title) to BuildConfig.VERSION_NAME,
+            stringResource(R.string.privacy_title) to stringResource(R.string.privacy_text)
         )
 
         LazyColumn(

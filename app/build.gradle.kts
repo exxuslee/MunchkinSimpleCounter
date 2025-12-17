@@ -17,10 +17,12 @@ android {
         applicationId = "com.appybuilder.ExxusLee.Manchkin"
         minSdk = property("version.minSdk").toString().toInt()
         targetSdk = property("version.targetSdk").toString().toInt()
-        versionCode = 8
-        versionName = "1.8"
+        versionCode = property("version.versionCode").toString().toInt()
+        versionName = property("version.versionName").toString()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "VERSION_NAME", property("version.versionName").toString())
     }
 
     buildTypes {
