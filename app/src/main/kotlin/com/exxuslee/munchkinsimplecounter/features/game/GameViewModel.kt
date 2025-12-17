@@ -6,15 +6,15 @@ import com.exxuslee.domain.usecases.PlayersUseCase
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.game.models.Action
 import com.exxuslee.munchkinsimplecounter.features.game.models.Event
-import com.exxuslee.munchkinsimplecounter.features.game.models.ViewState
+import com.exxuslee.munchkinsimplecounter.features.game.models.GameViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GameViewModel(
     private val playersUseCase: PlayersUseCase,
-) : BaseViewModel<ViewState, Action, Event>(
-    initialState = ViewState()
+) : BaseViewModel<GameViewState, Action, Event>(
+    initialState = GameViewState()
 ) {
 
     init {

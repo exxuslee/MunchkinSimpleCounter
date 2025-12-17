@@ -3,7 +3,7 @@ package com.exxuslee.munchkinsimplecounter.features.game.models
 import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.model.UiState
 
-data class ViewState(
+data class GameViewState(
     val isDark: Boolean = false,
     val activePlayers: List<Player> = emptyList(),
     val allPlayers: Int = 0,

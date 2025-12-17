@@ -1,4 +1,4 @@
-package com.exxuslee.munchkinsimplecounter.features.game
+package com.exxuslee.munchkinsimplecounter.navigation
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.height

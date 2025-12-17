@@ -31,7 +31,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.game.GameScreen
-import com.exxuslee.munchkinsimplecounter.features.root.models.Event
+import com.exxuslee.munchkinsimplecounter.features.game.GameViewModel
+import com.exxuslee.munchkinsimplecounter.features.game.models.BottomButtonsItems
+import com.exxuslee.munchkinsimplecounter.features.game.models.Event
+import com.exxuslee.munchkinsimplecounter.features.game.models.GameViewState
+import com.exxuslee.munchkinsimplecounter.features.root.models.MainEvent
 import com.exxuslee.munchkinsimplecounter.features.root.models.ViewState
 import com.exxuslee.munchkinsimplecounter.features.settings.about.AboutScreen
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.DonateScreen
@@ -44,16 +48,19 @@ import com.exxuslee.munchkinsimplecounter.navigation.isPrimaryRoute
 import com.exxuslee.munchkinsimplecounter.ui.common.AnimationType
 import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
+import com.exxuslee.munchkinsimplecounter.ui.common.VSpacer
 import com.exxuslee.munchkinsimplecounter.ui.common.animatedComposable
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun MainContent(
-    viewModel: MainViewModel = koinViewModel(),
+    mainViewModel: MainViewModel = koinViewModel(),
+    gameViewModel: GameViewModel = koinViewModel(),
 ) {
-    val viewState by viewModel.viewStates().collectAsState()
-    val viewAction by viewModel.viewActions().collectAsState(null)
+    val mainViewState by mainViewModel.viewStates().collectAsState()
+    val gameViewState by gameViewModel.viewStates().collectAsState()
+    val viewAction by mainViewModel.viewActions().collectAsState(null)
 
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -64,9 +71,16 @@ fun MainContent(
         LocalNavController provides navController
     ) {
         if (isLandscape) {
-            LandscapeLayout(currentRoute, navController, viewModel, viewState)
+            LandscapeLayout(
+                currentRoute,
+                navController,
+                gameViewModel,
+                mainViewModel,
+                mainViewState,
+                gameViewState
+            )
         } else {
-            PortraitLayout(currentRoute, navController, viewModel, viewState)
+            PortraitLayout(currentRoute, navController, mainViewModel, mainViewState, gameViewModel)
         }
 
         when (viewAction) {
@@ -81,6 +95,7 @@ private fun PortraitLayout(
     navController: NavHostController,
     viewModel: MainViewModel,
     viewState: ViewState,
+    gameViewModel: GameViewModel,
 ) {
     Scaffold(
         topBar = { MainTopBar(currentRoute, navController, viewModel) },
@@ -89,6 +104,7 @@ private fun PortraitLayout(
         NavHostContent(
             navController,
             viewState,
+            gameViewModel,
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize()
@@ -101,8 +117,10 @@ private fun PortraitLayout(
 private fun LandscapeLayout(
     currentRoute: Routes?,
     navController: NavHostController,
-    viewModel: MainViewModel,
+    gameViewModel: GameViewModel,
+    mainViewModel: MainViewModel,
     viewState: ViewState,
+    gameViewState: GameViewState,
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp),
@@ -113,10 +131,18 @@ private fun LandscapeLayout(
                 .padding(padding)
         ) {
             NavigationRail(containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp)) {
-                LandscapeNavigationButtons(currentRoute, navController, viewModel)
+                LandscapeNavigationButtons(
+                    currentRoute,
+                    navController,
+                    gameViewModel,
+                    mainViewModel,
+                    gameViewState
+                )
             }
             NavHostContent(
-                navController, viewState,
+                navController,
+                viewState,
+                gameViewModel,
                 modifier = Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.surface)
@@ -152,7 +178,7 @@ private fun MainTopBar(
         actions = {
             if (currentRoute?.isPrimaryRoute() == true) {
                 IconButton(onClick = {
-                    viewModel.obtainEvent(Event.MainRoute(Routes.SettingsRoute.MainRoute.route))
+                    viewModel.obtainEvent(MainEvent.MainRoute(Routes.SettingsRoute.MainRoute.route))
                     navController.navigate(Routes.SettingsRoute.MainRoute.route)
                 }) {
                     Icon(
@@ -172,30 +198,61 @@ private fun MainTopBar(
 private fun LandscapeNavigationButtons(
     currentRoute: Routes?,
     navController: NavHostController,
-    viewModel: MainViewModel
+    gameViewModel: GameViewModel,
+    mainViewModel: MainViewModel,
+    gameViewState: GameViewState,
 ) {
-    IconButton(onClick = { navController.popBackStack() }) {
-        Icon(
-            painterResource(id = R.drawable.outline_arrow_back_ios_new_24),
-            contentDescription = stringResource(R.string.back)
-        )
+    if (currentRoute?.isPrimaryRoute() == false) {
+        IconButton(onClick = { navController.popBackStack() }) {
+            Icon(
+                painterResource(id = R.drawable.outline_arrow_back_ios_new_24),
+                contentDescription = stringResource(R.string.back)
+            )
+        }
+    } else {
+        IconButton(onClick = {
+            mainViewModel.obtainEvent(MainEvent.MainRoute(Routes.SettingsRoute.MainRoute.route))
+            navController.navigate(Routes.SettingsRoute.MainRoute.route)
+        }) {
+            Icon(
+                painterResource(id = R.drawable.ic_baseline_settings_24),
+                contentDescription = stringResource(R.string.title_settings)
+            )
+        }
     }
-    HSpacer(16.dp)
-    IconButton(onClick = {
-        viewModel.obtainEvent(Event.MainRoute(Routes.SettingsRoute.MainRoute.route))
-        navController.navigate(Routes.SettingsRoute.MainRoute.route)
-    }) {
-        Icon(
-            painterResource(id = R.drawable.ic_baseline_settings_24),
-            contentDescription = stringResource(R.string.title_settings)
-        )
+    VSpacer(16.dp)
+    if (gameViewState.activePlayers.isNotEmpty() && currentRoute?.isPrimaryRoute() == true) listOf(
+        BottomButtonsItems.AddLevel,
+        BottomButtonsItems.SubLevel,
+        BottomButtonsItems.AddBonus,
+        BottomButtonsItems.SubBonus,
+    ).forEach { dest ->
+
+        IconButton(onClick = {
+            gameViewModel.obtainEvent(
+                when (dest) {
+                    BottomButtonsItems.AddLevel -> Event.AddLevel
+                    BottomButtonsItems.SubLevel -> Event.SubLevel
+                    BottomButtonsItems.AddBonus -> Event.AddBonus
+                    BottomButtonsItems.SubBonus -> Event.SubBonus
+                }
+            )
+        }) {
+            Icon(
+                painter = dest.icon(),
+                contentDescription = dest.label(),
+            )
+        }
+
     }
+
 }
 
 @Composable
 private fun NavHostContent(
     navController: NavHostController,
     viewState: ViewState,
+    gameViewModel: GameViewModel,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -203,7 +260,7 @@ private fun NavHostContent(
         startDestination = viewState.initialRoute,
         modifier = modifier
     ) {
-        animatedComposable(Routes.GameRoute.route) { GameScreen() }
+        animatedComposable(Routes.GameRoute.route) { GameScreen(viewModel = gameViewModel) }
         animatedComposable(Routes.SettingsRoute.MainRoute.route) { SettingsScreen() }
         animatedComposable(
             Routes.SettingsRoute.ThermsRoute.route,

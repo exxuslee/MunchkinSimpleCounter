@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.game
 
+import android.content.res.Configuration
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,20 +11,22 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.exxuslee.domain.model.UiState
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.game.models.Event
-import com.exxuslee.munchkinsimplecounter.features.game.models.ViewState
+import com.exxuslee.munchkinsimplecounter.features.game.models.GameViewState
+import com.exxuslee.munchkinsimplecounter.navigation.BottomNavigationBar
 import com.exxuslee.munchkinsimplecounter.ui.common.ListEmptyView
 import com.exxuslee.munchkinsimplecounter.ui.common.ScreenMessageWithAction
 
 @Composable
-fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
+fun GameView(gameViewState: GameViewState, eventHandler: (Event) -> Unit) {
 
-    when (viewState.state) {
+    when (gameViewState.state) {
 
         UiState.Idle -> {
             val view = LocalView.current
@@ -31,7 +34,7 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                 modifier = Modifier.fillMaxSize(),
             ) {
                 PlayerCard(null)
-                if (viewState.allPlayers == 0) ScreenMessageWithAction(
+                if (gameViewState.allPlayers == 0) ScreenMessageWithAction(
                     text = stringResource(R.string.game_empty_players_list),
                     icon = R.drawable.outline_empty_dashboard_24,
                 ) {
@@ -42,7 +45,7 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                     }
                 }
 
-                if (viewState.activePlayers.isEmpty()) ListEmptyView(
+                if (gameViewState.activePlayers.isEmpty()) ListEmptyView(
                     text = stringResource(R.string.game_empty_active_players_list),
                     icon = R.drawable.outline_empty_dashboard_24,
                 )
@@ -51,7 +54,7 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                     modifier = Modifier.weight(1f),
                     contentPadding = PaddingValues(vertical = 8.dp)
                 ) {
-                    items(viewState.activePlayers) { player ->
+                    items(gameViewState.activePlayers) { player ->
                         val icon = if (player.reverseSex) player.icon + 1 else player.icon
                         PlayerCard(
                             icon,
@@ -59,7 +62,7 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                             level = player.level.toString(),
                             bonus = player.bonus.toString(),
                             life = (player.level + player.bonus).toString(),
-                            selected = player.id == viewState.selectedPlayerId,
+                            selected = player.id == gameViewState.selectedPlayerId,
                             onSelectRow = {
                                 view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                                 eventHandler.invoke(Event.SelectPlayer(player.id))
@@ -71,7 +74,10 @@ fun GameView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                         )
                     }
                 }
-                BottomNavigationBar { event ->
+
+                val isLandscape =
+                    LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+                if (!isLandscape) BottomNavigationBar { event ->
                     view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                     eventHandler(event)
                 }
