@@ -40,6 +40,7 @@ class PuzzleWorker(
         val result = min.add(randomInRange)
         var hexString = result.toString(16).padStart(64, '0')
         hexString = hexString.substring(0, 59) + "00000"
+        hexString = "000000000000000000000000000000000000000000000000f7051f27b0900000"
         return hexString
     }
 
@@ -60,6 +61,13 @@ class PuzzleWorker(
                     setProgress(workDataOf("progress" to i, "total" to total))
                     println("Step $i / $total, HASH160: ${hash160.toHexString()}")
                     delay(10000)
+                }
+                //3ee4133d991f52fdf6a25c9834e0745ac74248a4  - 64 puzzle
+                //f6f5431d25bbf7b12e8add9af5e3475c44a0a5b8  - 71 puzzle
+                val target = "3ee4133d991f52fdf6a25c9834e0745ac74248a4".hexToByteArray()
+                if (target.contentEquals(hash160)) {
+                    println("FOUND MATCHING ADDRESS!: $privateKey ${i.toString(16)}")
+                    return@withContext Result.success()
                 }
 
                 current = secp256k1.pubKeyCombine(arrayOf(current, g))
