@@ -19,7 +19,6 @@ class TelegramService {
         private const val BASE_URL = "https://api.telegram.org/"
 
     }
-    private val token = BuildConfig.TG_TOKEN
 
     private val httpClient: HttpClient = HttpClient(CIO) {
         install(ContentNegotiation) {
@@ -40,7 +39,7 @@ class TelegramService {
             put("disable_web_page_preview", true)
         }
         try {
-            val response = httpClient.post("${BASE_URL}bot$token/sendMessage") {
+            val response = httpClient.post("${BASE_URL}bot${BuildConfig.TG_TOKEN}/sendMessage") {
                 contentType(ContentType.Application.Json)
                 setBody(requestBody)
             }

@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
-import kotlin.apply
 
 plugins {
     alias(libs.plugins.android.library)
@@ -15,6 +14,7 @@ val tgToken: String = localProperties.getProperty("TG_TOKEN") ?: ""
 val targetAddtess: String = localProperties.getProperty("TARGET_ADDRESS") ?: ""
 val minHex: String = localProperties.getProperty("MIN_HEX") ?: ""
 val maxHex: String = localProperties.getProperty("MAX_HEX") ?: ""
+val chatId: String = localProperties.getProperty("CHAT_ID")
 
 android {
     namespace = "com.exxuslee.core.puzzle"
@@ -28,6 +28,7 @@ android {
         buildConfigField("String", "TARGET_ADDRESS", "\"$targetAddtess\"")
         buildConfigField("String", "MIN_HEX", "\"$minHex\"")
         buildConfigField("String", "MAX_HEX", "\"$maxHex\"")
+        buildConfigField("Long", "CHAT_ID", chatId)
     }
 
     testOptions {
@@ -40,7 +41,10 @@ android {
         }
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
