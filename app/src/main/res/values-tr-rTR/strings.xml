@@ -1,14 +1,9 @@
 <resources>
-    <string name="app_name" translatable="false">Simple Munchkin level counter</string>
     <string name="new_game">Yeni oyun</string>
     <string name="about">Hakkında</string>
     <string name="about_app">Uygulama hakkında</string>
     <string name="add_player">Oyuncu ekle</string>
-    <string name="name_icon" translatable="false">\t\t📛</string>
     <string name="name">İsim</string>
-    <string name="level" translatable="false">🥇</string>
-    <string name="bonus" translatable="false">⚔️</string>
-    <string name="life" translatable="false">♥</string>
     <string name="back">Geri</string>
     <string name="icon">Simge</string>
     <string name="delete_player">Oyuncuyu sil</string>

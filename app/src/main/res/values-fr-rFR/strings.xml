@@ -1,14 +1,9 @@
 <resources>
-    <string name="app_name" translatable="false">Simple Munchkin level counter</string>
     <string name="new_game">Nouvelle partie</string>
     <string name="about">À propos</string>
     <string name="about_app">À propos de l\'application</string>
     <string name="add_player">Ajouter un joueur</string>
-    <string name="name_icon" translatable="false">\t\t📛</string>
     <string name="name">Nom</string>
-    <string name="level" translatable="false">🥇</string>
-    <string name="bonus" translatable="false">⚔️</string>
-    <string name="life" translatable="false">♥</string>
     <string name="back">Retour</string>
     <string name="icon">Icône</string>
     <string name="delete_player">Supprimer le joueur</string>

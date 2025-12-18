@@ -2,11 +2,14 @@ package com.exxuslee.munchkinsimplecounter.features.game
 
 import android.content.res.Configuration
 import android.view.HapticFeedbackConstants
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,10 +33,17 @@ fun GameView(gameViewState: GameViewState, eventHandler: (Event) -> Unit) {
 
         UiState.Idle -> {
             val view = LocalView.current
+            val isLandscape =
+                LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+
             Column(
                 modifier = Modifier.fillMaxSize(),
             ) {
-                PlayerCard(null)
+                Row {
+                    PlayerCard(modifier = Modifier.weight(1f), null)
+                    if (isLandscape) PlayerCard(modifier = Modifier.weight(1f), null)
+                }
+
                 if (gameViewState.allPlayers == 0) ScreenMessageWithAction(
                     text = stringResource(R.string.game_empty_players_list),
                     icon = R.drawable.outline_empty_dashboard_24,
@@ -50,14 +60,17 @@ fun GameView(gameViewState: GameViewState, eventHandler: (Event) -> Unit) {
                     icon = R.drawable.outline_empty_dashboard_24,
                 )
 
-                LazyColumn(
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(if (isLandscape) 2 else 1),
                     modifier = Modifier.weight(1f),
-                    contentPadding = PaddingValues(vertical = 8.dp)
+                    contentPadding = PaddingValues(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(gameViewState.activePlayers) { player ->
                         val icon = if (player.reverseSex) player.icon + 1 else player.icon
                         PlayerCard(
-                            icon,
+                            iconRes = icon,
                             name = player.name,
                             level = player.level.toString(),
                             bonus = player.bonus.toString(),
@@ -75,8 +88,6 @@ fun GameView(gameViewState: GameViewState, eventHandler: (Event) -> Unit) {
                     }
                 }
 
-                val isLandscape =
-                    LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
                 if (!isLandscape) BottomNavigationBar { event ->
                     view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                     eventHandler(event)

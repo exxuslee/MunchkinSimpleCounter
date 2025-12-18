@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name" translatable="false">Simple Munchkin level counter</string>
+    <string name="name_icon" translatable="false">\t\t📛</string>
+    <string name="level" translatable="false">🥇</string>
+    <string name="bonus" translatable="false">😎</string>
+    <string name="life" translatable="false">⚔️</string>
     <string name="new_game">New game</string>
     <string name="about">About</string>
     <string name="about_app">About app</string>
     <string name="add_player">Add player</string>
-    <string name="name_icon" translatable="false">\t\t📛</string>
     <string name="name">Name</string>
-    <string name="level" translatable="false">🥇</string>
-    <string name="bonus" translatable="false">⚔️</string>
-    <string name="life" translatable="false">♥</string>
     <string name="back">back</string>
     <string name="icon">icon</string>
     <string name="delete_player">Delete player</string>

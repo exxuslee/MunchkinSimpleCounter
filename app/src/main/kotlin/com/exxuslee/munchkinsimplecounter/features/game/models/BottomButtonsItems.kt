@@ -13,22 +13,22 @@ sealed class BottomButtonsItems(
 
     data object AddLevel : BottomButtonsItems(
         label = { stringResource(R.string.add_level) },
-        icon = { painterResource(R.drawable.ic_baseline_sentiment_satisfied_alt_24) },
+        icon = { painterResource(R.drawable.outline_trophy_24) },
     )
 
     data object AddBonus : BottomButtonsItems(
         label = { stringResource(R.string.add_bonus) },
-        icon = { painterResource(R.drawable.ic_baseline_fastfood_24) },
+        icon = { painterResource(R.drawable.outline_add_moderator_24) },
     )
 
     data object SubLevel : BottomButtonsItems(
         label = { stringResource(R.string.sub_level) },
-        icon = { painterResource(R.drawable.ic_baseline_sentiment_very_dissatisfied_24) },
+        icon = { painterResource(R.drawable.outline_skull_24) },
     )
 
     data object SubBonus : BottomButtonsItems(
         label = { stringResource(R.string.sub_bonus) },
-        icon = { painterResource(R.drawable.ic_baseline_no_food_24) },
+        icon = { painterResource(R.drawable.outline_remove_moderator_24) },
     )
 
 }

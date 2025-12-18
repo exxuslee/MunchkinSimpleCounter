@@ -1,13 +1,11 @@
 package com.exxuslee.munchkinsimplecounter.features.game
 
-import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.game.models.Action
 import com.exxuslee.munchkinsimplecounter.features.game.models.Event
 import com.exxuslee.munchkinsimplecounter.ui.common.AddPlayerDialog

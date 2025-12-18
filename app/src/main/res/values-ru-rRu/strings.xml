@@ -1,14 +1,9 @@
 <resources>
-    <string name="app_name" translatable="false">Простой счетчик уровней Munchkin</string>
     <string name="new_game">Новая игра</string>
     <string name="about">О приложении</string>
     <string name="about_app">О приложении</string>
     <string name="add_player">Добавить игрока</string>
-    <string name="name_icon" translatable="false">\t\t📛</string>
     <string name="name">Имя</string>
-    <string name="level" translatable="false">🥇</string>
-    <string name="bonus" translatable="false">⚔️</string>
-    <string name="life" translatable="false">♥</string>
     <string name="back">Назад</string>
     <string name="icon">Иконка</string>
     <string name="delete_player">Удалить игрока</string>
