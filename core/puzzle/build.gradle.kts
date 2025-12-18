@@ -1,17 +1,18 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("org.jetbrains.kotlin.android")
-    id("com.android.library")
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
-    namespace = "com.exxuslee.domain"
+    namespace = "com.exxuslee.core.puzzle"
     compileSdk = property("version.compileSdk").toString().toInt()
 
     defaultConfig {
         minSdk = property("version.minSdk").toString().toInt()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     testOptions {
@@ -24,27 +25,24 @@ android {
         }
         release {
             isMinifyEnabled = false
-            consumerProguardFiles("consumer-rules.pro")        }
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
 
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
     }
-
 }
 
 dependencies {
-    implementation(libs.koin.android)
-    implementation(libs.kotlinx.coroutines.core)
-
-    testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter)
-    testImplementation(libs.kotlinx.coroutines.test)
+    implementation(kotlin("stdlib"))
+    implementation("fr.acinq.secp256k1:secp256k1-kmp-jni-android:0.22.0")
+    implementation(libs.androidx.work.runtime.ktx)
 }

@@ -13,8 +13,7 @@ koin = "4.1.1"
 room = "2.8.4"
 ksp = "2.2.21-2.0.4"
 coroutines = "1.10.2"
-mockito = "6.1.0"
-mockitoInline = "5.2.0"
+
 junitJupiter = "6.0.1"
 activity-compose = "1.12.2"
 splashscreen = "1.2.0"
@@ -30,6 +29,7 @@ navigation = "2.9.6"
 ktor = "3.3.3"
 
 firebaseBom = "34.7.0"
+workRuntimeKtx = "2.11.0"
 
 [libraries]
 
@@ -76,9 +76,6 @@ junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.r
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 
-mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
-mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 androidx-arch-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "archCoreTesting" }
 android-arch-core-testing = { module = "android.arch.core:core-testing", version.ref = "archCoreTestingLegacy" }
 
@@ -88,6 +85,7 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-client-content-encoding = { module = "io.ktor:ktor-client-encoding", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

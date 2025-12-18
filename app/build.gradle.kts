@@ -65,6 +65,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":core:localize"))
+    implementation(project(":core:puzzle"))
     implementation(fileTree("libs") { include("*.jar") })
 
     implementation(platform(libs.firebase.bom))
@@ -90,17 +91,14 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
     implementation(libs.koin.navigation)
+    implementation(libs.androidx.work.runtime.ktx)
 
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.mockito.kotlin)
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.androidx.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.androidx.arch.core.testing)
-    testImplementation(libs.mockito.inline)
 
-    androidTestImplementation(libs.mockito.core)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.arch.core.testing)

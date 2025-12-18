@@ -83,8 +83,6 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.android.arch.core.testing)
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.mockito.kotlin)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.androidx.junit)
 
