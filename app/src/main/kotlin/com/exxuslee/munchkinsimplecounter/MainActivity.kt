@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.exxuslee.domain.usecases.ThemeController
 import com.exxuslee.munchkinsimplecounter.features.root.MainContent
 import com.exxuslee.munchkinsimplecounter.ui.common.rememberDoubleBackPressHandler
@@ -16,6 +17,7 @@ import org.koin.compose.koinInject
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
@@ -31,8 +33,6 @@ class MainActivity : ComponentActivity() {
             AppTheme(isDark) {
                 MainContent()
             }
-
         }
     }
-
 }

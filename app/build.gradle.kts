@@ -72,16 +72,11 @@ dependencies {
     implementation(libs.firebase.crashlytics)
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.material)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.preference.ktx)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
@@ -89,9 +84,7 @@ dependencies {
     implementation(libs.compose.ui.preview)
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
-    implementation(libs.compose.material.iconsExtended)
     implementation(libs.compose.ui.text.googlefonts)
-    implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
 
     implementation(libs.koin.android)

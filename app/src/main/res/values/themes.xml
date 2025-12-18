@@ -20,4 +20,16 @@
     </style>
 
     <style name="Theme.MunchkinSimpleCounter" parent="Base.Theme.MunchkinSimpleCounter" />
+
+    <!-- Тема для системного SplashScreen (Android 12+) -->
+    <style name="Theme.MunchkinSimpleCounter.Splash" parent="Theme.SplashScreen">
+        <!-- Фон заставки -->
+        <item name="windowSplashScreenBackground">@color/color_bg_1</item>
+        <!-- Иконка заставки (можно заменить на свой логотип) -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <!-- Длительность анимации (мс) -->
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <!-- Тема, которая будет применена после скрытия splash -->
+        <item name="postSplashScreenTheme">@style/Theme.MunchkinSimpleCounter</item>
+    </style>
 </resources>
