@@ -162,7 +162,8 @@ private fun MainTopBar(
         title = {
             Text(
                 text = currentRoute?.label() ?: "",
-                style = MaterialTheme.typography.headlineMedium
+                style = MaterialTheme.typography.headlineMedium,
+                maxLines = 1,
             )
         },
         navigationIcon = {
