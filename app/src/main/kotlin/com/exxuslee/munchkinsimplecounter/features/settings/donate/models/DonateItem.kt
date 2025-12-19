@@ -3,35 +3,35 @@ package com.exxuslee.munchkinsimplecounter.features.settings.donate.models
 import com.exxuslee.munchkinsimplecounter.R
 
 
-sealed class DonateTickerItem(
+sealed class DonateItem(
     val label: String,
     val icon: Int,
 ) {
-    data object Bitcoin : DonateTickerItem(
+    data object Bitcoin : DonateItem(
         label = "BTC", icon = R.drawable.icons8_bitcoin_80,
     )
 
-    data object Ethereum : DonateTickerItem(
+    data object Ethereum : DonateItem(
         label = "ETH", icon = R.drawable.icons8_ethereum_80
     )
 
-    data object Bnb : DonateTickerItem(
+    data object Bnb : DonateItem(
         label = "BNB", icon = R.drawable.icon_bnb
     )
 
-    data object Solana : DonateTickerItem(
+    data object Solana : DonateItem(
         label = "SOL", icon = R.drawable.icon_solana
     )
 
-    data object Tron : DonateTickerItem(
+    data object Tron : DonateItem(
         label = "TRX", icon = R.drawable.icon_tron
     )
 
-    data object Usdt : DonateTickerItem(
+    data object Usdt : DonateItem(
         label = "USDT", icon = R.drawable.icons8_tether_80
     )
 
-    data object Usdc : DonateTickerItem(
+    data object Usdc : DonateItem(
         label = "USDC", icon = R.drawable.icons8_usdc_80
     )
 

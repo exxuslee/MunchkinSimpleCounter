@@ -31,8 +31,9 @@ class PriceRepositoryImpl(
 
         return try {
             val tokens = cmCapService.topTokens()
+            if (tokens.isEmpty()) return listOf()
             tokensDAO.insertAll(tokens.map { it.toEntity() })
-            settingsRepository.priceTimestamp(System.currentTimeMillis())
+            if (tokens.isNotEmpty()) settingsRepository.priceTimestamp(System.currentTimeMillis())
             tokens
         } catch (e: Exception) {
             Log.e("PriceRepositoryImpl", "Error fetching prices: ${e.message}")

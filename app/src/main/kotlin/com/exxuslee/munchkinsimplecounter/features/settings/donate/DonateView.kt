@@ -44,7 +44,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateChainItem
-import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateTickerItem
+import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateItem
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.ViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.CellUniversalSection
@@ -211,9 +211,9 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
 
 @Composable
 private fun DonationTickerSelector(
-    items: List<DonateTickerItem>,
-    selectedAmount: DonateTickerItem,
-    onItemSelected: (DonateTickerItem) -> Unit,
+    items: List<DonateItem>,
+    selectedAmount: DonateItem,
+    onItemSelected: (DonateItem) -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -364,8 +364,8 @@ fun DonateView_Preview() {
         DonateView(
             viewState = ViewState(
                 donates = DonateChainItem.chains(),
-                tickers = DonateTickerItem.btcList(),
-                selectedTicker = DonateTickerItem.Bitcoin,
+                tickers = DonateItem.btcList(),
+                selectedTicker = DonateItem.Bitcoin,
                 selectedChain = DonateChainItem.Bitcoin,
             ),
             eventHandler = {}

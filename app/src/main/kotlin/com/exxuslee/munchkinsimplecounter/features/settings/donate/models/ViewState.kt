@@ -13,8 +13,8 @@ data class ViewState(
     ),
     val selectedAmount: Int = availableAmounts[1].second,
     val outAmount: String = selectedAmount.toString(),
-    val tickers: List<DonateTickerItem>,
-    val selectedTicker: DonateTickerItem,
+    val tickers: List<DonateItem>,
+    val selectedTicker: DonateItem,
     val selectedChain: DonateChainItem,
     val isAddressCopied: Boolean = false,
 )

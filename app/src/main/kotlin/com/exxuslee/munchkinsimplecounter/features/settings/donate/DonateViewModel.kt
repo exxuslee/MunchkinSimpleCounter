@@ -5,7 +5,7 @@ import com.exxuslee.domain.model.TokenData
 import com.exxuslee.domain.usecases.PriceUseCase
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.Action
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateChainItem
-import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateTickerItem
+import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.DonateItem
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.ViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
@@ -20,8 +20,8 @@ class DonateViewModel(
 ) : BaseViewModel<ViewState, Action, Event>(
     initialState = ViewState(
         donates = DonateChainItem.chains(),
-        tickers = DonateTickerItem.trxList(),
-        selectedTicker = DonateTickerItem.Usdt,
+        tickers = DonateItem.trxList(),
+        selectedTicker = DonateItem.Usdt,
         selectedChain = DonateChainItem.Tron,
     )
 ) {
@@ -47,8 +47,8 @@ class DonateViewModel(
         }
     }
 
-    private fun tickerSelected(tickerItem: DonateTickerItem) {
-        if (tickerItem is DonateTickerItem.Usdt || viewState.selectedTicker is DonateTickerItem.Usdc) {
+    private fun tickerSelected(tickerItem: DonateItem) {
+        if (tickerItem is DonateItem.Usdt || viewState.selectedTicker is DonateItem.Usdc) {
             viewState = viewState.copy(
                 selectedTicker = tickerItem,
                 outAmount = viewState.selectedAmount.toString(),
@@ -66,7 +66,7 @@ class DonateViewModel(
     }
 
     private fun amountSelected(amount: Int) {
-        if (viewState.selectedTicker is DonateTickerItem.Usdt || viewState.selectedTicker is DonateTickerItem.Usdc) {
+        if (viewState.selectedTicker is DonateItem.Usdt || viewState.selectedTicker is DonateItem.Usdc) {
             viewState = viewState.copy(
                 selectedAmount = amount,
                 outAmount = amount.toString(),
@@ -85,47 +85,66 @@ class DonateViewModel(
 
     private fun chainSelected(chain: DonateChainItem) {
         when (chain) {
-            DonateChainItem.BSC -> viewState = viewState.copy(
-                tickers = listOf(
-                    DonateTickerItem.Bnb, DonateTickerItem.Usdt, DonateTickerItem.Usdc,
-                ),
-                selectedChain = chain,
-                selectedTicker = DonateTickerItem.Usdt,
-                outAmount = viewState.selectedAmount.toString(),
-            )
+            DonateChainItem.BSC -> {
+                val selectedTicker = if (DonateItem.bnbList().contains(viewState.selectedTicker)) {
+                    viewState.selectedTicker
+                } else DonateItem.Usdt
+                viewState = viewState.copy(
+                    tickers = DonateItem.bnbList(),
+                    selectedChain = chain,
+                    selectedTicker = selectedTicker,
+                    outAmount = viewState.selectedAmount.toString(),
+                )
+            }
 
             DonateChainItem.Bitcoin -> {
-                val price = tokens.firstOrNull { it.symbol == "BTC" }?.price ?: BigDecimal("80000")
+                val price =
+                    tokens.firstOrNull { it.symbol == "BTC" }?.price ?: BigDecimal("80000")
                 val amountInToken = viewState.selectedAmount.toDouble() / price.toDouble()
                 val rounded = BigDecimal(amountInToken, MathContext(3, RoundingMode.HALF_UP))
                 viewState = viewState.copy(
-                    tickers = DonateTickerItem.btcList(),
+                    tickers = DonateItem.btcList(),
                     selectedChain = chain,
-                    selectedTicker = DonateTickerItem.Bitcoin,
+                    selectedTicker = DonateItem.Bitcoin,
                     outAmount = rounded.toPlainString(),
                 )
             }
 
-            DonateChainItem.Ethereum -> viewState = viewState.copy(
-                tickers = DonateTickerItem.ethList(),
-                selectedChain = chain,
-                selectedTicker = DonateTickerItem.Usdt,
-                outAmount = viewState.selectedAmount.toString(),
-            )
+            DonateChainItem.Ethereum -> {
+                val selectedTicker = if (DonateItem.ethList().contains(viewState.selectedTicker)) {
+                    viewState.selectedTicker
+                } else DonateItem.Usdt
+                viewState = viewState.copy(
+                    tickers = DonateItem.ethList(),
+                    selectedChain = chain,
+                    selectedTicker = selectedTicker,
+                    outAmount = viewState.selectedAmount.toString(),
+                )
+            }
 
-            DonateChainItem.Solana -> viewState = viewState.copy(
-                tickers = DonateTickerItem.solList(),
-                selectedChain = chain,
-                selectedTicker = DonateTickerItem.Usdt,
-                outAmount = viewState.selectedAmount.toString(),
-            )
+            DonateChainItem.Solana -> {
+                val selectedTicker = if (DonateItem.solList().contains(viewState.selectedTicker)) {
+                    viewState.selectedTicker
+                } else DonateItem.Usdt
+                viewState = viewState.copy(
+                    tickers = DonateItem.solList(),
+                    selectedChain = chain,
+                    selectedTicker = selectedTicker,
+                    outAmount = viewState.selectedAmount.toString(),
+                )
+            }
 
-            DonateChainItem.Tron -> viewState = viewState.copy(
-                tickers = DonateTickerItem.trxList(),
-                selectedChain = chain,
-                selectedTicker = DonateTickerItem.Usdt,
-                outAmount = viewState.selectedAmount.toString(),
-            )
+            DonateChainItem.Tron -> {
+                val selectedTicker = if (DonateItem.trxList().contains(viewState.selectedTicker)) {
+                    viewState.selectedTicker
+                } else DonateItem.Usdt
+                viewState = viewState.copy(
+                    tickers = DonateItem.trxList(),
+                    selectedChain = chain,
+                    selectedTicker = selectedTicker,
+                    outAmount = viewState.selectedAmount.toString(),
+                )
+            }
         }
     }
 
