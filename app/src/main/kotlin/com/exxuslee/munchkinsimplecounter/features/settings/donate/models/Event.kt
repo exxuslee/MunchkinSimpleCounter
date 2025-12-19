@@ -5,4 +5,5 @@ sealed class Event {
     data class OnAmountSelected(val amount: Int): Event()
     data class OnTickerSelected(val tickerItem: DonateItem): Event()
     data class OnChainSelected(val chainItem: DonateChainItem): Event()
+    data object OnDonate: Event()
 }

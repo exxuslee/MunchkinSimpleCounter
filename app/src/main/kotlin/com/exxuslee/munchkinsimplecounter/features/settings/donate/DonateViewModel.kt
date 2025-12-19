@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.donate
 
+import androidx.core.net.toUri
 import androidx.lifecycle.viewModelScope
 import com.exxuslee.domain.model.TokenData
 import com.exxuslee.domain.usecases.PriceUseCase
@@ -10,6 +11,7 @@ import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.Event
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.models.ViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import java.math.MathContext
@@ -44,6 +46,10 @@ class DonateViewModel(
 
             Event.AddressCopied -> viewState = viewState.copy(isAddressCopied = true)
 
+            Event.OnDonate -> {
+                viewState = viewState.copy(isAddressCopied = true)
+                openCryptoDonate()
+            }
         }
     }
 
@@ -146,6 +152,52 @@ class DonateViewModel(
                 )
             }
         }
+    }
+
+    fun openCryptoDonate() {
+        val chain: DonateChainItem = viewState.selectedChain
+        val ticker: DonateItem = viewState.selectedTicker
+        val amount: String = viewState.outAmount
+
+        val uri = when (chain) {
+
+            DonateChainItem.Bitcoin -> {
+                "bitcoin:${chain.address}?amount=$amount".toUri()
+            }
+
+            DonateChainItem.Ethereum -> when (ticker) {
+                DonateItem.Ethereum ->
+                    "ethereum:${chain.address}?value=$amount".toUri()
+
+                DonateItem.Usdt, DonateItem.Usdc ->
+                    ("https://link.trustwallet.com/send?address=${chain.address}&amount=$amount").toUri()
+
+                else -> null
+            }
+
+            DonateChainItem.BSC -> when (ticker) {
+                DonateItem.Bnb -> "ethereum:${chain.address}?value=$amount".toUri()
+
+                DonateItem.Usdt, DonateItem.Usdc ->
+                    ("https://link.trustwallet.com/send?address=${chain.address}&amount=$amount").toUri()
+
+                else -> null
+            }
+
+            DonateChainItem.Solana -> {
+                "solana:${chain.address}?amount=$amount".toUri()
+            }
+
+            DonateChainItem.Tron -> {
+                "tron:${chain.address}?amount=$amount".toUri()
+            }
+        }
+
+        viewModelScope.launch {
+            delay(500)
+            uri?.let { viewAction = Action.Donate(it) }
+        }
+
     }
 
 }

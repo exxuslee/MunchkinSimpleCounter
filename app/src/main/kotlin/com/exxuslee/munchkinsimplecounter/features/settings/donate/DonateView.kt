@@ -181,7 +181,7 @@ fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
         VSpacer(12.dp)
         TextButton(
             onClick = {
-                eventHandler.invoke(Event.AddressCopied)
+                eventHandler.invoke(Event.OnDonate)
             },
             colors = ButtonDefaults.textButtonColors(
                 containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
