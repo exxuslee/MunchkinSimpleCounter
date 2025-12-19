@@ -4,6 +4,25 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="bitcoin" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="ethereum" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tron" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="solana" />
+        </intent>
+    </queries>
+
     <application
         android:name=".App"
         android:allowBackup="true"

@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.donate
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -25,7 +26,13 @@ fun DonateScreen(
         is Action.Donate -> {
             viewModel.clearAction()
             val uri = (viewAction as Action.Donate).uri
-            LocalContext.current.startActivity(Intent(Intent.ACTION_VIEW, uri))
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+
+            if (intent.resolveActivity(LocalContext.current.packageManager) != null) {
+                LocalContext.current.startActivity(Intent.createChooser(intent, "Choose wallet"))
+            } else {
+                // fallback: Play Market / snackbar / toast
+            }
         }
 
         null -> {}
