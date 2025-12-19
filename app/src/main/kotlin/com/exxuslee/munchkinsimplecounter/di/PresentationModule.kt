@@ -1,7 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.di
 
 
-
 import com.exxuslee.munchkinsimplecounter.features.game.GameViewModel
 import com.exxuslee.munchkinsimplecounter.features.root.MainViewModel
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.DonateViewModel
@@ -13,7 +12,7 @@ import org.koin.dsl.module
 
 val presentationModule = module {
 
-    viewModel { MainViewModel() }
+    viewModel { MainViewModel(get()) }
 
     viewModel { GameViewModel(get()) }
 

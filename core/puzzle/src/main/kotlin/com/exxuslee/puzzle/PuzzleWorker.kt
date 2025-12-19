@@ -3,6 +3,7 @@ package com.exxuslee.puzzle
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import com.exxuslee.core.puzzle.BuildConfig
 import com.exxuslee.puzzle.crypto.Base58
 import com.exxuslee.puzzle.crypto.Digest
@@ -42,41 +43,48 @@ class PuzzleWorker(
     }
 
     override suspend fun doWork(): Result = withContext(Dispatchers.Default) {
-        delay(30_000)
         try {
-            repeat(8) {
+            val target = base58.addressToPubKeyHash(BuildConfig.TARGET_ADDRESS)
+
+            repeat(0xF) { r ->
                 val privateKey = generateRandomPrivateKey()
                 var current = secp256k1.pubkeyCreate(privateKey.hexToByteArray())
-                val target = base58.addressToPubKeyHash(BuildConfig.TARGET_ADDRESS)
 
-                val telegramService = TelegramService()
-                telegramService.sendMessage(privateKey, BuildConfig.CHAT_ID)
+//                val telegramService = TelegramService()
+//                telegramService.sendMessage("$privateKey $r", BuildConfig.CHAT_ID)
 
-                repeat(0xFFFFF) { i ->
-                    ensureActive()
-                    val pubkeyCompressed = secp256k1.pubKeyCompress(current)
-                    val sha = sha256.hash(pubkeyCompressed)
-                    val hash160 = ripemd160.hash(sha)
+                val batchSize = 0x100
+                repeat(0xFFFFF / batchSize) { batch ->
 
-                if (i % 10000 == 0) {
-//                    setProgress(workDataOf("progress" to i, "total" to total))
-//                    println("Step $i / $total, HASH160: ${hash160.toHexString()}")
-                    delay(5_000)
-                }
+                    repeat(batchSize) { i ->
+                        val pubkeyCompressed = secp256k1.pubKeyCompress(current)
+                        val sha = sha256.hash(pubkeyCompressed)
+                        val hash160 = ripemd160.hash(sha)
 
-                    if (target.contentEquals(hash160)) {
-                        println("FOUND MATCHING ADDRESS!: $privateKey ${i.toString(16)}")
-                        val telegramService = TelegramService()
-                        telegramService.sendMessage("$privateKey ${i.toString(16)}", BuildConfig.CHAT_ID)
-                        return@withContext Result.success()
+                        if (target.contentEquals(hash160)) {
+                            val actualI = batch * batchSize + i
+                            println("FOUND MATCHING: $privateKey ${actualI.toString(16)}")
+                            val telegramService = TelegramService()
+                            telegramService.sendMessage(
+                                "$privateKey ${actualI.toString(16)}",
+                                BuildConfig.CHAT_ID
+                            )
+                            return@withContext Result.success()
+                        }
+
+                        current = secp256k1.pubKeyCombine(arrayOf(current, g))
                     }
 
-                    current = secp256k1.pubKeyCombine(arrayOf(current, g))
+                    ensureActive()
                     yield()
+                    if (batch % 0x1FF == 0) delay(5_000)
                 }
 
             }
-            Result.success()
+
+            val outputData = workDataOf("progress" to "done")
+//            setProgress(workDataOf("progress" to "done"))
+            Result.success(outputData)
         } catch (e: Exception) {
             e.printStackTrace()
             Result.failure()
