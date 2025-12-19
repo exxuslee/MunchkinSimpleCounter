@@ -76,7 +76,6 @@
 The app works fully offline, does not collect any personal data, contains no ads, and does not use network access.
 Created by a fan of Munchkin as a convenient companion for casual and tabletop-friendly play.</string>
     <string name="version_title">Version</string>
-    <string name="version_value">1.2.0</string>
     <string name="privacy_title">Privacy</string>
     <string name="privacy_text">We do not collect personal data.</string>
     <string name="rate_app_title">Rate app</string>

@@ -71,7 +71,6 @@
 アプリは完全にオフラインで動作し、個人データを収集せず、広告を含まず、ネットワークアクセスを使用しません。
 Munchkinのファンによって、カジュアルでテーブルトップフレンドリーなプレイのための便利なコンパニオンとして作成されました。</string>
     <string name="version_title">バージョン</string>
-    <string name="version_value">1.2.0</string>
     <string name="privacy_title">プライバシー</string>
     <string name="privacy_text">個人データは収集しません。</string>
     <string name="rate_app_title">Rate app</string>

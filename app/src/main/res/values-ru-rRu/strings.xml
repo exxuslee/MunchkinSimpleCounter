@@ -71,7 +71,6 @@
 Приложение полностью работает офлайн, не собирает персональные данные, не содержит рекламы и не использует доступ к сети.
 Создано фанатом Munchkin как удобный помощник для непринужденной и настольной игры.</string>
     <string name="version_title">Версия</string>
-    <string name="version_value">1.2.0</string>
     <string name="privacy_title">Конфиденциальность</string>
     <string name="privacy_text">Мы не собираем персональные данные.</string>
     <string name="rate_app_title">Оценить приложение</string>

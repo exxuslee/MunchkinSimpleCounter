@@ -71,7 +71,6 @@
 Die App funktioniert vollständig offline, erfasst keine persönlichen Daten, enthält keine Werbung und verwendet keinen Netzwerkzugang.
 Erstellt von einem Munchkin-Fan als praktischer Begleiter für lockeres und tischfreundliches Spielen.</string>
     <string name="version_title">Version</string>
-    <string name="version_value">1.2.0</string>
     <string name="privacy_title">Datenschutz</string>
     <string name="privacy_text">Wir erfassen keine persönlichen Daten.</string>
     <string name="rate_app_title">Rate app</string>

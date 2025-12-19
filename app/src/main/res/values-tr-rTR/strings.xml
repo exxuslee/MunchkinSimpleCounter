@@ -71,7 +71,6 @@
 Uygulama tamamen çevrimdışı çalışır, kişisel veri toplamaz, reklam içermez ve ağ erişimi kullanmaz.
 Munchkin hayranı tarafından, gündelik ve masa dostu oyun için uygun bir arkadaş olarak oluşturulmuştur.</string>
     <string name="version_title">Sürüm</string>
-    <string name="version_value">1.2.0</string>
     <string name="privacy_title">Gizlilik</string>
     <string name="privacy_text">Kişisel veri toplamıyoruz.</string>
     <string name="rate_app_title">Rate app</string>

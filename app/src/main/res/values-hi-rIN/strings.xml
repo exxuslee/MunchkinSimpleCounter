@@ -71,7 +71,6 @@
 ऐप पूरी तरह से ऑफलाइन काम करता है, कोई व्यक्तिगत डेटा एकत्र नहीं करता है, कोई विज्ञापन नहीं रखता है, और नेटवर्क एक्सेस का उपयोग नहीं करता है।
 Munchkin के एक प्रशंसक द्वारा आकस्मिक और टेबलटॉप-अनुकूल खेल के लिए एक सुविधाजनक साथी के रूप में बनाया गया है।</string>
     <string name="version_title">संस्करण</string>
-    <string name="version_value">1.2.0</string>
     <string name="privacy_title">गोपनीयता</string>
     <string name="privacy_text">हम व्यक्तिगत डेटा एकत्र नहीं करते हैं।</string>
     <string name="rate_app_title">Rate app</string>

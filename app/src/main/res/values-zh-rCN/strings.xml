@@ -71,7 +71,6 @@
 该应用完全离线工作，不收集任何个人数据，不包含广告，也不使用网络访问。
 由《Munchkin》粉丝创建，作为休闲和桌面友好游戏的便捷伴侣。</string>
     <string name="version_title">版本</string>
-    <string name="version_value">1.2.0</string>
     <string name="privacy_title">隐私</string>
     <string name="privacy_text">我们不收集个人数据。</string>
     <string name="rate_app_title">Rate app</string>

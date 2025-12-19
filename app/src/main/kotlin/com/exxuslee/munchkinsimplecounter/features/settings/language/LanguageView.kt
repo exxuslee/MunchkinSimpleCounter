@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -78,9 +79,15 @@ private fun LanguageCell(
             contentDescription = title
         )
         Column(modifier = Modifier.weight(1f)) {
-            Text(title)
+            Text(
+                title,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
             Spacer(Modifier.height(1.dp))
-            Text(subtitle)
+            Text(
+                subtitle,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
         Box(
             modifier = Modifier
@@ -88,12 +95,11 @@ private fun LanguageCell(
                 .fillMaxHeight(),
             contentAlignment = Alignment.Center
         ) {
-            if (checked) {
-                Icon(
-                    painter = painterResource(R.drawable.outline_check_24),
-                    contentDescription = null,
-                )
-            }
+            if (checked) Icon(
+                painter = painterResource(R.drawable.outline_check_24),
+                contentDescription = title,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
     }
 }

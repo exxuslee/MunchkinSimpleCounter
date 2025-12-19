@@ -16,6 +16,7 @@ enum class SupportedLocales(val tag: String, val locale: Locale, val icon: Int) 
     PT_BR("pt-BR", Locale.forLanguageTag("pt-BR"), R.drawable.icon_32_flag_brazil),
     RU_RU("ru-RU", Locale.forLanguageTag("ru-RU"), R.drawable.icon_32_flag_russia),
     TR_TR("tr-TR", Locale.forLanguageTag("tr-TR"), R.drawable.icon_32_flag_turkey),
+    UA_UA("ua-UA", Locale.forLanguageTag("ua-UA"), R.drawable.icon_32_flag_ukraine),
     UR_PK("ur-PK", Locale.forLanguageTag("ur-PK"), R.drawable.icon_32_flag_india),
     ZH_CN("zh-CN", Locale.forLanguageTag("zh-CN"), R.drawable.icon_32_flag_china);
 

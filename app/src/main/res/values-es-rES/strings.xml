@@ -71,7 +71,6 @@
 La aplicación funciona completamente sin conexión, no recopila datos personales, no contiene anuncios y no usa acceso a la red.
 Creada por un fan de Munchkin como compañero conveniente para un juego casual y amigable para mesa.</string>
     <string name="version_title">Versión</string>
-    <string name="version_value">1.2.0</string>
     <string name="privacy_title">Privacidad</string>
     <string name="privacy_text">No recopilamos datos personales.</string>
     <string name="rate_app_title">Rate app</string>

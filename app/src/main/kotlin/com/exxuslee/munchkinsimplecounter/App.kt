@@ -1,19 +1,13 @@
 package com.exxuslee.munchkinsimplecounter
 
 import android.app.Application
-import android.content.Context
 import com.exxuslee.munchkinsimplecounter.di.appModule
-import com.hwasfy.localize.util.LocaleHelper
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
 class App : Application() {
-
-    override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(LocaleHelper.wrapContext(base))
-    }
 
     override fun onCreate() {
         super.onCreate()

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalContext
@@ -17,16 +18,15 @@ object LanguageManager {
 
     fun setLanguage(context: Context, appLocale: SupportedLocales) {
         val tag = appLocale.tag
-        val locale = appLocale.locale
-
+        Locale.setDefault(appLocale.locale)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context.getSystemService(android.app.LocaleManager::class.java)
                 ?.applicationLocales = LocaleList.forLanguageTags(tag)
         } else {
             LocaleHelper.persist(context, tag)
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(tag))
             restartApp(context)
         }
-        Locale.setDefault(locale)
     }
 
     fun getCurrentLocale(context: Context): SupportedLocales {
@@ -38,10 +38,11 @@ object LanguageManager {
             if (!locales.isEmpty) locales[0].toLanguageTag() else defaultTag
         } else {
             val locales = AppCompatDelegate.getApplicationLocales()
-            if (!locales.isEmpty) locales[0]?.toLanguageTag() ?: LocaleHelper.getPersistedLocaleTag(
-                context
-            )
-            else LocaleHelper.getPersistedLocaleTag(context)
+            if (!locales.isEmpty) {
+                locales[0]?.toLanguageTag() ?: LocaleHelper.getPersistedLocaleTag(context)
+            } else {
+                LocaleHelper.getPersistedLocaleTag(context)
+            }
         }
         return SupportedLocales.fromTag(localeTag)
     }
