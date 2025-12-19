@@ -169,17 +169,32 @@ class DonateViewModel(
                 DonateItem.Ethereum ->
                     "ethereum:${chain.address}?value=$amount".toUri()
 
-                DonateItem.Usdt, DonateItem.Usdc ->
-                    ("https://link.trustwallet.com/send?address=${chain.address}&amount=$amount").toUri()
+                DonateItem.Usdt, DonateItem.Usdc -> {
+                    val contract = when (ticker) {
+                        DonateItem.Usdt -> "0xdAC17F958D2ee523a2206206994597C13D831ec7" // USDT ERC20
+                        DonateItem.Usdc -> "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eb48" // USDC ERC20
+                        else -> ""
+                    }
+                    val chainId = 1 // Ethereum mainnet
+                    "ethereum:$contract@$chainId?value=$amount".toUri()
+                }
 
                 else -> null
             }
 
             DonateChainItem.BSC -> when (ticker) {
-                DonateItem.Bnb -> "ethereum:${chain.address}?value=$amount".toUri()
+                DonateItem.Bnb ->
+                    "ethereum:${chain.address}?value=$amount".toUri() // MetaMask BNB в BEP20
 
-                DonateItem.Usdt, DonateItem.Usdc ->
-                    ("https://link.trustwallet.com/send?address=${chain.address}&amount=$amount").toUri()
+                DonateItem.Usdt, DonateItem.Usdc -> {
+                    val contract = when (ticker) {
+                        DonateItem.Usdt -> "0x55d398326f99059fF775485246999027B3197955" // USDT BEP20
+                        DonateItem.Usdc -> "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d" // USDC BEP20
+                        else -> ""
+                    }
+                    val chainId = 56 // BSC mainnet
+                    "ethereum:$contract@$chainId?value=$amount".toUri()
+                }
 
                 else -> null
             }
@@ -197,7 +212,6 @@ class DonateViewModel(
             delay(500)
             uri?.let { viewAction = Action.Donate(it) }
         }
-
     }
 
 }
