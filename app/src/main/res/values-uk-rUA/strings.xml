@@ -78,4 +78,7 @@
     <string name="game_empty_players_list">Порожньо.\nБудь ласка, додайте гравців</string>
     <string name="retry">Повторити</string>
     <string name="error_description">Перевірте підключення до мережі і спробуйте ще раз</string>
+    <string name="dice">Кубик</string>
+    <string name="throw_dice">Кинути 🎲</string>
+
 </resources>

@@ -78,6 +78,8 @@ Creada por un fan de Munchkin como compañero conveniente para un juego casual y
     <string name="game_empty_players_list">Vacío.\nPor favor, añade jugadores</string>
     <string name="retry">Reintentar</string>
     <string name="error_description">Comprueba tu conexión e inténtalo de nuevo</string>
+    <string name="dice">Dado</string>
+    <string name="throw_dice">Lanzar 🎲</string>
 
 </resources>
 

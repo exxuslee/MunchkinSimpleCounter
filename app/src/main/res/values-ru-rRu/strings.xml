@@ -78,6 +78,8 @@
     <string name="game_empty_players_list">Пусто.\nПожалуйста, добавьте игроков</string>
     <string name="retry">Повторить</string>
     <string name="error_description">Проверьте подключение к сети и попробуйте ещё раз</string>
+    <string name="dice">Кубик</string>
+    <string name="throw_dice">Бросить 🎲</string>
 </resources>
 
 

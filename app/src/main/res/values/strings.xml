@@ -83,5 +83,7 @@ Created by a fan of Munchkin as a convenient companion for casual and tabletop-f
     <string name="game_empty_players_list">Empty.\nPlease add the players</string>
     <string name="retry">Retry</string>
     <string name="error_description">Check your connection and try again</string>
+    <string name="dice">Dice</string>
+    <string name="throw_dice">Throw 🎲</string>
 
 </resources>

@@ -78,6 +78,8 @@ Munchkin کے ایک پرستار کے ذریعہ کیشول اور ٹیبل ٹ�
     <string name="game_empty_players_list">خالی ہے۔\nبراہ کرم کھلاڑی شامل کریں</string>
     <string name="retry">دوبارہ کوشش کریں</string>
     <string name="error_description">اپنا کنکشن چیک کریں اور دوبارہ کوشش کریں</string>
+    <string name="dice">پانسہ</string>
+    <string name="throw_dice">پھینکیں 🎲</string>
 
 </resources>
 

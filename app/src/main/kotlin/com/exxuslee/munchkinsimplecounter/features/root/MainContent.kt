@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -35,6 +36,7 @@ import com.exxuslee.munchkinsimplecounter.features.game.GameViewModel
 import com.exxuslee.munchkinsimplecounter.features.game.models.BottomButtonsItems
 import com.exxuslee.munchkinsimplecounter.features.game.models.Event
 import com.exxuslee.munchkinsimplecounter.features.game.models.GameViewState
+import com.exxuslee.munchkinsimplecounter.features.root.models.Action
 import com.exxuslee.munchkinsimplecounter.features.root.models.MainEvent
 import com.exxuslee.munchkinsimplecounter.features.root.models.ViewState
 import com.exxuslee.munchkinsimplecounter.features.settings.about.AboutScreen
@@ -46,6 +48,7 @@ import com.exxuslee.munchkinsimplecounter.navigation.Routes
 import com.exxuslee.munchkinsimplecounter.navigation.asRoute
 import com.exxuslee.munchkinsimplecounter.navigation.isPrimaryRoute
 import com.exxuslee.munchkinsimplecounter.ui.common.AnimationType
+import com.exxuslee.munchkinsimplecounter.ui.common.DiceRollDialog
 import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
 import com.exxuslee.munchkinsimplecounter.ui.common.LocalNavController
 import com.exxuslee.munchkinsimplecounter.ui.common.VSpacer
@@ -84,6 +87,8 @@ fun MainContent(
         }
 
         when (viewAction) {
+            Action.Dice -> DiceRollDialog { mainViewModel.clearAction() }
+
             null -> {}
         }
     }
@@ -130,7 +135,10 @@ private fun LandscapeLayout(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            NavigationRail(containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp)) {
+            NavigationRail(
+                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp),
+                windowInsets = WindowInsets(),
+            ) {
                 LandscapeNavigationButtons(
                     currentRoute,
                     navController,
@@ -178,6 +186,14 @@ private fun MainTopBar(
         },
         actions = {
             if (currentRoute?.isPrimaryRoute() == true) {
+                IconButton(onClick = {
+                    viewModel.obtainEvent(MainEvent.Dice)
+                }) {
+                    Icon(
+                        painterResource(id = R.drawable.outline_dice_5_24),
+                        contentDescription = stringResource(R.string.dice)
+                    )
+                }
                 IconButton(onClick = {
                     viewModel.obtainEvent(MainEvent.MainRoute(Routes.SettingsRoute.MainRoute.route))
                     navController.navigate(Routes.SettingsRoute.MainRoute.route)

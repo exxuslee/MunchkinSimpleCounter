@@ -133,7 +133,7 @@ fun SettingsView(
                         Row(
                             modifier = Modifier
                                 .padding(vertical = 1.dp)
-                                .background(MaterialTheme.colorScheme.surface)
+                                .background(MaterialTheme.colorScheme.surfaceContainer)
                         ) {
                             HsRow(
                                 iconContent = {

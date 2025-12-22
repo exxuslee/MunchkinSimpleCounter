@@ -78,6 +78,8 @@ Erstellt von einem Munchkin-Fan als praktischer Begleiter für lockeres und tisc
     <string name="game_empty_players_list">Leer.\nBitte fügen Sie Spieler hinzu</string>
     <string name="retry">Erneut versuchen</string>
     <string name="error_description">Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut</string>
+    <string name="dice">Würfel</string>
+    <string name="throw_dice">Würfeln 🎲</string>
 
 </resources>
 
