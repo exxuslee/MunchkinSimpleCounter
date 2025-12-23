@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.settings.language
 
+import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -52,6 +53,9 @@ fun LanguageView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                 checked = currentAppLocale() == item,
                 onClick = {
                     LanguageManager.setLanguage(localContext, item)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        navController.popBackStack()
+                    }
                 }
             )
         }
