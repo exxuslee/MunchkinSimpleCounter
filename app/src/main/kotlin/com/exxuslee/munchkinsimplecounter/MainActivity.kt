@@ -22,6 +22,8 @@ class MainActivity : ComponentActivity() {
     override fun attachBaseContext(newBase: Context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             super.attachBaseContext(LocaleHelper.wrapContext(newBase))
+        }else {
+            super.attachBaseContext(newBase)
         }
     }
 
