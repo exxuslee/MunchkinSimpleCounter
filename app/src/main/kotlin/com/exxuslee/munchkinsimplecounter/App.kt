@@ -2,6 +2,7 @@ package com.exxuslee.munchkinsimplecounter
 
 import android.app.Application
 import android.content.Context
+import android.os.Build
 import com.exxuslee.munchkinsimplecounter.di.appModule
 import com.hwasfy.localize.util.LocaleHelper
 import org.koin.android.ext.koin.androidContext
@@ -12,7 +13,9 @@ import org.koin.core.logger.Level
 class App : Application() {
 
     override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LocaleHelper.wrapContext(newBase))
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            super.attachBaseContext(LocaleHelper.wrapContext(newBase))
+        }
     }
 
     override fun onCreate() {

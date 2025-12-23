@@ -1,6 +1,7 @@
 package com.exxuslee.munchkinsimplecounter
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -19,7 +20,9 @@ import org.koin.compose.koinInject
 class MainActivity : ComponentActivity() {
 
     override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LocaleHelper.wrapContext(newBase))
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            super.attachBaseContext(LocaleHelper.wrapContext(newBase))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

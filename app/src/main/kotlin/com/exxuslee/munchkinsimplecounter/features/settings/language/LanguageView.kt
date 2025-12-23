@@ -52,7 +52,6 @@ fun LanguageView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                 checked = currentAppLocale() == item,
                 onClick = {
                     LanguageManager.setLanguage(localContext, item)
-                    navController.popBackStack()
                 }
             )
         }

@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.ui.common
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
@@ -29,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -101,11 +103,13 @@ fun DiceRollDialog(
         }
     )
 
+    val view = LocalView.current
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(
                 onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                     if (!rolling) rolling = true
                 }
             ) {
@@ -133,6 +137,7 @@ fun DiceRollDialog(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() },
                         onClick = {
+                            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                             if (!rolling) rolling = true
                         },
                     )
