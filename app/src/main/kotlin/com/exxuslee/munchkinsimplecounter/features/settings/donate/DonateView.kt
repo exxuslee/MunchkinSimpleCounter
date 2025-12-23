@@ -59,8 +59,11 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DonateView(viewState: ViewState, eventHandler: (Event) -> Unit) {
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = Modifier
+            .verticalScroll(scrollState)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
