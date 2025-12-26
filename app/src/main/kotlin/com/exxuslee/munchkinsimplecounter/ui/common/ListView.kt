@@ -69,8 +69,7 @@ fun ScreenMessageWithAction(
     Column(
         modifier = Modifier
             .padding(paddingValues)
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+            .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
