@@ -80,6 +80,8 @@
     <string name="error_description">Проверьте подключение к сети и попробуйте ещё раз</string>
     <string name="dice">Кубик</string>
     <string name="throw_dice">Бросить 🎲</string>
+    <string name="sound">Звук</string>
+
 </resources>
 
 

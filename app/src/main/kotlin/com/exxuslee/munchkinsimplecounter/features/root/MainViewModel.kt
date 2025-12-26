@@ -2,6 +2,7 @@ package com.exxuslee.munchkinsimplecounter.features.root
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.exxuslee.domain.usecases.SettingsUseCase
 import com.exxuslee.munchkinsimplecounter.features.root.models.Action
 import com.exxuslee.munchkinsimplecounter.features.root.models.MainEvent
 import com.exxuslee.munchkinsimplecounter.features.root.models.ViewState
@@ -15,8 +16,7 @@ class MainViewModel(
     val workManager: PuzzleWorkManager,
 ) : BaseViewModel<ViewState, Action, MainEvent>(
     initialState = ViewState(
-        initialRoute = Routes.GameRoute.route,
-    )
+        initialRoute = Routes.GameRoute.route)
 ) {
 
     init {

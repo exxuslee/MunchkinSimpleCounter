@@ -19,7 +19,9 @@ class SettingsViewModel(
     private val settingsUseCase: SettingsUseCase,
     private val playersUseCase: PlayersUseCase,
 ) : BaseViewModel<ViewState, Action, Event>(
-    initialState = ViewState()
+    initialState = ViewState(
+        isSound = settingsUseCase.isSound()
+    )
 ) {
 
     init {
@@ -28,11 +30,13 @@ class SettingsViewModel(
                 themeController.isDark,
                 settingsUseCase.isTermsOfUseRead,
                 playersUseCase.players,
-            ) { isDark, isTermsOfUseRead, players ->
+                settingsUseCase.isSound,
+            ) { isDark, isTermsOfUseRead, players, isSound ->
                 ViewState(
                     isTermsOfUseRead = isTermsOfUseRead,
                     isDark = isDark,
-                    players = players
+                    players = players,
+                    isSound = isSound,
                 )
             }.collect { newState ->
                 viewState = newState
@@ -46,6 +50,10 @@ class SettingsViewModel(
             is Event.IsDark -> {
                 themeController.setDark(viewEvent.newValue)
                 viewState = viewState.copy(isDark = viewEvent.newValue)
+            }
+
+            is Event.IsSound -> {
+                settingsUseCase.setSound(viewEvent.newValue)
             }
 
             Event.DialogNewGame -> viewAction = Action.NewGame

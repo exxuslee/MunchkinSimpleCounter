@@ -80,6 +80,7 @@ Munchkin hayranı tarafından, gündelik ve masa dostu oyun için uygun bir arka
     <string name="error_description">Bağlantınızı kontrol edip tekrar deneyin</string>
     <string name="dice">Zar</string>
     <string name="throw_dice">At 🎲</string>
+    <string name="sound">Ses</string>
 
 </resources>
 

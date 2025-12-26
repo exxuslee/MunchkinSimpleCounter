@@ -80,6 +80,7 @@
     <string name="error_description">请检查您的网络连接然后重试</string>
     <string name="dice">骰子</string>
     <string name="throw_dice">掷 🎲</string>
+    <string name="sound">声音</string>
 
 </resources>
 

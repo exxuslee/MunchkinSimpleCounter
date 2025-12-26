@@ -80,6 +80,7 @@ Munchkin 팬이 캐주얼하고 테이블톱 친화적인 플레이를 위한 �
     <string name="error_description">연결을 확인한 후 다시 시도하세요</string>
     <string name="dice">주사위</string>
     <string name="throw_dice">던지기 🎲</string>
+    <string name="sound">사운드</string>
 
 </resources>
 

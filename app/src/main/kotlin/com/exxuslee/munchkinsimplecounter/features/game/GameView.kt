@@ -105,7 +105,7 @@ fun GameView(gameViewState: GameViewState, eventHandler: (Event) -> Unit) {
                     }
                 }
 
-                if (!isLandscape) BottomNavigationBar { event ->
+                if (!isLandscape) BottomNavigationBar(gameViewState.isSound) { event ->
                     view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                     eventHandler(event)
                 }

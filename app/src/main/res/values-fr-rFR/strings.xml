@@ -80,6 +80,7 @@ Créée par un fan de Munchkin comme compagnon pratique pour un jeu décontract�
     <string name="error_description">Vérifiez votre connexion et réessayez</string>
     <string name="dice">Dé</string>
     <string name="throw_dice">Lancer 🎲</string>
+    <string name="sound">Son</string>
 
 </resources>
 

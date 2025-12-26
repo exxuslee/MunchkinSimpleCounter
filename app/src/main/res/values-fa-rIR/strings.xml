@@ -80,6 +80,7 @@
     <string name="error_description">اتصال خود را بررسی کنید و دوباره تلاش کنید</string>
     <string name="dice">تاس</string>
     <string name="throw_dice">انداختن 🎲</string>
+    <string name="sound">صدا</string>
 
 </resources>
 

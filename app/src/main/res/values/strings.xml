@@ -85,5 +85,6 @@ Created by a fan of Munchkin as a convenient companion for casual and tabletop-f
     <string name="error_description">Check your connection and try again</string>
     <string name="dice">Dice</string>
     <string name="throw_dice">Throw 🎲</string>
+    <string name="sound">Sound</string>
 
 </resources>

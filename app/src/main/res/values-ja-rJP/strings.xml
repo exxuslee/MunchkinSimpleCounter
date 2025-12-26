@@ -80,6 +80,7 @@ Munchkinのファンによって、カジュアルでテーブルトップフレ
     <string name="error_description">接続を確認して、もう一度お試しください</string>
     <string name="dice">サイコロ</string>
     <string name="throw_dice">振る 🎲</string>
+    <string name="sound">サウンド</string>
 
 </resources>
 

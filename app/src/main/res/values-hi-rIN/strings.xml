@@ -80,6 +80,7 @@ Munchkin के एक प्रशंसक द्वारा आकस्म�
     <string name="error_description">अपना कनेक्शन जांचें और फिर से प्रयास करें</string>
     <string name="dice">पासा</string>
     <string name="throw_dice">फेंको 🎲</string>
+    <string name="sound">आवाज़</string>
 
 </resources>
 

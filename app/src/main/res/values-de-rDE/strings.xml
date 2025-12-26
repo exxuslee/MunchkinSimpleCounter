@@ -80,6 +80,7 @@ Erstellt von einem Munchkin-Fan als praktischer Begleiter für lockeres und tisc
     <string name="error_description">Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut</string>
     <string name="dice">Würfel</string>
     <string name="throw_dice">Würfeln 🎲</string>
+    <string name="sound">Ton</string>
 
 </resources>
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.model.UiState
 import com.exxuslee.domain.usecases.PlayersUseCase
+import com.exxuslee.domain.usecases.SettingsUseCase
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.game.models.Action
 import com.exxuslee.munchkinsimplecounter.features.game.models.Event
@@ -14,8 +15,11 @@ import kotlinx.coroutines.launch
 
 class GameViewModel(
     private val playersUseCase: PlayersUseCase,
+    private val settingsUseCase: SettingsUseCase,
 ) : BaseViewModel<GameViewState, Action, Event>(
-    initialState = GameViewState()
+    initialState = GameViewState(
+        isSound = settingsUseCase.isSound()
+    )
 ) {
 
     init {
@@ -29,6 +33,12 @@ class GameViewModel(
                     state = UiState.Idle,
                     boom = isEndGame(activePlayers, viewState.activePlayers)
                 )
+            }
+        }
+
+        viewModelScope.launch {
+            settingsUseCase.isSound.collect {
+                viewState = viewState.copy(isSound = it)
             }
         }
     }

@@ -80,6 +80,7 @@ Criado por um fã de Munchkin como um companheiro conveniente para jogos casuais
     <string name="error_description">Verifique sua conexão e tente novamente</string>
     <string name="dice">Dado</string>
     <string name="throw_dice">Jogar 🎲</string>
+    <string name="sound">Som</string>
 
 </resources>
 

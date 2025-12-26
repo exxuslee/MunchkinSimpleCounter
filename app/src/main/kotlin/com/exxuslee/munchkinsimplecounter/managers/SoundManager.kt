@@ -29,8 +29,8 @@ enum class ClickSound(
     val tone: Int,
     val durationMs: Int = 100
 ) {
-    ADD_LEVEL(ToneGenerator.TONE_PROP_BEEP),
-    ADD_BONUS(ToneGenerator.TONE_PROP_ACK),
+    ADD_LEVEL(ToneGenerator.TONE_DTMF_1),
+    ADD_BONUS(ToneGenerator.TONE_DTMF_B),
     SUB_LEVEL(ToneGenerator.TONE_PROP_NACK),
     SUB_BONUS(ToneGenerator.TONE_SUP_BUSY)
 }

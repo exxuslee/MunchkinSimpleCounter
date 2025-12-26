@@ -249,27 +249,21 @@ private fun LandscapeNavigationButtons(
     ).forEach { dest ->
 
         IconButton(onClick = {
+            if (gameViewState.isSound) soundManager.play(
+                when (dest) {
+                    BottomButtonsItems.AddLevel -> ClickSound.ADD_LEVEL
+                    BottomButtonsItems.SubLevel -> ClickSound.SUB_LEVEL
+                    BottomButtonsItems.AddBonus -> ClickSound.ADD_BONUS
+                    BottomButtonsItems.SubBonus -> ClickSound.SUB_BONUS
+                }
+            )
+
             gameViewModel.obtainEvent(
                 when (dest) {
-                    BottomButtonsItems.AddLevel -> {
-                        soundManager.play(ClickSound.ADD_LEVEL)
-                        Event.AddLevel
-                    }
-
-                    BottomButtonsItems.SubLevel -> {
-                        soundManager.play(ClickSound.SUB_LEVEL)
-                        Event.SubLevel
-                    }
-
-                    BottomButtonsItems.AddBonus -> {
-                        soundManager.play(ClickSound.ADD_BONUS)
-                        Event.AddBonus
-                    }
-
-                    BottomButtonsItems.SubBonus -> {
-                        soundManager.play(ClickSound.SUB_BONUS)
-                        Event.SubBonus
-                    }
+                    BottomButtonsItems.AddLevel -> Event.AddLevel
+                    BottomButtonsItems.SubLevel -> Event.SubLevel
+                    BottomButtonsItems.AddBonus -> Event.AddBonus
+                    BottomButtonsItems.SubBonus -> Event.SubBonus
                 }
             )
         }) {

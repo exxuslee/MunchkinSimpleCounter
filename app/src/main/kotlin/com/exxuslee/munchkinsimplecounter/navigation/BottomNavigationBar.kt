@@ -17,6 +17,7 @@ import com.exxuslee.munchkinsimplecounter.managers.rememberSoundManager
 
 @Composable
 fun BottomNavigationBar(
+    isSound: Boolean,
     eventHandler: (Event) -> Unit,
 ) {
     val soundManager = rememberSoundManager()
@@ -36,27 +37,31 @@ fun BottomNavigationBar(
             NavigationBarItem(
                 selected = false,
                 onClick = {
-                    eventHandler.invoke(
+                    if (isSound) {
                         when (dest) {
                             BottomButtonsItems.AddLevel -> {
                                 soundManager.play(ClickSound.ADD_LEVEL)
-                                Event.AddLevel
                             }
 
                             BottomButtonsItems.SubLevel -> {
                                 soundManager.play(ClickSound.SUB_LEVEL)
-                                Event.SubLevel
                             }
 
                             BottomButtonsItems.AddBonus -> {
                                 soundManager.play(ClickSound.ADD_BONUS)
-                                Event.AddBonus
                             }
 
                             BottomButtonsItems.SubBonus -> {
                                 soundManager.play(ClickSound.SUB_BONUS)
-                                Event.SubBonus
                             }
+                        }
+                    }
+                    eventHandler.invoke(
+                        when (dest) {
+                            BottomButtonsItems.AddLevel -> Event.AddLevel
+                            BottomButtonsItems.SubLevel -> Event.SubLevel
+                            BottomButtonsItems.AddBonus -> Event.AddBonus
+                            BottomButtonsItems.SubBonus -> Event.SubBonus
                         }
                     )
                 },
