@@ -9,4 +9,5 @@ data class GameViewState(
     val allPlayers: Int = 0,
     val selectedPlayerId: Int? = null,
     val state: UiState = UiState.Loading,
+    val boom: Boolean = false,
 )

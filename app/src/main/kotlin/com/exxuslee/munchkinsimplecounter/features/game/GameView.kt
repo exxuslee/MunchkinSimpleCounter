@@ -16,6 +16,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalView
@@ -26,6 +30,7 @@ import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.game.models.Event
 import com.exxuslee.munchkinsimplecounter.features.game.models.GameViewState
 import com.exxuslee.munchkinsimplecounter.navigation.BottomNavigationBar
+import com.exxuslee.munchkinsimplecounter.ui.common.ArcCornerConfetti
 import com.exxuslee.munchkinsimplecounter.ui.common.ListEmptyView
 import com.exxuslee.munchkinsimplecounter.ui.common.ScreenMessageWithAction
 
@@ -109,4 +114,10 @@ fun GameView(gameViewState: GameViewState, eventHandler: (Event) -> Unit) {
 
         UiState.Loading -> {}
     }
+
+    ArcCornerConfetti(
+        trigger = gameViewState.boom,
+        modifier = Modifier.fillMaxSize()
+    )
+
 }

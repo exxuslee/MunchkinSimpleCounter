@@ -1,4 +1,5 @@
 package com.exxuslee.munchkinsimplecounter.features.game
+
 import androidx.lifecycle.viewModelScope
 import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.model.UiState
@@ -19,14 +20,25 @@ class GameViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            playersUseCase.players.collect {
-                val activePlayers = it.filter { player -> player.playing }
+            playersUseCase.players.collect { players ->
+
+                val activePlayers = players.filter { player -> player.playing }
                 viewState = viewState.copy(
                     activePlayers = activePlayers,
-                    allPlayers = it.size,
+                    allPlayers = players.size,
                     state = UiState.Idle,
+                    boom = isEndGame(activePlayers, viewState.activePlayers)
                 )
             }
+        }
+    }
+
+    private fun isEndGame(
+        new: List<Player>,
+        old: List<Player>
+    ): Boolean {
+        return old.any { oldPlayer ->
+            oldPlayer.level == 9 && new.find { it.id == oldPlayer.id }?.level == 10
         }
     }
 
@@ -36,7 +48,8 @@ class GameViewModel(
             Event.AddBonus -> viewModelScope.launch(Dispatchers.IO) {
                 val id = viewState.selectedPlayerId
                 if (id == null || !viewState.activePlayers.map { it.id }.contains(id)) {
-                    viewAction = Action.ShowSelectPlayerMessage(R.string.select_player_toast_message)
+                    viewAction =
+                        Action.ShowSelectPlayerMessage(R.string.select_player_toast_message)
                 } else {
                     val player = playersUseCase.player(id) ?: return@launch
                     playersUseCase.updatePlayer(player.copy(bonus = player.bonus + 1))
@@ -46,7 +59,8 @@ class GameViewModel(
             Event.AddLevel -> viewModelScope.launch(Dispatchers.IO) {
                 val id = viewState.selectedPlayerId
                 if (id == null || !viewState.activePlayers.map { it.id }.contains(id)) {
-                    viewAction = Action.ShowSelectPlayerMessage(R.string.select_player_toast_message)
+                    viewAction =
+                        Action.ShowSelectPlayerMessage(R.string.select_player_toast_message)
                 } else {
                     val player = playersUseCase.player(id) ?: return@launch
                     playersUseCase.updatePlayer(player.copy(level = player.level + 1))
@@ -56,7 +70,8 @@ class GameViewModel(
             Event.SubBonus -> viewModelScope.launch(Dispatchers.IO) {
                 val id = viewState.selectedPlayerId
                 if (id == null || !viewState.activePlayers.map { it.id }.contains(id)) {
-                    viewAction = Action.ShowSelectPlayerMessage(R.string.select_player_toast_message)
+                    viewAction =
+                        Action.ShowSelectPlayerMessage(R.string.select_player_toast_message)
                 } else {
                     val player = playersUseCase.player(id) ?: return@launch
                     playersUseCase.updatePlayer(player.copy(bonus = player.bonus - 1))
@@ -66,7 +81,8 @@ class GameViewModel(
             Event.SubLevel -> viewModelScope.launch(Dispatchers.IO) {
                 val id = viewState.selectedPlayerId
                 if (id == null || !viewState.activePlayers.map { it.id }.contains(id)) {
-                    viewAction = Action.ShowSelectPlayerMessage(R.string.select_player_toast_message)
+                    viewAction =
+                        Action.ShowSelectPlayerMessage(R.string.select_player_toast_message)
                 } else {
                     val player = playersUseCase.player(id) ?: return@launch
                     playersUseCase.updatePlayer(player.copy(level = player.level - 1))
@@ -74,7 +90,7 @@ class GameViewModel(
             }
 
             is Event.SelectPlayer -> {
-                viewState = viewState.copy(selectedPlayerId = viewEvent.id)
+                viewState = viewState.copy(selectedPlayerId = viewEvent.id, boom = false)
             }
 
             is Event.SwitchSex -> {
@@ -87,7 +103,7 @@ class GameViewModel(
                 }
             }
 
-            is Event.AddPlayer ->  {
+            is Event.AddPlayer -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     playersUseCase.savePlayer(Player(name = viewEvent.name, icon = viewEvent.icon))
                 }

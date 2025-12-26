@@ -44,6 +44,8 @@ import com.exxuslee.munchkinsimplecounter.features.settings.donate.DonateScreen
 import com.exxuslee.munchkinsimplecounter.features.settings.language.LanguageScreen
 import com.exxuslee.munchkinsimplecounter.features.settings.main.SettingsScreen
 import com.exxuslee.munchkinsimplecounter.features.settings.terms.TermsScreen
+import com.exxuslee.munchkinsimplecounter.managers.ClickSound
+import com.exxuslee.munchkinsimplecounter.managers.rememberSoundManager
 import com.exxuslee.munchkinsimplecounter.navigation.Routes
 import com.exxuslee.munchkinsimplecounter.navigation.asRoute
 import com.exxuslee.munchkinsimplecounter.navigation.isPrimaryRoute
@@ -219,6 +221,7 @@ private fun LandscapeNavigationButtons(
     mainViewModel: MainViewModel,
     gameViewState: GameViewState,
 ) {
+    val soundManager = rememberSoundManager()
     if (currentRoute?.isPrimaryRoute() == false) {
         IconButton(onClick = { navController.popBackStack() }) {
             Icon(
@@ -248,10 +251,25 @@ private fun LandscapeNavigationButtons(
         IconButton(onClick = {
             gameViewModel.obtainEvent(
                 when (dest) {
-                    BottomButtonsItems.AddLevel -> Event.AddLevel
-                    BottomButtonsItems.SubLevel -> Event.SubLevel
-                    BottomButtonsItems.AddBonus -> Event.AddBonus
-                    BottomButtonsItems.SubBonus -> Event.SubBonus
+                    BottomButtonsItems.AddLevel -> {
+                        soundManager.play(ClickSound.ADD_LEVEL)
+                        Event.AddLevel
+                    }
+
+                    BottomButtonsItems.SubLevel -> {
+                        soundManager.play(ClickSound.SUB_LEVEL)
+                        Event.SubLevel
+                    }
+
+                    BottomButtonsItems.AddBonus -> {
+                        soundManager.play(ClickSound.ADD_BONUS)
+                        Event.AddBonus
+                    }
+
+                    BottomButtonsItems.SubBonus -> {
+                        soundManager.play(ClickSound.SUB_BONUS)
+                        Event.SubBonus
+                    }
                 }
             )
         }) {
