@@ -25,7 +25,7 @@ class SettingsViewModel(
 ) {
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             combine(
                 themeController.isDark,
                 settingsUseCase.isTermsOfUseRead,

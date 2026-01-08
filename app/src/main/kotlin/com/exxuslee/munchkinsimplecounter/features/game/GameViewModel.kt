@@ -11,6 +11,7 @@ import com.exxuslee.munchkinsimplecounter.features.game.models.Event
 import com.exxuslee.munchkinsimplecounter.features.game.models.GameViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class GameViewModel(
@@ -23,9 +24,8 @@ class GameViewModel(
 ) {
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             playersUseCase.players.collect { players ->
-
                 val activePlayers = players.filter { player -> player.playing }
                 viewState = viewState.copy(
                     activePlayers = activePlayers,
