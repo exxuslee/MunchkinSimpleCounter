@@ -35,15 +35,14 @@ fun OvalCounter(
     var value by remember { mutableIntStateOf(startInt) }
 
     Box(
-        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Row(
             modifier = Modifier
-                .width(80.dp)
+                .width(88.dp)
                 .height(32.dp)
                 .clip(CircleShape)
-                .background(Color.White),
+                .background(MaterialTheme.colorScheme.secondaryContainer),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -76,8 +75,9 @@ fun OvalCounter(
             ) {
                 Text(
                     text = value.toString(),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.secondary,
                 )
             }
 
@@ -106,7 +106,7 @@ fun OvalCounter(
 
 @Preview
 @Composable
-fun OvalCounter_View() {
+private fun OvalCounter_View() {
     AppTheme {
         OvalCounter(startInt = 10, {}) {}
     }

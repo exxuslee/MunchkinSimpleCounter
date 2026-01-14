@@ -1,7 +1,9 @@
 package com.exxuslee.munchkinsimplecounter.features.fight
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
@@ -12,17 +14,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +35,8 @@ import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.fight.models.Event
 import com.exxuslee.munchkinsimplecounter.features.fight.models.UnitItem
 import com.exxuslee.munchkinsimplecounter.features.fight.models.ViewState
+import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
+import com.exxuslee.munchkinsimplecounter.ui.common.OvalCounter
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -118,40 +123,34 @@ private fun HeroCardView(
                 .padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Text(
-                text = hero.unit.name,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.secondary,
-            )
-            Text(
-                text = "Уровень: ${hero.unit.level}",
-                style = MaterialTheme.typography.bodyMedium,
-            )
-
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Column(horizontalAlignment = Alignment.End) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
                     Text(
-                        text = "Сила",
-                        style = MaterialTheme.typography.bodySmall,
+                        text = hero.unit.name,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.secondary,
                     )
-                    Text(
-                        text = "power",
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
-                    )
+                    HSpacer(8.dp)
+
                 }
+
+                val total = hero.unit.level + hero.spells.sum()
+                Text(
+                    modifier = Modifier.padding(horizontal = 8.dp),
+                    text = total.toString(),
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.tertiary,
+                )
             }
 
-            ModifierButtonsRow(
-                onAddModifier = onAddModifier,
-                onLevelChange = onAddModifier,
-            )
+            ModifierButtonsRow(onAddModifier)
 
             SpellsList(
                 spells = hero.spells,
@@ -205,6 +204,9 @@ private fun MonstersSection(
                     },
                     onRemoveMonster = {
                         onEvent(Event.RemoveMonster(monster.unit.id))
+                    },
+                    onChangeLevel = {
+                        onEvent(Event.ChangeMonsterLevel(monster.unit.id, it))
                     }
                 )
             }
@@ -218,6 +220,7 @@ private fun MonsterCardView(
     onAddSpell: (Int) -> Unit,
     onRemoveSpell: (Int) -> Unit,
     onRemoveMonster: () -> Unit,
+    onChangeLevel: (Int) -> Unit,
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -236,35 +239,30 @@ private fun MonsterCardView(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Column {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
                     Text(
-                        text = monster.unit.name,
+                        modifier = Modifier.padding(horizontal = 8.dp),
+                        text = "# ${monster.unit.id}",
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.secondary,
                     )
-                    Text(
-                        text = "Базовая сила: ${monster.unit.level}",
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
+                    HSpacer(8.dp)
+                    OvalCounter(onClick = null, onChange = onChangeLevel)
                 }
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(
-                        text = "Сила монстра",
-                        style = MaterialTheme.typography.bodySmall,
-                    )
-                    Text(
-                        text = "monster.totalPower",
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.error,
-                    )
-                }
+
+                val total = monster.unit.level + monster.spells.sum()
+                Text(
+                    modifier = Modifier.padding(horizontal = 8.dp),
+                    text = total.toString(),
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.error,
+                )
             }
 
-            ModifierButtonsRow(
-                onAddModifier = onAddSpell,
-                onLevelChange = { },
-            )
+            ModifierButtonsRow(onAddSpell)
 
             SpellsList(
                 spells = monster.spells,
@@ -276,28 +274,36 @@ private fun MonsterCardView(
 
 @Composable
 private fun ModifierButtonsRow(
-    onAddModifier: (Int) -> Unit,
-    onLevelChange: (Int) -> Unit,
+    onAddSpell: (Int) -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        val values = listOf(-5, -2, +2, +5)
+        val values = listOf(-5, +2, +5)
         values.forEach { value ->
-            OutlinedButton(
-                modifier = Modifier.weight(1f),
-                onClick = {
-                    if (value == 1 || value == -1) {
-                        onLevelChange(value)
-                    } else {
-                        onAddModifier(value)
-                    }
-                },
+            Box(
+                modifier = Modifier
+                    .height(32.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.secondaryContainer)
+                    .clickable(onClick = {
+                        onAddSpell(value)
+                    }),
+                contentAlignment = Alignment.Center
             ) {
-                Text(if (value > 0) "+$value" else value.toString())
+                Text(
+                    modifier = Modifier.padding(horizontal = 24.dp),
+                    text = if (value > 0) "+$value" else value.toString(),
+                    style = MaterialTheme.typography.titleMedium,
+                )
             }
         }
+        OvalCounter(
+            onChange = {},
+            onClick = onAddSpell,
+        )
     }
 }
 
@@ -311,11 +317,11 @@ private fun SpellsList(
     Column(
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        Text(
+        if (spells.isNotEmpty()) Text(
             text = "Модификаторы:",
             style = MaterialTheme.typography.bodySmall,
         )
-        FlowRow (
+        FlowRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(4.dp),
             itemVerticalAlignment = Alignment.CenterVertically,
@@ -331,7 +337,7 @@ private fun SpellsList(
                     ) {
                         Text(
                             text = (if (spell > 0) "+" else "") + spell,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.titleMedium,
                         )
                         IconButton(
                             onClick = { onRemoveSpell(index) }
@@ -353,7 +359,7 @@ private fun SpellsList(
 
 @Preview
 @Composable
-fun FightView_Preview() {
+private fun FightView_Preview() {
     AppTheme {
         FightView(
             viewState = ViewState(

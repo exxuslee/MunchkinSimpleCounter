@@ -18,6 +18,7 @@ class FightViewModel(
             is Event.RemoveHero -> TODO()
             is Event.RemoveModifier -> TODO()
             is Event.RemoveMonster -> TODO()
+            is Event.ChangeMonsterLevel -> TODO()
         }
 
     }
