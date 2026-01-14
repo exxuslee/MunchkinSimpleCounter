@@ -1,5 +1,6 @@
 package com.exxuslee.munchkinsimplecounter.features.fight
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -31,11 +32,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.exxuslee.domain.model.Player
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.fight.models.Event
 import com.exxuslee.munchkinsimplecounter.features.fight.models.UnitItem
 import com.exxuslee.munchkinsimplecounter.features.fight.models.ViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
+import com.exxuslee.munchkinsimplecounter.ui.common.Icons
 import com.exxuslee.munchkinsimplecounter.ui.common.OvalCounter
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 
@@ -132,13 +135,18 @@ private fun HeroCardView(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
+                    val icon = painterResource(Icons.icon((hero.unit as? Player)?.icon ?: 0))
+                    Image(
+                        icon,
+                        modifier = Modifier.size(36.dp),
+                        contentDescription = stringResource(R.string.icon),
+                    )
+                    HSpacer(8.dp)
                     Text(
                         text = hero.unit.name,
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.secondary,
                     )
-                    HSpacer(8.dp)
-
                 }
 
                 val total = hero.unit.level + hero.spells.sum()
