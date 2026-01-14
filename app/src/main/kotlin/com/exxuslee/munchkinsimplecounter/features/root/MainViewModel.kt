@@ -33,7 +33,6 @@ class MainViewModel(
 
     override fun obtainEvent(viewEvent: MainEvent) {
         when (viewEvent) {
-            is MainEvent.MainRoute -> true
             MainEvent.Dice -> viewAction = Action.Dice
         }
 

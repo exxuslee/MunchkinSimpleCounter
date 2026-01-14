@@ -8,6 +8,8 @@ fun NavDestination?.asRoute(): Routes? {
         // Game
         Routes.GameRoute.route -> Routes.GameRoute
 
+        Routes.FightRoute.route -> Routes.FightRoute
+
         // Settings
         Routes.SettingsRoute.MainRoute.route -> Routes.SettingsRoute.MainRoute
         Routes.SettingsRoute.ThermsRoute.route -> Routes.SettingsRoute.ThermsRoute

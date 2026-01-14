@@ -18,6 +18,12 @@ sealed class Routes(
         icon = { painterResource(R.drawable.ic_baseline_sentiment_satisfied_alt_24) },
     )
 
+    data object FightRoute : Routes(
+        "fight",
+        label = { stringResource(R.string.munchkin_counter) },
+        icon = { painterResource(R.drawable.outline_skull_24) },
+    )
+
     sealed class SettingsRoute(subRoute: String, label: @Composable () -> String) :
         Routes(
             "settings/$subRoute",

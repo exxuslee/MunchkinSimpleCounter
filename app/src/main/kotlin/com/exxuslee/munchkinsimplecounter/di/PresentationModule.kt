@@ -1,6 +1,7 @@
 package com.exxuslee.munchkinsimplecounter.di
 
 
+import com.exxuslee.munchkinsimplecounter.features.fight.FightViewModel
 import com.exxuslee.munchkinsimplecounter.features.game.GameViewModel
 import com.exxuslee.munchkinsimplecounter.features.root.MainViewModel
 import com.exxuslee.munchkinsimplecounter.features.settings.donate.DonateViewModel
@@ -15,6 +16,8 @@ val presentationModule = module {
     viewModel { MainViewModel(get()) }
 
     viewModel { GameViewModel(get(), get()) }
+
+    viewModel { FightViewModel() }
 
     viewModel { SettingsViewModel(get(), get(), get()) }
     viewModel { DonateViewModel(get()) }
