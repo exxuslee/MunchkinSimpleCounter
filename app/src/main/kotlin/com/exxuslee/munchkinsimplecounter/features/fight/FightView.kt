@@ -78,7 +78,7 @@ private fun HeroSection(
                 color = MaterialTheme.colorScheme.secondary,
             )
             IconButton(onClick = {
-
+                onEvent(Event.AddHero(heroId = 0))
             }) {
                 Icon(
                     painterResource(id = R.drawable.outline_person_add_24),
@@ -96,9 +96,10 @@ private fun HeroSection(
                 HeroCardView(
                     hero = hero,
                     onAddModifier = { value ->
+                        onEvent(Event.AddModifier(hero.unit.id, value))
                     },
-                    onRemoveModifier = { id ->
-                        onEvent(Event.RemoveModifier(id))
+                    onRemoveModifier = { index ->
+                        onEvent(Event.RemoveModifier(hero.unit.id, index))
                     },
                 )
             }
@@ -178,7 +179,7 @@ private fun MonstersSection(
                 color = MaterialTheme.colorScheme.secondary,
             )
             IconButton(onClick = {
-
+                onEvent(Event.AddMonster)
             }) {
                 Icon(
                     painterResource(id = R.drawable.outline_person_add_24),
@@ -199,8 +200,8 @@ private fun MonstersSection(
                     onAddSpell = { value ->
                         onEvent(Event.AddModifier(monster.unit.id, value))
                     },
-                    onRemoveSpell = { id ->
-                        onEvent(Event.RemoveModifier(id))
+                    onRemoveSpell = { index ->
+                        onEvent(Event.RemoveModifier(monster.unit.id, index))
                     },
                     onRemoveMonster = {
                         onEvent(Event.RemoveMonster(monster.unit.id))
@@ -249,7 +250,11 @@ private fun MonsterCardView(
                         color = MaterialTheme.colorScheme.secondary,
                     )
                     HSpacer(8.dp)
-                    OvalCounter(onClick = null, onChange = onChangeLevel)
+                    OvalCounter(
+                        startInt = monster.unit.level,
+                        onClick = null,
+                        onChange = onChangeLevel
+                    )
                 }
 
                 val total = monster.unit.level + monster.spells.sum()

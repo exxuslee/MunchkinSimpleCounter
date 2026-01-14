@@ -27,6 +27,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.exxuslee.munchkinsimplecounter.R
+import com.exxuslee.munchkinsimplecounter.features.fight.FightViewModel
 import com.exxuslee.munchkinsimplecounter.features.game.GameViewModel
 import com.exxuslee.munchkinsimplecounter.features.game.models.BottomButtonsItems
 import com.exxuslee.munchkinsimplecounter.features.game.models.Event
@@ -68,10 +69,16 @@ fun MainContent(
                 gameViewModel,
                 mainViewModel,
                 mainViewState,
-                gameViewState
+                gameViewState,
             )
         } else {
-            PortraitLayout(currentRoute, navController, mainViewModel, mainViewState, gameViewModel)
+            PortraitLayout(
+                currentRoute,
+                navController,
+                mainViewModel,
+                mainViewState,
+                gameViewModel,
+            )
         }
 
         when (viewAction) {
@@ -86,22 +93,22 @@ fun MainContent(
 private fun PortraitLayout(
     currentRoute: Routes?,
     navController: NavHostController,
-    viewModel: MainViewModel,
+    mainViewModel: MainViewModel,
     viewState: ViewState,
     gameViewModel: GameViewModel,
 ) {
     Scaffold(
-        topBar = { MainTopBar(currentRoute, navController, viewModel) },
+        topBar = { MainTopBar(currentRoute, navController, mainViewModel) },
         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp),
     ) { padding ->
         NavHostContent(
-            navController,
-            viewState,
-            gameViewModel,
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface)
+                .background(MaterialTheme.colorScheme.surface),
+            navController,
+            viewState,
+            gameViewModel,
         )
     }
 }
@@ -136,12 +143,12 @@ private fun LandscapeLayout(
                 )
             }
             NavHostContent(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.surface),
                 navController,
                 viewState,
                 gameViewModel,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.surface)
             )
         }
     }

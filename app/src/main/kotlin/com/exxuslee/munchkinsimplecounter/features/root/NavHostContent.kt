@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.exxuslee.munchkinsimplecounter.features.fight.FightScreen
+import com.exxuslee.munchkinsimplecounter.features.fight.FightViewModel
 import com.exxuslee.munchkinsimplecounter.features.game.GameScreen
 import com.exxuslee.munchkinsimplecounter.features.game.GameViewModel
 import com.exxuslee.munchkinsimplecounter.features.root.models.ViewState
@@ -20,10 +21,10 @@ import com.exxuslee.munchkinsimplecounter.ui.common.animatedComposable
 
 @Composable
 fun NavHostContent(
+    modifier: Modifier = Modifier,
     navController: NavHostController,
     viewState: ViewState,
     gameViewModel: GameViewModel,
-    modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,

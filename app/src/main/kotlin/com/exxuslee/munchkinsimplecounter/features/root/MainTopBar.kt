@@ -24,8 +24,8 @@ import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
 fun MainTopBar(
     currentRoute: Routes?,
     navController: NavHostController,
-    viewModel: MainViewModel
-) {
+    mainViewModel: MainViewModel,
+    ) {
     TopAppBar(
         title = {
             Text(
@@ -55,7 +55,7 @@ fun MainTopBar(
                     )
                 }
                 IconButton(onClick = {
-                    viewModel.obtainEvent(MainEvent.Dice)
+                    mainViewModel.obtainEvent(MainEvent.Dice)
                 }) {
                     Icon(
                         painterResource(id = R.drawable.outline_dice_5_24),

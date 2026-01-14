@@ -100,6 +100,7 @@ class GameViewModel(
             }
 
             is Event.SelectPlayer -> {
+                playersUseCase.selectId(viewEvent.id)
                 viewState = viewState.copy(selectedPlayerId = viewEvent.id, boom = false)
             }
 
