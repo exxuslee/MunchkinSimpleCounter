@@ -53,7 +53,6 @@ class FightViewModel(
                 val newMonster = UnitItem(
                     unit = GameUnit(
                         id = viewState.monsters.size + 1,
-                        name = "Монстр",
                         level = 1
                     )
                 )
@@ -124,11 +123,7 @@ class FightViewModel(
                         if (monster.unit.id == viewEvent.id) {
                             val newLevel = viewEvent.value.coerceAtLeast(1)
                             monster.copy(
-                                unit = GameUnit(
-                                    id = monster.unit.id,
-                                    name = monster.unit.name,
-                                    level = newLevel
-                                )
+                                unit = GameUnit(id = monster.unit.id, level = newLevel)
                             )
                         } else {
                             monster
