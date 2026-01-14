@@ -148,7 +148,6 @@ private fun LandscapeLayout(
 }
 
 
-
 @Composable
 private fun LandscapeNavigationButtons(
     currentRoute: Routes?,

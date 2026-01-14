@@ -3,10 +3,11 @@ package com.exxuslee.munchkinsimplecounter.features.fight
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,19 +15,22 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.exxuslee.domain.model.Player
+import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.fight.models.Event
-import com.exxuslee.munchkinsimplecounter.features.fight.models.FightModifier
-import com.exxuslee.munchkinsimplecounter.features.fight.models.MonsterCard
+import com.exxuslee.munchkinsimplecounter.features.fight.models.UnitItem
 import com.exxuslee.munchkinsimplecounter.features.fight.models.ViewState
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 
@@ -40,7 +44,7 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         HeroSection(
-            viewState = viewState,
+            heroes = viewState.heroes,
             onEvent = eventHandler,
         )
 
@@ -49,71 +53,61 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
             onEvent = eventHandler,
         )
 
-        Spacer(modifier = Modifier.weight(1f))
-
-        FightSummary(
-            heroPower = viewState.heroPower + viewState.helperPower,
-            monstersPower = viewState.monstersPower,
-        )
     }
 }
 
 @Composable
 private fun HeroSection(
-    viewState: ViewState,
+    heroes: List<UnitItem>,
     onEvent: (Event) -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(
-            text = "Герои",
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.secondary,
-        )
-
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            PlayerFightCard(
-                modifier = Modifier.weight(1f),
-                title = "Герой",
-                player = viewState.hero,
-                power = viewState.heroPower,
-                modifiers = viewState.heroModifiers,
-                onAddModifier = { value -> onEvent(Event.AddHeroModifier(value)) },
-                onRemoveModifier = { id -> onEvent(Event.RemoveModifier(id)) },
-                onLevelChange = { delta -> onEvent(Event.ChangeHeroLevel(delta)) },
+            Text(
+                text = "Герои",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.secondary,
             )
+            IconButton(onClick = {
 
-            PlayerFightCard(
-                modifier = Modifier.weight(1f),
-                title = "Помощник",
-                player = viewState.helper,
-                power = viewState.helperPower,
-                modifiers = viewState.helperModifiers,
-                onAddModifier = { value -> onEvent(Event.AddHelperModifier(value)) },
-                onRemoveModifier = { id -> onEvent(Event.RemoveModifier(id)) },
-                onLevelChange = { delta -> onEvent(Event.ChangeHelperLevel(delta)) },
-                onEmptyClick = { onEvent(Event.AddHelper) },
-            )
+            }) {
+                Icon(
+                    painterResource(id = R.drawable.outline_person_add_24),
+                    contentDescription = stringResource(R.string.title_settings)
+                )
+            }
+        }
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.surfaceContainerLowest),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            items(heroes) { hero ->
+                HeroCardView(
+                    hero = hero,
+                    onAddModifier = { value ->
+                    },
+                    onRemoveModifier = { id ->
+                        onEvent(Event.RemoveModifier(id))
+                    },
+                )
+            }
         }
     }
 }
 
 @Composable
-private fun PlayerFightCard(
-    modifier: Modifier = Modifier,
-    title: String,
-    player: Player?,
-    power: Int,
-    modifiers: List<FightModifier>,
+private fun HeroCardView(
+    hero: UnitItem,
     onAddModifier: (Int) -> Unit,
-    onRemoveModifier: (Long) -> Unit,
-    onLevelChange: (Int) -> Unit,
-    onEmptyClick: (() -> Unit)? = null,
+    onRemoveModifier: (Int) -> Unit
 ) {
     Card(
-        modifier = modifier,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer
         )
@@ -125,71 +119,52 @@ private fun PlayerFightCard(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text(
-                text = title,
+                text = hero.unit.name,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.secondary,
             )
+            Text(
+                text = "Уровень: ${hero.unit.level}",
+                style = MaterialTheme.typography.bodyMedium,
+            )
 
-            if (player == null) {
-                OutlinedButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = { onEmptyClick?.invoke() },
-                    enabled = onEmptyClick != null,
-                ) {
-                    Text("Добавить")
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        text = "Сила",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                    Text(
+                        text = "power",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
                 }
-            } else {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Column {
-                        Text(
-                            text = player.name,
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.secondary,
-                        )
-                        Text(
-                            text = "Уровень: ${player.level}",
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
-                        Text(
-                            text = "Бонус: ${player.bonus}",
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
-                    }
-                    Column(horizontalAlignment = Alignment.End) {
-                        Text(
-                            text = "Сила",
-                            style = MaterialTheme.typography.bodySmall,
-                        )
-                        Text(
-                            text = power.toString(),
-                            style = MaterialTheme.typography.headlineSmall,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary,
-                        )
-                    }
-                }
-
-                ModifierButtonsRow(
-                    onAddModifier = onAddModifier,
-                    onLevelChange = onLevelChange,
-                )
-
-                ModifiersList(
-                    modifiers = modifiers,
-                    onRemoveModifier = onRemoveModifier,
-                )
             }
+
+            ModifierButtonsRow(
+                onAddModifier = onAddModifier,
+                onLevelChange = onAddModifier,
+            )
+
+            SpellsList(
+                spells = hero.spells,
+                onRemoveSpell = onRemoveModifier,
+            )
         }
     }
 }
 
+
 @Composable
 private fun MonstersSection(
-    monsters: List<MonsterCard>,
+    monsters: List<UnitItem>,
     onEvent: (Event) -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -203,8 +178,13 @@ private fun MonstersSection(
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.secondary,
             )
-            OutlinedButton(onClick = { onEvent(Event.AddMonster) }) {
-                Text("Добавить монстра")
+            IconButton(onClick = {
+
+            }) {
+                Icon(
+                    painterResource(id = R.drawable.outline_person_add_24),
+                    contentDescription = stringResource(R.string.title_settings)
+                )
             }
         }
 
@@ -214,17 +194,17 @@ private fun MonstersSection(
                 .background(MaterialTheme.colorScheme.surfaceContainerLowest),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            items(monsters, key = { it.id }) { monster ->
+            items(monsters) { monster ->
                 MonsterCardView(
                     monster = monster,
-                    onAddModifier = { value ->
-                        onEvent(Event.AddMonsterModifier(monster.id, value))
+                    onAddSpell = { value ->
+                        onEvent(Event.AddModifier(monster.unit.id, value))
                     },
-                    onRemoveModifier = { id ->
+                    onRemoveSpell = { id ->
                         onEvent(Event.RemoveModifier(id))
                     },
                     onRemoveMonster = {
-                        onEvent(Event.RemoveMonster(monster.id))
+                        onEvent(Event.RemoveMonster(monster.unit.id))
                     }
                 )
             }
@@ -234,9 +214,9 @@ private fun MonstersSection(
 
 @Composable
 private fun MonsterCardView(
-    monster: MonsterCard,
-    onAddModifier: (Int) -> Unit,
-    onRemoveModifier: (Long) -> Unit,
+    monster: UnitItem,
+    onAddSpell: (Int) -> Unit,
+    onRemoveSpell: (Int) -> Unit,
     onRemoveMonster: () -> Unit,
 ) {
     Card(
@@ -258,12 +238,12 @@ private fun MonsterCardView(
             ) {
                 Column {
                     Text(
-                        text = monster.name,
+                        text = monster.unit.name,
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.secondary,
                     )
                     Text(
-                        text = "Базовая сила: ${monster.basePower}",
+                        text = "Базовая сила: ${monster.unit.level}",
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
@@ -273,7 +253,7 @@ private fun MonsterCardView(
                         style = MaterialTheme.typography.bodySmall,
                     )
                     Text(
-                        text = monster.totalPower.toString(),
+                        text = "monster.totalPower",
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.error,
@@ -282,23 +262,14 @@ private fun MonsterCardView(
             }
 
             ModifierButtonsRow(
-                onAddModifier = onAddModifier,
+                onAddModifier = onAddSpell,
                 onLevelChange = { },
             )
 
-            ModifiersList(
-                modifiers = monster.modifiers,
-                onRemoveModifier = onRemoveModifier,
+            SpellsList(
+                spells = monster.spells,
+                onRemoveSpell = onRemoveSpell,
             )
-
-            OutlinedButton(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 4.dp),
-                onClick = onRemoveMonster,
-            ) {
-                Text("Удалить монстра")
-            }
         }
     }
 }
@@ -312,7 +283,7 @@ private fun ModifierButtonsRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        val values = listOf(-5, -3, -1, +1, +3, +5)
+        val values = listOf(-5, -2, +2, +5)
         values.forEach { value ->
             OutlinedButton(
                 modifier = Modifier.weight(1f),
@@ -331,11 +302,11 @@ private fun ModifierButtonsRow(
 }
 
 @Composable
-private fun ModifiersList(
-    modifiers: List<FightModifier>,
-    onRemoveModifier: (Long) -> Unit,
+private fun SpellsList(
+    spells: List<Int>,
+    onRemoveSpell: (Int) -> Unit,
 ) {
-    if (modifiers.isEmpty()) return
+    if (spells.isEmpty()) return
 
     Column(
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -344,69 +315,38 @@ private fun ModifiersList(
             text = "Модификаторы:",
             style = MaterialTheme.typography.bodySmall,
         )
-        modifiers.forEach { modifier ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                Text(
-                    text = modifier.label ?: "Бонус",
-                    style = MaterialTheme.typography.bodySmall,
-                )
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text(
-                        text = (if (modifier.value > 0) "+" else "") + modifier.value,
-                        style = MaterialTheme.typography.bodySmall,
-                    )
-                    OutlinedButton(
-                        modifier = Modifier.size(32.dp),
-                        onClick = { onRemoveModifier(modifier.id) },
+        FlowRow (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            itemVerticalAlignment = Alignment.CenterVertically,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            spells.forEachIndexed { index, spell ->
+                Card(
+                    modifier = Modifier.height(32.dp),
+                ) {
+                    Row(
+                        modifier = Modifier.padding(start = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Text("×")
+                        Text(
+                            text = (if (spell > 0) "+" else "") + spell,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                        IconButton(
+                            onClick = { onRemoveSpell(index) }
+                        ) {
+                            Icon(
+                                painterResource(id = R.drawable.outline_cancel_24),
+                                contentDescription = stringResource(R.string.title_settings),
+                                modifier = Modifier.size(16.dp)
+                            )
+                        }
                     }
+
                 }
             }
-        }
-    }
-}
 
-@Composable
-private fun FightSummary(
-    heroPower: Int,
-    monstersPower: Int,
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
-        )
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text("Герои", style = MaterialTheme.typography.bodySmall)
-                Text(
-                    text = heroPower.toString(),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-            }
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text("Монстры", style = MaterialTheme.typography.bodySmall)
-                Text(
-                    text = monstersPower.toString(),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.error,
-                )
-            }
         }
     }
 }
@@ -417,15 +357,33 @@ fun FightView_Preview() {
     AppTheme {
         FightView(
             viewState = ViewState(
-                hero = Player(id = 1, name = "King Arthur", level = 4, bonus = 6),
-                helper = Player(id = 2, name = "Helper", level = 3, bonus = 2),
+                heroes = listOf(
+                    UnitItem(
+                        unit = com.exxuslee.domain.model.GameUnit(
+                            id = 1,
+                            name = "Герой 1",
+                            level = 5,
+                        ),
+                        spells = listOf(2, -1, 5),
+                    ),
+                ),
                 monsters = listOf(
-                    MonsterCard(
-                        id = 1,
-                        name = "Monster 1",
-                        basePower = 7,
-                        modifiers = listOf(FightModifier(id = 1, value = 3, label = "+3")),
-                    )
+                    UnitItem(
+                        unit = com.exxuslee.domain.model.GameUnit(
+                            id = 3,
+                            name = "Монстр 1",
+                            level = 7,
+                        ),
+                        spells = listOf(4, -3, 5, 5, -1),
+                    ),
+                    UnitItem(
+                        unit = com.exxuslee.domain.model.GameUnit(
+                            id = 4,
+                            name = "Монстр 2",
+                            level = 10,
+                        ),
+                        spells = listOf(5),
+                    ),
                 )
             ),
             eventHandler = { }
