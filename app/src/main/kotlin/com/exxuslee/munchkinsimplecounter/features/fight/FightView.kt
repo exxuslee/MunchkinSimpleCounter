@@ -32,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.exxuslee.domain.model.GameUnit
 import com.exxuslee.domain.model.Player
 import com.exxuslee.munchkinsimplecounter.R
 import com.exxuslee.munchkinsimplecounter.features.fight.models.Event
@@ -143,7 +144,7 @@ private fun HeroCardView(
                     )
                     HSpacer(8.dp)
                     Text(
-                        text = hero.unit.name,
+                        text = (hero.unit as? Player)?.name ?: "",
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.secondary,
                     )
@@ -378,27 +379,25 @@ private fun FightView_Preview() {
             viewState = ViewState(
                 heroes = listOf(
                     UnitItem(
-                        unit = com.exxuslee.domain.model.GameUnit(
+                        unit = Player(
                             id = 1,
-                            name = "Герой 1",
                             level = 5,
+                            name = "Игрок 1",
                         ),
                         spells = listOf(2, -1, 5),
                     ),
                 ),
                 monsters = listOf(
                     UnitItem(
-                        unit = com.exxuslee.domain.model.GameUnit(
+                        unit = GameUnit(
                             id = 3,
-                            name = "Монстр 1",
                             level = 7,
                         ),
                         spells = listOf(4, -3, 5, 5, -1),
                     ),
                     UnitItem(
-                        unit = com.exxuslee.domain.model.GameUnit(
+                        unit = GameUnit(
                             id = 4,
-                            name = "Монстр 2",
                             level = 10,
                         ),
                         spells = listOf(5),

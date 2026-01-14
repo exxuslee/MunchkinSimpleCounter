@@ -8,7 +8,6 @@ data class ViewState(
         UnitItem(
             unit = GameUnit(
                 id = 1,
-                name = "1",
                 level = 1
             ),
             spells = emptyList(),
