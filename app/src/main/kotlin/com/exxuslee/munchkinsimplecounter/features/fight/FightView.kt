@@ -21,12 +21,18 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -69,52 +75,90 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                     AttackView(total.toString(), MaterialTheme.colorScheme.tertiary)
                 },
                 {
-                    IconButton(onClick = {
-                        eventHandler(Event.AddHero(heroId = 0))
-                    }) {
-                        Icon(
-                            painterResource(id = R.drawable.outline_person_add_24),
-                            contentDescription = stringResource(R.string.title_settings)
-                        )
+                    var expanded by remember { mutableStateOf(false) }
+                    Box {
+                        IconButton(onClick = {
+                            expanded = true
+                        }) {
+                            Icon(
+                                painterResource(id = R.drawable.outline_person_add_24),
+                                contentDescription = stringResource(R.string.title_settings)
+                            )
+                        }
+                        DropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false }
+                        ) {
+                            val availablePlayers = viewState.activePlayers.filter { activePlayer ->
+                                viewState.heroes.none { hero ->
+                                    hero.unit.id == activePlayer.id
+                                }
+                            }
+                            availablePlayers.forEachIndexed { index, player ->
+                                DropdownMenuItem(
+                                    leadingIcon = {
+                                        Image(
+                                            painter = painterResource(id = Icons.icon(player.icon)),
+                                            modifier = Modifier.size(36.dp),
+                                            contentDescription = stringResource(R.string.select_icon)
+                                        )
+                                    },
+                                    text = {
+                                        Text(text = player.name)
+                                    },
+                                    onClick = {
+                                        eventHandler(Event.AddHero(heroId = player.id))
+                                        expanded = false
+                                    }
+                                )
+                            }
+                        }
                     }
+
                 }
             )
         }
 
         items(viewState.heroes) { hero ->
-            RowUniversal(
-                horizontalArrangement = Arrangement.End,
-                onClick = {
-                    eventHandler.invoke(Event.RemoveHero(hero.unit.id))
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                RowUniversal(
+                    horizontalArrangement = Arrangement.End,
+                    onClick = {
+                        eventHandler.invoke(Event.RemoveHero(hero.unit.id))
+                    }
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_baseline_person_remove_24),
+                        contentDescription = stringResource(R.string.remove_player),
+                        modifier = Modifier.padding(horizontal = 24.dp),
+                        tint = MaterialTheme.colorScheme.error
+                    )
                 }
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_baseline_person_remove_24),
-                    contentDescription = stringResource(R.string.remove_player),
-                    modifier = Modifier.padding(horizontal = 24.dp),
-                    tint = MaterialTheme.colorScheme.error
-                )
-            }
-            DraggableCardSimple(
-                isRevealed = viewState.revealedId == hero.unit.id,
-                cardOffset = 64f,
-                onReveal = {
-                    eventHandler(Event.Reveal(hero.unit.id))
-                },
-                onCancel = {
-                    eventHandler(Event.Reveal(null))
-                },
-            ) {
-                HeroCardView(
-                    hero = hero,
-                    onAddModifier = { value ->
-                        eventHandler(Event.AddModifier(hero.unit.id, value))
+                DraggableCardSimple(
+                    isRevealed = viewState.revealedId == hero.unit.id,
+                    cardOffset = 64f,
+                    onReveal = {
+                        eventHandler(Event.Reveal(hero.unit.id))
                     },
-                    onRemoveModifier = { index ->
-                        eventHandler(Event.RemoveModifier(hero.unit.id, index))
+                    onCancel = {
+                        eventHandler(Event.Reveal(null))
                     },
-                )
+                ) {
+                    HeroCardView(
+                        hero = hero,
+                        onAddModifier = { value ->
+                            eventHandler(Event.AddModifier(hero.unit.id, value))
+                        },
+                        onRemoveModifier = { index ->
+                            eventHandler(Event.RemoveModifier(hero.unit.id, index))
+                        },
+                    )
+                }
             }
+
         }
 
         stickyHeader {
@@ -138,45 +182,51 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
         }
 
         itemsIndexed(viewState.monsters) { index, monster ->
-            RowUniversal(
-                horizontalArrangement = Arrangement.End,
-                onClick = {
-                    eventHandler.invoke(Event.RemoveMonster(index))
-                }
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterEnd
             ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_baseline_person_remove_24),
-                    contentDescription = stringResource(R.string.remove_player),
-                    modifier = Modifier.padding(horizontal = 24.dp),
-                    tint = MaterialTheme.colorScheme.error
-                )
-            }
-            DraggableCardSimple(
-                isRevealed = viewState.revealedId == -index,
-                cardOffset = 64f,
-                onReveal = {
-                    eventHandler(Event.Reveal(-index))
-                },
-                onCancel = {
-                    eventHandler(Event.Reveal(null))
-                },
-            ) {
-                MonsterCardView(
-                    monster = monster,
-                    onAddSpell = { value ->
-                        eventHandler(Event.AddModifier(monster.unit.id, value))
-                    },
-                    onRemoveSpell = { index ->
-                        eventHandler(Event.RemoveModifier(monster.unit.id, index))
-                    },
-                    onRemoveMonster = {
-                        eventHandler(Event.RemoveMonster(monster.unit.id))
-                    },
-                    onChangeLevel = {
-                        eventHandler(Event.ChangeMonsterLevel(monster.unit.id, it))
+                RowUniversal(
+                    horizontalArrangement = Arrangement.End,
+                    onClick = {
+                        eventHandler.invoke(Event.RemoveMonster(index))
                     }
-                )
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_baseline_person_remove_24),
+                        contentDescription = stringResource(R.string.remove_player),
+                        modifier = Modifier.padding(horizontal = 24.dp),
+                        tint = MaterialTheme.colorScheme.error
+                    )
+                }
+                DraggableCardSimple(
+                    isRevealed = viewState.revealedId == -index,
+                    cardOffset = 64f,
+                    onReveal = {
+                        eventHandler(Event.Reveal(-index))
+                    },
+                    onCancel = {
+                        eventHandler(Event.Reveal(null))
+                    },
+                ) {
+                    MonsterCardView(
+                        monster = monster,
+                        onAddSpell = { value ->
+                            eventHandler(Event.AddModifier(monster.unit.id, value))
+                        },
+                        onRemoveSpell = { index ->
+                            eventHandler(Event.RemoveModifier(monster.unit.id, index))
+                        },
+                        onRemoveMonster = {
+                            eventHandler(Event.RemoveMonster(monster.unit.id))
+                        },
+                        onChangeLevel = {
+                            eventHandler(Event.ChangeMonsterLevel(monster.unit.id, it))
+                        }
+                    )
+                }
             }
+
         }
 
 

@@ -1,6 +1,7 @@
 package com.exxuslee.munchkinsimplecounter.features.fight.models
 
 import com.exxuslee.domain.model.GameUnit
+import com.exxuslee.domain.model.Player
 
 data class ViewState(
     val heroes: List<UnitItem> = emptyList(),
@@ -14,4 +15,5 @@ data class ViewState(
         )
     ),
     val revealedId: Int? = null,
+    val activePlayers: List<Player> = emptyList(),
 )

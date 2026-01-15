@@ -28,6 +28,14 @@ class FightViewModel(
                 }
             }
         }
+        viewModelScope.launch(Dispatchers.IO) {
+            playersUseCase.activePlayers.collect { players ->
+                withContext(Dispatchers.Main) {
+                    viewState = viewState.copy(activePlayers = players )
+                }
+            }
+        }
+
     }
 
     override fun obtainEvent(viewEvent: Event) {
@@ -45,7 +53,8 @@ class FightViewModel(
 
             is Event.RemoveHero -> {
                 viewState = viewState.copy(
-                    heroes = viewState.heroes.filter { it.unit.id != viewEvent.heroId }
+                    heroes = viewState.heroes.filter { it.unit.id != viewEvent.heroId },
+                    revealedId = null,
                 )
             }
 
@@ -61,7 +70,8 @@ class FightViewModel(
 
             is Event.RemoveMonster -> {
                 viewState = viewState.copy(
-                    monsters = viewState.monsters.filterIndexed { index, item -> index != viewEvent.index }
+                    monsters = viewState.monsters.filterIndexed { index, item -> index != viewEvent.index },
+                    revealedId = null,
                 )
             }
 
