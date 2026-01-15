@@ -71,6 +71,16 @@ fun MainTopBar(
                     )
                 }
             }
+            if (currentRoute == Routes.FightRoute) {
+                IconButton(onClick = {
+                    mainViewModel.obtainEvent(MainEvent.Dice)
+                }) {
+                    Icon(
+                        painterResource(id = R.drawable.outline_dice_5_24),
+                        contentDescription = stringResource(R.string.dice)
+                    )
+                }
+            }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp)

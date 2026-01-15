@@ -81,6 +81,10 @@ Munchkinのファンによって、カジュアルでテーブルトップフレ
     <string name="dice">サイコロ</string>
     <string name="throw_dice">振る 🎲</string>
     <string name="sound">サウンド</string>
+    <string name="fight">戦闘</string>
+    <string name="heroes">ヒーロー</string>
+    <string name="monsters">モンスター</string>
+    <string name="modifiers">修正値:</string>
 
 </resources>
 

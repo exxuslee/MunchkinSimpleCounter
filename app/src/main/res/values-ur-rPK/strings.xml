@@ -81,6 +81,10 @@ Munchkin کے ایک پرستار کے ذریعہ کیشول اور ٹیبل ٹ�
     <string name="dice">پانسہ</string>
     <string name="throw_dice">پھینکیں 🎲</string>
     <string name="sound">آواز</string>
+    <string name="fight">لڑائی</string>
+    <string name="heroes">ہیروز</string>
+    <string name="monsters">عفریت</string>
+    <string name="modifiers">موڈیفائرز:</string>
 
 </resources>
 

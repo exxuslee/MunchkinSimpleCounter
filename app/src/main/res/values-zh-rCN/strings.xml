@@ -81,6 +81,10 @@
     <string name="dice">骰子</string>
     <string name="throw_dice">掷 🎲</string>
     <string name="sound">声音</string>
+    <string name="fight">战斗</string>
+    <string name="heroes">英雄</string>
+    <string name="monsters">怪物</string>
+    <string name="modifiers">修正值:</string>
 
 </resources>
 

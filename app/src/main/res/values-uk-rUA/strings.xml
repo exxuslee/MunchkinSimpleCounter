@@ -81,5 +81,9 @@
     <string name="dice">Кубик</string>
     <string name="throw_dice">Кинути 🎲</string>
     <string name="sound">Звук</string>
+    <string name="fight">Бій</string>
+    <string name="heroes">Герої</string>
+    <string name="monsters">Монстри</string>
+    <string name="modifiers">Модифікатори:</string>
 
 </resources>

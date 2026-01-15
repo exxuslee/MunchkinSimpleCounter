@@ -28,11 +28,9 @@ class FightViewModel(
                 }
             }
         }
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             playersUseCase.activePlayers.collect { players ->
-                withContext(Dispatchers.Main) {
-                    viewState = viewState.copy(activePlayers = players )
-                }
+                viewState = viewState.copy(activePlayers = players)
             }
         }
 
@@ -53,7 +51,7 @@ class FightViewModel(
 
             is Event.RemoveHero -> {
                 viewState = viewState.copy(
-                    heroes = viewState.heroes.filter { it.unit.id != viewEvent.heroId },
+                    heroes = viewState.heroes.filterIndexed { index, item -> index != viewEvent.index },
                     revealedId = null,
                 )
             }
@@ -62,7 +60,7 @@ class FightViewModel(
                 val newMonster = UnitItem(
                     unit = GameUnit(
                         id = -viewState.monsters.size - 1,
-                        level = 1
+                        attack = 1
                     )
                 )
                 viewState = viewState.copy(monsters = viewState.monsters + newMonster)
@@ -131,7 +129,7 @@ class FightViewModel(
                         if (monster.unit.id == viewEvent.id) {
                             val newLevel = viewEvent.value.coerceAtLeast(1)
                             monster.copy(
-                                unit = GameUnit(id = monster.unit.id, level = newLevel)
+                                unit = GameUnit(id = monster.unit.id, attack = newLevel)
                             )
                         } else {
                             monster

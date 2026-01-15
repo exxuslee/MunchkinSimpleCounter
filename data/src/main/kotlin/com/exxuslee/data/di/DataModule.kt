@@ -21,6 +21,9 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -57,13 +60,17 @@ val dataModule = module {
             .fallbackToDestructiveMigration(false).build()
     }
 
+    single<CoroutineScope> {
+        CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    }
+
     single { get<AppDatabase>().playerDAO }
     single { get<AppDatabase>().tokensDAO }
 
     single<CMCapService> { CMCapServiceImpl(get()) }
 
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
-    single<PlayersRepository> { PlayersRepositoryImpl(get()) }
+    single<PlayersRepository> { PlayersRepositoryImpl(get(), get()) }
     single<PriceRepository> { PriceRepositoryImpl(get(), get(), get()) }
 
 

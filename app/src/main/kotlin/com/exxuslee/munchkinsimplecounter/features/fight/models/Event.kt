@@ -3,7 +3,7 @@ package com.exxuslee.munchkinsimplecounter.features.fight.models
 sealed class Event {
 
     data class AddHero(val heroId: Int) : Event()
-    data class RemoveHero(val heroId: Int) : Event()
+    data class RemoveHero(val index: Int) : Event()
     object AddMonster : Event()
     data class RemoveMonster(val index: Int) : Event()
     data class AddModifier(val id: Int, val value: Int) : Event()

@@ -7,28 +7,31 @@ import com.exxuslee.domain.model.Player
 import com.exxuslee.domain.repositories.PlayersRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class PlayersRepositoryImpl(
     private val playerDAO: PlayerDAO,
+    private val scope: CoroutineScope,
 ) : PlayersRepository {
 
     override val activePlayers: StateFlow<List<Player>> = playerDAO.activePlayersFlow()
         .map { list -> list.map { it.toDomain() } }
+        .flowOn(Dispatchers.IO)
         .stateIn(
-            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            scope = scope,
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
 
     override val players: StateFlow<List<Player>> = playerDAO.playersFlow()
         .map { list -> list.map { it.toDomain() } }
+        .flowOn(Dispatchers.IO)
         .stateIn(
-            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            scope = scope,
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )

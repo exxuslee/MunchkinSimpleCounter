@@ -89,5 +89,6 @@ Created by a fan of Munchkin as a convenient companion for casual and tabletop-f
     <string name="fight">Fight</string>
     <string name="heroes">Heroes</string>
     <string name="monsters">Monsters</string>
+    <string name="modifiers">Modifiers:</string>
 
 </resources>

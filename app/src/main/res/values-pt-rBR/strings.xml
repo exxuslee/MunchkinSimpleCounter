@@ -81,6 +81,10 @@ Criado por um fã de Munchkin como um companheiro conveniente para jogos casuais
     <string name="dice">Dado</string>
     <string name="throw_dice">Jogar 🎲</string>
     <string name="sound">Som</string>
+    <string name="fight">Luta</string>
+    <string name="heroes">Heróis</string>
+    <string name="monsters">Monstros</string>
+    <string name="modifiers">Modificadores:</string>
 
 </resources>
 

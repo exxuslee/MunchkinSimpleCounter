@@ -81,6 +81,10 @@ Munchkin 팬이 캐주얼하고 테이블톱 친화적인 플레이를 위한 �
     <string name="dice">주사위</string>
     <string name="throw_dice">던지기 🎲</string>
     <string name="sound">사운드</string>
+    <string name="fight">전투</string>
+    <string name="heroes">영웅</string>
+    <string name="monsters">몬스터</string>
+    <string name="modifiers">수정치:</string>
 
 </resources>
 

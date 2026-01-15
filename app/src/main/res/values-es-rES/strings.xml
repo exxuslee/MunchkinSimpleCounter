@@ -81,6 +81,10 @@ Creada por un fan de Munchkin como compañero conveniente para un juego casual y
     <string name="dice">Dado</string>
     <string name="throw_dice">Lanzar 🎲</string>
     <string name="sound">Sonido</string>
+    <string name="fight">Combate</string>
+    <string name="heroes">Héroes</string>
+    <string name="monsters">Monstruos</string>
+    <string name="modifiers">Modificadores:</string>
 
 </resources>
 

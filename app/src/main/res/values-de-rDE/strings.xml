@@ -81,6 +81,10 @@ Erstellt von einem Munchkin-Fan als praktischer Begleiter für lockeres und tisc
     <string name="dice">Würfel</string>
     <string name="throw_dice">Würfeln 🎲</string>
     <string name="sound">Ton</string>
+    <string name="fight">Kampf</string>
+    <string name="heroes">Helden</string>
+    <string name="monsters">Monster</string>
+    <string name="modifiers">Modifikatoren:</string>
 
 </resources>
 

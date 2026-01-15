@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -71,7 +70,7 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
             HeaderStick(
                 stringResource(R.string.heroes),
                 {
-                    val total = viewState.heroes.sumOf { it.unit.level + it.spells.sum() }
+                    val total = viewState.heroes.sumOf { it.unit.attack + it.spells.sum() }
                     AttackView(total.toString(), MaterialTheme.colorScheme.tertiary)
                 },
                 {
@@ -119,7 +118,10 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
             )
         }
 
-        items(viewState.heroes) { hero ->
+        itemsIndexed(
+            viewState.heroes,
+            key = { index, hero -> "$index-${hero.unit.id}" }
+            ) { index, hero ->
             Box(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterEnd
@@ -127,7 +129,7 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                 RowUniversal(
                     horizontalArrangement = Arrangement.End,
                     onClick = {
-                        eventHandler.invoke(Event.RemoveHero(hero.unit.id))
+                        eventHandler.invoke(Event.RemoveHero(index))
                     }
                 ) {
                     Icon(
@@ -138,10 +140,10 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                     )
                 }
                 DraggableCardSimple(
-                    isRevealed = viewState.revealedId == hero.unit.id,
+                    isRevealed = viewState.revealedId == index,
                     cardOffset = 64f,
                     onReveal = {
-                        eventHandler(Event.Reveal(hero.unit.id))
+                        eventHandler(Event.Reveal(index))
                     },
                     onCancel = {
                         eventHandler(Event.Reveal(null))
@@ -165,7 +167,7 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
             HeaderStick(
                 stringResource(R.string.monsters),
                 {
-                    val total = viewState.monsters.sumOf { it.unit.level + it.spells.sum() }
+                    val total = viewState.monsters.sumOf { it.unit.attack + it.spells.sum() }
                     AttackView(total.toString(), MaterialTheme.colorScheme.error)
                 },
                 {
@@ -181,7 +183,10 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
             )
         }
 
-        itemsIndexed(viewState.monsters) { index, monster ->
+        itemsIndexed(
+            viewState.monsters,
+            key = { index, monster -> "$index-${monster.unit.id}" }
+        ) { index, monster ->
             Box(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterEnd
@@ -200,10 +205,10 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                     )
                 }
                 DraggableCardSimple(
-                    isRevealed = viewState.revealedId == -index,
+                    isRevealed = viewState.revealedId == -index - 1,
                     cardOffset = 64f,
                     onReveal = {
-                        eventHandler(Event.Reveal(-index))
+                        eventHandler(Event.Reveal(-index - 1))
                     },
                     onCancel = {
                         eventHandler(Event.Reveal(null))
@@ -216,9 +221,6 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
                         },
                         onRemoveSpell = { index ->
                             eventHandler(Event.RemoveModifier(monster.unit.id, index))
-                        },
-                        onRemoveMonster = {
-                            eventHandler(Event.RemoveMonster(monster.unit.id))
                         },
                         onChangeLevel = {
                             eventHandler(Event.ChangeMonsterLevel(monster.unit.id, it))
@@ -275,7 +277,7 @@ private fun HeroCardView(
                         color = MaterialTheme.colorScheme.secondary,
                     )
                 }
-                val total = hero.unit.level + hero.spells.sum()
+                val total = hero.unit.attack + hero.spells.sum()
                 AttackView(total.toString(), MaterialTheme.colorScheme.tertiary)
             }
 
@@ -315,7 +317,6 @@ private fun MonsterCardView(
     monster: UnitItem,
     onAddSpell: (Int) -> Unit,
     onRemoveSpell: (Int) -> Unit,
-    onRemoveMonster: () -> Unit,
     onChangeLevel: (Int) -> Unit,
 ) {
     Card(
@@ -348,12 +349,12 @@ private fun MonsterCardView(
                     )
                     HSpacer(8.dp)
                     OvalCounter(
-                        startInt = monster.unit.level,
+                        startInt = monster.unit.attack,
                         onClick = null,
                         onChange = onChangeLevel
                     )
                 }
-                val total = monster.unit.level + monster.spells.sum()
+                val total = monster.unit.attack + monster.spells.sum()
                 AttackView(total.toString(), MaterialTheme.colorScheme.error)
             }
 
@@ -424,7 +425,7 @@ private fun SpellsList(
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         if (spells.isNotEmpty()) Text(
-            text = "Модификаторы:",
+            text = stringResource(R.string.modifiers),
             style = MaterialTheme.typography.bodySmall,
         )
         FlowRow(
@@ -455,7 +456,7 @@ private fun SpellsList(
                         ) {
                             Icon(
                                 painterResource(id = R.drawable.outline_cancel_24),
-                                contentDescription = stringResource(R.string.title_settings),
+                                contentDescription = stringResource(R.string.cancel),
                                 modifier = Modifier.size(16.dp)
                             )
                         }
@@ -488,14 +489,14 @@ private fun FightView_Preview() {
                     UnitItem(
                         unit = GameUnit(
                             id = 3,
-                            level = 7,
+                            attack = 7,
                         ),
                         spells = listOf(4, -3, 5, 5, -1),
                     ),
                     UnitItem(
                         unit = GameUnit(
                             id = 4,
-                            level = 10,
+                            attack = 10,
                         ),
                         spells = listOf(5),
                     ),

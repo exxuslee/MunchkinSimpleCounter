@@ -81,6 +81,10 @@
     <string name="dice">تاس</string>
     <string name="throw_dice">انداختن 🎲</string>
     <string name="sound">صدا</string>
+    <string name="fight">نبرد</string>
+    <string name="heroes">قهرمانان</string>
+    <string name="monsters">هیولاها</string>
+    <string name="modifiers">اصلاح‌کننده‌ها:</string>
 
 </resources>
 

@@ -81,6 +81,10 @@ Munchkin hayranı tarafından, gündelik ve masa dostu oyun için uygun bir arka
     <string name="dice">Zar</string>
     <string name="throw_dice">At 🎲</string>
     <string name="sound">Ses</string>
+    <string name="fight">Savaş</string>
+    <string name="heroes">Kahramanlar</string>
+    <string name="monsters">Canavarlar</string>
+    <string name="modifiers">Değiştiriciler:</string>
 
 </resources>
 

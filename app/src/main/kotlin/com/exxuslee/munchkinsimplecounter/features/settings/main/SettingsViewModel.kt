@@ -12,6 +12,7 @@ import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(
@@ -38,9 +39,10 @@ class SettingsViewModel(
                     players = players,
                     isSound = isSound,
                 )
-            }.collect { newState ->
-                viewState = newState
-            }
+            }.flowOn(Dispatchers.IO)
+                .collect { newState ->
+                    viewState = newState
+                }
         }
     }
 

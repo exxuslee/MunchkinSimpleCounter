@@ -11,7 +11,6 @@ import com.exxuslee.munchkinsimplecounter.features.game.models.Event
 import com.exxuslee.munchkinsimplecounter.features.game.models.GameViewState
 import com.exxuslee.munchkinsimplecounter.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class GameViewModel(
