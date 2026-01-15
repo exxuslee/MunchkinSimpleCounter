@@ -48,6 +48,7 @@ import com.exxuslee.munchkinsimplecounter.ui.common.HSpacer
 import com.exxuslee.munchkinsimplecounter.ui.common.HeaderStick
 import com.exxuslee.munchkinsimplecounter.ui.common.Icons
 import com.exxuslee.munchkinsimplecounter.ui.common.OvalCounter
+import com.exxuslee.munchkinsimplecounter.ui.common.RowUniversal
 import com.exxuslee.munchkinsimplecounter.ui.theme.AppTheme
 import kotlin.math.abs
 
@@ -81,6 +82,19 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
         }
 
         items(viewState.heroes) { hero ->
+            RowUniversal(
+                horizontalArrangement = Arrangement.End,
+                onClick = {
+                    eventHandler.invoke(Event.RemoveHero(hero.unit.id))
+                }
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_baseline_person_remove_24),
+                    contentDescription = stringResource(R.string.remove_player),
+                    modifier = Modifier.padding(horizontal = 24.dp),
+                    tint = MaterialTheme.colorScheme.error
+                )
+            }
             DraggableCardSimple(
                 isRevealed = viewState.revealedId == hero.unit.id,
                 cardOffset = 64f,
@@ -124,6 +138,19 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
         }
 
         itemsIndexed(viewState.monsters) { index, monster ->
+            RowUniversal(
+                horizontalArrangement = Arrangement.End,
+                onClick = {
+                    eventHandler.invoke(Event.RemoveMonster(index))
+                }
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_baseline_person_remove_24),
+                    contentDescription = stringResource(R.string.remove_player),
+                    modifier = Modifier.padding(horizontal = 24.dp),
+                    tint = MaterialTheme.colorScheme.error
+                )
+            }
             DraggableCardSimple(
                 isRevealed = viewState.revealedId == -index,
                 cardOffset = 64f,

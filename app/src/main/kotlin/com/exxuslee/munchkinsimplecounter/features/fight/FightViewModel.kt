@@ -61,7 +61,7 @@ class FightViewModel(
 
             is Event.RemoveMonster -> {
                 viewState = viewState.copy(
-                    monsters = viewState.monsters.filter { it.unit.id != viewEvent.monsterId }
+                    monsters = viewState.monsters.filterIndexed { index, item -> index != viewEvent.index }
                 )
             }
 

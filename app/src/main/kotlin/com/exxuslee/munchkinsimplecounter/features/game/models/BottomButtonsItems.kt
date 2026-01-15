@@ -23,7 +23,7 @@ sealed class BottomButtonsItems(
 
     data object SubLevel : BottomButtonsItems(
         label = { stringResource(R.string.sub_level) },
-        icon = { painterResource(R.drawable.outline_skull_24) },
+        icon = { painterResource(R.drawable.outline_heart_broken_24) },
     )
 
     data object SubBonus : BottomButtonsItems(
