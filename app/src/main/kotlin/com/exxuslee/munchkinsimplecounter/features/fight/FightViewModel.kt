@@ -33,7 +33,7 @@ class FightViewModel(
     override fun obtainEvent(viewEvent: Event) {
         when (viewEvent) {
             is Event.AddHero -> {
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
                     val player = playersUseCase.player(viewEvent.heroId)
                     if (player != null && !viewState.heroes.any { it.unit.id == player.id }) {
                         viewState = viewState.copy(
@@ -52,7 +52,7 @@ class FightViewModel(
             Event.AddMonster -> {
                 val newMonster = UnitItem(
                     unit = GameUnit(
-                        id = viewState.monsters.size + 1,
+                        id = -viewState.monsters.size - 1,
                         level = 1
                     )
                 )
@@ -68,7 +68,6 @@ class FightViewModel(
             is Event.AddModifier -> {
                 val unitId = viewEvent.id
                 val modifierValue = viewEvent.value
-
                 val updatedHeroes = viewState.heroes.map { hero ->
                     if (hero.unit.id == unitId) {
                         hero.copy(spells = hero.spells + modifierValue)
@@ -76,7 +75,6 @@ class FightViewModel(
                         hero
                     }
                 }
-
                 val updatedMonsters = viewState.monsters.map { monster ->
                     if (monster.unit.id == unitId) {
                         monster.copy(spells = monster.spells + modifierValue)
@@ -131,6 +129,8 @@ class FightViewModel(
                     }
                 )
             }
+
+            is Event.Reveal -> viewState = viewState.copy(revealedId = viewEvent.id)
         }
     }
 }

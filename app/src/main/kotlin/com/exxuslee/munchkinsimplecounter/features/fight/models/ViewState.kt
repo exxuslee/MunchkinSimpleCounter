@@ -7,10 +7,11 @@ data class ViewState(
     val monsters: List<UnitItem> = listOf(
         UnitItem(
             unit = GameUnit(
-                id = 1,
+                id = -1,
                 level = 1
             ),
             spells = emptyList(),
         )
     ),
+    val revealedId: Int? = null,
 )

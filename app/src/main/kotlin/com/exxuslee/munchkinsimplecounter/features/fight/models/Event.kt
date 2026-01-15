@@ -9,5 +9,6 @@ sealed class Event {
     data class AddModifier(val id: Int, val value: Int) : Event()
     data class ChangeMonsterLevel(val id: Int, val value: Int) : Event()
     data class RemoveModifier(val unitId: Int, val modifierIndex: Int) : Event()
+    data class Reveal(val id: Int?) : Event()
 
 }
