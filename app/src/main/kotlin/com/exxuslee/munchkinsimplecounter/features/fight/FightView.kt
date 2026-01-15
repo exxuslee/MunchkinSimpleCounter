@@ -30,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -61,7 +62,11 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
     ) {
         stickyHeader {
             HeaderStick(
-                "Герои",
+                stringResource(R.string.heroes),
+                {
+                    val total = viewState.heroes.sumOf { it.unit.level + it.spells.sum() }
+                    AttackView(total.toString(), MaterialTheme.colorScheme.tertiary)
+                },
                 {
                     IconButton(onClick = {
                         eventHandler(Event.AddHero(heroId = 0))
@@ -100,7 +105,11 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
 
         stickyHeader {
             HeaderStick(
-                "Монстры",
+                stringResource(R.string.monsters),
+                {
+                    val total = viewState.monsters.sumOf { it.unit.level + it.spells.sum() }
+                    AttackView(total.toString(), MaterialTheme.colorScheme.error)
+                },
                 {
                     IconButton(onClick = {
                         eventHandler(Event.AddMonster)
@@ -116,10 +125,10 @@ fun FightView(viewState: ViewState, eventHandler: (Event) -> Unit) {
 
         itemsIndexed(viewState.monsters) { index, monster ->
             DraggableCardSimple(
-                isRevealed = viewState.revealedId == index,
+                isRevealed = viewState.revealedId == -index,
                 cardOffset = 64f,
                 onReveal = {
-                    eventHandler(Event.Reveal(index))
+                    eventHandler(Event.Reveal(-index))
                 },
                 onCancel = {
                     eventHandler(Event.Reveal(null))
@@ -189,15 +198,8 @@ private fun HeroCardView(
                         color = MaterialTheme.colorScheme.secondary,
                     )
                 }
-
                 val total = hero.unit.level + hero.spells.sum()
-                Text(
-                    modifier = Modifier.padding(horizontal = 8.dp),
-                    text = total.toString(),
-                    style = MaterialTheme.typography.headlineLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.tertiary,
-                )
+                AttackView(total.toString(), MaterialTheme.colorScheme.tertiary)
             }
 
             ModifierButtonsRow(onAddModifier)
@@ -207,6 +209,27 @@ private fun HeroCardView(
                 onRemoveSpell = onRemoveModifier,
             )
         }
+    }
+}
+
+@Composable
+private fun AttackView(
+    text: String,
+    color: Color,
+) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            modifier = Modifier.padding(horizontal = 8.dp),
+            text = text,
+            style = MaterialTheme.typography.headlineLarge,
+            fontWeight = FontWeight.Bold,
+            color = color,
+        )
+        Text(
+            modifier = Modifier.padding(horizontal = 8.dp),
+            text = stringResource(R.string.life),
+            style = MaterialTheme.typography.headlineSmall,
+        )
     }
 }
 
@@ -253,15 +276,8 @@ private fun MonsterCardView(
                         onChange = onChangeLevel
                     )
                 }
-
                 val total = monster.unit.level + monster.spells.sum()
-                Text(
-                    modifier = Modifier.padding(horizontal = 8.dp),
-                    text = total.toString(),
-                    style = MaterialTheme.typography.headlineLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.error,
-                )
+                AttackView(total.toString(), MaterialTheme.colorScheme.error)
             }
 
             ModifierButtonsRow(onAddSpell)
@@ -283,6 +299,10 @@ private fun ModifierButtonsRow(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        Icon(
+            painterResource(id = R.drawable.outline_wand_stars_24),
+            contentDescription = "spells"
+        )
         val values = listOf(-5, +2, +5)
         values.forEach { value ->
             Box(

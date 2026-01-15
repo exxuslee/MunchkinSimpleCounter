@@ -86,5 +86,8 @@ Created by a fan of Munchkin as a convenient companion for casual and tabletop-f
     <string name="dice">Dice</string>
     <string name="throw_dice">Throw 🎲</string>
     <string name="sound">Sound</string>
+    <string name="fight">Fight</string>
+    <string name="heroes">Heroes</string>
+    <string name="monsters">Monsters</string>
 
 </resources>

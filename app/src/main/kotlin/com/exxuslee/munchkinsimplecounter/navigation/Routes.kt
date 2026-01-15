@@ -20,7 +20,7 @@ sealed class Routes(
 
     data object FightRoute : Routes(
         "fight",
-        label = { stringResource(R.string.munchkin_counter) },
+        label = { stringResource(R.string.fight) },
         icon = { painterResource(R.drawable.outline_skull_24) },
     )
 

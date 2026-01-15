@@ -15,7 +15,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HeaderStick(
     text: String,
-    icon: @Composable (() -> Unit)? = null,
+    middle: @Composable (() -> Unit)? = null,
+    end: @Composable (() -> Unit)? = null,
 ) {
     Surface(
         modifier = Modifier.fillMaxWidth()
@@ -30,7 +31,8 @@ fun HeaderStick(
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 8.dp)
             )
-            icon?.invoke()
+            middle?.invoke()
+            if (middle != null) end?.invoke() ?: HSpacer(0.dp)
         }
 
     }
