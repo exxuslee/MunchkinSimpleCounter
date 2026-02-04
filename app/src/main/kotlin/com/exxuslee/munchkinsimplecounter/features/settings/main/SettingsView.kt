@@ -132,8 +132,9 @@ fun SettingsView(
                     ) {
                         Row(
                             modifier = Modifier
-                                .padding(vertical = 1.dp)
+                                .padding(0.dp, 1.dp, 0.dp, 0.dp)
                                 .background(MaterialTheme.colorScheme.surfaceContainer)
+                                .padding(0.dp, 2.dp, 0.dp, 0.dp),
                         ) {
                             HsRow(
                                 iconContent = {
@@ -148,6 +149,7 @@ fun SettingsView(
                                         player.name,
                                         modifier = Modifier.padding(horizontal = 12.dp),
                                         color = MaterialTheme.colorScheme.secondary,
+                                        maxLines = 1,
                                     )
                                 },
                                 onClick = {
